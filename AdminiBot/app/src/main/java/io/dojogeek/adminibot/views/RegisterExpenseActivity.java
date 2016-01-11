@@ -25,7 +25,7 @@ import io.dojogeek.adminibot.utils.DateUtils;
 public class RegisterExpenseActivity extends BaseActivity implements RegisterExpense, View.OnClickListener {
 
     private static String TAG = "ExpenseRegistrationActivity";
-    private static String DEFAULT_VALUE_SPINNER = "- selecciona un valor -";
+    private static int DEFAULT_VALUE_SPINNER = R.string.expenses_types_default_value;
     private EditText mName;
     private EditText mAmount;
     private Spinner mExpensesTypes;
@@ -49,10 +49,10 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         mExpenseTypeModelList = expenseTypeModelList;
 
         List<String> expensesTypes = new ArrayList<>();
-        expensesTypes.add(DEFAULT_VALUE_SPINNER);
+        expensesTypes.add(getString(DEFAULT_VALUE_SPINNER));
 
         for (ExpenseTypeModel expenseTypeModel : expenseTypeModelList) {
-            expensesTypes.add(expenseTypeModel.name);
+            expensesTypes.add(getString(expenseTypeModel.name));
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, expensesTypes);
