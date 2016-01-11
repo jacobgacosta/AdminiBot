@@ -48,6 +48,7 @@
     <string name="action_bar_menu_notifications">Notificaciones</string>
 
     <!-- expenses types -->
+    <string name="expenses_types_default_value">-Selecciona un valor-</string>
     <string name="expenses_types_foods">Alimentos</string>
     <string name="expenses_types_clothes">Ropa</string>
     <string name="expenses_types_drinks">Alcohol</string>
@@ -69,4 +70,10 @@
     <string name="expense_registration_suggestion">Lleva el registro de cada uno de tus gastos realizados para que de esta
     manera tengas cifras mas precisas de tu capital :)</string>
     <string name="expense_registered_ok">El gasto se registro con exito!</string>
+
+    <!-- Inbox -->
+    <string name="inbox_expense_amount">Monto:</string>
+    <string name="inbox_expense_payment_method">Tipo de pago:</string>
+    <string name="inbox_expense_date">Pago realizado el:</string>
+
 </resources>
