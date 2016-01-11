@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class InboxFragment extends BaseFragment implements Inbox, View.OnClickLi
     @Inject
     public NewPurchasePresenter newPurchasePresenter;
     private FloatingActionButton mAddCostButton;
+    private ListView mExpenses;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +72,7 @@ public class InboxFragment extends BaseFragment implements Inbox, View.OnClickLi
     @Override
     protected void loadViews(View fragmentView) {
         mAddCostButton = (FloatingActionButton) fragmentView.findViewById(R.id.add_cost);
+        mExpenses = (ListView) fragmentView.findViewById(R.id.expenses);
     }
 
     @Override
