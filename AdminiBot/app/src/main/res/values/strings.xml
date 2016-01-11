@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">dojoknowledge</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">REGISTRO</string>
+
+    <!-- user register -->
+    <string name="register_title">Registrar</string>
+    <string name="register_hint_name">Nombre</string>
+    <string name="register_hint_last_name">Apellidos</string>
+    <string name="register_hint_email">Email</string>
+    <string name="action_bar_about_title">About</string>
+    <string name="register_button_ok">OK</string>
+    <string name="register_ok">El usuario se registro con exito!</string>
+    <string name="register_failed">Se produjo un error, intentalo más tarde</string>
+
+    <!-- login user -->
+    <string name="title_activity_login">LOGIN</string>
+    <string name="login_hint_password">Pasword</string>
+    <string name="login_button_enter">Entrar</string>
+    <string name="login_register_now_link">¡Registrate ahora!</string>
+    <string name="title_activity_about_admini_bot">AboutAdminiBotActivity</string>
+
+    <!-- about -->
+    <string name="about_title">¿Que es Adminibot?</string>
+    <string name="about_description">Registra tus gastos diarios
+    y obten un resumen periodico de los movimientos de tu capital. </string>
+
+    <!-- error messages -->
+    <string name="error_empty_value">El campo es requerido</string>
+    <string name="error_wrong_email">El formato del email es incorrecto</string>
+    <string name="error_wrong_lenght_email">El tamaño del email es incorrecto</string>
+    <string name="title_activity_home_activity">Adminibot!</string>
+
+    <!-- navigation menu -->
+    <string name="navigation_home_option">Bandeja de entrada</string>
+    <string name="navigation_my_cards_option">Mis tarjetas</string>
+    <string name="navigation_my_saving_option">Mis ahorros</string>
+    <string name="navigation_accounts_option">Mis cuentas</string>
+    <string name="navigation_summary_option">Resumen</string>
+    <string name="navigation_title_header">Hola, yo soy <b>ADMINIBOT!</b></string>
+    <string name="navigation_open_message">Open Navigation</string>
+    <string name="navigation_close_message">Close Navigation</string>
+
+    <!-- home fragment -->
+    <string name="home_title_register_spending">Haz click en el botón para registrar una compra.</string>
+
+    <!-- action bar menu -->
+    <string name="action_bar_menu_notifications">Notificaciones</string>
+
+    <!-- expenses types -->
+    <string name="expenses_types_foods">Alimentos</string>
+    <string name="expenses_types_clothes">Ropa</string>
+    <string name="expenses_types_drinks">Alcohol</string>
+    <string name="expenses_types_medicals">Médicos</string>
+    <string name="expenses_types_luxuries">Lujos</string>
+
+    <string name="expenses_types_foods_description">Cualquier alimento adquirido en tiendas departamentales,
+    tiendas de auto servicio, puestos de la calle etc.</string>
+    <string name="expenses_types_clothes_description">Ropa adquirida en cualquier punto de venta.</string>
+    <string name="expenses_types_drinks_description">Bebidas alcohólicas de cualquier tipo</string>
+    <string name="expenses_types_medicals_description">Gastos por medicamentos o consultas médicas</string>
+    <string name="expenses_types_luxuries_description">Productos adquiridos no necesarios pero si deseados.</string>
+    <string name="title_activity_expense_registration">Registro de gasto</string>
+
+    <!-- expense registration -->
+    <string name="expense_registration_hint_name">Nombre del gasto</string>
+    <string name="expense_registration_hint_amount">Monto</string>
+    <string name="expense_registration_button_register">Registrar</string>
+    <string name="expense_registration_suggestion">Lleva el registro de cada uno de tus gastos realizados para que de esta
+    manera tengas cifras mas precisas de tu capital :)</string>
+    <string name="expense_registered_ok">El gasto se registro con exito!</string>
+</resources>
