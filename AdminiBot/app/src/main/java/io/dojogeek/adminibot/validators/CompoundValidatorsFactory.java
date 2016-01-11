@@ -1,0 +1,20 @@
+package io.dojogeek.adminibot.validators;
+
+
+import io.dojogeek.adminibot.R;
+
+public class CompoundValidatorsFactory {
+
+    static RequiredValueValidator requiredValueValidator = new RequiredValueValidator();
+
+    public static CompoundValidator emailValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(RegexValues.EMAIL_MAX_LENGTH).withErroMessage(R.string.error_wrong_lenght_email));
+        compoundValidator.addValidator(RegexValidator.withRegexp(RegexValues.EMAIL_REGEXP).withErroMessage(R.string.error_wrong_email));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
+
+}

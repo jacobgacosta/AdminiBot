@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape>
+                    <solid android:color="@color/primary_background" />
+                    <corners
+                        android:topLeftRadius="20dp"
+                        android:topRightRadius="20dp"
+                        android:bottomLeftRadius="20dp"
+                        android:bottomRightRadius="20dp" />
+                    <padding
+                        android:right="16dp" />
+                </shape>
+            </item>
+            <item >
+                <bitmap android:gravity="right"
+                    android:src="@drawable/ic_down_arrow"/>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape>
+                    <solid android:color="@color/primary_background" />
+                    <corners
+                        android:topLeftRadius="20dp"
+                        android:topRightRadius="20dp"
+                        android:bottomLeftRadius="20dp"
+                        android:bottomRightRadius="20dp" />
+                    <padding
+                        android:right="16dp" />
+                </shape>
+            </item>
+            <item >
+                <bitmap android:gravity="right|center"
+                    android:src="@drawable/ic_down_arrow"/>
+
+            </item>
+        </layer-list>
+    </item>
+
+</selector>
