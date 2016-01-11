@@ -50,8 +50,8 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
-        String name = cursor.getString(cursor.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
-        String description = cursor.getString(cursor.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
+        int name = cursor.getInt(cursor.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
+        int description = cursor.getInt(cursor.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
 
         expenseTypeModel.id = id;
         expenseTypeModel.name = name;
