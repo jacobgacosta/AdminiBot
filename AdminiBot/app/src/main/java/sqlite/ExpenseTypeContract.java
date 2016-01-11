@@ -20,10 +20,12 @@ import static sqlite.SQLiteConstants.VALUES;
 
 public class ExpenseTypeContract {
 
-    private static String [] expensesTypes = {"Alimentos", "Ropa", "Alcohol", "Médicos", "Lujos"};
-    private static String [] expensesTypesDescriptions = {"Cualquier alimento adquirido en tiendas departamentales,\n" +
-            "tiendas de auto servicio, puestos de la calle etc.", "Ropa adquirida en cualquier punto de venta",
-            "Bebidas alcohólicas de cualquier tipo", "Gastos por medicamentos o consultas médicas", "Productos adquiridos no necesarios pero si deseados."};
+    private static int [] expensesTypes = {R.string.expenses_types_foods,
+            R.string.expenses_types_clothes, R.string.expenses_types_drinks, R.string.expenses_types_medicals,
+            R.string.expenses_types_luxuries};
+    private static int [] expensesTypesDescriptions = {R.string.expenses_types_foods_description,
+            R.string.expenses_types_clothes_description, R.string.expenses_types_drinks_description,
+            R.string.expenses_types_medicals_description, R.string.expenses_types_luxuries_description};
 
     public static abstract class ExpenseType implements BaseColumns {
 
@@ -36,8 +38,8 @@ public class ExpenseTypeContract {
 
     public static final String SQL_CREATE_ENTRIES = CREATE_TABLE + ExpenseType.TABLE_NAME + OPEN_PARENTHESIS +
             ExpenseType._ID + INTEGER + PRIMARY_KEY + COMMA_SEP +
-            ExpenseType.COLUMN_NAME + TEXT_TYPE + COMMA_SEP +
-            ExpenseType.COLUMN_DESCRIPTION + TEXT_TYPE + CLOSE_PARENTHESIS;
+            ExpenseType.COLUMN_NAME + INTEGER + COMMA_SEP +
+            ExpenseType.COLUMN_DESCRIPTION + INTEGER + CLOSE_PARENTHESIS;
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
