@@ -37,9 +37,14 @@
             style="@style/spinnerTheme"
             android:layout_below="@+id/expense_name" />
 
+        <Spinner
+            android:id="@+id/payment_method"
+            style="@style/spinnerTheme"
+            android:layout_below="@+id/expenses_types" />
+
         <EditText
             android:id="@+id/expense_amount"
-            android:layout_below="@+id/expenses_types"
+            android:layout_below="@+id/payment_method"
             style="@style/inputTheme"
             android:inputType="numberDecimal"
             android:hint="@string/expense_registration_hint_amount" />
