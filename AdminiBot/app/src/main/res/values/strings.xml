@@ -70,10 +70,23 @@
     <string name="expense_registration_suggestion">Lleva el registro de cada uno de tus gastos realizados para que de esta
     manera tengas cifras mas precisas de tu capital :)</string>
     <string name="expense_registered_ok">El gasto se registro con exito!</string>
+    <string name="expense_registered_add">+  agregar método de pago</string>
+    <string name="expense_registered_remove">-  eliminar método de pago</string>
 
     <!-- Inbox -->
     <string name="inbox_expense_amount">Monto:</string>
     <string name="inbox_expense_payment_method">Tipo de pago:</string>
     <string name="inbox_expense_date">Pago realizado el:</string>
+
+    <!-- payment methods -->
+    <string name="payment_methods_credit_card">Tarjeta de crédito</string>
+    <string name="payment_methods_food_stamps">Vales de despensa</string>
+    <string name="payment_methods_debit_card">Tarjeta de débito</string>
+    <string name="payment_methods_cash">Efectivo</string>
+
+    <string name="payment_methods_credit_card_description">Cualquier tarjeta de crédito</string>
+    <string name="payment_methods_food_stamps_description">Vales de despensa, tarjetas o cupones</string>
+    <string name="payment_methods_debit_card_description">Cualquier tarjeta de débito</string>
+    <string name="payment_methods_cash_description">Dinero en efectivo</string>
 
 </resources>
