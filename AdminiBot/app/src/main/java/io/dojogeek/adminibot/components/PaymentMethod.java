@@ -7,7 +7,6 @@ import android.util.*;
 import android.view.View;
 import android.widget.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ public class PaymentMethod extends LinearLayout {
     private LinearLayout mGroup;
     private int mSpinnerSize = 4;
     private int mCounter = 0;
+    private int mId = 0;
     private Context mContext;
     private Map<Integer, RelativeLayout> mAddedItems = new HashMap();
 
@@ -54,6 +54,10 @@ public class PaymentMethod extends LinearLayout {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(dataAdapter);
 
+    }
+
+    public Map<Integer, RelativeLayout> getAddedItems() {
+        return mAddedItems;
     }
 
     @Override
@@ -88,6 +92,7 @@ public class PaymentMethod extends LinearLayout {
                 switch (idView) {
                     case R.id.add_payment_method:
                         addGroupView();
+                        incrementCounter();
                         checkItemLimit();
                         break;
                     case R.id.remove_button:
@@ -116,6 +121,10 @@ public class PaymentMethod extends LinearLayout {
 
         addToCollection(idView, relativeLayout);
 
+    }
+
+    private int getViewId() {
+        return ++mId;
     }
 
     private RelativeLayout createGroupView(int idComponent) {
@@ -197,10 +206,6 @@ public class PaymentMethod extends LinearLayout {
         return removeButton;
     }
 
-    private int getViewId() {
-        return ++mCounter;
-    }
-
     private void addToView(RelativeLayout relativeLayout) {
         mGroup.addView(relativeLayout);
     }
@@ -208,6 +213,10 @@ public class PaymentMethod extends LinearLayout {
     private void addToCollection(int idView, RelativeLayout relativeLayout) {
         Log.v(TAG, " saved id:" + idView);
         mAddedItems.put(idView, relativeLayout);
+    }
+
+    private void incrementCounter() {
+        ++mCounter;
     }
 
     private void checkItemLimit() {
