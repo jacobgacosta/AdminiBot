@@ -12,4 +12,5 @@
     <item name="light_grey" type="color">#807f7f</item>
     <item name="orange_dark" type="color">#DF7401</item>
     <item name="notification_background" type="color">#FA5858</item>
+    <item name="light_yellow" type="color">#F5ECCE</item>
 </resources>
