@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="io.dojogeek.adminibot.views.RegisterExpenseActivity"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/suggestion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:padding="16dp"
-        android:background="@color/global_background_dark"
-        android:textColor="@color/primary_background"
-        android:drawableLeft="@drawable/ic_suggestion"
-        android:drawablePadding="15dp"
-        android:textStyle="italic"
-        android:text="@string/expense_registration_suggestion"/>
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="io.dojogeek.adminibot.views.RegisterExpenseActivity"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
-
-        <EditText
-            android:id="@+id/expense_name"
-            style="@style/inputTheme"
-            android:layout_marginTop="32dp"
-            android:hint="@string/expense_registration_hint_name" />
-
-        <Spinner
-            android:id="@+id/expenses_types"
-            style="@style/spinnerTheme"
-            android:layout_below="@+id/expense_name" />
-
-        <Spinner
-            android:id="@+id/payment_method"
-            style="@style/spinnerTheme"
-            android:layout_below="@+id/expenses_types" />
-
-        <EditText
-            android:id="@+id/expense_amount"
-            android:layout_below="@+id/payment_method"
-            style="@style/inputTheme"
-            android:inputType="numberDecimal"
-            android:hint="@string/expense_registration_hint_amount" />
-
-        <Button
-            android:id="@+id/expense_ok"
-            android:layout_below="@+id/expense_amount"
+        <TextView
+            android:id="@+id/suggestion"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/expense_registration_button_register"
-            android:textSize="24sp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="16dp"
+            android:background="@color/global_background_dark"
             android:textColor="@color/primary_background"
-            android:background="@drawable/rounded_button_selector"
-            android:layout_gravity="center_horizontal"
-            android:stateListAnimator="@null"/>
+            android:drawableLeft="@drawable/ic_suggestion"
+            android:drawablePadding="15dp"
+            android:textStyle="italic"
+            android:text="@string/expense_registration_suggestion"/>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/expense_name"
+                style="@style/inputTheme"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:hint="@string/expense_registration_hint_name" />
+
+            <Spinner
+                android:id="@+id/expenses_types"
+                style="@style/spinnerTheme"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/expense_name" />
+
+            <io.dojogeek.adminibot.components.PaymentMethod
+                android:id="@+id/payment_method"
+                android:layout_below="@+id/expenses_types"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/expense_ok"
+                android:layout_below="@+id/payment_method"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/expense_registration_button_register"
+                android:textSize="24sp"
+                android:textColor="@color/primary_background"
+                android:background="@drawable/rounded_button_selector"
+                android:stateListAnimator="@null"/>
+
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+
