@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
@@ -27,7 +28,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     private static String TAG = "ExpenseRegistrationActivity";
     private static int DEFAULT_VALUE_SPINNER = R.string.expenses_types_default_value;
     private EditText mName;
-    private EditText mAmount;
+    private PaymentMethod mPaymentMethod;
     private Spinner mExpensesTypes;
     private Button mOk;
     private List<ExpenseTypeModel> mExpenseTypeModelList;
@@ -103,8 +104,8 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     protected void loadViews() {
         mExpensesTypes = (Spinner) findViewById(R.id.expenses_types);
         mName = (EditText) findViewById(R.id.expense_name);
-        mAmount = (EditText) findViewById(R.id.expense_amount);
         mOk = (Button) findViewById(R.id.expense_ok);
+        mPaymentMethod = (PaymentMethod) findViewById(R.id.payment_method);
     }
 
     @Override
@@ -128,7 +129,6 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     private ExpenseModel fillExpense() {
 
         ExpenseModel expense = new ExpenseModel();
-        expense.amount = mAmount.getText().toString();
         expense.dataExpediture = DateUtils.getCurrentData();
         expense.name = mName.getText().toString();
         expense.expenseTypeId = mExpenseTypeModelList.get(mExpensesTypes.getSelectedItemPosition()).id;
