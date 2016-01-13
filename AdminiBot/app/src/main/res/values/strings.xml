@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dojoknowledge</string>
+    <string name="app_name">Adminibot</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_register">REGISTRO</string>
 
@@ -48,7 +48,7 @@
     <string name="action_bar_menu_notifications">Notificaciones</string>
 
     <!-- expenses types -->
-    <string name="expenses_types_default_value">-Selecciona un valor-</string>
+    <string name="expenses_types_spinner_default_value">Selecciona el tipo de gasto</string>
     <string name="expenses_types_foods">Alimentos</string>
     <string name="expenses_types_clothes">Ropa</string>
     <string name="expenses_types_drinks">Alcohol</string>
@@ -79,6 +79,7 @@
     <string name="inbox_expense_date">Pago realizado el:</string>
 
     <!-- payment methods -->
+    <string name="payment_methods_spinner_default_value">Selecciona un tipo de pago</string>
     <string name="payment_methods_credit_card">Tarjeta de crédito</string>
     <string name="payment_methods_food_stamps">Vales de despensa</string>
     <string name="payment_methods_debit_card">Tarjeta de débito</string>
