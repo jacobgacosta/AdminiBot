@@ -4,6 +4,8 @@ import android.content.Context;
 
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
+import io.dojogeek.adminibot.daos.PaymentMethodsDao;
+import io.dojogeek.adminibot.daos.PaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenterImpl;
@@ -74,9 +76,11 @@ public class AdminiBotModule {
     @Provides
     @AdminBotScope
     RegisterExpensePresenter provideExpenseRegistrationPresenter(ExpenseTypeDaoImpl expenseTypeDaoImpl,
-                                                                     ExpenseDaoImpl expenseDaoImpl, UserDaoImpl userDaoImpl) {
+                                                                 ExpenseDaoImpl expenseDaoImpl,
+                                                                 UserDaoImpl userDaoImpl, PaymentMethodsDaoImpl paymentMethodsDaoImpl) {
 
-        return new RegisterExpensePresenterImpl(mRegisterExpense, expenseTypeDaoImpl, expenseDaoImpl, userDaoImpl);
+        return new RegisterExpensePresenterImpl(mRegisterExpense, expenseTypeDaoImpl, expenseDaoImpl,
+                userDaoImpl, paymentMethodsDaoImpl);
     }
 
     @Provides
