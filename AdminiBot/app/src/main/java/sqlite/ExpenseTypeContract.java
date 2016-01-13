@@ -20,10 +20,10 @@ import static sqlite.SQLiteConstants.VALUES;
 
 public class ExpenseTypeContract {
 
-    private static int [] expensesTypes = {R.string.expenses_types_foods,
+    private static final int [] EXPENSES_TYPES = {R.string.expenses_types_foods,
             R.string.expenses_types_clothes, R.string.expenses_types_drinks, R.string.expenses_types_medicals,
             R.string.expenses_types_luxuries};
-    private static int [] expensesTypesDescriptions = {R.string.expenses_types_foods_description,
+    private static final int [] EXPENSES_TYPES_DESCRIPTIONS = {R.string.expenses_types_foods_description,
             R.string.expenses_types_clothes_description, R.string.expenses_types_drinks_description,
             R.string.expenses_types_medicals_description, R.string.expenses_types_luxuries_description};
 
@@ -43,28 +43,28 @@ public class ExpenseTypeContract {
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypes[0] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypesDescriptions[0] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+            OPEN_QUOTE + EXPENSES_TYPES[0] + CLOSE_QUOTE + COMMA_SEP +
+            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[0] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
 
     public static final String SQL_INSERT_INITIAL_VALUES_2 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypes[1] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypesDescriptions[1] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+            OPEN_QUOTE + EXPENSES_TYPES[1] + CLOSE_QUOTE + COMMA_SEP +
+            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[1] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
 
     public static final String SQL_INSERT_INITIAL_VALUES_3 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypes[2] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypesDescriptions[2] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+            OPEN_QUOTE + EXPENSES_TYPES[2] + CLOSE_QUOTE + COMMA_SEP +
+            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[2] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
 
     public static final String SQL_INSERT_INITIAL_VALUES_4 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypes[3] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypesDescriptions[3] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+            OPEN_QUOTE + EXPENSES_TYPES[3] + CLOSE_QUOTE + COMMA_SEP +
+            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[3] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
 
     public static final String SQL_INSERT_INITIAL_VALUES_5 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypes[4] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + expensesTypesDescriptions[4] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+            OPEN_QUOTE + EXPENSES_TYPES[4] + CLOSE_QUOTE + COMMA_SEP +
+            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[4] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + ExpenseType.TABLE_NAME;
 
