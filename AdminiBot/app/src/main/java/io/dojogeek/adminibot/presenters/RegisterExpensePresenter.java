@@ -13,4 +13,5 @@ public interface RegisterExpensePresenter {
 
     void unnusedView();
 
+    void getPaymentMethods();
 }
