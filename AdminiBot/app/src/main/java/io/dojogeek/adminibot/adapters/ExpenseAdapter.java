@@ -28,7 +28,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseModel> {
 
         convertView.findViewById(R.id.expense_description);
         convertView.findViewById(R.id.expense_amount);
-        convertView.findViewById(R.id.payment_method);
+        convertView.findViewById(R.id.payment_method_detail);
         convertView.findViewById(R.id.expense_date);
 
         return convertView;
