@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -119,7 +121,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         mExpensesTypes = (CustomSpinner) findViewById(R.id.expenses_types);
         mName = (EditText) findViewById(R.id.expense_name);
         mOk = (Button) findViewById(R.id.expense_ok);
-        mPaymentMethod = (PaymentMethod) findViewById(R.id.payment_method);
+        mPaymentMethod = (PaymentMethod) findViewById(R.id.payment_method_component);
     }
 
     @Override
@@ -147,8 +149,27 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         expense.dataExpediture = DateUtils.getCurrentData();
         expense.name = mName.getText().toString();
         expense.expenseTypeId = mExpenseTypeModelList.get(mExpensesTypes.getSelectedItemPosition()).id;
+        expense.totalAmount = getTotalAmount();
 
         return expense;
+    }
+
+    private String getTotalAmount() {
+
+        double totalAmount = 0.0;
+
+        EditText mandatoryAmount = (EditText) mPaymentMethod.findViewById(R.id.mandatory_amount);
+        totalAmount += Double.parseDouble(mandatoryAmount.getText().toString());
+
+        Map<Integer, RelativeLayout> paymentMethods = mPaymentMethod.getAddedItems();
+
+        for (Map.Entry<Integer, RelativeLayout> entry : paymentMethods.entrySet()) {
+            RelativeLayout relativeLayout = entry.getValue();
+            EditText editText = (EditText) relativeLayout.findViewById(R.id.added_amount);
+            totalAmount += Double.parseDouble(editText.getText().toString());
+        }
+
+        return String.valueOf(totalAmount);
     }
 
     private void loadInitData() {
