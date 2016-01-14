@@ -60,7 +60,7 @@ public class PaymentMethod extends LinearLayout {
 
         super.onFinishInflate();
 
-        mSpinner = (CustomSpinner) findViewById(R.id.spinner);
+        mSpinner = (CustomSpinner) findViewById(R.id.mandayory_payment_method);
         mButton = (Button) findViewById(R.id.add_payment_method);
         mButton.setOnClickListener(onClickListener());
         mGroup = (LinearLayout) findViewById(R.id.group);
@@ -138,7 +138,7 @@ public class PaymentMethod extends LinearLayout {
 
         LayoutParams layoutParams = getGroupViewLayoutParams();
 
-        RelativeLayout containerLayout = (RelativeLayout) inflate(getContext(), R.layout.payment_method_component, null);
+        RelativeLayout containerLayout = (RelativeLayout) inflate(getContext(), R.layout.extra_payment_method, null);
         containerLayout.setId(id);
         containerLayout.setLayoutParams(layoutParams);
 
@@ -158,7 +158,7 @@ public class PaymentMethod extends LinearLayout {
 
         LayoutParams layoutParams = getSpinnerLayoutParams();
 
-        CustomSpinner spinner = (CustomSpinner) parentLayout.findViewById(R.id.spinner);
+        CustomSpinner spinner = (CustomSpinner) parentLayout.findViewById(R.id.added_payment_method);
         spinner.setPadding(dpToPx(20), 0, dpToPx(10), 0);
         spinner.setLayoutParams(layoutParams);
         spinner.setItems(mSpinnerItems);
@@ -178,7 +178,7 @@ public class PaymentMethod extends LinearLayout {
 
         LayoutParams layoutParams = getEditTextLayoutParams();
 
-        EditText editText = (EditText) parentLayout.findViewById(R.id.edit_text);
+        EditText editText = (EditText) parentLayout.findViewById(R.id.added_amount);
         editText.setPadding(dpToPx(20), 0, dpToPx(10), 0);
         editText.setLayoutParams(layoutParams);
 
