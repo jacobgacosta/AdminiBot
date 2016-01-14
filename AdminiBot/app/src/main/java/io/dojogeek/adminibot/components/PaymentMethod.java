@@ -16,43 +16,38 @@ import io.dojogeek.adminibot.R;
 public class PaymentMethod extends LinearLayout {
 
     private static final String TAG = "PaymentMethod";
-    private static int DEFAULT_VALUE_SPINNER = R.string.expenses_types_default_value;
-    private static int ONE_BEFORE = 1;
     private static int KEY_TAG_BUTTON = R.id.payment_methods_tag_id;
 
-    private Spinner mSpinner;
+    private CustomSpinner mSpinner;
     private Button mButton;
     private LinearLayout mGroup;
-    private int mSpinnerSize = 4;
     private int mCounter = 0;
     private int mId = 0;
-    private Context mContext;
     private Map<Integer, RelativeLayout> mAddedItems = new HashMap();
+    private List<String> mSpinnerItems;
 
     public PaymentMethod(Context context) {
         super(context);
-        inflateView(context);
+        inflateView();
     }
 
     public PaymentMethod(Context context, AttributeSet attrs) {
         super(context, attrs);
-        inflateView(context);
+        inflateView();
     }
 
     public PaymentMethod(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflateView(context);
+        inflateView();
     }
 
-    public void setItemsForSpinner(List<String> items) {
+    public void createSpinner(List<String>  items, int resourceId) {
 
-        setSpinnerSize(items.size());
+        mSpinnerItems = items;
 
-        items.add(getResources().getString(DEFAULT_VALUE_SPINNER));
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, items);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(dataAdapter);
+        mSpinner.setItems(mSpinnerItems);
+        mSpinner.setHint(resourceId);
+        mSpinner.createSpinner();
 
     }
 
@@ -65,20 +60,19 @@ public class PaymentMethod extends LinearLayout {
 
         super.onFinishInflate();
 
-        mSpinner = (Spinner) findViewById(R.id.spinner);
+        mSpinner = (CustomSpinner) findViewById(R.id.spinner);
         mButton = (Button) findViewById(R.id.add_payment_method);
         mButton.setOnClickListener(onClickListener());
         mGroup = (LinearLayout) findViewById(R.id.group);
 
     }
 
-    private void inflateView(Context context) {
-        mContext = context;
+    private void inflateView() {
         inflate(getContext(), R.layout.register_payment_method, this);
     }
 
-    private void setSpinnerSize(int size) {
-        mSpinnerSize = size - ONE_BEFORE;
+    private int getSpinnerSize() {
+        return mSpinnerItems.size() - 1;
     }
 
     private OnClickListener onClickListener() {
@@ -164,9 +158,11 @@ public class PaymentMethod extends LinearLayout {
 
         LayoutParams layoutParams = getSpinnerLayoutParams();
 
-        Spinner spinner = (Spinner) parentLayout.findViewById(R.id.spinner);
+        CustomSpinner spinner = (CustomSpinner) parentLayout.findViewById(R.id.spinner);
         spinner.setPadding(dpToPx(20), 0, dpToPx(10), 0);
         spinner.setLayoutParams(layoutParams);
+        spinner.setItems(mSpinnerItems);
+        spinner.createSpinner();
 
         return spinner;
     }
@@ -211,8 +207,8 @@ public class PaymentMethod extends LinearLayout {
     }
 
     private void addToCollection(int idView, RelativeLayout relativeLayout) {
-        Log.v(TAG, " saved id:" + idView);
         mAddedItems.put(idView, relativeLayout);
+        Log.v(TAG, " saved id:" + idView + " size saved items " + mAddedItems.size());
     }
 
     private void incrementCounter() {
@@ -220,7 +216,7 @@ public class PaymentMethod extends LinearLayout {
     }
 
     private void checkItemLimit() {
-        if (createdItems() == mSpinnerSize) {
+        if (createdItems() == getSpinnerSize()) {
             hiddenAddButton();
             return;
         }
@@ -257,8 +253,8 @@ public class PaymentMethod extends LinearLayout {
     }
 
     private void removeFromCollection(int idToremove) {
-        Log.v(TAG, " remove id:" + idToremove);
         mAddedItems.remove(idToremove);
+        Log.v(TAG, " remove id:" + idToremove + " size saved items " + mAddedItems.size());
     }
 
     private void decrementCounter() {
@@ -266,7 +262,7 @@ public class PaymentMethod extends LinearLayout {
     }
 
     private void checkAvailableItems() {
-        if (createdItems() < mSpinnerSize) {
+        if (createdItems() < getSpinnerSize()) {
             showAddButton();
             return;
         }
