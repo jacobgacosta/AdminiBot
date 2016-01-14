@@ -34,7 +34,7 @@
                 android:layout_marginTop="32dp"
                 android:hint="@string/expense_registration_hint_name" />
 
-            <Spinner
+            <io.dojogeek.adminibot.components.CustomSpinner
                 android:id="@+id/expenses_types"
                 style="@style/spinnerTheme"
                 android:layout_marginLeft="16dp"
