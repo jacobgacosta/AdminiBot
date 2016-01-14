@@ -20,7 +20,7 @@
         android:layout_below="@+id/remove_button"
         android:orientation="vertical">
 
-        <Spinner
+        <io.dojogeek.adminibot.components.CustomSpinner
             android:id="@+id/spinner"
             style="@style/spinnerTheme"
             android:layout_height="45dp"/>
