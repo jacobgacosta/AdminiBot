@@ -58,7 +58,7 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         contentValues.put(ExpenseContract.Expense.COLUMN_NAME, expenseModel.name);
         contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
         contentValues.put(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
+        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.totalAmount);
         contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dataExpediture);
 
         return contentValues;
@@ -78,7 +78,7 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
         expenseTypeModel.id = id;
         expenseTypeModel.name = name;
-        expenseTypeModel.amount = amount;
+        expenseTypeModel.totalAmount = amount;
         expenseTypeModel.dataExpediture = dateExpediture;
         expenseTypeModel.expenseTypeId = expenseTypeId;
         expenseTypeModel.userId = userId;
