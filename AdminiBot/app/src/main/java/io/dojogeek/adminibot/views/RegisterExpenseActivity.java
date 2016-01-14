@@ -17,19 +17,23 @@ import javax.inject.Inject;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.components.CustomSpinner;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 public class RegisterExpenseActivity extends BaseActivity implements RegisterExpense, View.OnClickListener {
 
     private static String TAG = "ExpenseRegistrationActivity";
-    private static int DEFAULT_VALUE_SPINNER = R.string.expenses_types_default_value;
+    private static final int DEFAULT_VALUE_SPINNER_EXPENSES_TYPES = R.string.expenses_types_spinner_default_value;
+    private static final int DEFAULT_VALUE_SPINNER_PAYMENT__METHODS = R.string.payment_methods_spinner_default_value;
+
     private EditText mName;
     private PaymentMethod mPaymentMethod;
-    private Spinner mExpensesTypes;
+    private CustomSpinner mExpensesTypes;
     private Button mOk;
     private List<ExpenseTypeModel> mExpenseTypeModelList;
 
@@ -38,6 +42,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
 
     @Override
     public void showNotification(int message) {
+
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(this, message, duration);
@@ -50,15 +55,25 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         mExpenseTypeModelList = expenseTypeModelList;
 
         List<String> expensesTypes = new ArrayList<>();
-        expensesTypes.add(getString(DEFAULT_VALUE_SPINNER));
 
         for (ExpenseTypeModel expenseTypeModel : expenseTypeModelList) {
             expensesTypes.add(getString(expenseTypeModel.name));
         }
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, expensesTypes);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mExpensesTypes.setAdapter(dataAdapter);
+        loadSpinnerData(expensesTypes);
+    }
+
+    @Override
+    public void deployPaymentMethods(List<PaymentMethodModel> paymentMethodModelList) {
+
+        List<String> paymentMethods = new ArrayList<>();
+
+        for (PaymentMethodModel paymentMethodModel : paymentMethodModelList) {
+            paymentMethods.add(getString(paymentMethodModel.name));
+        }
+
+        mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);
+
     }
 
     @Override
@@ -75,7 +90,6 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
                 Log.v(TAG, "no events!");
                 break;
         }
-
     }
 
     @Override
@@ -102,7 +116,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
 
     @Override
     protected void loadViews() {
-        mExpensesTypes = (Spinner) findViewById(R.id.expenses_types);
+        mExpensesTypes = (CustomSpinner) findViewById(R.id.expenses_types);
         mName = (EditText) findViewById(R.id.expense_name);
         mOk = (Button) findViewById(R.id.expense_ok);
         mPaymentMethod = (PaymentMethod) findViewById(R.id.payment_method);
@@ -113,10 +127,11 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         mOk.setOnClickListener(this);
     }
 
-    private void loadInitData() {
-        registerExpensePresenter.getExpensesTypes();
+    private void loadSpinnerData(List<String> expensesTypes) {
+        mExpensesTypes.setItems(expensesTypes);
+        mExpensesTypes.setHint(DEFAULT_VALUE_SPINNER_EXPENSES_TYPES);
+        mExpensesTypes.createSpinner();
     }
-
 
     private void processInputData() {
 
@@ -135,4 +150,10 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
 
         return expense;
     }
+
+    private void loadInitData() {
+        registerExpensePresenter.getExpensesTypes();
+        registerExpensePresenter.getPaymentMethods();
+    }
+
 }
