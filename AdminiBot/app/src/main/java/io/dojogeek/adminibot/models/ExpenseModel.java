@@ -8,5 +8,6 @@ public class ExpenseModel {
     public long expenseTypeId;
     public String amount;
     public String dataExpediture;
+    public String paymentMethod;
 
 }
