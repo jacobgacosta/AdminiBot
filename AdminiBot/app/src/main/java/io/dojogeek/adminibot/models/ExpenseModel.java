@@ -6,8 +6,7 @@ public class ExpenseModel {
     public String name;
     public long userId;
     public long expenseTypeId;
-    public String amount;
+    public String totalAmount;
     public String dataExpediture;
-    public String paymentMethod;
 
 }
