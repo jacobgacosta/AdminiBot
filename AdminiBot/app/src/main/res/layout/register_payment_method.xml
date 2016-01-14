@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Spinner
+            <io.dojogeek.adminibot.components.CustomSpinner
                 android:id="@+id/spinner"
                 style="@style/spinnerTheme"
                 android:layout_marginLeft="16dp"
