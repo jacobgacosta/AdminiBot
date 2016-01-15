@@ -27,8 +27,8 @@
 
     <!-- error messages -->
     <string name="error_empty_value">El campo es requerido</string>
-    <string name="error_wrong_email">El formato del email es incorrecto</string>
-    <string name="error_wrong_lenght_email">El tamaño del email es incorrecto</string>
+    <string name="error_wrong_format_email">El formato del email es incorrecto</string>
+    <string name="error_wrong_length_email">El tamaño del email es incorrecto</string>
     <string name="error_wrong_lenght_name">El nombre es demasiado largo</string>
     <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
     <string name="title_activity_home_activity">Adminibot!</string>
