@@ -21,6 +21,7 @@ public class CompoundValidatorsFactory {
 
         CompoundValidator compoundValidator = new CompoundValidator();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS).withErroMessage(R.string.error_wrong_format_name));
         compoundValidator.addValidator(requiredValueValidator);
 
         return compoundValidator;
