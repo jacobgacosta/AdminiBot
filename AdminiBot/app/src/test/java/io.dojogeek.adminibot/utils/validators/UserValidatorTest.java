@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class UserValidatorTest {
 
-    private static final String CORRECT_NAME = "Jacob";
+    private static final String CORRECT_NAME = "Jacob Dojogeek";
     private static final String CORRECT_LAST_NAME = "Guzman A";
     private static final String CORRECT__EMAIL = "jgacosta@dojogeek.io";
     private static final String EMTPY_VALUE = "";
@@ -64,6 +64,20 @@ public class UserValidatorTest {
             assertFalse(isValid);
             assertEquals(R.string.error_empty_value, userValidator.getErrorMessageEmail());
         }
+
+    }
+
+    @Test
+    public void userValidator_emailLength_isFalse() {
+
+        UserValidator userValidator = createUserValidator("jgacosta1234567891011122402881@dojogeek.io",
+                CORRECT_NAME, CORRECT_LAST_NAME);
+
+        boolean isValid = userValidator.validate();
+
+        assertFalse(isValid);
+
+        assertEquals(R.string.error_wrong_length_email, userValidator.getErrorMessageEmail());
 
     }
 
