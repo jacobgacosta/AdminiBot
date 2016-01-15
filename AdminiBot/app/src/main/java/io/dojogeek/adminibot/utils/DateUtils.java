@@ -9,7 +9,7 @@ public class DateUtils {
     public static String getCurrentData() {
 
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         return sdf.format(cal.getTime());
 
