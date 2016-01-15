@@ -21,7 +21,7 @@ public class LenghtValidator implements DataValidator<String> {
     @Override
     public boolean isValid(String value) {
 
-        if (value != null && !value.isEmpty() && value.length() <= maxLenght) {
+        if (value != null && !value.trim().isEmpty() && value.length() <= maxLenght) {
             return true;
         }
 
