@@ -38,8 +38,7 @@ public class UserValidatorTest {
     public void userValidator_formatEmail_isFalse() {
 
         final String [] invalidEmails = {"jgacosta@", "jgacostadojogeek.io", "jgacosta@dojogeek.",
-                "@dojogeek.io", "jgacosta", "jgacosta@dojogeek.@", "jgacosta@dojogeek._", EMTPY_VALUE,
-                SPACE_VALUE};
+                "@dojogeek.io", "jgacosta", "jgacosta@dojogeek.@", "jgacosta@dojogeek._"};
 
         UserValidator userValidator;
 
@@ -47,6 +46,23 @@ public class UserValidatorTest {
             userValidator = createUserValidator(email, CORRECT_NAME, CORRECT_LAST_NAME);
             boolean isValid = userValidator.validate();
             assertFalse(isValid);
+            assertEquals(R.string.error_wrong_format_email, userValidator.getErrorMessageEmail());
+        }
+
+    }
+
+    @Test
+    public void userValidator_withEmptyEmail_isFalse() {
+
+        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        UserValidator userValidator;
+
+        for (String value : emptyValues) {
+            userValidator = createUserValidator(value, CORRECT_NAME, CORRECT_LAST_NAME);
+            boolean isValid = userValidator.validate();
+            assertFalse(isValid);
+            assertEquals(R.string.error_empty_value, userValidator.getErrorMessageEmail());
         }
 
     }
