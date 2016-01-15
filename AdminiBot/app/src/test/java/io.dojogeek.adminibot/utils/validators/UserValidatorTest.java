@@ -3,8 +3,10 @@ package io.dojogeek.adminibot.utils.validators;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.validators.UserValidator;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -49,12 +51,11 @@ public class UserValidatorTest {
     @Test
     public void userValidator_nameLenght_isFalse() {
 
-        UserValidator userValidator = createUserValidator("jgacosta@dojogeek.io",
-                "Jacooooooooooooooooooooooob", "G. Acosta");
-
+        UserValidator userValidator = createUserValidator("jgacosta@dojogeek.io", "Jacooooooooooooooooooooooob", "G. Acosta");
         boolean isValid = userValidator.validate();
-
         assertFalse(isValid);
+
+        assertEquals(R.string.error_wrong_lenght_name, userValidator.getErrorMessageName());
 
     }
 
