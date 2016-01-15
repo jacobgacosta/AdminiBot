@@ -10,8 +10,17 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator emailValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(RegexValues.EMAIL_MAX_LENGTH).withErroMessage(R.string.error_wrong_lenght_email));
-        compoundValidator.addValidator(RegexValidator.withRegexp(RegexValues.EMAIL_REGEXP).withErroMessage(R.string.error_wrong_email));
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.EMAIL_MAX_LENGTH).withErroMessage(R.string.error_wrong_lenght_email));
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.EMAIL_REGEXP).withErroMessage(R.string.error_wrong_email));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator nameValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
         compoundValidator.addValidator(requiredValueValidator);
 
         return compoundValidator;
