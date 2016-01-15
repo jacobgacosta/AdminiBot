@@ -71,6 +71,17 @@ public class UserValidatorTest {
 
     }
 
+    @Test
+    public void userValidator_nameWithNumbers_isFalse() {
+
+        UserValidator userValidator = createUserValidator("jgacosta@dojogeek.io", "Jac0b", "G. Acosta");
+
+        boolean isValid = userValidator.validate();
+
+        assertFalse(isValid);
+
+    }
+
     private UserValidator createUserValidator(String email, String name, String lastName) {
 
         UserValidator userValidator = new UserValidator();
