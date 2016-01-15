@@ -1,8 +1,9 @@
 package io.dojogeek.adminibot.validators;
 
-public interface RegexValues {
+public interface ValidatorsValues {
 
     String EMAIL_REGEXP = "^([a-zA-Z0-9_\\.\\-])+@(([a-zA-Z0-9\\-])+\\.)+([a-zA-Z0-9]{2,4})+";
     int EMAIL_MAX_LENGTH = 40;
+    int NAME_MAX_LENGHT = 15;
 
 }
