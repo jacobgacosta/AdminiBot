@@ -54,8 +54,20 @@ public class UserValidatorTest {
         UserValidator userValidator = createUserValidator("jgacosta@dojogeek.io", "Jacooooooooooooooooooooooob", "G. Acosta");
         boolean isValid = userValidator.validate();
         assertFalse(isValid);
-
         assertEquals(R.string.error_wrong_lenght_name, userValidator.getErrorMessageName());
+    }
+
+    @Test
+    public void userValidator_withEmptyName_isFalse() {
+
+        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String value : emptyValues) {
+            UserValidator userValidator = createUserValidator("jgacosta@dojogeek.io", value, "G. Acosta");
+            boolean isValid = userValidator.validate();
+            assertFalse(isValid);
+            assertEquals(R.string.error_empty_value, userValidator.getErrorMessageName());
+        }
 
     }
 
