@@ -51,7 +51,7 @@ public class UserValidator extends Validator {
 
         this.validations.put(NAME, CompoundValidatorsFactory.nameValidator());
 
-        this.validations.put(LAST_NAME, requiredValueValidator);
+        this.validations.put(LAST_NAME, CompoundValidatorsFactory.lastNameValidator());
 
         this.validations.put(EMAIL, CompoundValidatorsFactory.emailValidator());
 
