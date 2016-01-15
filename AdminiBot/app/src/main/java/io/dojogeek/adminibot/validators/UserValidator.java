@@ -49,7 +49,7 @@ public class UserValidator extends Validator {
     @Override
     protected Map<String, DataValidator> configureValidations() {
 
-        this.validations.put(NAME, requiredValueValidator);
+        this.validations.put(NAME, CompoundValidatorsFactory.nameValidator());
 
         this.validations.put(LAST_NAME, requiredValueValidator);
 
