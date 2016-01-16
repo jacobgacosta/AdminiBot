@@ -127,4 +127,17 @@ public class LoginValidatorTest {
             assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessagePassword());
         }
     }
+
+    @Test
+    public void loginValidator_exceededLengthPassword_isFalse() {
+
+        final String password = "DojogeekJgAcosta240288_#$%??*)/%&";
+
+        mLoginValidator.setEmail(CORRECT_EMAIL);
+        mLoginValidator.setPassword(password);
+        boolean isValid = mLoginValidator.validate();
+
+        assertFalse(isValid);
+        assertEquals(R.string.error_wrong_lenght_password, mLoginValidator.getErrorMessagePassword());
+    }
 }
