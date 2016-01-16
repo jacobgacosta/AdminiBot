@@ -23,7 +23,7 @@ public class LoginValidator extends UserValidator {
 
         this.validations.put(EMAIL, CompoundValidatorsFactory.emailValidator());
 
-        this.validations.put(PASSWORD, this.requiredValueValidator);
+        this.validations.put(PASSWORD, CompoundValidatorsFactory.passwordValidator());
 
         return null;
     }
