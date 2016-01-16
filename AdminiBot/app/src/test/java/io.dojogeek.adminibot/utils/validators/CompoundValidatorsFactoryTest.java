@@ -52,4 +52,13 @@ public class CompoundValidatorsFactoryTest {
 
     }
 
+    @Test
+    public void compoundValidators_nullEmail_isFalse() {
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
+        compoundValidator.isValid(null);
+
+        assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
+    }
+
 }
