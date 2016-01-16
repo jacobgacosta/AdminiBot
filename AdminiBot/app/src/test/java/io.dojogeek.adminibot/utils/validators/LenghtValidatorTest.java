@@ -10,6 +10,9 @@ import static org.junit.Assert.assertTrue;
 
 public class LenghtValidatorTest {
 
+    private static final String EMTPY_VALUE = "";
+    private static final String SPACE_VALUE = "  ";
+
     @Test
     public void lengthValidator_correctValue_isTrue() {
 
@@ -27,6 +30,19 @@ public class LenghtValidatorTest {
 
         int maxLength = 4;
         String value = null;
+
+        LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
+        boolean isValid = lenghtValidator.isValid(value);
+
+        assertFalse(isValid);
+
+    }
+
+    @Test
+    public void lengthValidator_exceededLength_isFalse() {
+
+        int maxLength = 15;
+        String value = "Dojogeek is knoledge";
 
         LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
         boolean isValid = lenghtValidator.isValid(value);
