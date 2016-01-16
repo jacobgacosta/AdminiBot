@@ -51,4 +51,17 @@ public class LenghtValidatorTest {
 
     }
 
+    @Test
+    public void lengthValidator_withEmptyValue_isTrue() {
+
+        int maxLength = 10;
+        String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String value : emptyValues) {
+            LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
+            boolean isValid = lenghtValidator.isValid(value);
+            assertTrue(isValid);
+        }
+
+    }
 }
