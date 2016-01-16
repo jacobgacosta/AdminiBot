@@ -19,9 +19,24 @@ public class CompoundValidatorsFactory {
 
     public static CompoundValidator nameValidator() {
 
-        CompoundValidator compoundValidator = new CompoundValidator();
+        CompoundValidator compoundValidator = commonValidators();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
-        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS).withErroMessage(R.string.error_wrong_format_name));
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator lastNameValidator() {
+
+        CompoundValidator compoundValidator = commonValidators();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.LAST_NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_last_name));
+
+        return  compoundValidator;
+    }
+
+    private static CompoundValidator commonsValidators() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_name));
         compoundValidator.addValidator(requiredValueValidator);
 
         return compoundValidator;
