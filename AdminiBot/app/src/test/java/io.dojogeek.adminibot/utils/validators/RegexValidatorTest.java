@@ -39,4 +39,19 @@ public class RegexValidatorTest {
 
     }
 
+    @Test
+    public void regexValidator_nullValue_isFalse() {
+
+        String nullValue = null;
+
+        RegexValidator regexValidator = new RegexValidator(ValidatorsValues.EMAIL_REGEXP);
+        regexValidator.withErroMessage(R.string.error_wrong_format_email);
+        boolean isValid = regexValidator.isValid(nullValue);
+
+        assertFalse(isValid);
+
+        assertEquals(R.string.error_wrong_format_email, regexValidator.getErrorMsg());
+
+    }
+
 }
