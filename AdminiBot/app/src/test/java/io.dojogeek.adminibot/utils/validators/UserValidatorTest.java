@@ -134,6 +134,21 @@ public class UserValidatorTest {
 
     }
 
+    @Test
+    public void userValidator_withEmptyLastName_isFalse() {
+
+        final String [] invalidLastName = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String value : invalidLastName) {
+            UserValidator userValidator = createUserValidator(CORRECT__EMAIL, CORRECT_NAME, value);
+            boolean isValid = userValidator.validate();
+            assertFalse(isValid);
+            assertEquals(R.string.error_empty_value, userValidator.getErrorMessageLastName());
+
+        }
+
+    }
+
     private UserValidator createUserValidator(String email, String name, String lastName) {
 
         UserValidator userValidator = new UserValidator();
