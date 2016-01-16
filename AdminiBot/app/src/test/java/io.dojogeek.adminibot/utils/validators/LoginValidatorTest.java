@@ -73,7 +73,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_withNullValue_isFalse() {
+    public void loginValidator_withNullName_isFalse() {
 
         String nullEmail = null;
 
