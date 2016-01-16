@@ -40,7 +40,8 @@ public class LoginValidatorTest {
     public void loginValidator_formatEmail_isFalse() {
 
         String [] invalidEmails = {"jgacosta@dojogeek", "jgacosta@dojo@.com", "jgacosta@.com",
-                "jgacosta@..", "jgacosta@@@.com", "jgacosta@dojogeek@dojogeek.io", "dojogeek.io"};
+                "jgacosta@..", "jgacosta@@@.com", "jgacosta@dojogeek@dojogeek.io", "dojogeek.io",
+        "jgacosta#@dojogeek.io", "jgacosta@dojogeek.##"};
 
         for (String emails : invalidEmails) {
 
