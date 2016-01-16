@@ -19,7 +19,7 @@ public class CompoundValidatorsFactory {
 
     public static CompoundValidator nameValidator() {
 
-        CompoundValidator compoundValidator = commonValidators();
+        CompoundValidator compoundValidator = commonsValidators();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
 
         return compoundValidator;
@@ -27,7 +27,7 @@ public class CompoundValidatorsFactory {
 
     public static CompoundValidator lastNameValidator() {
 
-        CompoundValidator compoundValidator = commonValidators();
+        CompoundValidator compoundValidator = commonsValidators();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.LAST_NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_last_name));
 
         return  compoundValidator;
