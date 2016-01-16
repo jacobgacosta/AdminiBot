@@ -12,6 +12,10 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginValidatorTest {
 
+    private static final String EMTPY_VALUE = "";
+    private static final String SPACE_VALUE = "  ";
+    private static final String CORRECT_PASSWORD = "dojogeek1234@_DG#1";
+    private static final String CORRECT_EMAIL = "jgacosta@dojogeek.io";
     private LoginValidator mLoginValidator;
 
     @Before
@@ -24,8 +28,8 @@ public class LoginValidatorTest {
     @Test
     public void loginValidator_correctData_isTrue() {
 
-        mLoginValidator.setEmail("jgacosta@dojogeek.io");
-        mLoginValidator.setPassword("dojogeek_1234_#990DG");
+        mLoginValidator.setEmail(CORRECT_EMAIL);
+        mLoginValidator.setPassword(CORRECT_PASSWORD);
 
         boolean isValid = mLoginValidator.validate();
 
@@ -41,12 +45,29 @@ public class LoginValidatorTest {
         for (String emails : invalidEmails) {
 
             mLoginValidator.setEmail(emails);
-            mLoginValidator.setPassword("dojogeek1234@_DG#1");
+            mLoginValidator.setPassword(CORRECT_PASSWORD);
             boolean isValid = mLoginValidator.validate();
             assertFalse(isValid);
             assertEquals(R.string.error_wrong_format_email, mLoginValidator.getErrorMessageEmail());
 
         }
 
+    }
+
+    @Test
+    public void loginValidator_withEmptyValue_isFalse() {
+
+        String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String values : emptyValues) {
+
+            mLoginValidator.setEmail(values);
+            mLoginValidator.setPassword(CORRECT_PASSWORD);
+
+            boolean isValid = mLoginValidator.validate();
+            assertFalse(isValid);
+            assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessageEmail());
+
+        }
     }
 }
