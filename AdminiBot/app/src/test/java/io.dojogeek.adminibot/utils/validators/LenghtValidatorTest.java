@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import io.dojogeek.adminibot.validators.LenghtValidator;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 public class LenghtValidatorTest {
 
     @Test
@@ -14,7 +17,22 @@ public class LenghtValidatorTest {
         String value = "Dojogeek";
 
         LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
-        lenghtValidator.isValid(value);
+        boolean isValid = lenghtValidator.isValid(value);
+
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void lengthValidator_nullValue_isFalse() {
+
+        int maxLength = 4;
+        String value = null;
+
+        LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
+        boolean isValid = lenghtValidator.isValid(value);
+
+        assertFalse(isValid);
+
     }
 
 }
