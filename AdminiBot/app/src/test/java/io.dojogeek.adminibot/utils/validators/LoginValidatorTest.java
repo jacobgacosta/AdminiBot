@@ -56,7 +56,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_withEmptyName_isFalse() {
+    public void loginValidator_withEmptyEmail_isFalse() {
 
         String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
 
@@ -73,7 +73,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_withNullName_isFalse() {
+    public void loginValidator_withNullEmail_isFalse() {
 
         String nullEmail = null;
 
@@ -86,7 +86,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_exceededLength_isFalse() {
+    public void loginValidator_exceededLengthEmail_isFalse() {
 
         String exceededLengthEmail = "jgacosta240288dg2015knowledge@dojogeek.io";
 
