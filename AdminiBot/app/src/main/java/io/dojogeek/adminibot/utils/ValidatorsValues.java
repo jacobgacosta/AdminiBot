@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.validators;
+package io.dojogeek.adminibot.utils;
 
 public interface ValidatorsValues {
 

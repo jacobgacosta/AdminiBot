@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.validators;
 
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.utils.ValidatorsValues;
 
 public class CompoundValidatorsFactory {
 
