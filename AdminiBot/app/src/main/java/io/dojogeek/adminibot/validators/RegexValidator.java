@@ -24,7 +24,7 @@ public class RegexValidator implements DataValidator<String> {
 
     @Override
     public boolean isValid(String s) {
-        this.stringToValidate = s;
+        this.stringToValidate = s.trim();
         if (s == null || s.isEmpty()) {
             return true;
         }
