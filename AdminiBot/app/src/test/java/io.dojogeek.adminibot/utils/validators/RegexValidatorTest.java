@@ -12,6 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 public class RegexValidatorTest {
 
+    private static final String EMTPY_VALUE = "";
+    private static final String SPACE_VALUE = "  ";
+
     @Test
     public void regexValidator_matchedString_isTrue() {
 
@@ -51,6 +54,22 @@ public class RegexValidatorTest {
         assertFalse(isValid);
 
         assertEquals(R.string.error_wrong_format_email, regexValidator.getErrorMsg());
+
+    }
+
+    @Test
+    public void regexValidator_emptyValue_isFalse() {
+
+        String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String value : emptyValues) {
+
+            RegexValidator regexValidator = new RegexValidator(ValidatorsValues.EMAIL_REGEXP);
+            regexValidator.withErroMessage(R.string.error_wrong_format_email);
+            boolean isValid = regexValidator.isValid(value);
+            assertFalse(isValid);
+            assertEquals(R.string.error_wrong_format_email, regexValidator.getErrorMsg());
+        }
 
     }
 
