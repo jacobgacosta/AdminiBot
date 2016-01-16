@@ -24,5 +24,19 @@ public class RegexValidatorTest {
 
     }
 
+    @Test
+    public void regexValidator_notMatchingString_isFalse() {
+
+        String simpleString = "Dojogeej is knowledge =)";
+
+        RegexValidator regexValidator = new RegexValidator(ValidatorsValues.ONLY_LETTERS_AND_SPACES);
+        regexValidator.withErroMessage(R.string.error_wrong_format_name);
+        boolean isValid = regexValidator.isValid(simpleString);
+
+        assertFalse(isValid);
+
+        assertEquals(R.string.error_wrong_format_name, regexValidator.getErrorMsg());
+
+    }
 
 }
