@@ -61,4 +61,20 @@ public class CompoundValidatorsFactoryTest {
         assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
     }
 
+    @Test
+    public void compoundValidators_malformed_isFalse() {
+
+        final String [] invalidEmails = {"jgacosta", "jgacosta@", "jgacosta@dojogeek", "jgacosta@dojogeek.",
+        "jgacosta@dojogeek.oi.", "jgacosta@dojogeek#io", "@dojogeek.com", "jgacosta.io", "jgacosta$dojogeek.io",
+        "jgacosta@@.io", "jgacosta@&.io"};
+
+        for (String values : invalidEmails) {
+
+            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
+            compoundValidator.isValid(values);
+
+            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_email);
+        }
+
+    }
 }
