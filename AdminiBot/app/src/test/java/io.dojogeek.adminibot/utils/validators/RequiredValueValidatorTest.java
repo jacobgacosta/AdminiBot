@@ -21,6 +21,17 @@ public class RequiredValueValidatorTest {
     }
 
     @Test
+    public void requiredValueValidator_correctValue_isTrue() {
+
+        String value = "Jacob";
+
+        boolean isValid = mRequiredValueValidator.isValid(value);
+
+        assertTrue(isValid);
+
+    }
+
+    @Test
     public void requiredValueValidator_nullValue_isFalse() {
 
         String value = null;
