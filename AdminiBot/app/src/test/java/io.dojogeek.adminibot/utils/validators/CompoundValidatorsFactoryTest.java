@@ -12,6 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 public class CompoundValidatorsFactoryTest {
 
+    private static final String EMTPY_VALUE = "";
+    private static final String SPACE_VALUE = "  ";
     private static final int NO_ERRORS = 0;
 
     @Test
@@ -34,6 +36,20 @@ public class CompoundValidatorsFactoryTest {
         compoundValidator.isValid(email);
 
         assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_length_email);
+    }
+
+    @Test
+    public void compoundValidators_emptyEmail_isFalse() {
+
+        final String [] emptyEmail = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String value : emptyEmail) {
+            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
+            compoundValidator.isValid(value);
+
+            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
+        }
+
     }
 
 }
