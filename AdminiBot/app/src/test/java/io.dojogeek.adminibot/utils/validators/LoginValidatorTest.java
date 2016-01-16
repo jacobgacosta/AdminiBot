@@ -83,4 +83,18 @@ public class LoginValidatorTest {
         assertFalse(isValid);
         assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessageEmail());
     }
+
+    @Test
+    public void loginValidator_exceededLength_isFalse() {
+
+        String exceededLengthEmail = "jgacosta240288dg2015knowledge@dojogeek.io";
+
+        mLoginValidator.setPassword(CORRECT_PASSWORD);
+        mLoginValidator.setEmail(exceededLengthEmail);
+        boolean isValid = mLoginValidator.validate();
+
+        assertFalse(isValid);
+        assertEquals(R.string.error_wrong_length_email, mLoginValidator.getErrorMessageEmail());
+
+    }
 }
