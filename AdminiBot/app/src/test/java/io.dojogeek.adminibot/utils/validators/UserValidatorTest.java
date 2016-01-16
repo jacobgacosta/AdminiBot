@@ -119,6 +119,21 @@ public class UserValidatorTest {
 
     }
 
+    @Test
+    public void userValidator_lastNameLenght_isFalse() {
+
+
+        UserValidator userValidator = createUserValidator(CORRECT__EMAIL, CORRECT_NAME ,
+                "Guzman Dojogeek Developer Android Test");
+
+        boolean isValid = userValidator.validate();
+
+        assertFalse(isValid);
+
+        assertEquals(R.string.error_wrong_lenght_last_name, userValidator.getErrorMessageLastName());
+
+    }
+
     private UserValidator createUserValidator(String email, String name, String lastName) {
 
         UserValidator userValidator = new UserValidator();
