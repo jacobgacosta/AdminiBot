@@ -7,7 +7,6 @@ public class RegexValidator implements DataValidator<String> {
 
     private String regex;
     private int errorMsg;
-    private String stringToValidate;
 
     public RegexValidator(String regex) {
         this.regex = regex;
@@ -24,9 +23,8 @@ public class RegexValidator implements DataValidator<String> {
 
     @Override
     public boolean isValid(String s) {
-        this.stringToValidate = s.trim();
         if (s == null || s.isEmpty()) {
-            return true;
+            return false;
         }
 
         Pattern pattern = Pattern.compile(regex);
