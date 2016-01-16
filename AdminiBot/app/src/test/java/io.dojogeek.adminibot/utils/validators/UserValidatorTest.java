@@ -149,6 +149,20 @@ public class UserValidatorTest {
 
     }
 
+    @Test
+    public void userValidator_withoutOnlyLetters_isFalse() {
+
+        final String [] invalidLastName = {"G8zm4n", "Guzm@n", "Gu2m4n"};
+
+        for (String value : invalidLastName) {
+            UserValidator userValidator = createUserValidator(CORRECT__EMAIL, CORRECT_NAME, value);
+            boolean isValid = userValidator.validate();
+            assertFalse(isValid);
+            assertEquals(R.string.error_wrong_format_name, userValidator.getErrorMessageLastName());
+
+        }
+    }
+
     private UserValidator createUserValidator(String email, String name, String lastName) {
 
         UserValidator userValidator = new UserValidator();
