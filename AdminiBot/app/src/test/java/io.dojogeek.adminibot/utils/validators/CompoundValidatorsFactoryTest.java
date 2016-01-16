@@ -77,4 +77,15 @@ public class CompoundValidatorsFactoryTest {
         }
 
     }
+
+    @Test
+    public void compoundValidators_correctName_isFalse() {
+
+        final String name = "Jacob";
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
+        compoundValidator.isValid(name);
+
+        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
+    }
 }
