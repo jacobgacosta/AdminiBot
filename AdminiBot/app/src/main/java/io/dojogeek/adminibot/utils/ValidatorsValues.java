@@ -7,5 +7,6 @@ public interface ValidatorsValues {
     int EMAIL_MAX_LENGTH = 40;
     int NAME_MAX_LENGHT = 15;
     int LAST_NAME_MAX_LENGHT = 30;
+    int PASSWORD_MAX_LENGHT = 30;
 
 }
