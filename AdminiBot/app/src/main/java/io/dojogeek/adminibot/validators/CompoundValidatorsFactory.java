@@ -34,6 +34,14 @@ public class CompoundValidatorsFactory {
         return  compoundValidator;
     }
 
+    public static CompoundValidator passwordValidator() {
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.PASSWORD_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_password));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return  compoundValidator;
+    }
+
     private static CompoundValidator commonsValidators() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
