@@ -88,4 +88,17 @@ public class CompoundValidatorsFactoryTest {
 
         assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
     }
+
+    @Test
+    public void compoundValidators_nameWithNoLetters_isFalse() {
+
+        final String [] invalidNames = {"J4c0b", "Jaco&", "J_a_c_o_b", "J.a.c.o.b", "J>cob", "74508"};
+
+        for (String values : invalidNames) {
+            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
+            compoundValidator.isValid(values);
+
+            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_name);
+        }
+    }
 }
