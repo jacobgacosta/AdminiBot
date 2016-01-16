@@ -113,5 +113,18 @@ public class LoginValidatorTest {
         assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessagePassword());
     }
 
+    @Test
+    public void loginValidator_withEmptyPassword() {
 
+        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String values : emptyValues) {
+            mLoginValidator.setEmail(CORRECT_EMAIL);
+            mLoginValidator.setPassword(values);
+            boolean isValid = mLoginValidator.validate();
+
+            assertFalse(isValid);
+            assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessagePassword());
+        }
+    }
 }
