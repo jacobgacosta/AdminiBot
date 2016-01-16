@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.utils.validators;
 
 import org.junit.Test;
 
+import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.validators.CompoundValidator;
 import io.dojogeek.adminibot.validators.CompoundValidatorsFactory;
 
@@ -22,6 +23,17 @@ public class CompoundValidatorsFactoryTest {
         compoundValidator.isValid(email);
 
         assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
+    }
+
+    @Test
+    public void compoundValidators_longLength_isFalse() {
+
+        final String email = "jgacostadg880224n62guaj272016hck@dojogeek.io";
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
+        compoundValidator.isValid(email);
+
+        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_length_email);
     }
 
 }
