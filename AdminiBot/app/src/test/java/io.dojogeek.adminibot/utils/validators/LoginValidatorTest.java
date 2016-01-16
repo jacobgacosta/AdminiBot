@@ -56,7 +56,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_withEmptyValue_isFalse() {
+    public void loginValidator_withEmptyName_isFalse() {
 
         String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
 
@@ -98,4 +98,5 @@ public class LoginValidatorTest {
         assertEquals(R.string.error_wrong_length_email, mLoginValidator.getErrorMessageEmail());
 
     }
+
 }
