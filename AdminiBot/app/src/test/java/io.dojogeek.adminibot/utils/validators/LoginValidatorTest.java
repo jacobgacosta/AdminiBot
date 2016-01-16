@@ -70,4 +70,17 @@ public class LoginValidatorTest {
 
         }
     }
+
+    @Test
+    public void loginValidator_withNullValue_isFalse() {
+
+        String nullEmail = null;
+
+        mLoginValidator.setPassword(CORRECT_PASSWORD);
+        mLoginValidator.setEmail(nullEmail);
+        boolean isValid = mLoginValidator.validate();
+
+        assertFalse(isValid);
+        assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessageEmail());
+    }
 }
