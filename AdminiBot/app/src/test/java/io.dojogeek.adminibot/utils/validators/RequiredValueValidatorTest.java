@@ -10,6 +10,22 @@ import io.dojogeek.adminibot.validators.RequiredValueValidator;
 
 public class RequiredValueValidatorTest {
 
+    private RequiredValueValidator mRequiredValueValidator;
+
+    @Before
+    public void setup() {
+        mRequiredValueValidator = new RequiredValueValidator();
+    }
+
+    @Test
+    public void requiredValueValidator_nullValue_isFalse() {
+
+        String value = null;
+
+        boolean isValid = mRequiredValueValidator.isValid(value);
+
+        assertFalse(isValid);
+    }
 
 
 }
