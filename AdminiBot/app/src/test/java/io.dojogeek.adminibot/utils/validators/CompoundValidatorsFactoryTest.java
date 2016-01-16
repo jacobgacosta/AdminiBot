@@ -62,7 +62,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_malformed_isFalse() {
+    public void compoundValidators_malformedEmail_isFalse() {
 
         final String [] invalidEmails = {"jgacosta", "jgacosta@", "jgacosta@dojogeek", "jgacosta@dojogeek.",
         "jgacosta@dojogeek.oi.", "jgacosta@dojogeek#io", "@dojogeek.com", "jgacosta.io", "jgacosta$dojogeek.io",
