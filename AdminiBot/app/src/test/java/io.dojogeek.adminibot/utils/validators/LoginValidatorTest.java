@@ -99,4 +99,19 @@ public class LoginValidatorTest {
 
     }
 
+    @Test
+    public void loginValidator_withNullPassword() {
+
+        String nullPassword = null;
+
+        mLoginValidator.setEmail(CORRECT_EMAIL);
+        mLoginValidator.setPassword(nullPassword);
+
+        boolean isValid = mLoginValidator.validate();
+
+        assertFalse(isValid);
+        assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessagePassword());
+    }
+
+
 }
