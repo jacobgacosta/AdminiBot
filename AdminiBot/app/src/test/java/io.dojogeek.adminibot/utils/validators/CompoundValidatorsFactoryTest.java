@@ -33,7 +33,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_emailLongLength_isFalse() {
+    public void compoundValidators_exceededLengthEmail_isFalse() {
 
         final String email = "jgacostadg880224n62guaj272016hck@dojogeek.io";
 
