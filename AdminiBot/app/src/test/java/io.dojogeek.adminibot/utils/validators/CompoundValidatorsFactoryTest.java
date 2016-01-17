@@ -101,4 +101,17 @@ public class CompoundValidatorsFactoryTest {
             assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_name);
         }
     }
+
+    @Test
+    public void compoundValidators_withEmptyValues_isFalse() {
+
+        final String [] emptyValues = {SPACE_VALUE, EMTPY_VALUE};
+
+        for (String values : emptyValues) {
+            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
+            compoundValidator.isValid(values);
+
+            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
+        }
+    }
 }
