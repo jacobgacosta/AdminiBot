@@ -139,4 +139,15 @@ public class CompoundValidatorsFactoryTest {
         assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_name);
 
     }
+
+    @Test
+    public void compoundValidators_correctLastName_isTrue() {
+
+        final String lastName = "Guzman A";
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
+        compoundValidator.isValid(lastName);
+
+        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
+    }
 }
