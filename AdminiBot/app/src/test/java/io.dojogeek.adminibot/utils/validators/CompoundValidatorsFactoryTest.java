@@ -185,4 +185,14 @@ public class CompoundValidatorsFactoryTest {
         }
 
     }
+
+    @Test(expected= ValidatorNullValueException.class)
+    public void compoundValidators_withNullLastName_isException() {
+
+        final String lastName = null;
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
+        compoundValidator.isValid(lastName);
+        
+    }
 }
