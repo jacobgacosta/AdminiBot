@@ -218,4 +218,16 @@ public class CompoundValidatorsFactoryTest {
         assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_password);
     }
 
+    @Test
+    public void compoundValidators_withEmptyPassword_isError() {
+
+        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
+
+        for (String values : emptyValues) {
+            CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
+            compoundValidator.isValid(values);
+
+            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
+        }
+    }
 }
