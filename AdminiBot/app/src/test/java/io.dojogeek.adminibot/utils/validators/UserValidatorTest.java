@@ -158,7 +158,7 @@ public class UserValidatorTest {
             UserValidator userValidator = createUserValidator(CORRECT__EMAIL, CORRECT_NAME, value);
             boolean isValid = userValidator.validate();
             assertFalse(isValid);
-            assertEquals(R.string.error_wrong_format_name, userValidator.getErrorMessageLastName());
+            assertEquals(R.string.error_wrong_format_last_name, userValidator.getErrorMessageLastName());
 
         }
     }
