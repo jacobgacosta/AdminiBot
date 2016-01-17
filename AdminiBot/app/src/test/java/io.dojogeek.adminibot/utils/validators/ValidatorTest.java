@@ -37,6 +37,24 @@ public class ValidatorTest {
 
     }
 
+    @Test
+    public void validator_withFailedValidator_isFalse() {
+
+        Map<String, DataValidator> validators = createValidatorsMap();
+
+        Map<String, Object> valuesToValidate = createInvalidValuesToValidate();
+
+        Validator validator = createConfigureValidator(validators, valuesToValidate);
+        boolean isValid = validator.validate();
+
+        assertFalse(isValid);
+        assertFalse(validator.isError("onlyLettersAndSpaces"));
+        assertFalse(validator.isError("onlyNumbers"));
+        assertFalse(validator.isError("maxLength"));
+        assertFalse(validator.isError("requiredValue"));
+
+    }
+
     private Validator createConfigureValidator(final Map<String, DataValidator> validators,
                                                final Map<String, Object> valuesToValidate) {
 
@@ -73,6 +91,18 @@ public class ValidatorTest {
         valuesToValidate.put("requiredValue", "DG Knowledge");
 
         return  valuesToValidate;
+    }
+
+    private Map<String, Object> createInvalidValuesToValidate() {
+
+        Map<String, Object> valuesToValidate = new HashMap<>();
+        valuesToValidate.put("onlyLettersAndSpaces", "Dojogeek #1");
+        valuesToValidate.put("onlyNumbers", "GUAJ23456789");
+        valuesToValidate.put("maxLength", "RFCD");
+        valuesToValidate.put("requiredValue", "");
+
+        return  valuesToValidate;
+
     }
 
 }
