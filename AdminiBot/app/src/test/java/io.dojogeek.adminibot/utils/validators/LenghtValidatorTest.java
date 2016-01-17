@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.utils.validators;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
 import io.dojogeek.adminibot.validators.LenghtValidator;
 
 import static org.junit.Assert.assertFalse;
@@ -25,16 +26,14 @@ public class LenghtValidatorTest {
         assertTrue(isValid);
     }
 
-    @Test
+    @Test(expected= ValidatorNullValueException.class)
     public void lengthValidator_nullValue_isFalse() {
 
         int maxLength = 4;
         String value = null;
 
         LenghtValidator lenghtValidator = new LenghtValidator(maxLength);
-        boolean isValid = lenghtValidator.isValid(value);
-
-        assertFalse(isValid);
+        lenghtValidator.isValid(value);
 
     }
 
