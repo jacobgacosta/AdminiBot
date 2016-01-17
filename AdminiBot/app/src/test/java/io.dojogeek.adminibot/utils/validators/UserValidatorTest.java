@@ -120,7 +120,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void userValidator_lastNameLenght_isFalse() {
+    public void userValidator_exceededLengthLastName_isFalse() {
 
 
         UserValidator userValidator = createUserValidator(CORRECT__EMAIL, CORRECT_NAME ,
