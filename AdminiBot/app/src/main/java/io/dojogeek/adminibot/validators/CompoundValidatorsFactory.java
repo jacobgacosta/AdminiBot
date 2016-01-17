@@ -20,16 +20,20 @@ public class CompoundValidatorsFactory {
 
     public static CompoundValidator nameValidator() {
 
-        CompoundValidator compoundValidator = commonsValidators();
+        CompoundValidator compoundValidator = new CompoundValidator();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_name));
+        compoundValidator.addValidator(requiredValueValidator);
 
         return compoundValidator;
     }
 
     public static CompoundValidator lastNameValidator() {
 
-        CompoundValidator compoundValidator = commonsValidators();
+        CompoundValidator compoundValidator = new CompoundValidator();
         compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.LAST_NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_last_name));
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_last_name));
+        compoundValidator.addValidator(requiredValueValidator);
 
         return  compoundValidator;
     }
@@ -40,15 +44,6 @@ public class CompoundValidatorsFactory {
         compoundValidator.addValidator(requiredValueValidator);
 
         return  compoundValidator;
-    }
-
-    private static CompoundValidator commonsValidators() {
-
-        CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_name));
-        compoundValidator.addValidator(requiredValueValidator);
-
-        return compoundValidator;
     }
 
 }
