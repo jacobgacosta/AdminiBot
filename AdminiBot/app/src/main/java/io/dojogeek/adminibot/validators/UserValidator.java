@@ -23,15 +23,15 @@ public class UserValidator extends Validator {
     }
 
     public boolean isValidName() {
-        return this.isError(NAME);
+        return this.isValid(NAME);
     }
 
     public boolean isValidLastName() {
-        return this.isError(LAST_NAME);
+        return this.isValid(LAST_NAME);
     }
 
     public boolean isValidEmail() {
-        return this.isError(EMAIL);
+        return this.isValid(EMAIL);
     }
 
     public int getErrorMessageName() {
