@@ -19,12 +19,11 @@ public class LoginValidator extends UserValidator {
     }
 
     @Override
-    protected Map<String, DataValidator> configureValidations() {
+    protected void configureValidations() {
 
         this.validations.put(EMAIL, CompoundValidatorsFactory.emailValidator());
 
         this.validations.put(PASSWORD, CompoundValidatorsFactory.passwordValidator());
 
-        return null;
     }
 }
