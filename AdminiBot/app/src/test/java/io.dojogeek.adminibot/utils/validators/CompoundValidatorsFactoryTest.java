@@ -22,7 +22,7 @@ public class CompoundValidatorsFactoryTest {
     private static final int NO_ERRORS = 0;
 
     @Test
-    public void compoundValidators_correctEmail_isTrue() {
+    public void compoundValidators_correctEmail_noErrors() {
 
         final String email = "jgacosta@dojogeek.io";
 
@@ -33,7 +33,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_exceededLengthEmail_isFalse() {
+    public void compoundValidators_exceededLengthEmail_isError() {
 
         final String email = "jgacostadg880224n62guaj272016hck@dojogeek.io";
 
@@ -44,7 +44,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_emptyEmail_isFalse() {
+    public void compoundValidators_emptyEmail_isError() {
 
         final String [] emptyEmail = {EMTPY_VALUE, SPACE_VALUE};
 
@@ -58,7 +58,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_nullEmail_isFalse() {
+    public void compoundValidators_nullEmail_isException() {
 
         CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
         compoundValidator.isValid(null);
@@ -66,7 +66,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_malformedEmail_isFalse() {
+    public void compoundValidators_malformedEmail_isError() {
 
         final String [] invalidEmails = {"jgacosta", "jgacosta@", "jgacosta@dojogeek", "jgacosta@dojogeek.",
         "jgacosta@dojogeek.oi.", "jgacosta@dojogeek#io", "@dojogeek.com", "jgacosta.io", "jgacosta$dojogeek.io",
@@ -83,7 +83,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_correctName_isFalse() {
+    public void compoundValidators_correctName_noErrors() {
 
         final String name = "Jacob";
 
@@ -94,7 +94,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_nameWithNoLetters_isFalse() {
+    public void compoundValidators_nameWithNoLetters_isError() {
 
         final String [] invalidNames = {"J4c0b", "Jaco&", "J_a_c_o_b", "J.a.c.o.b", "J>cob", "74508"};
 
@@ -107,7 +107,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_withEmptyName_isFalse() {
+    public void compoundValidators_withEmptyName_isError() {
 
         final String [] emptyValues = {SPACE_VALUE, EMTPY_VALUE};
 
@@ -120,7 +120,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_withNullName_isFalse() {
+    public void compoundValidators_withNullName_isException() {
 
         final String name = null;
 
@@ -130,7 +130,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_exceededLengthName_isFalse() {
+    public void compoundValidators_exceededLengthName_isError() {
 
         final String name = "Jacob Dojogek Knowledge";
         CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
@@ -141,7 +141,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_correctLastName_isTrue() {
+    public void compoundValidators_correctLastName_noErrors() {
 
         final String lastName = "Guzman A";
 
@@ -152,7 +152,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_exceededLengthLastName_isTrue() {
+    public void compoundValidators_exceededLengthLastName_isError() {
 
         final String lastName = "Guzman Knowledge Android Code Dojogeek";
         CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
@@ -162,7 +162,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_lastNameWithNoLetters_isFalse() {
+    public void compoundValidators_lastNameWithNoLetters_isError() {
 
         final String lastName = "Guzm4an";
 
