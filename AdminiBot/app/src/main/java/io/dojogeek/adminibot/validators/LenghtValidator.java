@@ -1,5 +1,9 @@
 package io.dojogeek.adminibot.validators;
 
+import android.util.Log;
+
+import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
+
 public class LenghtValidator implements DataValidator<String> {
 
     private int maxLenght = 0;
@@ -21,8 +25,10 @@ public class LenghtValidator implements DataValidator<String> {
     @Override
     public boolean isValid(String value) {
 
-        if (value != null && value.length() <= maxLenght) {
-            return true;
+        if (value == null) {
+            throw new ValidatorNullValueException("The value can't be null");
+        } else if (value.length() <= maxLenght) {
+            return  true;
         }
 
         return false;
