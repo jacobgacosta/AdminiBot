@@ -195,4 +195,15 @@ public class CompoundValidatorsFactoryTest {
         compoundValidator.isValid(lastName);
         
     }
+
+    @Test
+    public void compoundValidators_correctPassword_noErrors() {
+
+        final String password = "fuDg3490%&$22_1";
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
+        compoundValidator.isValid(password);
+
+        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
+    }
 }
