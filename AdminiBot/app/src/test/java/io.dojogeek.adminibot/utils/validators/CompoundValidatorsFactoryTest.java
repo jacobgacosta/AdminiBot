@@ -128,4 +128,15 @@ public class CompoundValidatorsFactoryTest {
         compoundValidator.isValid(name);
 
     }
+
+    @Test
+    public void compoundValidators_exceededLengthName_isFalse() {
+
+        final String name = "Jacob Dojogek Knowledge";
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
+        compoundValidator.isValid(name);
+
+        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_name);
+
+    }
 }
