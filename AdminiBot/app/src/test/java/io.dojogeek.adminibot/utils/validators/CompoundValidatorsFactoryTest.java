@@ -230,4 +230,14 @@ public class CompoundValidatorsFactoryTest {
             assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
         }
     }
+
+    @Test(expected= ValidatorNullValueException.class)
+    public void compoundValidators_withNullPassword_isException() {
+
+        final String password = null;
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
+        compoundValidator.isValid(password);
+
+    }
 }
