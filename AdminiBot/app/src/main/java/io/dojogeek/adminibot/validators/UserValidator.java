@@ -47,7 +47,7 @@ public class UserValidator extends Validator {
     }
 
     @Override
-    protected Map<String, DataValidator> configureValidations() {
+    protected void configureValidations() {
 
         this.validations.put(NAME, CompoundValidatorsFactory.nameValidator());
 
@@ -55,6 +55,5 @@ public class UserValidator extends Validator {
 
         this.validations.put(EMAIL, CompoundValidatorsFactory.emailValidator());
 
-        return validations;
     }
 }
