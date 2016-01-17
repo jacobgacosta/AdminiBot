@@ -27,7 +27,7 @@ public class LenghtValidator implements DataValidator<String> {
 
         if (value == null) {
             throw new ValidatorNullValueException("The value can't be null");
-        } else if (value.length() <= maxLenght) {
+        } else if (value.trim().length() <= maxLenght) {
             return  true;
         }
 
