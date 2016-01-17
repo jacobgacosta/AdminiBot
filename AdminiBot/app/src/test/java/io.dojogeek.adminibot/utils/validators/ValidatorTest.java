@@ -48,10 +48,10 @@ public class ValidatorTest {
         boolean isValid = validator.validate();
 
         assertFalse(isValid);
-        assertFalse(validator.isError("onlyLettersAndSpaces"));
-        assertFalse(validator.isError("onlyNumbers"));
-        assertFalse(validator.isError("maxLength"));
-        assertFalse(validator.isError("requiredValue"));
+        assertFalse(validator.isValid("onlyLettersAndSpaces"));
+        assertFalse(validator.isValid("onlyNumbers"));
+        assertFalse(validator.isValid("maxLength"));
+        assertFalse(validator.isValid("requiredValue"));
 
     }
 
