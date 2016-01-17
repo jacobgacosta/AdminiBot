@@ -11,7 +11,7 @@ public class LoginValidator extends UserValidator {
     }
 
     public boolean isValidPassword() {
-        return this.isError(PASSWORD);
+        return this.isValid(PASSWORD);
     }
 
     public int getErrorMessagePassword() {
