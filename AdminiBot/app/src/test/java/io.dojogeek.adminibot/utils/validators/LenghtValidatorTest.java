@@ -27,7 +27,7 @@ public class LenghtValidatorTest {
     }
 
     @Test(expected= ValidatorNullValueException.class)
-    public void lengthValidator_nullValue_isFalse() {
+    public void lengthValidator_nullValue_isException() {
 
         int maxLength = 4;
         String value = null;
