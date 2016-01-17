@@ -26,7 +26,7 @@ public class ValidatorTest {
     @Test
     public void validator_correctValidator_returnTrue() {
 
-        Map<String, Object> valuesToValidate = createValuesToValidate();
+        Map<String, Object> valuesToValidate = createCorrectValuesToValidate();
 
         Map<String, DataValidator> validators = createValidatorsMap();
 
@@ -64,7 +64,7 @@ public class ValidatorTest {
         return validations;
     }
 
-    private Map<String, Object> createValuesToValidate() {
+    private Map<String, Object> createCorrectValuesToValidate() {
 
         Map<String, Object> valuesToValidate = new HashMap<>();
         valuesToValidate.put("onlyLettersAndSpaces", "Dojogeek");
