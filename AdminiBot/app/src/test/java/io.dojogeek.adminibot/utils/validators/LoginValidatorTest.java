@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
 import io.dojogeek.adminibot.validators.LoginValidator;
 
 import static org.junit.Assert.assertEquals;
@@ -72,17 +73,15 @@ public class LoginValidatorTest {
         }
     }
 
-    @Test
+    @Test(expected= ValidatorNullValueException.class)
     public void loginValidator_withNullEmail_isFalse() {
 
         String nullEmail = null;
 
         mLoginValidator.setPassword(CORRECT_PASSWORD);
         mLoginValidator.setEmail(nullEmail);
-        boolean isValid = mLoginValidator.validate();
+        mLoginValidator.validate();
 
-        assertFalse(isValid);
-        assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessageEmail());
     }
 
     @Test
@@ -99,7 +98,7 @@ public class LoginValidatorTest {
 
     }
 
-    @Test
+    @Test(expected= ValidatorNullValueException.class)
     public void loginValidator_withNullPassword() {
 
         String nullPassword = null;
@@ -107,10 +106,8 @@ public class LoginValidatorTest {
         mLoginValidator.setEmail(CORRECT_EMAIL);
         mLoginValidator.setPassword(nullPassword);
 
-        boolean isValid = mLoginValidator.validate();
+        mLoginValidator.validate();
 
-        assertFalse(isValid);
-        assertEquals(R.string.error_empty_value, mLoginValidator.getErrorMessagePassword());
     }
 
     @Test
