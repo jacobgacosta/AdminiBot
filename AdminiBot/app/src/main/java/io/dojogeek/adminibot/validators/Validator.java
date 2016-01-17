@@ -9,7 +9,7 @@ public abstract class Validator {
     protected Map<String, DataValidator> validations = new HashMap<>();
     protected Map<String, Integer> errorMessages = new HashMap<>();
 
-    protected abstract Map<String, DataValidator> configureValidations();
+    protected abstract void configureValidations();
 
     public boolean validate() {
 
