@@ -102,7 +102,7 @@ public class CompoundValidatorsFactoryTest {
     }
 
     @Test
-    public void compoundValidators_withEmptyValues_isFalse() {
+    public void compoundValidators_withEmptyName_isFalse() {
 
         final String [] emptyValues = {SPACE_VALUE, EMTPY_VALUE};
 
