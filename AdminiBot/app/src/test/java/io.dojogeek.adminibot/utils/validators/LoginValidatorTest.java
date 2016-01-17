@@ -74,7 +74,7 @@ public class LoginValidatorTest {
     }
 
     @Test(expected= ValidatorNullValueException.class)
-    public void loginValidator_withNullEmail_isFalse() {
+    public void loginValidator_withNullEmail_isException() {
 
         String nullEmail = null;
 
@@ -99,7 +99,7 @@ public class LoginValidatorTest {
     }
 
     @Test(expected= ValidatorNullValueException.class)
-    public void loginValidator_withNullPassword() {
+    public void loginValidator_withNullPassword_isException() {
 
         String nullPassword = null;
 
@@ -111,7 +111,7 @@ public class LoginValidatorTest {
     }
 
     @Test
-    public void loginValidator_withEmptyPassword() {
+    public void loginValidator_withEmptyPassword_isFalse() {
 
         final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
 
