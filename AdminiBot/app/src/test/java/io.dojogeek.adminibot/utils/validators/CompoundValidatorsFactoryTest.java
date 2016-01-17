@@ -206,4 +206,16 @@ public class CompoundValidatorsFactoryTest {
 
         assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
     }
+
+    @Test
+    public void compoundValidators_exceededLengthPassword_isError() {
+
+        final String password = "fu2345_$%&0df%&678DGK_lla12?¿=0@";
+
+        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
+        compoundValidator.isValid(password);
+
+        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_password);
+    }
+
 }
