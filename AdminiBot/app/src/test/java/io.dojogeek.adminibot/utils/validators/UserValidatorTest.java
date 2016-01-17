@@ -82,7 +82,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void userValidator_nameLenght_isFalse() {
+    public void userValidator_lenghtName_isFalse() {
 
         UserValidator userValidator = createUserValidator(CORRECT__EMAIL, "Jacooooooooooooooooooooooob", CORRECT_LAST_NAME);
         boolean isValid = userValidator.validate();
