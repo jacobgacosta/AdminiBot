@@ -150,7 +150,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void userValidator_withoutOnlyLetters_isFalse() {
+    public void userValidator_lastNameWithoutOnlyLetters_isFalse() {
 
         final String [] invalidLastName = {"G8zm4n", "Guzm@n", "Gu2m4n"};
 
