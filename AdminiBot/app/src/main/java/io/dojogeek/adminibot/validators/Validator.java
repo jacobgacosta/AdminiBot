@@ -36,7 +36,7 @@ public abstract class Validator {
         return isValid();
     }
 
-    public boolean isError(String key) {
+    public boolean isValid(String key) {
         return !errorMessages.containsKey(key);
     }
 
