@@ -68,7 +68,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void userValidator_lengthEmail_isFalse() {
+    public void userValidator_exceededLengthEmail_isFalse() {
 
         UserValidator userValidator = createUserValidator("jgacosta1234567891011122402881@dojogeek.io",
                 CORRECT_NAME, CORRECT_LAST_NAME);
