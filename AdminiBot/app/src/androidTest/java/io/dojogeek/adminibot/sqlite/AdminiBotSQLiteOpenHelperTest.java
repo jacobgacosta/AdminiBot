@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
-import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import sqlite.AdminiBotSQLiteOpenHelper;
 import sqlite.ExpenseTypeContract;
 
@@ -49,6 +48,49 @@ public class AdminiBotSQLiteOpenHelperTest {
 
         assertEquals(cursor.getCount(), insertedValues);
 
+    }
+
+    @Test
+    public void sqliteHelper_expensesTypesInserted_isEquals() {
+
+        SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = database.query(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                compareResultQueryFields(cursor);
+
+                cursor.moveToNext();
+            }
+        }
+
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition) {
+
+        int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
+        int [] expextedExpensesTypesDescriptions = ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS;
+
+        long actualId = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
+        int actualName = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
+        int actualDescription = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
+
+        String expectedName = getStringFromResourceId(expectedExpensesTypes[castLongToInt(actualId)]);
+        String expectedDescription = getStringFromResourceId(expextedExpensesTypesDescriptions[castLongToInt(actualId)]);
+
+        assertEquals(expectedName, actualName);
+        assertEquals(expectedDescription, actualDescription);
+
+    }
+
+    private String getStringFromResourceId(int resourceId) {
+        return mContext.getResources().getString(resourceId);
+    }
+
+    private int castLongToInt(long value) {
+        return (int) value;
     }
 
 }
