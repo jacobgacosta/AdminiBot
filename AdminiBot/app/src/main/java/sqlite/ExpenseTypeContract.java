@@ -20,10 +20,10 @@ import static sqlite.SQLiteConstants.VALUES;
 
 public class ExpenseTypeContract {
 
-    private static final int [] EXPENSES_TYPES = {R.string.expenses_types_foods,
+    public static final int [] EXPENSES_TYPES = {R.string.expenses_types_foods,
             R.string.expenses_types_clothes, R.string.expenses_types_drinks, R.string.expenses_types_medicals,
             R.string.expenses_types_luxuries};
-    private static final int [] EXPENSES_TYPES_DESCRIPTIONS = {R.string.expenses_types_foods_description,
+    public static final int [] EXPENSES_TYPES_DESCRIPTIONS = {R.string.expenses_types_foods_description,
             R.string.expenses_types_clothes_description, R.string.expenses_types_drinks_description,
             R.string.expenses_types_medicals_description, R.string.expenses_types_luxuries_description};
 
