@@ -39,7 +39,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_expensesTypesInserted_isEquals() {
+    public void sqliteHelper_numberOfInsertedExpensesTypes_isEquals() {
 
         final int insertedValues = 5;
 
