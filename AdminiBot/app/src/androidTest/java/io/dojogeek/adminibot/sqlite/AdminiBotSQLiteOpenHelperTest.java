@@ -22,15 +22,16 @@ import static org.junit.Assert.*;
 public class AdminiBotSQLiteOpenHelperTest {
 
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
+    private Context mContext;
 
     @Before
     public void setUp() {
 
-        Context context = getTargetContext();
+        mContext = getTargetContext();
 
-        context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
 
-        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(context);
+        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
     }
 
     @After
