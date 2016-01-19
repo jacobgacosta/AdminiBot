@@ -1,5 +1,5 @@
 package io.dojogeek.adminibot.validators;
-;
+
 import java.util.HashMap;
 import java.util.Map;
 
