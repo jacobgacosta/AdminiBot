@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,8 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
+import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import sqlite.AdminiBotSQLiteOpenHelper;
 import sqlite.ExpenseTypeContract;
 
@@ -20,6 +23,8 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class AdminiBotSQLiteOpenHelperTest {
 
+    private static final int ADITIONAL_INDEX = 1;
+    private static final int INSERTION_RESULT_FAILED = -1;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
 
@@ -59,13 +64,21 @@ public class AdminiBotSQLiteOpenHelperTest {
         if (cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
-
                 compareResultQueryFields(cursor);
-
                 cursor.moveToNext();
             }
         }
+    }
 
+    @Test
+    public void sqliteHelper_insertedValue_isTrue() {
+
+        ContentValues contentValues = createContentValues();
+
+        SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
+        long result = database.insert(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, contentValues);
+
+        assertTrue(result > INSERTION_RESULT_FAILED);
     }
 
     private void compareResultQueryFields(Cursor currentPosition) {
@@ -73,12 +86,15 @@ public class AdminiBotSQLiteOpenHelperTest {
         int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
         int [] expextedExpensesTypesDescriptions = ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS;
 
-        long actualId = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
-        int actualName = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
-        int actualDescription = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        String expectedName = getStringFromResourceId(expectedExpensesTypes[castLongToInt(actualId)]);
-        String expectedDescription = getStringFromResourceId(expextedExpensesTypesDescriptions[castLongToInt(actualId)]);
+        String expectedName = getStringFromResourceId(expectedExpensesTypes[getId(id)]);
+        String expectedDescription = getStringFromResourceId(expextedExpensesTypesDescriptions[getId(id)]);
+
+        String actualName = getStringFromResourceId(name);
+        String actualDescription = getStringFromResourceId(description);
 
         assertEquals(expectedName, actualName);
         assertEquals(expectedDescription, actualDescription);
@@ -89,8 +105,29 @@ public class AdminiBotSQLiteOpenHelperTest {
         return mContext.getResources().getString(resourceId);
     }
 
-    private int castLongToInt(long value) {
-        return (int) value;
+    private int getId(long value) {
+        return (int) value - ADITIONAL_INDEX;
+    }
+
+    private ContentValues createContentValues() {
+
+        ExpenseTypeModel expenseTypeModel = createExpenseTypeModel();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ExpenseTypeContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name);
+        contentValues.put(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
+
+        return contentValues;
+    }
+
+    private ExpenseTypeModel createExpenseTypeModel() {
+
+        ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
+        expenseTypeModel.name = R.string.expenses_types_foods;
+        expenseTypeModel.description = 0;
+
+        return expenseTypeModel;
+
     }
 
 }
