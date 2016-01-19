@@ -7,7 +7,7 @@ import sqlite.AdminiBotSQLiteOpenHelper;
 
 public class SQLiteGlobalDao {
 
-    private static final int INVALID_RESPONSE = 0;
+    private static final int INVALID_RESPONSE = -1;
 
     protected AdminiBotSQLiteOpenHelper mHelper;
     protected SQLiteDatabase mDatabase;
