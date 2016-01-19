@@ -44,7 +44,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctCreatedTable() {
+    public void sqliteHelper_correctCreatedTable_isTrue() {
         SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
 
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
