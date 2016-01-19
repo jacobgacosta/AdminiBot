@@ -18,12 +18,13 @@ import sqlite.ExpenseTypeContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class ExpensesTypesSQLiteOpenHelperTest {
 
     private static final int ADITIONAL_INDEX = 1;
-    private static final int INSERTION_RESULT_FAILED = -1;
+    private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
 
@@ -44,8 +45,16 @@ public class ExpensesTypesSQLiteOpenHelperTest {
 
     @Test
     public void sqliteHelper_correctCreatedTable() {
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
 
-        
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+                        ExpenseTypeContract.ExpenseType.TABLE_NAME + "'", null);
+
+        if (cursor != null) {
+
+            assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
+
+        }
 
     }
 
