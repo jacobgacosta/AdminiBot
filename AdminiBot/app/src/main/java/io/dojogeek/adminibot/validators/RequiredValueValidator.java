@@ -8,11 +8,8 @@ public class RequiredValueValidator implements DataValidator<String> {
     @Override
     public boolean isValid(String s) {
 
-        if (s != null && !s.trim().isEmpty()) {
-            return true;
-        }
+        return s != null && !s.trim().isEmpty();
 
-        return false;
     }
 
     @Override
