@@ -118,7 +118,22 @@ public class ExpenseSQLiteOpenHelperTest {
                 compareResultQueryFields(cursor, expenseModel);
             }
         }
+    }
 
+    @Test
+    public void sqlite_correctDeleteData_isTrue() {
+
+        ExpenseModel expenseModel = createExpenseModel();
+
+        long createdExpenseId = createRecord(expenseModel);
+
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
+
+        String where =  ExpenseContract.Expense._ID + " = " + createdExpenseId;
+
+        long deletedRecord = sqLiteDatabase.delete(ExpenseContract.Expense.TABLE_NAME, where, null);
+
+        assertEquals(createdExpenseId, deletedRecord);
 
     }
 
