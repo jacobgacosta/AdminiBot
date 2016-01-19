@@ -218,7 +218,6 @@ public class PaymentMethod extends LinearLayout {
     private void checkItemLimit() {
         if (createdItems() == getSpinnerSize()) {
             hiddenAddButton();
-            return;
         }
     }
 
