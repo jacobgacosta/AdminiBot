@@ -97,4 +97,20 @@ public class ExpenseSQLiteOpenHelperTest {
 
     }
 
+    private void compareResultQueryFields(Cursor currentPosition, ExpenseModel expenseModel) {
+
+        String name = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_NAME));
+        long userId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
+        long expenseTypeId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID));
+        String amount = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
+        String date = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
+
+
+        assertEquals(expenseModel.name, name);
+        assertEquals(expenseModel.dataExpediture, date);
+        assertEquals(expenseModel.totalAmount, amount);
+        assertEquals(expenseModel.userId, userId);
+        assertEquals(expenseModel.expenseTypeId, expenseTypeId);
+
+    }
 }
