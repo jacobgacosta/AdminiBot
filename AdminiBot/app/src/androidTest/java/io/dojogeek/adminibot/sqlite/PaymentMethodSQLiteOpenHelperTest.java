@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class PaymentMethodSQLiteOpenHelperTest {
 
+    private static final int ADITIONAL_INDEX = 1;
     private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
@@ -67,4 +68,51 @@ public class PaymentMethodSQLiteOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_inserterdPaymentMethods_isEquals() {
+
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(PaymentMethodsContract.PaymentMethod.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            while (cursor.isAfterLast() == false) {
+                compareResultQueryFields(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition) {
+
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_DESCRIPTION));
+
+        String expectedName = getValuePaymentMethodFromId(id);
+        String expectedDescription = getValuePaymentMethodDescriptionFromId(id);
+
+        assertEquals(expectedName, mContext.getString(name));
+        assertEquals(expectedDescription, mContext.getString(description));
+
+
+    }
+
+    private String getValuePaymentMethodFromId(long id) {
+
+        int [] paymentMethods = PaymentMethodsContract.PAYMENT_METHODS;
+
+        return  mContext.getString(paymentMethods[getId(id)]);
+    }
+
+    private String getValuePaymentMethodDescriptionFromId(long id) {
+
+        int [] paymentMethodsDescriptions = PaymentMethodsContract.PAYMENT_METHODS_DESCRIPTIONS;
+
+        return mContext.getString(paymentMethodsDescriptions[getId(id)]);
+    }
+
+    private int getId(long value) {
+        return (int) value - ADITIONAL_INDEX;
+    }
 }
