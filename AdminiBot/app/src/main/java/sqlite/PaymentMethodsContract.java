@@ -18,10 +18,10 @@ import static sqlite.SQLiteConstants.VALUES;
 
 public class PaymentMethodsContract {
 
-    private static final int [] PAYMENT_METHODS = {R.string.payment_methods_credit_card,
+    public static final int [] PAYMENT_METHODS = {R.string.payment_methods_credit_card,
             R.string.payment_methods_food_stamps, R.string.payment_methods_debit_card, R.string.payment_methods_cash};
 
-    private static final int [] PAYMENT_METHODS_DESCRIPTIONS = {R.string.payment_methods_credit_card_description,
+    public static final int [] PAYMENT_METHODS_DESCRIPTIONS = {R.string.payment_methods_credit_card_description,
     R.string.payment_methods_food_stamps_description, R.string.payment_methods_debit_card_description,
             R.string.payment_methods_cash_description};
 
