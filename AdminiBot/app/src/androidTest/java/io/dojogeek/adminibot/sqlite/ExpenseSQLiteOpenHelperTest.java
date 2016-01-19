@@ -147,4 +147,12 @@ public class ExpenseSQLiteOpenHelperTest {
         assertEquals(expenseModel.expenseTypeId, expenseTypeId);
 
     }
+
+    private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
+
+        expenseModel.name = "Changed text";
+        expenseModel.totalAmount = "456.9";
+
+        return expenseModel;
+    }
 }
