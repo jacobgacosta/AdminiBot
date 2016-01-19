@@ -70,17 +70,6 @@ public class AdminiBotSQLiteOpenHelperTest {
         }
     }
 
-    @Test
-    public void sqliteHelper_insertedValue_isTrue() {
-
-        ContentValues contentValues = createContentValues();
-
-        SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
-        long result = database.insert(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, contentValues);
-
-        assertTrue(result > INSERTION_RESULT_FAILED);
-    }
-
     private void compareResultQueryFields(Cursor currentPosition) {
 
         int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
