@@ -87,21 +87,16 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
     private void compareResultQueryFields(Cursor currentPosition) {
 
-        int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
-        int [] expextedExpensesTypesDescriptions = ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS;
 
         long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
         int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
         int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        String expectedName = getStringFromResourceId(expectedExpensesTypes[getId(id)]);
-        String expectedDescription = getStringFromResourceId(expextedExpensesTypesDescriptions[getId(id)]);
+        String expectedName = getExpenseTypeFromId(id);
+        String expectedDescription = getExpenseTypeDescriptionFromId(id);
 
-        String actualName = getStringFromResourceId(name);
-        String actualDescription = getStringFromResourceId(description);
-
-        assertEquals(expectedName, actualName);
-        assertEquals(expectedDescription, actualDescription);
+        assertEquals(expectedName, getStringFromResourceId(name));
+        assertEquals(expectedDescription, getStringFromResourceId(description));
 
     }
 
