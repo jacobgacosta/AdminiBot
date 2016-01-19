@@ -71,7 +71,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_expensesTypesInserted_isEquals() {
+    public void sqliteHelper_insertedExpensesTypes_isEquals() {
 
         SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = database.query(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
