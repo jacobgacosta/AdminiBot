@@ -18,12 +18,16 @@ import sqlite.ExpenseContract;
 import sqlite.PaymentMethodsContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class ExpenseSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
+    private static final int INSERT_ERROR = -1;
 
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
@@ -62,14 +66,44 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertData_isTrue() {
 
+        ExpenseModel expenseModel = createExpenseModel();
+
+        assertTrue(createRecord(expenseModel) > INSERT_ERROR);
+    }
+
+    @Test
+    public void sqliteHelper_correctQueryData_isTrue() {
+
+        ExpenseModel expenseModel = createExpenseModel();
+
+        long recordId = createRecord(expenseModel);
+
+        String where =  ExpenseContract.Expense._ID + " = " + recordId;
+
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(ExpenseContract.Expense.TABLE_NAME, null, where, null, null, null, null);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, expenseModel);
+            }
+        }
+
+
+    }
+
+    private long createRecord(ExpenseModel expenseModel) {
+
         SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
 
-        ContentValues contentValues = createContentValues(createExpenseModel());
+        ContentValues contentValues = createContentValues(expenseModel);
 
         long responseId = sqLiteDatabase.insert(ExpenseContract.Expense.TABLE_NAME,
                 ExpenseContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
 
-        assertTrue(responseId > -1);
+        return responseId;
     }
 
     private ExpenseModel createExpenseModel() {
