@@ -90,6 +90,34 @@ public class ExpenseSQLiteOpenHelperTest {
                 compareResultQueryFields(cursor, expenseModel);
             }
         }
+    }
+
+    @Test
+    public void sqlite_correctUpdateData_isTrue() {
+
+        ExpenseModel expenseModel = createExpenseModel();
+
+        long recordId = createRecord(expenseModel);
+
+        expenseModel = changeExpenseModelValues(expenseModel);
+
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+
+        ContentValues contentValues = createContentValues(expenseModel);
+
+        String where =  ExpenseContract.Expense._ID + " = " + recordId;
+
+        sqLiteDatabase.update(ExpenseContract.Expense.TABLE_NAME, contentValues, where, null);
+
+        Cursor cursor = sqLiteDatabase.query(ExpenseContract.Expense.TABLE_NAME, null, where, null, null, null, null);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, expenseModel);
+            }
+        }
 
 
     }
