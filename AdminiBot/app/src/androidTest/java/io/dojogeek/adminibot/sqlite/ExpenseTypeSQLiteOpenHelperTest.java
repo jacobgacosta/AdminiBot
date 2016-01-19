@@ -76,7 +76,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
         SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = database.query(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
                 compareResultQueryFields(cursor);
