@@ -15,6 +15,7 @@ import sqlite.ExpenseTypeContract;
 import sqlite.PaymentMethodsContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -51,6 +52,18 @@ public class PaymentMethodSQLiteOpenHelperTest {
             assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
 
         }
+
+    }
+
+    @Test
+    public void sqliteHelper_numberOfInsertedPaymentMethods_isEquals() {
+
+        final int insertedValues = 4;
+
+        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(PaymentMethodsContract.PaymentMethod.TABLE_NAME, null, null, null, null, null, null);
+
+        assertEquals(cursor.getCount(), insertedValues);
 
     }
 
