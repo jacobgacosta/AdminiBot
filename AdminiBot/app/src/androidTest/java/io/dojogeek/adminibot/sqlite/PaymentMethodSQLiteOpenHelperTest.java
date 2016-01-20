@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
+import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
+
+import static android.support.test.InstrumentationRegistry.getContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,15 +23,18 @@ public class PaymentMethodSQLiteOpenHelperTest {
     private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
+    private SQLiteDatabase mSQLiteDatabase;
+    private DataBaseConfigurationTest mDataBaseConfigurationTest;
 
     @Before
     public void setUp() {
 
-        mContext = getTargetContext();
+        mDataBaseConfigurationTest = new DataBaseConfigurationTest();
+        mDataBaseConfigurationTest.prepareDataBase(getContext());
 
-        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+        mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
-        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
     }
 
     @After
