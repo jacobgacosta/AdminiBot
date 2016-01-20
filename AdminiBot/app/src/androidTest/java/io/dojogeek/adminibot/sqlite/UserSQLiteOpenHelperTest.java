@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.UserModelDataUtilTest;
+import io.dojogeek.adminibot.sqlite.utils.UserDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getContext;
 import static org.junit.Assert.assertEquals;
@@ -24,7 +24,7 @@ public class UserSQLiteOpenHelperTest {
     private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
-    private UserModelDataUtilTest mUserModelDataUtilTest;
+    private UserDataUtilTest mUserDataUtilTest;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
 
     @Before
@@ -62,7 +62,7 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertionData_isTrue() {
 
-        UserModel userModel = mUserModelDataUtilTest.createUserModel();
+        UserModel userModel = mUserDataUtilTest.createUserModel();
 
         long insertedRecordId = insertData(userModel);
 
@@ -73,11 +73,11 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_queryData_isTrue() {
 
-        UserModel userModel = mUserModelDataUtilTest.createUserModel();
+        UserModel userModel = mUserDataUtilTest.createUserModel();
 
         long insertedRecordId = insertData(userModel);
 
-        Cursor cursor = mUserModelDataUtilTest.queryRecordWhere(getIdField(insertedRecordId));
+        Cursor cursor = mUserDataUtilTest.queryRecordWhere(getIdField(insertedRecordId));
 
         assertNotNull(cursor);
 
@@ -91,17 +91,17 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_updateDate_isTrue() {
 
-        UserModel userModel = mUserModelDataUtilTest.createUserModel();
+        UserModel userModel = mUserDataUtilTest.createUserModel();
 
         long insertedRecordId = insertData(userModel);
 
-        userModel = mUserModelDataUtilTest.createUserModel("Irene", "Gutierrez", "igutierrez@dojogeek.io");
+        userModel = mUserDataUtilTest.createUserModel("Irene", "Gutierrez", "igutierrez@dojogeek.io");
 
-        ContentValues newContentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
+        ContentValues newContentValues = mUserDataUtilTest.createUserContentValues(userModel);
 
-        long updatedRecord = mUserModelDataUtilTest.updateRecord(newContentValues, getIdField(insertedRecordId));
+        long updatedRecord = mUserDataUtilTest.updateRecord(newContentValues, getIdField(insertedRecordId));
 
-        Cursor cursor = mUserModelDataUtilTest.queryRecordWhere(getIdField(updatedRecord));
+        Cursor cursor = mUserDataUtilTest.queryRecordWhere(getIdField(updatedRecord));
 
         assertNotNull(cursor);
 
@@ -115,7 +115,7 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqlite_correctDeleteData_isTrue() {
 
-        UserModel userModel = mUserModelDataUtilTest.createUserModel();
+        UserModel userModel = mUserDataUtilTest.createUserModel();
 
         long insertedRecordId = insertData(userModel);
 
@@ -128,9 +128,9 @@ public class UserSQLiteOpenHelperTest {
 
     private long insertData(UserModel userModel) {
 
-        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
+        ContentValues contentValues = mUserDataUtilTest.createUserContentValues(userModel);
 
-        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+        long insertedRecordId = mUserDataUtilTest.createRecord(contentValues);
 
         return  insertedRecordId;
 
@@ -151,8 +151,8 @@ public class UserSQLiteOpenHelperTest {
 
 
     private void loadUserModelUtil() {
-        if (mUserModelDataUtilTest == null) {
-            mUserModelDataUtilTest = new UserModelDataUtilTest(mSQLiteDatabase);
+        if (mUserDataUtilTest == null) {
+            mUserDataUtilTest = new UserDataUtilTest(mSQLiteDatabase);
         }
     }
 
