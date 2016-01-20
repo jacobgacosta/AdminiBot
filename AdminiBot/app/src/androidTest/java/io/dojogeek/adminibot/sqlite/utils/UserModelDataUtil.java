@@ -25,9 +25,9 @@ public class UserModelDataUtil {
         return insertedValueId;
     }
 
-    public Cursor queryRecord() {
+    public Cursor queryRecordWhere(String where) {
 
-        return mDatabaseOperationsUtils.queryAllRecords(UserContract.User.TABLE_NAME);
+        return mDatabaseOperationsUtils.queryRecordBySelection(UserContract.User.TABLE_NAME, where);
 
     }
 
