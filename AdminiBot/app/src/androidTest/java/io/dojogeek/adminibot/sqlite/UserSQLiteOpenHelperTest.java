@@ -211,4 +211,8 @@ public class UserSQLiteOpenHelperTest {
             mUserModelDataUtil = new UserModelDataUtil(mSQLiteDatabase);
         }
     }
+
+    private String getIdField(long id) {
+        return UserContract.User._ID + " = " + id;
+    }
 }
