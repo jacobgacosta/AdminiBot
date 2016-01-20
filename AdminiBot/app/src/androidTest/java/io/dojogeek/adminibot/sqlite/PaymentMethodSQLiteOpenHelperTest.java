@@ -11,8 +11,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.sqlite.utils.PaymentMethodDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getContext;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -25,21 +27,26 @@ public class PaymentMethodSQLiteOpenHelperTest {
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
+    private PaymentMethodDataUtilTest mPaymentMethodDataUtilTest;
 
     @Before
     public void setUp() {
 
+        mContext = getTargetContext();
+
         mDataBaseConfigurationTest = new DataBaseConfigurationTest();
-        mDataBaseConfigurationTest.prepareDataBase(getContext());
+        mDataBaseConfigurationTest.prepareDataBase(mContext);
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
         mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
+
+        loadPaymentMethodUtil();
     }
 
     @After
     public void tearDown() throws Exception {
-        mAdminiBotSQLiteOpenHelper.close();
+        mDataBaseConfigurationTest.closeDataBaseConnection();
     }
 
     @Test
