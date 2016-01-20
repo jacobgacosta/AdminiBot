@@ -115,4 +115,10 @@ public class PaymentMethodSQLiteOpenHelperTest {
     private int getId(long value) {
         return (int) value - ADITIONAL_INDEX;
     }
+
+    private void loadPaymentMethodUtil() {
+        if (mPaymentMethodDataUtilTest == null) {
+            mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(mSQLiteDatabase);
+        }
+    }
 }
