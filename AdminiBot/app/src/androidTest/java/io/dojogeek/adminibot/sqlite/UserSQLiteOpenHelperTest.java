@@ -75,17 +75,13 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_queryData_isTrue() {
 
-        UserModel userModel = createUserModel();
+        UserModel userModel = mUserModelDataUtil.createUserModel();
 
-        ContentValues contentValues = createContentValues(userModel);
+        ContentValues contentValues = mUserModelDataUtil.createUserContentValues(userModel);
 
-        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
-                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecordId = mUserModelDataUtil.createRecord(contentValues);
 
-        String where =  ExpenseContract.Expense._ID + " = " + insertedRecordId;
-
-        Cursor cursor = mSQLiteDatabase.query(UserContract.User.TABLE_NAME, null, where,
-                null, null, null, null);
+        Cursor cursor = mUserModelDataUtil.queryRecordWhere(getIdField(insertedRecordId));
 
         assertNotNull(cursor);
 
