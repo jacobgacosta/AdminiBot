@@ -31,13 +31,14 @@ public class UserSQLiteOpenHelperTest {
     @Before
     public void setUp() {
 
-        mContext = getTargetContext();
+        loadContext();
 
-        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+        deleteExistentDB();
 
-        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+        loadSQLiteHelper();
 
-        mSQLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        openDataBaseConnection();
+
     }
 
     @After
