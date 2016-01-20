@@ -88,4 +88,17 @@ public class UserSQLiteOpenHelperTest {
 
         return contentValues;
     }
+
+    private void compareResultQueryFields(Cursor currentPosition, UserModel userModel) {
+
+        String name = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_NAME));
+        String lastName = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_LAST_NAME));
+        String email = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_EMAIL));
+
+
+        assertEquals(userModel.name, name);
+        assertEquals(userModel.lastName, lastName);
+        assertEquals(userModel.email, email);
+
+    }
 }
