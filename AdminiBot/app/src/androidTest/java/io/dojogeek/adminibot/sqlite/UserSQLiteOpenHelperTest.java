@@ -62,9 +62,7 @@ public class UserSQLiteOpenHelperTest {
 
         UserModel userModel = mUserModelDataUtilTest.createUserModel();
 
-        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
-
-        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+        long insertedRecordId = insertData(userModel);
 
         assertTrue(insertedRecordId > INSERT_ERROR);
 
@@ -75,9 +73,7 @@ public class UserSQLiteOpenHelperTest {
 
         UserModel userModel = mUserModelDataUtilTest.createUserModel();
 
-        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
-
-        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+        long insertedRecordId = insertData(userModel);
 
         Cursor cursor = mUserModelDataUtilTest.queryRecordWhere(getIdField(insertedRecordId));
 
@@ -95,15 +91,13 @@ public class UserSQLiteOpenHelperTest {
 
         UserModel userModel = mUserModelDataUtilTest.createUserModel();
 
-        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
-
-        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+        long insertedRecordId = insertData(userModel);
 
         userModel = mUserModelDataUtilTest.createUserModel("Irene", "Gutierrez", "igutierrez@dojogeek.io");
 
-        contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
+        ContentValues newContentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
 
-        long updatedRecord = mUserModelDataUtilTest.updateRecord(contentValues, getIdField(insertedRecordId));
+        long updatedRecord = mUserModelDataUtilTest.updateRecord(newContentValues, getIdField(insertedRecordId));
 
         Cursor cursor = mUserModelDataUtilTest.queryRecordWhere(getIdField(updatedRecord));
 
@@ -121,9 +115,7 @@ public class UserSQLiteOpenHelperTest {
 
         UserModel userModel = mUserModelDataUtilTest.createUserModel();
 
-        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
-
-        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+        long insertedRecordId = insertData(userModel);
 
         long deletedRecord = mSQLiteDatabase.delete(ExpenseContract.Expense.TABLE_NAME,
                 getIdField(insertedRecordId), null);
@@ -132,6 +124,15 @@ public class UserSQLiteOpenHelperTest {
 
     }
 
+    private long insertData(UserModel userModel) {
+
+        ContentValues contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
+
+        long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
+
+        return  insertedRecordId;
+
+    }
 
     private void compareResultQueryFields(Cursor currentPosition, UserModel userModel) {
 
