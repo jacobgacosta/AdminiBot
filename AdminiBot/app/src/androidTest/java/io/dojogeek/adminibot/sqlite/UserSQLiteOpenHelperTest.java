@@ -43,7 +43,7 @@ public class UserSQLiteOpenHelperTest {
 
     @After
     public void tearDown() throws Exception {
-        mAdminiBotSQLiteOpenHelper.close();
+        closeDataBaseConnection();
     }
 
     @Test
@@ -201,5 +201,9 @@ public class UserSQLiteOpenHelperTest {
 
     private void openDataBaseConnection() {
         mSQLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+    }
+
+    private void closeDataBaseConnection() {
+        mAdminiBotSQLiteOpenHelper.close();
     }
 }
