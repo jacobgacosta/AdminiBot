@@ -62,8 +62,7 @@ public class PaymentMethodSQLiteOpenHelperTest {
 
         final int insertedValues = 4;
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(PaymentMethodsContract.PaymentMethod.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mPaymentMethodDataUtilTest.queryAllRecord();
 
         assertEquals(cursor.getCount(), insertedValues);
 
