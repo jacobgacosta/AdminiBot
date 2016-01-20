@@ -95,22 +95,15 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_updateDate_isTrue() {
 
-        UserModel userModel = createUserModel();
+        UserModel userModel = mUserModelDataUtil.createUserModel();
 
-        ContentValues contentValues = createContentValues(userModel);
+        ContentValues contentValues = mUserModelDataUtil.createUserContentValues(userModel);
 
-        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
-                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecordId = mUserModelDataUtil.createRecord(contentValues);
 
-        userModel = changeUserModelValues(userModel);
+        long updatedRecord = mUserModelDataUtil.updateRecord(contentValues, getIdField(insertedRecordId));
 
-        contentValues = createContentValues(userModel);
-
-        String where =  UserContract.User._ID + " = " + insertedRecordId;
-
-        mSQLiteDatabase.update(UserContract.User.TABLE_NAME, contentValues, where, null);
-
-        Cursor cursor = mSQLiteDatabase.query(UserContract.User.TABLE_NAME, null, where, null, null, null, null);
+        Cursor cursor = mUserModelDataUtil.queryRecordWhere(getIdField(updatedRecord));
 
         assertNotNull(cursor);
 
