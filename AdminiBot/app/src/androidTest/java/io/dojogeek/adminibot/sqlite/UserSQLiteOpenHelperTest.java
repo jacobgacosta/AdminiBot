@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.UserModel;
+import io.dojogeek.adminibot.sqlite.utils.UserModelDataUtil;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -27,17 +28,16 @@ public class UserSQLiteOpenHelperTest {
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
+    private UserModelDataUtil mUserModelDataUtil;
 
     @Before
     public void setUp() {
 
         loadContext();
-
         deleteExistentDB();
-
         loadSQLiteHelper();
-
         openDataBaseConnection();
+        loadUserModelUtil();
 
     }
 
@@ -62,12 +62,11 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertionData_isTrue() {
 
-        UserModel userModel = createUserModel();
+        UserModel userModel = mUserModelDataUtil.createUserModel();
 
-        ContentValues contentValues = createContentValues(userModel);
+        ContentValues contentValues = mUserModelDataUtil.createUserContentValues(userModel);
 
-        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
-                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecordId = mUserModelDataUtil.createRecord(contentValues);
 
         assertTrue(insertedRecordId > INSERT_ERROR);
 
