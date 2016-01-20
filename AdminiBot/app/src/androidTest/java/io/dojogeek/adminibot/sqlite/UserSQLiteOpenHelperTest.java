@@ -99,6 +99,10 @@ public class UserSQLiteOpenHelperTest {
 
         long insertedRecordId = mUserModelDataUtilTest.createRecord(contentValues);
 
+        userModel = mUserModelDataUtilTest.createUserModel("Irene", "Gutierrez", "igutierrez@dojogeek.io");
+
+        contentValues = mUserModelDataUtilTest.createUserContentValues(userModel);
+
         long updatedRecord = mUserModelDataUtilTest.updateRecord(contentValues, getIdField(insertedRecordId));
 
         Cursor cursor = mUserModelDataUtilTest.queryRecordWhere(getIdField(updatedRecord));
