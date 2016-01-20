@@ -129,4 +129,13 @@ public class UserSQLiteOpenHelperTest {
         assertEquals(userModel.email, email);
 
     }
+
+    private UserModel changeUserModelValues(UserModel userModel) {
+
+        userModel.name = "Irene";
+        userModel.lastName = "Gutierrez";
+        userModel.email = "igutierrez@dojogeek.io";
+
+        return userModel;
+    }
 }
