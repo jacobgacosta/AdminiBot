@@ -1,4 +1,4 @@
-package sqlite;
+package io.dojogeek.adminibot.sqlite;
 
 public interface SQLiteConstants {
 

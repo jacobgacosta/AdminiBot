@@ -10,7 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
-import sqlite.ExpenseContract;
+import io.dojogeek.adminibot.sqlite.ExpenseContract;
 
 public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 

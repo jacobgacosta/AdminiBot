@@ -9,7 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
-import sqlite.PaymentMethodsContract;
+import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 
 public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMethodsDao {
 

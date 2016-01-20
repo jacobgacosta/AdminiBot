@@ -9,7 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import sqlite.ExpenseTypeContract;
+import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
 
 public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDao {
 

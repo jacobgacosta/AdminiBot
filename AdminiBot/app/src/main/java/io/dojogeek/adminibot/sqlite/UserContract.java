@@ -1,14 +1,14 @@
-package sqlite;
+package io.dojogeek.adminibot.sqlite;
 
 import android.provider.BaseColumns;
-import static sqlite.SQLiteConstants.COMMA_SEP;
-import static sqlite.SQLiteConstants.TEXT_TYPE;
-import static sqlite.SQLiteConstants.PRIMARY_KEY;
-import static sqlite.SQLiteConstants.INTEGER;
-import static sqlite.SQLiteConstants.CREATE_TABLE;
-import static sqlite.SQLiteConstants.OPEN_PARENTHESIS;
-import static sqlite.SQLiteConstants.CLOSE_PARENTHESIS;
-import static sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.COMMA_SEP;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.TEXT_TYPE;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.PRIMARY_KEY;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.INTEGER;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CREATE_TABLE;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.OPEN_PARENTHESIS;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CLOSE_PARENTHESIS;
+import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
 
 public class UserContract {
 

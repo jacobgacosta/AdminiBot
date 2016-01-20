@@ -7,7 +7,7 @@ import android.database.Cursor;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.UserModel;
-import sqlite.UserContract;
+import io.dojogeek.adminibot.sqlite.UserContract;
 
 public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 

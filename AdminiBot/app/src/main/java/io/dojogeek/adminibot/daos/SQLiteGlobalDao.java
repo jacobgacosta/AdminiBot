@@ -3,7 +3,7 @@ package io.dojogeek.adminibot.daos;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
 public class SQLiteGlobalDao {
 
