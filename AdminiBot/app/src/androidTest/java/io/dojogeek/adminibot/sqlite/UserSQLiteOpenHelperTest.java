@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,7 +13,6 @@ import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.UserModelDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getContext;
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -33,7 +31,7 @@ public class UserSQLiteOpenHelperTest {
     public void setUp() {
 
         mDataBaseConfigurationTest = new DataBaseConfigurationTest();
-        mDataBaseConfigurationTest.loadDataBaseConfiguration(getContext());
+        mDataBaseConfigurationTest.prepareDataBase(getContext());
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
