@@ -40,6 +40,12 @@ public class DatabaseOperationsUtils {
         return cursor;
     }
 
+    public long updateRecord(String tableName, ContentValues contentValues,String where) {
+
+        long updatedValue = updateRecord(tableName, contentValues, where, null);
+
+        return updatedValue;
+    }
 
     private Cursor queryRecord(String table, String[] columns, String selection, String[] selectionArgs,
                                String groupBy, String having, String orderBy) {
@@ -48,6 +54,13 @@ public class DatabaseOperationsUtils {
                 selectionArgs, groupBy, having, orderBy);
 
         return cursor;
+    }
+
+    private long updateRecord(String table, ContentValues values, String whereClause, String[] whereArgs) {
+
+        long updatedValue = mSQLiteDatabase.update(table, values, whereClause, whereArgs);
+
+        return updatedValue;
     }
 
     private void setSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
