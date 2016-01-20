@@ -10,8 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.dojogeek.adminibot.models.UserModel;
+import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.UserModelDataUtilTest;
 
+import static android.support.test.InstrumentationRegistry.getContext;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -21,27 +23,29 @@ import static org.junit.Assert.assertTrue;
 public class UserSQLiteOpenHelperTest {
 
     private static final int INSERT_ERROR = -1;
-    private static final int ADITIONAL_INDEX = 1;
     private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
-    private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private UserModelDataUtilTest mUserModelDataUtilTest;
+    private DataBaseConfigurationTest mDataBaseConfigurationTest;
 
     @Before
     public void setUp() {
 
-        loadContext();
-        deleteExistentDB();
-        loadSQLiteHelper();
-        openDataBaseConnection();
+        mDataBaseConfigurationTest = new DataBaseConfigurationTest();
+        mDataBaseConfigurationTest.loadDataBaseConfiguration(getContext());
+
+        mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
+
+        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
+
         loadUserModelUtil();
 
     }
 
     @After
     public void tearDown() throws Exception {
-        closeDataBaseConnection();
+        mDataBaseConfigurationTest.closeDataBaseConnection();
     }
 
     @Test
