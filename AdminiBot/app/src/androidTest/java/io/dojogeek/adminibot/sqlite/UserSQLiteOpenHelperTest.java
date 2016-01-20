@@ -94,6 +94,36 @@ public class UserSQLiteOpenHelperTest {
                 compareResultQueryFields(cursor, userModel);
             }
         }
+    }
+
+    @Test
+    public void sqliteHelper_updateDate_isTrue() {
+
+        UserModel userModel = createUserModel();
+
+        ContentValues contentValues = createContentValues(userModel);
+
+        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
+                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+
+        userModel = changeUserModelValues(userModel);
+
+        contentValues = createContentValues(userModel);
+
+        String where =  UserContract.User._ID + " = " + insertedRecordId;
+
+        mSQLiteDatabase.update(UserContract.User.TABLE_NAME, contentValues, where, null);
+
+        Cursor cursor = mSQLiteDatabase.query(UserContract.User.TABLE_NAME, null, where, null, null, null, null);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, userModel);
+            }
+        }
+
 
     }
 
