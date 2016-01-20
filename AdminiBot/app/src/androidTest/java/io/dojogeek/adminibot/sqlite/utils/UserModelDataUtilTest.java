@@ -7,19 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.UserContract;
 
-public class UserModelDataUtil {
+public class UserModelDataUtilTest {
 
     private SQLiteDatabase mSQLiteDatabase;
-    private DatabaseOperationsUtils mDatabaseOperationsUtils;
+    private DatabaseOperationsUtilTest mDatabaseOperationsUtilTest;
 
-    public UserModelDataUtil(SQLiteDatabase sqliteDatabase) {
+    public UserModelDataUtilTest(SQLiteDatabase sqliteDatabase) {
         mSQLiteDatabase = sqliteDatabase;
-        mDatabaseOperationsUtils = new DatabaseOperationsUtils();
+        mDatabaseOperationsUtilTest = new DatabaseOperationsUtilTest();
     }
 
     public long createRecord(ContentValues contentValues) {
 
-        long insertedValueId = mDatabaseOperationsUtils.createRecord(mSQLiteDatabase, UserContract.User.TABLE_NAME,
+        long insertedValueId = mDatabaseOperationsUtilTest.createRecord(mSQLiteDatabase, UserContract.User.TABLE_NAME,
                 contentValues);
 
         return insertedValueId;
@@ -27,12 +27,12 @@ public class UserModelDataUtil {
 
     public Cursor queryRecordWhere(String where) {
 
-        return mDatabaseOperationsUtils.queryRecordWhere(UserContract.User.TABLE_NAME, where);
+        return mDatabaseOperationsUtilTest.queryRecordWhere(UserContract.User.TABLE_NAME, where);
 
     }
 
     public long updateRecord(ContentValues contentValues, String where) {
-        return mDatabaseOperationsUtils.updateRecord(UserContract.User.TABLE_NAME, contentValues, where);
+        return mDatabaseOperationsUtilTest.updateRecord(UserContract.User.TABLE_NAME, contentValues, where);
     }
 
     public UserModel createUserModel() {
