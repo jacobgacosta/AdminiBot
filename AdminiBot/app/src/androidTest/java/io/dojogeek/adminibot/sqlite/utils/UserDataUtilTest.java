@@ -7,12 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.UserContract;
 
-public class UserModelDataUtilTest {
+public class UserDataUtilTest {
 
     private SQLiteDatabase mSQLiteDatabase;
     private DatabaseOperationsUtilTest mDatabaseOperationsUtilTest;
 
-    public UserModelDataUtilTest(SQLiteDatabase sqliteDatabase) {
+    public UserDataUtilTest(SQLiteDatabase sqliteDatabase) {
         mSQLiteDatabase = sqliteDatabase;
         mDatabaseOperationsUtilTest = new DatabaseOperationsUtilTest();
     }
@@ -27,12 +27,12 @@ public class UserModelDataUtilTest {
 
     public Cursor queryRecordWhere(String where) {
 
-        return mDatabaseOperationsUtilTest.queryRecordWhere(UserContract.User.TABLE_NAME, where);
+        return mDatabaseOperationsUtilTest.queryRecordWhere(mSQLiteDatabase, UserContract.User.TABLE_NAME, where);
 
     }
 
     public long updateRecord(ContentValues contentValues, String where) {
-        return mDatabaseOperationsUtilTest.updateRecord(UserContract.User.TABLE_NAME, contentValues, where);
+        return mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, UserContract.User.TABLE_NAME, contentValues, where);
     }
 
     public UserModel createUserModel() {
