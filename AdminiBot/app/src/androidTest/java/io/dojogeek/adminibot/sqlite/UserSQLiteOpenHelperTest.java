@@ -147,25 +147,6 @@ public class UserSQLiteOpenHelperTest {
 
     }
 
-    private void loadContext() {
-        mContext = getTargetContext();
-    }
-
-    private void deleteExistentDB() {
-        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
-    }
-
-    private void loadSQLiteHelper() {
-        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
-    }
-
-    private void openDataBaseConnection() {
-        mSQLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-    }
-
-    private void closeDataBaseConnection() {
-        mAdminiBotSQLiteOpenHelper.close();
-    }
 
     private void loadUserModelUtil() {
         if (mUserModelDataUtilTest == null) {
