@@ -18,33 +18,39 @@ public class DatabaseOperationsUtilTest {
         return createRecord(tableName, contentValues);
     }
 
-    private long createRecord(String tableName, ContentValues contentValues) {
+    public Cursor queryAllRecords(SQLiteDatabase sqliteDatabase, String tableName) {
 
-        long insertedRecordId = mSQLiteDatabase.insert(tableName,
-                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
-
-        return insertedRecordId;
-    }
-
-    public Cursor queryAllRecords(String tableName) {
+        setSQLiteDatabase(sqliteDatabase);
 
         Cursor cursor = queryRecord(tableName, null, null, null, null, null, null);
 
         return cursor;
     }
 
-    public Cursor queryRecordWhere(String tableName, String where) {
+    public Cursor queryRecordWhere(SQLiteDatabase sqliteDatabase, String tableName, String where) {
+
+        setSQLiteDatabase(sqliteDatabase);
 
         Cursor cursor = queryRecord(tableName, null, where, null, null, null, null);
 
         return cursor;
     }
 
-    public long updateRecord(String tableName, ContentValues contentValues,String where) {
+    public long updateRecord(SQLiteDatabase sqliteDatabase, String tableName, ContentValues contentValues,String where) {
+
+        setSQLiteDatabase(sqliteDatabase);
 
         long updatedValue = updateRecord(tableName, contentValues, where, null);
 
         return updatedValue;
+    }
+
+    private long createRecord(String tableName, ContentValues contentValues) {
+
+        long insertedRecordId = mSQLiteDatabase.insert(tableName,
+                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+
+        return insertedRecordId;
     }
 
     private Cursor queryRecord(String table, String[] columns, String selection, String[] selectionArgs,
