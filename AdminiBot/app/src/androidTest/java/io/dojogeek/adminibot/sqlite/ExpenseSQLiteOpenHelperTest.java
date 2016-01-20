@@ -61,7 +61,7 @@ public class ExpenseSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctInsertData_isTrue() {
+    public void sqliteHelper_correctInsertionData_isTrue() {
 
         ExpenseModel expenseModel = createExpenseModel();
 
