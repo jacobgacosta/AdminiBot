@@ -123,7 +123,24 @@ public class UserSQLiteOpenHelperTest {
                 compareResultQueryFields(cursor, userModel);
             }
         }
+    }
 
+    @Test
+    public void sqlite_correctDeleteData_isTrue() {
+
+        UserModel userModel = createUserModel();
+
+        ContentValues contentValues = createContentValues(userModel);
+
+        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
+                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+
+
+        String where =  UserContract.User._ID + " = " + insertedRecordId;
+
+        long deletedRecord = mSQLiteDatabase.delete(ExpenseContract.Expense.TABLE_NAME, where, null);
+
+        assertEquals(deletedRecord, deletedRecord);
 
     }
 
