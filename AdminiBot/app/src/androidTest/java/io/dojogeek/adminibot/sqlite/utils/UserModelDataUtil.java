@@ -27,8 +27,12 @@ public class UserModelDataUtil {
 
     public Cursor queryRecordWhere(String where) {
 
-        return mDatabaseOperationsUtils.queryRecordBySelection(UserContract.User.TABLE_NAME, where);
+        return mDatabaseOperationsUtils.queryRecordWhere(UserContract.User.TABLE_NAME, where);
 
+    }
+
+    public long updateRecord(ContentValues contentValues, String where) {
+        return mDatabaseOperationsUtils.updateRecord(UserContract.User.TABLE_NAME, contentValues, where);
     }
 
     public UserModel createUserModel() {
