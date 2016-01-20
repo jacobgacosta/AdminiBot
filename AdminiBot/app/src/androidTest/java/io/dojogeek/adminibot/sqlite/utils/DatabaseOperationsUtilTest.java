@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.UserContract;
 
-public class DatabaseOperationsUtils {
+public class DatabaseOperationsUtilTest {
 
     private SQLiteDatabase mSQLiteDatabase;
 
