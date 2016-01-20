@@ -13,7 +13,7 @@ public class DataBaseConfigurationTest {
     private SQLiteDatabase mSQLiteDatabase;
     private Context mContext;
 
-    public void loadDataBaseConfiguration(Context context) {
+    public void prepareDataBase(Context context) {
         mContext = context;
         deleteExistentDB();
         loadSQLiteHelper();
