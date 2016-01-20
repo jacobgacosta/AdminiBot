@@ -9,10 +9,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -66,6 +69,31 @@ public class UserSQLiteOpenHelperTest {
                 UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
 
         assertTrue(insertedRecordId > INSERT_ERROR);
+
+    }
+
+    @Test
+    public void sqliteHelper_queryData_isTrue() {
+
+        UserModel userModel = createUserModel();
+
+        ContentValues contentValues = createContentValues(userModel);
+
+        long insertedRecordId = mSQLiteDatabase.insert(UserContract.User.TABLE_NAME,
+                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+
+        String where =  ExpenseContract.Expense._ID + " = " + insertedRecordId;
+
+        Cursor cursor = mSQLiteDatabase.query(UserContract.User.TABLE_NAME, null, where,
+                null, null, null, null);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, userModel);
+            }
+        }
 
     }
 
