@@ -19,7 +19,7 @@ public class PaymentMethodDataUtilTest {
 
     public Cursor queryAllRecord() {
 
-        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(PaymentMethodsContract.PaymentMethod.TABLE_NAME);
+        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, PaymentMethodsContract.PaymentMethod.TABLE_NAME);
 
         return cursor;
     }
