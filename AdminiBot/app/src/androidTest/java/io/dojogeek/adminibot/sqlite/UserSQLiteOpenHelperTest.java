@@ -185,4 +185,20 @@ public class UserSQLiteOpenHelperTest {
 
         return userModel;
     }
+
+    private void loadContext() {
+        mContext = getTargetContext();
+    }
+
+    private void deleteExistentDB() {
+        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+    }
+
+    private void loadSQLiteHelper() {
+        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+    }
+
+    private void openDataBaseConnection() {
+        mSQLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+    }
 }
