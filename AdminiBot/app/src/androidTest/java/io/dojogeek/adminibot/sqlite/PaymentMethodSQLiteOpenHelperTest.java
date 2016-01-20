@@ -65,7 +65,7 @@ public class PaymentMethodSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_inserterdPaymentMethods_isEquals() {
+    public void sqliteHelper_insertedPaymentMethods_isEquals() {
 
         SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(PaymentMethodsContract.PaymentMethod.TABLE_NAME, null, null, null, null, null, null);
