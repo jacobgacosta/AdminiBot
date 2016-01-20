@@ -206,4 +206,10 @@ public class UserSQLiteOpenHelperTest {
     private void closeDataBaseConnection() {
         mAdminiBotSQLiteOpenHelper.close();
     }
+
+    private void loadUserModelUtil() {
+        if (mUserModelDataUtil == null) {
+            mUserModelDataUtil = new UserModelDataUtil(mSQLiteDatabase);
+        }
+    }
 }
