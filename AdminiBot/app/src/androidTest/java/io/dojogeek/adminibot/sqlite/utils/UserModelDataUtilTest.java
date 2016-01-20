@@ -37,12 +37,7 @@ public class UserModelDataUtilTest {
 
     public UserModel createUserModel() {
 
-        UserModel userModel = new UserModel();
-        userModel.name = "Jacob";
-        userModel.lastName = "Guzman";
-        userModel.email = "jgacosta@dojogeek.io";
-
-        return userModel;
+        return createUserModel("Jacob", "Guzman", "jgacosta@dojogeek.io");
     }
 
     public ContentValues createUserContentValues(UserModel userModel) {
