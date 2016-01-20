@@ -55,4 +55,14 @@ public class UserModelDataUtilTest {
         return contentValues;
     }
 
+    public UserModel createUserModel(String name, String lastName, String email) {
+
+        UserModel userModel = new UserModel();
+        userModel.name = name;
+        userModel.lastName = lastName;
+        userModel.email = email;
+
+        return userModel;
+    }
+
 }
