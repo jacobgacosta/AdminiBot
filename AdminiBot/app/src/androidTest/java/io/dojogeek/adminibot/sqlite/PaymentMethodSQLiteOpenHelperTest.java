@@ -10,10 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import sqlite.AdminiBotSQLiteOpenHelper;
-import sqlite.ExpenseTypeContract;
-import sqlite.PaymentMethodsContract;
-
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

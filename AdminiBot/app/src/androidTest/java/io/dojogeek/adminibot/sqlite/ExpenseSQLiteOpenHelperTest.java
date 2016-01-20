@@ -13,9 +13,6 @@ import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.utils.DateUtils;
-import sqlite.AdminiBotSQLiteOpenHelper;
-import sqlite.ExpenseContract;
-import sqlite.PaymentMethodsContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;

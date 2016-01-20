@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.sqlite;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import sqlite.AdminiBotSQLiteOpenHelper;
-import sqlite.ExpenseTypeContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;

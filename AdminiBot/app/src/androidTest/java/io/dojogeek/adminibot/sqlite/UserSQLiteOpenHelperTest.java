@@ -8,10 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sqlite.AdminiBotSQLiteOpenHelper;
-import sqlite.PaymentMethodsContract;
-import sqlite.UserContract;
-
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertTrue;
 
