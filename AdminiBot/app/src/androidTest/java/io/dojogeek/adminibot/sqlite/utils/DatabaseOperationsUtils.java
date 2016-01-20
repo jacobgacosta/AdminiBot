@@ -33,12 +33,13 @@ public class DatabaseOperationsUtils {
         return cursor;
     }
 
-    public Cursor queryRecordBySelection(String tableName, String selection) {
+    public Cursor queryRecordWhere(String tableName, String where) {
 
-        Cursor cursor = queryRecord(tableName, null, selection, null, null, null, null);
+        Cursor cursor = queryRecord(tableName, null, where, null, null, null, null);
 
         return cursor;
     }
+
 
     private Cursor queryRecord(String table, String[] columns, String selection, String[] selectionArgs,
                                String groupBy, String having, String orderBy) {
