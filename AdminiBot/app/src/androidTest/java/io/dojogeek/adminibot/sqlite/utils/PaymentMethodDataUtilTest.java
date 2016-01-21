@@ -13,18 +13,7 @@ public class PaymentMethodDataUtilTest {
     private DatabaseOperationsUtilTest mDatabaseOperationsUtilTest;
     private static PaymentMethodDataUtilTest mPaymentMethodDataUtilTest;
 
-    public static PaymentMethodDataUtilTest getInstance(SQLiteDatabase sqliteDatabase) {
-
-        if (mPaymentMethodDataUtilTest == null) {
-            mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(sqliteDatabase);
-            return mPaymentMethodDataUtilTest;
-        } else {
-            return mPaymentMethodDataUtilTest;
-        }
-        
-    }
-
-    private PaymentMethodDataUtilTest(SQLiteDatabase sqliteDatabase) {
+    public PaymentMethodDataUtilTest(SQLiteDatabase sqliteDatabase) {
         mSQLiteDatabase = sqliteDatabase;
         mDatabaseOperationsUtilTest = new DatabaseOperationsUtilTest();
     }
