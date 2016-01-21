@@ -38,6 +38,10 @@ public class ExpenseDataUtilTest {
         return mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, ExpenseContract.Expense.TABLE_NAME, contentValues, where);
     }
 
+    public long deleteRecordWhere(String where) {
+        return mDatabaseOperationsUtilTest.deleteRecordWhere(mSQLiteDatabase, ExpenseContract.Expense.TABLE_NAME, where);
+    }
+
     public ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
