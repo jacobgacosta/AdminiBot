@@ -20,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class ExpenseTypeSQLiteOpenHelperTest {
 
-    private static final int ADITIONAL_INDEX = 1;
     private static final int NONE_TABLE_CREATED = 0;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
