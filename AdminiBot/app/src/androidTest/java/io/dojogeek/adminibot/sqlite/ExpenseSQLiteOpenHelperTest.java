@@ -73,7 +73,7 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertionData_isTrue() {
 
-        ExpenseModel expenseModel = createExpenseModel();
+        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
 
         assertTrue(createRecord(expenseModel) > INSERT_ERROR);
     }
