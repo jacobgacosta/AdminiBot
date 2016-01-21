@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.sqlite.utils.ExpenseTypeDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
@@ -38,11 +39,13 @@ public class ExpenseTypeSQLiteOpenHelperTest {
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
         mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
+
+        loadExpenseTypeUtil();
     }
 
     @After
     public void tearDown() throws Exception {
-        mAdminiBotSQLiteOpenHelper.close();
+        mDataBaseConfigurationTest.closeDataBaseConnection();
     }
 
     @Test
@@ -65,8 +68,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
         final int insertedValues = 5;
 
-        SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = database.query(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mExpenseTypeDataUtilTest.queryAllRecords();
 
         assertEquals(cursor.getCount(), insertedValues);
 
@@ -75,8 +77,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_insertedExpensesTypes_isEquals() {
 
-        SQLiteDatabase database = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = database.query(ExpenseTypeContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mExpenseTypeDataUtilTest.queryAllRecords();
 
         if (cursor != null && cursor.moveToFirst()) {
 
