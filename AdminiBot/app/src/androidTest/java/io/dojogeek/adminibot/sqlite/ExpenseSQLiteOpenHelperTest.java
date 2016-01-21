@@ -28,7 +28,6 @@ public class ExpenseSQLiteOpenHelperTest {
     private static final int NONE_TABLE_CREATED = 0;
     private static final int INSERT_ERROR = -1;
 
-    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
@@ -44,8 +43,6 @@ public class ExpenseSQLiteOpenHelperTest {
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
-        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
-
         loadExpenseUtil();
 
     }
@@ -58,9 +55,7 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctTableCreation_isTrue() {
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 ExpenseContract.Expense.TABLE_NAME + "'", null);
 
         if (cursor != null) {
