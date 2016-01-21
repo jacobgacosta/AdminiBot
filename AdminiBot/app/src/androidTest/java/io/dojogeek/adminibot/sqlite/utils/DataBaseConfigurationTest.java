@@ -55,9 +55,5 @@ public class DataBaseConfigurationTest {
         return mSQLiteDatabase;
     }
 
-    public AdminiBotSQLiteOpenHelper getAdminiBotSQLiteOpenHelper() {
-        return mAdminiBotSQLiteOpenHelper;
-    }
-
 
 }
