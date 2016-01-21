@@ -12,9 +12,24 @@ public class DataBaseConfigurationTest {
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
     private Context mContext;
+    private static DataBaseConfigurationTest mDataBaseConfigurationTest;
 
-    public void prepareDataBase(Context context) {
+    public static DataBaseConfigurationTest getInstance(Context context) {
+
+        if (mDataBaseConfigurationTest == null) {
+            mDataBaseConfigurationTest = new DataBaseConfigurationTest(context);
+            return mDataBaseConfigurationTest;
+        } else {
+            return mDataBaseConfigurationTest;
+        }
+
+    }
+
+    private DataBaseConfigurationTest(Context context) {
         mContext = context;
+    }
+
+    public void prepareDataBase() {
         deleteExistentDB();
         loadSQLiteHelper();
         openDataBaseConnection();
