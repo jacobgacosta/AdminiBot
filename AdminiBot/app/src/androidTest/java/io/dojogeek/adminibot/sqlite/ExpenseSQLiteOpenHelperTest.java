@@ -84,10 +84,7 @@ public class ExpenseSQLiteOpenHelperTest {
 
         long recordId = insertData(expenseModel);
 
-        String where =  ExpenseContract.Expense._ID + " = " + recordId;
-
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(ExpenseContract.Expense.TABLE_NAME, null, where, null, null, null, null);
+        Cursor cursor = mExpenseDataUtilTest.queryRecordWhere(getIdField(recordId));
 
         assertNotNull(cursor);
 
@@ -179,5 +176,9 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private void loadExpenseUtil() {
         mExpenseDataUtilTest = new ExpenseDataUtilTest(mSQLiteDatabase);
+    }
+
+    private String getIdField(long id) {
+        return UserContract.User._ID + " = " + id;
     }
 }
