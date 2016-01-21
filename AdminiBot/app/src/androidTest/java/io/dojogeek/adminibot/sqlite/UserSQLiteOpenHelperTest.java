@@ -117,8 +117,7 @@ public class UserSQLiteOpenHelperTest {
 
         long insertedRecordId = insertData(userModel);
 
-        long deletedRecord = mSQLiteDatabase.delete(ExpenseContract.Expense.TABLE_NAME,
-                getIdField(insertedRecordId), null);
+        long deletedRecord = mUserDataUtilTest.deleteRecordWhere(getIdField(insertedRecordId));
 
         assertEquals(deletedRecord, deletedRecord);
 
