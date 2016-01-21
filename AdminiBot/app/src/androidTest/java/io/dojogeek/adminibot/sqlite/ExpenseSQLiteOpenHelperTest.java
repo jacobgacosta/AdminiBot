@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.ExpenseDataUtilTest;
-import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
@@ -75,15 +74,15 @@ public class ExpenseSQLiteOpenHelperTest {
 
         ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
 
-        assertTrue(createRecord(expenseModel) > INSERT_ERROR);
+        assertTrue(insertData(expenseModel) > INSERT_ERROR);
     }
 
     @Test
     public void sqliteHelper_correctQueryData_isTrue() {
 
-        ExpenseModel expenseModel = createExpenseModel();
+        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
 
-        long recordId = createRecord(expenseModel);
+        long recordId = insertData(expenseModel);
 
         String where =  ExpenseContract.Expense._ID + " = " + recordId;
 
@@ -104,7 +103,7 @@ public class ExpenseSQLiteOpenHelperTest {
 
         ExpenseModel expenseModel = createExpenseModel();
 
-        long recordId = createRecord(expenseModel);
+        long recordId = insertData(expenseModel);
 
         expenseModel = changeExpenseModelValues(expenseModel);
 
@@ -132,7 +131,7 @@ public class ExpenseSQLiteOpenHelperTest {
 
         ExpenseModel expenseModel = createExpenseModel();
 
-        long createdExpenseId = createRecord(expenseModel);
+        long createdExpenseId = insertData(expenseModel);
 
         SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
 
@@ -144,7 +143,7 @@ public class ExpenseSQLiteOpenHelperTest {
 
     }
 
-    private long createRecord(ExpenseModel expenseModel) {
+    private long insertData(ExpenseModel expenseModel) {
 
         ContentValues contentValues = mExpenseDataUtilTest.createContentValues(expenseModel);
 
