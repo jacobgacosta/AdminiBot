@@ -106,23 +106,6 @@ public class ExpenseTypeSQLiteOpenHelperTest {
         return mContext.getResources().getString(resourceId);
     }
 
-    private String getExpenseTypeFromId(long id) {
-
-        int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
-
-        return mContext.getString(expectedExpensesTypes[getId(id)]);
-    }
-
-    private String getExpenseTypeDescriptionFromId(long id) {
-
-        int [] expextedExpensesTypesDescriptions = ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS;
-
-        return mContext.getString(expextedExpensesTypesDescriptions[getId(id)]);
-    }
-
-    private int getId(long value) {
-        return (int) value - ADITIONAL_INDEX;
-    }
 
     private void loadExpenseTypeUtil() {
         mExpenseTypeDataUtilTest = new ExpenseTypeDataUtilTest(mSQLiteDatabase);
