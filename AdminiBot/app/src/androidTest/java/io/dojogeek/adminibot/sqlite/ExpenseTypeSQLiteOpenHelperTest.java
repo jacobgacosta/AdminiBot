@@ -94,8 +94,8 @@ public class ExpenseTypeSQLiteOpenHelperTest {
         int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
         int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        String expectedName = getExpenseTypeFromId(id);
-        String expectedDescription = getExpenseTypeDescriptionFromId(id);
+        String expectedName = ExpenseTypeDataUtilTest.getExpenseTypeFromId(mContext, id);
+        String expectedDescription = ExpenseTypeDataUtilTest.getExpenseTypeDescriptionFromId(mContext, id);
 
         assertEquals(expectedName, getStringFromResourceId(name));
         assertEquals(expectedDescription, getStringFromResourceId(description));
