@@ -21,7 +21,6 @@ import static org.junit.Assert.assertTrue;
 public class ExpenseTypeSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
-    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
@@ -37,8 +36,6 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
-        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
-
         loadExpenseTypeUtil();
     }
 
@@ -49,9 +46,8 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
     @Test
     public void sqliteHelper_correctCreatedTable_isTrue() {
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                         ExpenseTypeContract.ExpenseType.TABLE_NAME + "'", null);
 
         if (cursor != null) {
