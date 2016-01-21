@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.sqlite.utils.ExpenseDataUtilTest;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -31,6 +32,7 @@ public class ExpenseSQLiteOpenHelperTest {
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
+    private ExpenseDataUtilTest mExpenseDataUtilTest;
 
     @Before
     public void setup() {
@@ -43,6 +45,8 @@ public class ExpenseSQLiteOpenHelperTest {
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
         mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
+
+        loadExpenseUtil();
 
     }
 
@@ -200,5 +204,9 @@ public class ExpenseSQLiteOpenHelperTest {
         expenseModel.totalAmount = "456.9";
 
         return expenseModel;
+    }
+
+    private void loadExpenseUtil() {
+        mExpenseDataUtilTest = new ExpenseDataUtilTest(mSQLiteDatabase);
     }
 }
