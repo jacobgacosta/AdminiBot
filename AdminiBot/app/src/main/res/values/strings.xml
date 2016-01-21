@@ -33,7 +33,7 @@
     <string name="error_wrong_lenght_last_name">El apellido es demasiado largo</string>
     <string name="error_wrong_lenght_password">El password es demasiado largo</string>
     <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
-    <string name="error_wrong_format_last_name">El nombre debe contener solo letras</string>
+    <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
     <!-- navigation menu -->
