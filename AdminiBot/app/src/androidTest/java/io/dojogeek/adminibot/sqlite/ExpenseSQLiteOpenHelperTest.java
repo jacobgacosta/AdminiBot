@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.ExpenseDataUtilTest;
+import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
@@ -98,21 +99,17 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqlite_correctUpdateData_isTrue() {
 
-        ExpenseModel expenseModel = createExpenseModel();
+        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
 
         long recordId = insertData(expenseModel);
 
-        expenseModel = changeExpenseModelValues(expenseModel);
+        expenseModel = mExpenseDataUtilTest.createExpenseModel("111.10", 2, 2, DateUtils.getCurrentData(), "expense changed");
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+        ContentValues newContentValues = mExpenseDataUtilTest.createContentValues(expenseModel);
 
-        ContentValues contentValues = createContentValues(expenseModel);
+        long updatedRecord = mExpenseDataUtilTest.updateRecord(newContentValues, getIdField(recordId));
 
-        String where =  ExpenseContract.Expense._ID + " = " + recordId;
-
-        sqLiteDatabase.update(ExpenseContract.Expense.TABLE_NAME, contentValues, where, null);
-
-        Cursor cursor = sqLiteDatabase.query(ExpenseContract.Expense.TABLE_NAME, null, where, null, null, null, null);
+        Cursor cursor = mExpenseDataUtilTest.queryRecordWhere(getIdField(updatedRecord));
 
         assertNotNull(cursor);
 
@@ -164,14 +161,6 @@ public class ExpenseSQLiteOpenHelperTest {
         assertEquals(expenseModel.userId, userId);
         assertEquals(expenseModel.expenseTypeId, expenseTypeId);
 
-    }
-
-    private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
-
-        expenseModel.name = "Changed text";
-        expenseModel.totalAmount = "456.9";
-
-        return expenseModel;
     }
 
     private void loadExpenseUtil() {
