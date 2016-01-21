@@ -15,5 +15,11 @@ public class ExpenseTypeDataUtilTest {
         mDatabaseOperationsUtilTest = new DatabaseOperationsUtilTest();
     }
 
+    public Cursor queryAllRecords() {
+
+        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, ExpenseTypeContract.ExpenseType.TABLE_NAME);
+
+        return cursor;
+    }
 
 }
