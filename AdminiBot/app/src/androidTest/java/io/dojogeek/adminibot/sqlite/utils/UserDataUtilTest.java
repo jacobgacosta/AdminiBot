@@ -35,6 +35,10 @@ public class UserDataUtilTest {
         return mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, UserContract.User.TABLE_NAME, contentValues, where);
     }
 
+    public long deleteRecordWhere(String where) {
+        return mDatabaseOperationsUtilTest.deleteRecordWhere(mSQLiteDatabase, UserContract.User.TABLE_NAME, where);
+    }
+
     public UserModel createUserModel() {
 
         return createUserModel("Jacob", "Guzman", "jgacosta@dojogeek.io");
