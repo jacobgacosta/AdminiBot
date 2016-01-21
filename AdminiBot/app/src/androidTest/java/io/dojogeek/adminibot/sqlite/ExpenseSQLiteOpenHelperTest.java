@@ -146,14 +146,11 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private long createRecord(ExpenseModel expenseModel) {
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
-
         ContentValues contentValues = createContentValues(expenseModel);
 
-        long responseId = sqLiteDatabase.insert(ExpenseContract.Expense.TABLE_NAME,
-                ExpenseContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecord = mExpenseDataUtilTest.createRecord(contentValues);
 
-        return responseId;
+        return insertedRecord;
     }
 
     private ContentValues createContentValues(ExpenseModel expenseModel) {
