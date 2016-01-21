@@ -25,6 +25,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
+    private ExpenseTypeDataUtilTest mExpenseTypeDataUtilTest;
 
     @Before
     public void setUp() {
@@ -121,6 +122,10 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
     private int getId(long value) {
         return (int) value - ADITIONAL_INDEX;
+    }
+
+    private void loadExpenseTypeUtil() {
+        mExpenseTypeDataUtilTest = new ExpenseTypeDataUtilTest(mSQLiteDatabase);
     }
 
 }
