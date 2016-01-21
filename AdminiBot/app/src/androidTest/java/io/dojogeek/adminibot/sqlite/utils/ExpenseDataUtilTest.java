@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.sqlite.utils;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Date;
@@ -25,6 +26,12 @@ public class ExpenseDataUtilTest {
                 contentValues);
 
         return insertedValueId;
+    }
+
+    public Cursor queryRecordWhere(String where) {
+
+        return mDatabaseOperationsUtilTest.queryRecordWhere(mSQLiteDatabase, ExpenseContract.Expense.TABLE_NAME, where);
+
     }
 
     public ContentValues createContentValues(ExpenseModel expenseModel) {
