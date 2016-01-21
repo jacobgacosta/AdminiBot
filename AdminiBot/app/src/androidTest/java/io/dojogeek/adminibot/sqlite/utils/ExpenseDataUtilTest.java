@@ -34,6 +34,10 @@ public class ExpenseDataUtilTest {
 
     }
 
+    public long updateRecord(ContentValues contentValues, String where) {
+        return mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, ExpenseContract.Expense.TABLE_NAME, contentValues, where);
+    }
+
     public ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
