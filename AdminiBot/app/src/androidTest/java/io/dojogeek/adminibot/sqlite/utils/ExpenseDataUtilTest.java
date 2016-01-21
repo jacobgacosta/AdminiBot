@@ -1,10 +1,13 @@
 package io.dojogeek.adminibot.sqlite.utils;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Date;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
+import io.dojogeek.adminibot.sqlite.ExpenseContract;
+import io.dojogeek.adminibot.sqlite.UserContract;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 public class ExpenseDataUtilTest {
@@ -15,6 +18,13 @@ public class ExpenseDataUtilTest {
     public ExpenseDataUtilTest(SQLiteDatabase sqliteDatabase) {
         mSQLiteDatabase = sqliteDatabase;
         mDatabaseOperationsUtilTest = new DatabaseOperationsUtilTest();
+    }
+
+    public long createRecord(ContentValues contentValues) {
+        long insertedValueId = mDatabaseOperationsUtilTest.createRecord(mSQLiteDatabase, ExpenseContract.Expense.TABLE_NAME,
+                contentValues);
+
+        return insertedValueId;
     }
 
     public ExpenseModel createExpenseModel() {
