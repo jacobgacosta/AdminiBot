@@ -45,6 +45,13 @@ public class DatabaseOperationsUtilTest {
         return updatedValue;
     }
 
+    public long deleteRecordWhere(SQLiteDatabase sqliteDatabase, String table, String where) {
+
+        setSQLiteDatabase(sqliteDatabase);
+
+        return deleteRecord(table, where, null);
+    }
+
     private long createRecord(String tableName, ContentValues contentValues) {
 
         long insertedRecordId = mSQLiteDatabase.insert(tableName,
@@ -67,6 +74,13 @@ public class DatabaseOperationsUtilTest {
         long updatedValue = mSQLiteDatabase.update(table, values, whereClause, whereArgs);
 
         return updatedValue;
+    }
+
+    private long deleteRecord(String table, String whereClause, String[] whereArgs) {
+
+        long deletedRecord = mSQLiteDatabase.delete(table, whereClause, whereArgs);
+
+        return  deletedRecord;
     }
 
     private void setSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
