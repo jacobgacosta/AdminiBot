@@ -22,7 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class PaymentMethodSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
-    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
@@ -38,8 +37,6 @@ public class PaymentMethodSQLiteOpenHelperTest {
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
-        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
-
         loadPaymentMethodUtil();
     }
 
@@ -51,9 +48,7 @@ public class PaymentMethodSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctTableCreation_isTrue() {
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getReadableDatabase();
-
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 PaymentMethodsContract.PaymentMethod.TABLE_NAME + "'", null);
 
         if (cursor != null) {
