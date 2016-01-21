@@ -8,6 +8,8 @@ import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
 
 public class ExpenseTypeDataUtilTest {
 
+    private static final int ADITIONAL_INDEX = 1;
+
     private SQLiteDatabase mSQLiteDatabase;
     private DatabaseOperationsUtilTest mDatabaseOperationsUtilTest;
 
