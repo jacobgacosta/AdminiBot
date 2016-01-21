@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
+import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -28,21 +29,26 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private Context mContext;
+    private SQLiteDatabase mSQLiteDatabase;
+    private DataBaseConfigurationTest mDataBaseConfigurationTest;
 
     @Before
     public void setup() {
 
         mContext = getTargetContext();
 
-        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+        mDataBaseConfigurationTest = DataBaseConfigurationTest.getInstance(mContext);
+        mDataBaseConfigurationTest.prepareDataBase();
 
-        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+        mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
+
+        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
 
     }
 
     @After
     public void tearDown() throws Exception {
-        mAdminiBotSQLiteOpenHelper.close();
+        mDataBaseConfigurationTest.closeDataBaseConnection();
     }
 
     @Test
