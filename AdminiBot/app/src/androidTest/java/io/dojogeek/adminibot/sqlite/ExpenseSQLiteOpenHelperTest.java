@@ -146,24 +146,11 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private long createRecord(ExpenseModel expenseModel) {
 
-        ContentValues contentValues = createContentValues(expenseModel);
+        ContentValues contentValues = mExpenseDataUtilTest.createContentValues(expenseModel);
 
         long insertedRecord = mExpenseDataUtilTest.createRecord(contentValues);
 
         return insertedRecord;
-    }
-
-    private ContentValues createContentValues(ExpenseModel expenseModel) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpenseContract.Expense.COLUMN_NAME, expenseModel.name);
-        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.totalAmount);
-        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dataExpediture);
-
-        return contentValues;
-
     }
 
     private void compareResultQueryFields(Cursor currentPosition, ExpenseModel expenseModel) {
