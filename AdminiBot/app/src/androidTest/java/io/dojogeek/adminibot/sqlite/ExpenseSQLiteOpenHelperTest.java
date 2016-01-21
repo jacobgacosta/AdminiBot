@@ -123,15 +123,11 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqlite_correctDeleteData_isTrue() {
 
-        ExpenseModel expenseModel = createExpenseModel();
+        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
 
         long createdExpenseId = insertData(expenseModel);
 
-        SQLiteDatabase sqLiteDatabase = mAdminiBotSQLiteOpenHelper.getWritableDatabase();
-
-        String where =  ExpenseContract.Expense._ID + " = " + createdExpenseId;
-
-        long deletedRecord = sqLiteDatabase.delete(ExpenseContract.Expense.TABLE_NAME, where, null);
+        long deletedRecord = mExpenseDataUtilTest.deleteRecordWhere(getIdField(createdExpenseId));
 
         assertEquals(createdExpenseId, deletedRecord);
 
