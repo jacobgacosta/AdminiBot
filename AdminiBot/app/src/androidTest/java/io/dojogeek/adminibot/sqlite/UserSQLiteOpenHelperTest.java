@@ -151,9 +151,7 @@ public class UserSQLiteOpenHelperTest {
 
 
     private void loadUserModelUtil() {
-        if (mUserDataUtilTest == null) {
-            mUserDataUtilTest = new UserDataUtilTest(mSQLiteDatabase);
-        }
+        mUserDataUtilTest = new UserDataUtilTest(mSQLiteDatabase);
     }
 
     private String getIdField(long id) {
