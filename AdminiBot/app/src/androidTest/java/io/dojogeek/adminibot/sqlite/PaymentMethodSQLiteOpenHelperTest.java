@@ -123,8 +123,6 @@ public class PaymentMethodSQLiteOpenHelperTest {
     }
 
     private void loadPaymentMethodUtil() {
-        if (mPaymentMethodDataUtilTest == null) {
-            mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(mSQLiteDatabase);
-        }
+        mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(mSQLiteDatabase);
     }
 }
