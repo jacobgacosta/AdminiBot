@@ -13,6 +13,7 @@ import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.UserDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getContext;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -22,7 +23,6 @@ public class UserSQLiteOpenHelperTest {
 
     private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
-    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
     private UserDataUtilTest mUserDataUtilTest;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
@@ -30,12 +30,10 @@ public class UserSQLiteOpenHelperTest {
     @Before
     public void setUp() {
 
-        mDataBaseConfigurationTest = new DataBaseConfigurationTest();
-        mDataBaseConfigurationTest.prepareDataBase(getContext());
+        mDataBaseConfigurationTest = DataBaseConfigurationTest.getInstance(getTargetContext());
+        mDataBaseConfigurationTest.prepareDataBase();
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
-
-        mAdminiBotSQLiteOpenHelper = mDataBaseConfigurationTest.getAdminiBotSQLiteOpenHelper();
 
         loadUserModelUtil();
 
