@@ -31,4 +31,17 @@ public class CreatorModels {
 
         return paymentMethodModel;
     }
+
+    public static PaymentMethodModel [] createPaymentMethods() {
+
+        PaymentMethodModel  [] paymentMethods = {createPaymentMethodModel(R.string.payment_methods_credit_card,
+                R.string.payment_methods_credit_card_description), createPaymentMethodModel(R.string.payment_methods_cash,
+                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_cash,
+                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
+                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
+                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_food_stamps,
+                R.string.payment_methods_food_stamps_description)};
+
+        return paymentMethods;
+    }
 }
