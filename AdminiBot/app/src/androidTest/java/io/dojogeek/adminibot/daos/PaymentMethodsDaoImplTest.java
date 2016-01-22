@@ -55,4 +55,23 @@ public class PaymentMethodsDaoImplTest {
         assertTrue(insertedRecordId != OPERATIONAL_ERROR);
         assertTrue(insertedRecordId > NO_VALUE);
     }
+
+    @Test
+    public void paymentMethodsDao_numberInsertedPaymentMethods_isTrue() {
+
+        PaymentMethodModel [] paymentMethodModels = {CreatorModels.createPaymentMethodModel(),
+                CreatorModels.createPaymentMethodModel()};
+
+        for (PaymentMethodModel paymentMethod : paymentMethodModels) {
+            mPaymentMethodsDao.createPaymentMethod(paymentMethod);
+        }
+
+        List<PaymentMethodModel> paymentMethods = mPaymentMethodsDao.getPaymentMethods();
+
+        assertNotNull(paymentMethods);
+        assertTrue(!paymentMethods.isEmpty());
+        assertEquals(paymentMethodModels.length, paymentMethods.size());
+
+    }
+
 }
