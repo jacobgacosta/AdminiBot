@@ -16,6 +16,7 @@ import io.dojogeek.adminibot.views.RegisterExpense;
 
 public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
 
+    private static int INDEX_UNIQUE_USER = 0;
     private RegisterExpense mRegisterExpense;
     private ExpenseTypeDao mExpenseTypeDao;
     private ExpenseDao mExpenseDao;
@@ -50,7 +51,7 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
 
         mUserDao.openConection();
 
-        UserModel userModel = mUserDao.getUser();
+        UserModel userModel = mUserDao.getUsers().get(INDEX_UNIQUE_USER);
         expenseModel.userId = userModel.id;
 
         boolean isCreated = mExpenseDao.createExpense(expenseModel);
