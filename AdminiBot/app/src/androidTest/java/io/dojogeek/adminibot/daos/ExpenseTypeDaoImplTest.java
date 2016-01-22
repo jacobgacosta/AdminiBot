@@ -14,6 +14,7 @@ import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
+import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
@@ -25,6 +26,8 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class ExpenseTypeDaoImplTest {
 
+    private static final int NO_VALUE = 0;
+    private static final int OPERATIONAL_ERROR = -1;
     private ExpenseTypeDao mExpenseTypeDao;
 
     @Before
@@ -38,6 +41,17 @@ public class ExpenseTypeDaoImplTest {
     @After
     public void finishTest() {
         mExpenseTypeDao.closeConection();
+    }
+
+    @Test
+    public void expenseTypeDao_creationExpenseType_isTrue() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        assertTrue(insertedExpenseTypeId != OPERATIONAL_ERROR);
+        assertTrue(insertedExpenseTypeId > NO_VALUE);
     }
 
     @Test
