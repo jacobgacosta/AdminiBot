@@ -18,11 +18,17 @@ public class CreatorModels {
 
     public static PaymentMethodModel createPaymentMethodModel() {
 
-        PaymentMethodModel paymentMethodModel = new PaymentMethodModel();
-        paymentMethodModel.name = R.string.payment_methods_credit_card;
-        paymentMethodModel.description = R.string.payment_methods_credit_card_description;
+        PaymentMethodModel paymentMethodModel = createPaymentMethodModel(R.string.payment_methods_credit_card,
+                R.string.payment_methods_credit_card_description);
 
         return paymentMethodModel;
     }
 
+    public static PaymentMethodModel createPaymentMethodModel(int name, int description) {
+        PaymentMethodModel paymentMethodModel = new PaymentMethodModel();
+        paymentMethodModel.name = name;
+        paymentMethodModel.description = description;
+
+        return paymentMethodModel;
+    }
 }
