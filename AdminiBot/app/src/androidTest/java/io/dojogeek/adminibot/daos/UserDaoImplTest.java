@@ -50,4 +50,29 @@ public class UserDaoImplTest {
         assertTrue(isInserted);
     }
 
+    @Test
+    public void userDao_getUser_isTrue() {
+
+        UserModel userModel = CreatorModels.createUserModel();
+
+        mUserDao.createUser(userModel);
+
+        List<UserModel> users = mUserDao.getUsers();
+
+        assertNotNull(users);
+        assertTrue(!users.isEmpty());
+        assertEquals(UNIQUE_USER, users.size());
+        compareResultUserModel(userModel, users);
+
+    }
+
+    private void compareResultUserModel(UserModel userModel, List<UserModel> users) {
+
+        for (UserModel user : users) {
+            assertEquals(userModel.name, user.name);
+            assertEquals(userModel.lastName, user.lastName);
+            assertEquals(userModel.email, user.email);
+        }
+    }
+
 }
