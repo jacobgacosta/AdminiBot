@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
+import io.dojogeek.adminibot.sqlite.UserContract;
 
 public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMethodsDao {
 
@@ -38,6 +39,16 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
         return paymentMethodModelList;
         
+    }
+
+    @Override
+    public long createPaymentMethod(PaymentMethodModel paymentMethod) {
+
+        ContentValues contentValues = createContentValues(paymentMethod);
+
+        long insertedRecordId = mDatabase.insert(PaymentMethodsContract.PaymentMethod.TABLE_NAME, PaymentMethodsContract.PaymentMethod.COLUMN_NAME_NULLABLE, contentValues);
+
+        return insertedRecordId;
     }
 
     private PaymentMethodModel getPaymentMethodModelFromCursor(Cursor cursor) {
