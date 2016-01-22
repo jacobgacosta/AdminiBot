@@ -8,22 +8,32 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
+import dagger.Module;
 import io.dojogeek.adminibot.models.UserModel;
+import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.utils.UserDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class UserDaoImplTest {
 
+    private static int UNIQUE_USER = 1;
     private UserDao mUserDao;
 
     @Before
     public void setup() {
-        mUserDao = new UserDaoImpl(getTargetContext());
+        Context context = getTargetContext();
+        context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+        mUserDao = new UserDaoImpl(context);
         mUserDao.openConection();
     }
 
