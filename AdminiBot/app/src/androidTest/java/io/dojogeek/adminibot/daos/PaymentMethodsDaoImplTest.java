@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -59,19 +60,15 @@ public class PaymentMethodsDaoImplTest {
     @Test
     public void paymentMethodsDao_numberInsertedPaymentMethods_isTrue() {
 
-        PaymentMethodModel [] paymentMethodModels = {CreatorModels.createPaymentMethodModel(),
-                CreatorModels.createPaymentMethodModel()};
-
-        for (PaymentMethodModel paymentMethod : paymentMethodModels) {
-            mPaymentMethodsDao.createPaymentMethod(paymentMethod);
-        }
+        int defaultInitialInsertedValues = 4;
 
         List<PaymentMethodModel> paymentMethods = mPaymentMethodsDao.getPaymentMethods();
 
         assertNotNull(paymentMethods);
         assertTrue(!paymentMethods.isEmpty());
-        assertEquals(paymentMethodModels.length, paymentMethods.size());
+        assertEquals(defaultInitialInsertedValues, paymentMethods.size());
 
     }
+
 
 }
