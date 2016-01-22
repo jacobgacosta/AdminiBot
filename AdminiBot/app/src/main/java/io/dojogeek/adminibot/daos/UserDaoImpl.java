@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.UserModel;
@@ -27,15 +30,21 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     }
 
     @Override
-    public UserModel getUser() {
+    public List<UserModel> getUsers() {
 
         Cursor cursor = mDatabase.query(UserContract.User.TABLE_NAME, null, null, null, null, null, null);
 
-        cursor.moveToFirst();
+        List<UserModel> userModels = new ArrayList<>();
 
-        UserModel user = getUserModelFromCursor(cursor);
+        if (cursor.moveToFirst()) {
 
-        return user;
+            while (!cursor.isAfterLast()) {
+                UserModel user = getUserModelFromCursor(cursor);
+                userModels.add(user);
+                cursor.moveToNext();
+            }
+        }
+        return userModels;
     }
 
     private ContentValues createContentValues(UserModel user) {
