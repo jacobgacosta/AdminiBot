@@ -70,5 +70,25 @@ public class PaymentMethodsDaoImplTest {
 
     }
 
+    @Test
+    public void paymentMethodsDao_matchingPaymentMethodsInitialInsertion_isTrue() {
+
+
+        List<PaymentMethodModel> paymentMethodsList = mPaymentMethodsDao.getPaymentMethods();
+        assertNotNull(paymentMethodsList);
+        assertTrue(!paymentMethodsList.isEmpty());
+        comparePaymentMethodsResult(paymentMethodsList);
+
+    }
+
+    private void comparePaymentMethodsResult(List<PaymentMethodModel> actualPaymentMethodsList) {
+
+        for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
+            assertEquals(PaymentMethodsContract.PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
+            assertEquals(PaymentMethodsContract.PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
+        }
+
+    }
+
 
 }
