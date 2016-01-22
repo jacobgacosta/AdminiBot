@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.daos;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -16,6 +17,16 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     @Inject
     public ExpenseTypeDaoImpl(Context context) {
         super(context);
+    }
+
+    @Override
+    public long createExpenseType(ExpenseTypeModel expenseType) {
+
+        ContentValues contentValues = createContentValues(expenseType);
+
+        long insertedRecordId = mDatabase.insert(ExpenseTypeContract.ExpenseType.TABLE_NAME, ExpenseTypeContract.ExpenseType.COLUMN_NAME_NULLABLE, contentValues);
+
+        return insertedRecordId;
     }
 
     @Override
@@ -59,6 +70,15 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
 
         return expenseTypeModel;
 
+    }
+
+    private ContentValues createContentValues(ExpenseTypeModel expenseTypeModel) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ExpenseTypeContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name);
+        contentValues.put(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
+
+        return contentValues;
     }
 
 }
