@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.daos;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -65,6 +66,15 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
         return paymentMethodModel;
 
+    }
+
+    private ContentValues createContentValues(PaymentMethodModel paymentMethod) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PaymentMethodsContract.PaymentMethod.COLUMN_NAME, paymentMethod.name);
+        contentValues.put(PaymentMethodsContract.PaymentMethod.COLUMN_DESCRIPTION, paymentMethod.description);
+
+        return contentValues;
     }
 
 }
