@@ -13,6 +13,7 @@ import java.util.List;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
@@ -49,6 +50,24 @@ public class ExpenseTypeDaoImplTest {
         assertNotNull(expenseTypeModelList);
         assertTrue(!expenseTypeModelList.isEmpty());
         assertEquals(numberOfinitialInsertedValues, expenseTypeModelList.size());
+
+    }
+
+    @Test
+    public void expenseTypeDa_matchingExpenseTypeInitialInsertion_isTrue() {
+        List<ExpenseTypeModel> expensesTypesList = mExpenseTypeDao.getExpensesTypes();
+        assertNotNull(expensesTypesList);
+        assertTrue(!expensesTypesList.isEmpty());
+        comparePaymentMethodsResult(expensesTypesList);
+
+    }
+
+    private void comparePaymentMethodsResult(List<ExpenseTypeModel> actualExpensesTypesList) {
+
+        for (int index = 0; index < actualExpensesTypesList.size(); index++) {
+            assertEquals(ExpenseTypeContract.EXPENSES_TYPES[index], actualExpensesTypesList.get(index).name);
+            assertEquals(ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS[index], actualExpensesTypesList.get(index).description);
+        }
 
     }
 }
