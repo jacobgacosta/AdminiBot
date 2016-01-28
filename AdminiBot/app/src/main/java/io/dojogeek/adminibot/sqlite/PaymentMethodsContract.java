@@ -34,10 +34,10 @@ public class PaymentMethodsContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES = CREATE_TABLE + PaymentMethod.TABLE_NAME + OPEN_PARENTHESIS +
-            PaymentMethod._ID + INTEGER + PRIMARY_KEY + COMMA_SEP +
-            PaymentMethod.COLUMN_NAME + INTEGER + COMMA_SEP +
-            PaymentMethod.COLUMN_DESCRIPTION + INTEGER + CLOSE_PARENTHESIS;
+    public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + PaymentMethod.TABLE_NAME + "(" +
+            PaymentMethod._ID + " INTEGER PRIMARY KEY, " +
+            PaymentMethod.COLUMN_NAME + " INTEGER NOT NULL, " +
+            PaymentMethod.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + PaymentMethod.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + PaymentMethod.COLUMN_NAME_NULLABLE + COMMA_SEP +
