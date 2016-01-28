@@ -34,7 +34,7 @@ public class PaymentMethodsContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + PaymentMethod.TABLE_NAME + "(" +
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE " + PaymentMethod.TABLE_NAME + "(" +
             PaymentMethod._ID + " INTEGER PRIMARY KEY, " +
             PaymentMethod.COLUMN_NAME + " INTEGER NOT NULL, " +
             PaymentMethod.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
