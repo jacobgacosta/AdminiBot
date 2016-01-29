@@ -19,8 +19,8 @@ public class CreatorModels {
 
     public static PaymentMethodModel createPaymentMethodModel() {
 
-        PaymentMethodModel paymentMethodModel = createPaymentMethodModel(R.string.payment_methods_credit_card,
-                R.string.payment_methods_credit_card_description);
+        PaymentMethodModel paymentMethodModel = createPaymentMethodModel(R.string.payment_methods_food_coupons,
+                R.string.payment_methods_food_coupons_description);
 
         return paymentMethodModel;
     }
@@ -35,13 +35,10 @@ public class CreatorModels {
 
     public static PaymentMethodModel [] createPaymentMethods() {
 
-        PaymentMethodModel  [] paymentMethods = {createPaymentMethodModel(R.string.payment_methods_credit_card,
-                R.string.payment_methods_credit_card_description), createPaymentMethodModel(R.string.payment_methods_cash,
-                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_cash,
-                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
-                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
-                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_food_stamps,
-                R.string.payment_methods_food_stamps_description)};
+        PaymentMethodModel  [] paymentMethods = {createPaymentMethodModel(R.string.payment_methods_food_coupons,
+                R.string.payment_methods_food_coupons_description), createPaymentMethodModel(R.string.payment_methods_cash,
+                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_cheque,
+                R.string.payment_methods_cheque_description)};
 
         return paymentMethods;
     }
