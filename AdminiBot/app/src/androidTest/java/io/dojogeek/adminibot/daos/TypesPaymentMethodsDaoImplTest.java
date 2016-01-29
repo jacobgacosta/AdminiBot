@@ -1,11 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
+import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -27,7 +23,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class PaymentMethodsDaoImplTest {
+public class TypesPaymentMethodsDaoImplTest {
 
     private static final int NO_VALUE = 0;
     private static final int OPERATIONAL_ERROR = -1;
@@ -84,8 +80,8 @@ public class PaymentMethodsDaoImplTest {
     private void comparePaymentMethodsResult(List<PaymentMethodModel> actualPaymentMethodsList) {
 
         for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
-            assertEquals(PaymentMethodsContract.PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
-            assertEquals(PaymentMethodsContract.PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
         }
 
     }
