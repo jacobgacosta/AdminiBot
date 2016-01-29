@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
@@ -23,31 +23,31 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class TypesPaymentMethodsDaoImplTest {
+public class TypesTypesPaymentMethodsDaoImplTest {
 
     private static final int NO_VALUE = 0;
     private static final int OPERATIONAL_ERROR = -1;
-    private PaymentMethodsDao mPaymentMethodsDao;
+    private TypesPaymentMethodsDao mTypesPaymentMethodsDao;
 
     @Before
     public void setup() {
         Context context = getTargetContext();
         context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
-        mPaymentMethodsDao = new PaymentMethodsDaoImpl(context);
-        mPaymentMethodsDao.openConection();
+        mTypesPaymentMethodsDao = new TypesPaymentMethodsDaoImpl(context);
+        mTypesPaymentMethodsDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mPaymentMethodsDao.closeConection();
+        mTypesPaymentMethodsDao.closeConection();
     }
 
     @Test
     public void paymentMethodsDao_createPaymentMethod_isTrue() {
 
-        PaymentMethodModel paymentMethodModel = CreatorModels.createPaymentMethodModel();
+        TypesPaymentMethodsModel typesPaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
 
-        long insertedRecordId = mPaymentMethodsDao.createPaymentMethod(paymentMethodModel);
+        long insertedRecordId = mTypesPaymentMethodsDao.createPaymentMethod(typesPaymentMethodModel);
 
         assertTrue(insertedRecordId != OPERATIONAL_ERROR);
         assertTrue(insertedRecordId > NO_VALUE);
@@ -58,7 +58,7 @@ public class TypesPaymentMethodsDaoImplTest {
 
         int defaultInitialInsertedValues = 4;
 
-        List<PaymentMethodModel> paymentMethods = mPaymentMethodsDao.getPaymentMethods();
+        List<TypesPaymentMethodsModel> paymentMethods = mTypesPaymentMethodsDao.getPaymentMethods();
 
         assertNotNull(paymentMethods);
         assertTrue(!paymentMethods.isEmpty());
@@ -70,14 +70,14 @@ public class TypesPaymentMethodsDaoImplTest {
     public void paymentMethodsDao_matchingPaymentMethodsInitialInsertion_isTrue() {
 
 
-        List<PaymentMethodModel> paymentMethodsList = mPaymentMethodsDao.getPaymentMethods();
+        List<TypesPaymentMethodsModel> paymentMethodsList = mTypesPaymentMethodsDao.getPaymentMethods();
         assertNotNull(paymentMethodsList);
         assertTrue(!paymentMethodsList.isEmpty());
         comparePaymentMethodsResult(paymentMethodsList);
 
     }
 
-    private void comparePaymentMethodsResult(List<PaymentMethodModel> actualPaymentMethodsList) {
+    private void comparePaymentMethodsResult(List<TypesPaymentMethodsModel> actualPaymentMethodsList) {
 
         for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
             assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
