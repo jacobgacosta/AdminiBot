@@ -1,6 +1,6 @@
 package io.dojogeek.adminibot.models;
 
-public class PaymentMethodModel {
+public class TypesPaymentMethodsModel {
 
     public long id;
     public int name;
