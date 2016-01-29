@@ -10,8 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
-import io.dojogeek.adminibot.sqlite.UserContract;
+import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
 public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMethodsDao {
 
@@ -25,7 +24,7 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
         List<PaymentMethodModel> paymentMethodModelList = new ArrayList<>();
 
-        Cursor cursor = mDatabase.query(PaymentMethodsContract.PaymentMethod.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
 
@@ -47,7 +46,7 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
         ContentValues contentValues = createContentValues(paymentMethod);
 
-        long insertedRecordId = mDatabase.insert(PaymentMethodsContract.PaymentMethod.TABLE_NAME, PaymentMethodsContract.PaymentMethod.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecordId = mDatabase.insert(TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME_NULLABLE, contentValues);
 
         return insertedRecordId;
     }
@@ -56,9 +55,9 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
         PaymentMethodModel paymentMethodModel = new PaymentMethodModel();
 
-        long id = cursor.getInt(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethod._ID));
-        int name = cursor.getInt(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_NAME));
-        int description = cursor.getInt(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_DESCRIPTION));
+        long id = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
+        int name = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
+        int description = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
 
         paymentMethodModel.id = id;
         paymentMethodModel.name = name;
@@ -71,8 +70,8 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
     private ContentValues createContentValues(PaymentMethodModel paymentMethod) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PaymentMethodsContract.PaymentMethod.COLUMN_NAME, paymentMethod.name);
-        contentValues.put(PaymentMethodsContract.PaymentMethod.COLUMN_DESCRIPTION, paymentMethod.description);
+        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME, paymentMethod.name);
+        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION, paymentMethod.description);
 
         return contentValues;
     }
