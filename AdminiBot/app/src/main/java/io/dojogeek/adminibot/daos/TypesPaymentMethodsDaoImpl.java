@@ -9,20 +9,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
-public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMethodsDao {
+public class TypesPaymentMethodsDaoImpl extends SQLiteGlobalDao implements TypesPaymentMethodsDao {
 
     @Inject
-    public PaymentMethodsDaoImpl(Context context) {
+    public TypesPaymentMethodsDaoImpl(Context context) {
         super(context);
     }
 
     @Override
-    public List<PaymentMethodModel> getPaymentMethods() {
+    public List<TypesPaymentMethodsModel> getPaymentMethods() {
 
-        List<PaymentMethodModel> paymentMethodModelList = new ArrayList<>();
+        List<TypesPaymentMethodsModel> paymentMethodModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, null, null, null, null, null, null);
 
@@ -30,9 +30,9 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
             while (cursor.isAfterLast() == false) {
 
-                PaymentMethodModel paymentMethodModel = getPaymentMethodModelFromCursor(cursor);
+                TypesPaymentMethodsModel typesPaymentMethodModel = getPaymentMethodModelFromCursor(cursor);
 
-                paymentMethodModelList.add(paymentMethodModel);
+                paymentMethodModelList.add(typesPaymentMethodModel);
                 cursor.moveToNext();
             }
         }
@@ -42,18 +42,18 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
     }
 
     @Override
-    public long createPaymentMethod(PaymentMethodModel paymentMethod) {
+    public long createPaymentMethod(TypesPaymentMethodsModel typesPaymentMethods) {
 
-        ContentValues contentValues = createContentValues(paymentMethod);
+        ContentValues contentValues = createContentValues(typesPaymentMethods);
 
         long insertedRecordId = mDatabase.insert(TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME_NULLABLE, contentValues);
 
         return insertedRecordId;
     }
 
-    private PaymentMethodModel getPaymentMethodModelFromCursor(Cursor cursor) {
+    private TypesPaymentMethodsModel getPaymentMethodModelFromCursor(Cursor cursor) {
 
-        PaymentMethodModel paymentMethodModel = new PaymentMethodModel();
+        TypesPaymentMethodsModel paymentMethodModel = new TypesPaymentMethodsModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
         int name = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
@@ -67,7 +67,7 @@ public class PaymentMethodsDaoImpl extends SQLiteGlobalDao implements PaymentMet
 
     }
 
-    private ContentValues createContentValues(PaymentMethodModel paymentMethod) {
+    private ContentValues createContentValues(TypesPaymentMethodsModel paymentMethod) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME, paymentMethod.name);
