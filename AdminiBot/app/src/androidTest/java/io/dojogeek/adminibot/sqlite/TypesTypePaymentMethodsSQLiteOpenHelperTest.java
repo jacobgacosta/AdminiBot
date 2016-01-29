@@ -70,7 +70,7 @@ public class TypesTypePaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_insertedPaymentMethods_isEquals() {
+    public void sqliteHelper_insertedPaymentMethods_matchingIsTrue() {
 
         Cursor cursor = mPaymentMethodDataUtilTest.queryAllRecord();
 
