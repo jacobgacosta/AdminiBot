@@ -84,14 +84,6 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
     }
 
-    @Test
-    public void sqlite_insertNullValues_isException() {
-
-        //CreatorModels.createTypesPaymentMethods();
-        //mTypesPaymentMethodsDataUtilTest.insertTypePaymentMethod()
-
-    }
-
     private void compareResultQueryFields(Cursor currentPosition) {
 
         long id = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
