@@ -21,7 +21,7 @@ import io.dojogeek.adminibot.components.CustomSpinner;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.utils.DateUtils;
 
@@ -64,12 +64,12 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     }
 
     @Override
-    public void deployPaymentMethods(List<TypesPaymentMethodsModel> typesPaymentMethodsModelList) {
+    public void deployPaymentMethods(List<TypePaymentMethodModel> typesPaymentMethodsModelList) {
 
         List<String> paymentMethods = new ArrayList<>();
 
-        for (TypesPaymentMethodsModel typesPaymentMethodsModel : typesPaymentMethodsModelList) {
-            paymentMethods.add(getString(typesPaymentMethodsModel.name));
+        for (TypePaymentMethodModel typePaymentMethodModel : typesPaymentMethodsModelList) {
+            paymentMethods.add(getString(typePaymentMethodModel.name));
         }
 
         mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);

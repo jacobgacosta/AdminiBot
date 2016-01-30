@@ -2,12 +2,12 @@ package io.dojogeek.adminibot.daos;
 
 import java.util.List;
 
-import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 
 public interface TypesPaymentMethodsDao extends ConectionDao {
 
-    List<TypesPaymentMethodsModel> getPaymentMethods();
+    List<TypePaymentMethodModel> getPaymentMethods();
 
-    public long createPaymentMethod(TypesPaymentMethodsModel paymentMethod);
+    public long createPaymentMethod(TypePaymentMethodModel paymentMethod);
 
 }

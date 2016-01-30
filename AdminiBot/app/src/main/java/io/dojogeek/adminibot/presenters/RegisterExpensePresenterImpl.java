@@ -10,7 +10,7 @@ import io.dojogeek.adminibot.daos.TypesPaymentMethodsDao;
 import io.dojogeek.adminibot.daos.UserDao;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.views.RegisterExpense;
 
@@ -76,7 +76,7 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
 
         mTypesPaymentMethodsDao.openConection();
 
-        List<TypesPaymentMethodsModel> typePaymentMethodsModels = mTypesPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> typePaymentMethodsModels = mTypesPaymentMethodsDao.getPaymentMethods();
 
         mRegisterExpense.deployPaymentMethods(typePaymentMethodsModels);
     }

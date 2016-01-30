@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import io.dojogeek.adminibot.models.TypesPaymentMethodsModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
@@ -45,7 +45,7 @@ public class TypesTypesPaymentMethodsDaoImplTest {
     @Test
     public void paymentMethodsDao_createPaymentMethod_isTrue() {
 
-        TypesPaymentMethodsModel typesPaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
+        TypePaymentMethodModel typesPaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
 
         long insertedRecordId = mTypesPaymentMethodsDao.createPaymentMethod(typesPaymentMethodModel);
 
@@ -58,7 +58,7 @@ public class TypesTypesPaymentMethodsDaoImplTest {
 
         int defaultInitialInsertedValues = 4;
 
-        List<TypesPaymentMethodsModel> paymentMethods = mTypesPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> paymentMethods = mTypesPaymentMethodsDao.getPaymentMethods();
 
         assertNotNull(paymentMethods);
         assertTrue(!paymentMethods.isEmpty());
@@ -70,14 +70,14 @@ public class TypesTypesPaymentMethodsDaoImplTest {
     public void paymentMethodsDao_matchingPaymentMethodsInitialInsertion_isTrue() {
 
 
-        List<TypesPaymentMethodsModel> paymentMethodsList = mTypesPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> paymentMethodsList = mTypesPaymentMethodsDao.getPaymentMethods();
         assertNotNull(paymentMethodsList);
         assertTrue(!paymentMethodsList.isEmpty());
         comparePaymentMethodsResult(paymentMethodsList);
 
     }
 
-    private void comparePaymentMethodsResult(List<TypesPaymentMethodsModel> actualPaymentMethodsList) {
+    private void comparePaymentMethodsResult(List<TypePaymentMethodModel> actualPaymentMethodsList) {
 
         for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
             assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
