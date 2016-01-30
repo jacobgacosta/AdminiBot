@@ -1,9 +1,11 @@
 package io.dojogeek.adminibot.sqlite.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
@@ -25,11 +27,14 @@ public class TypesPaymentMethodsDataUtilTest {
         return cursor;
     }
 
-    public int insertTypePaymentMethod() {
+    public long insertTypePaymentMethod(TypePaymentMethodModel typePaymentMethodModel) {
 
+        ContentValues typePaymentMethodContentValues = createContentValuesFromTypePaymentMethod(typePaymentMethodModel);
 
-        //int insertedRecordId = mDatabaseOperationsUtilTest.createRecord(mSQLiteDatabase, );
-        return 0;
+        long insertedRecordId = mDatabaseOperationsUtilTest.createRecord(mSQLiteDatabase,
+                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, typePaymentMethodContentValues);
+
+        return insertedRecordId;
     }
 
     public String getValuePaymentMethodFromId(Context context, long id) {
@@ -44,6 +49,16 @@ public class TypesPaymentMethodsDataUtilTest {
         int [] paymentMethodsDescriptions = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS;
 
         return context.getString(paymentMethodsDescriptions[getId(id)]);
+    }
+
+    public ContentValues createContentValuesFromTypePaymentMethod(TypePaymentMethodModel typePaymentMethodModel) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME, typePaymentMethodModel.name);
+        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION, typePaymentMethodModel.description);
+
+        return contentValues;
+
     }
 
     private static int getId(long value) {
