@@ -33,7 +33,7 @@ public class CreatorModels {
         return typePaymentMethodModel;
     }
 
-    public static TypePaymentMethodModel[] createPaymentMethods() {
+    public static TypePaymentMethodModel[] createTypesPaymentMethods() {
 
         TypePaymentMethodModel[] typesPaymentMethods = {createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
                 R.string.payment_methods_food_coupons_description), createTypePaymentMethodModel(R.string.payment_methods_cash,
