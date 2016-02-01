@@ -65,7 +65,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
 
         Cursor cursor = mExpenseTypeDataUtilTest.queryAllRecords();
 
-        assertEquals(cursor.getCount(), insertedValues);
+        assertEquals(insertedValues, cursor.getCount());
 
     }
 
