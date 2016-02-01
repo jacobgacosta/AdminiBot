@@ -46,7 +46,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_successfulTableCreation_isTrue() {
+    public void sqliteHelper_successfullCreationTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME + "'", null);
