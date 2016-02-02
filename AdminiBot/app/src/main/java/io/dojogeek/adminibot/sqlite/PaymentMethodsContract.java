@@ -18,7 +18,7 @@ public class PaymentMethodsContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + PaymentMethods.TABLE_NAME + "(" +
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE " + PaymentMethods.TABLE_NAME + "(" +
             PaymentMethods._ID  + " INTEGER PRIMARY KEY, " +
             PaymentMethods.COLUMN_NAME + " TEXT NOT NULL, " +
             PaymentMethods.COLUMN_REFERENCE + " TEST NOT NULL, " +
