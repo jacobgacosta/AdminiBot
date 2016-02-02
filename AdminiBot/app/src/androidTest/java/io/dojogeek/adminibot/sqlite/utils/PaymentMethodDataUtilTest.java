@@ -1,9 +1,12 @@
 package io.dojogeek.adminibot.sqlite.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
 public class PaymentMethodDataUtilTest {
@@ -20,9 +23,19 @@ public class PaymentMethodDataUtilTest {
 
     public Cursor queryAllRecord() {
 
-        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME);
+        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, PaymentMethodsContract.PaymentMethods.TABLE_NAME);
 
         return cursor;
+    }
+
+    public long insertPaymentMethod(PaymentMethodModel paymentMethodModel) {
+
+        ContentValues contentValues = createContentValuesFromPaymentMethod(paymentMethodModel);
+
+        long insertedRecordId = mDatabaseOperationsUtilTest.createRecord(mSQLiteDatabase,
+                PaymentMethodsContract.PaymentMethods.TABLE_NAME, contentValues);
+
+        return insertedRecordId;
     }
 
     public static String getValuePaymentMethodFromId(Context context, long id) {
