@@ -54,7 +54,7 @@ public class DatabaseOperationsUtilTest {
 
     private long createRecord(String tableName, ContentValues contentValues) {
 
-        long insertedRecordId = mSQLiteDatabase.insert(tableName,
+        long insertedRecordId = mSQLiteDatabase.insertOrThrow(tableName,
                 UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
 
         return insertedRecordId;
