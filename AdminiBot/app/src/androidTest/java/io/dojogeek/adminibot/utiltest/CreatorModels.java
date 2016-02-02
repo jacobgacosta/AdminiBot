@@ -1,7 +1,9 @@
 package io.dojogeek.adminibot.utiltest;
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
 
@@ -57,5 +59,26 @@ public class CreatorModels {
         expenseTypeModel.description = description;
 
         return expenseTypeModel;
+    }
+
+    public static PaymentMethodModel createPaymentMethodModel() {
+
+        PaymentMethodModel paymentMethodModel = createPaymentMethodModel("Debt payment", "AD7689832D", 1, 1650, 4);
+
+        return paymentMethodModel;
+    }
+
+    public static PaymentMethodModel createPaymentMethodModel(String name, String reference,
+                                                              long typePaymentMethodId,
+                                                              double availableCredit, int userId) {
+
+        PaymentMethodModel paymentMethod = new PaymentMethodModel();
+        paymentMethod.name = name;
+        paymentMethod.reference = reference;
+        paymentMethod.typePaymentMethod = typePaymentMethodId;
+        paymentMethod.availabreCredit = availableCredit;
+        paymentMethod.userId = userId;
+
+        return paymentMethod;
     }
 }
