@@ -83,16 +83,14 @@
     <string name="inbox_expense_payment_method">Tipo de pago:</string>
     <string name="inbox_expense_date">Pago realizado el:</string>
 
-    <!-- payment methods -->
+    <!-- types payment methods -->
     <string name="payment_methods_spinner_default_value">Selecciona un tipo de pago</string>
-    <string name="payment_methods_credit_card">Tarjeta de crédito</string>
-    <string name="payment_methods_food_stamps">Vales de despensa</string>
-    <string name="payment_methods_debit_card">Tarjeta de débito</string>
+    <string name="payment_methods_cheque">cheque</string>
+    <string name="payment_methods_food_coupons">Vales de despensa</string>
     <string name="payment_methods_cash">Efectivo</string>
 
-    <string name="payment_methods_credit_card_description">Cualquier tarjeta de crédito</string>
-    <string name="payment_methods_food_stamps_description">Vales de despensa, tarjetas o cupones</string>
-    <string name="payment_methods_debit_card_description">Cualquier tarjeta de débito</string>
+    <string name="payment_methods_food_coupons_description">Vales de despensa, tarjetas o cupones</string>
     <string name="payment_methods_cash_description">Dinero en efectivo</string>
+    <string name="payment_methods_cheque_description">Documento de pago</string>
 
 </resources>

@@ -1,12 +1,10 @@
 package io.dojogeek.adminibot.sqlite.utils;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
-import io.dojogeek.adminibot.sqlite.UserContract;
+import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
 public class PaymentMethodDataUtilTest {
 
@@ -22,21 +20,21 @@ public class PaymentMethodDataUtilTest {
 
     public Cursor queryAllRecord() {
 
-        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, PaymentMethodsContract.PaymentMethod.TABLE_NAME);
+        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME);
 
         return cursor;
     }
 
     public static String getValuePaymentMethodFromId(Context context, long id) {
 
-        int [] paymentMethods = PaymentMethodsContract.PAYMENT_METHODS;
+        int [] paymentMethods = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS;
 
         return  context.getString(paymentMethods[getId(id)]);
     }
 
     public static String getValuePaymentMethodDescriptionFromId(Context context, long id) {
 
-        int [] paymentMethodsDescriptions = PaymentMethodsContract.PAYMENT_METHODS_DESCRIPTIONS;
+        int [] paymentMethodsDescriptions = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS;
 
         return context.getString(paymentMethodsDescriptions[getId(id)]);
     }

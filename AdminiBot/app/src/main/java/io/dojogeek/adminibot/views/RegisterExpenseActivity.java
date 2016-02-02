@@ -3,11 +3,9 @@ package io.dojogeek.adminibot.views;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import io.dojogeek.adminibot.components.CustomSpinner;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.utils.DateUtils;
 
@@ -66,12 +64,12 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     }
 
     @Override
-    public void deployPaymentMethods(List<PaymentMethodModel> paymentMethodModelList) {
+    public void deployPaymentMethods(List<TypePaymentMethodModel> typesPaymentMethodsModelList) {
 
         List<String> paymentMethods = new ArrayList<>();
 
-        for (PaymentMethodModel paymentMethodModel : paymentMethodModelList) {
-            paymentMethods.add(getString(paymentMethodModel.name));
+        for (TypePaymentMethodModel typePaymentMethodModel : typesPaymentMethodsModelList) {
+            paymentMethods.add(getString(typePaymentMethodModel.name));
         }
 
         mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);

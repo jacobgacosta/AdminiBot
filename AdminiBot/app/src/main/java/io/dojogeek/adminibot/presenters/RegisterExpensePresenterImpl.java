@@ -6,11 +6,11 @@ import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.daos.ConectionDao;
 import io.dojogeek.adminibot.daos.ExpenseDao;
 import io.dojogeek.adminibot.daos.ExpenseTypeDao;
-import io.dojogeek.adminibot.daos.PaymentMethodsDao;
+import io.dojogeek.adminibot.daos.TypesPaymentMethodsDao;
 import io.dojogeek.adminibot.daos.UserDao;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.views.RegisterExpense;
 
@@ -21,17 +21,17 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
     private ExpenseTypeDao mExpenseTypeDao;
     private ExpenseDao mExpenseDao;
     private UserDao mUserDao;
-    private PaymentMethodsDao mPaymentMethodsDao;
+    private TypesPaymentMethodsDao mTypesPaymentMethodsDao;
 
     public RegisterExpensePresenterImpl(RegisterExpense registerExpense,
                                         ExpenseTypeDao expenseTypeDao, ExpenseDao expenseDao,
-                                        UserDao userDao, PaymentMethodsDao paymentMethodsDao) {
+                                        UserDao userDao, TypesPaymentMethodsDao typesPaymentMethodsDao) {
 
         mRegisterExpense = registerExpense;
         mExpenseTypeDao = expenseTypeDao;
         mExpenseDao = expenseDao;
         mUserDao = userDao;
-        mPaymentMethodsDao = paymentMethodsDao;
+        mTypesPaymentMethodsDao = typesPaymentMethodsDao;
     }
 
     @Override
@@ -68,17 +68,17 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
         closeConnection(mExpenseTypeDao);
         closeConnection(mUserDao);
         closeConnection(mExpenseDao);
-        closeConnection(mPaymentMethodsDao);
+        closeConnection(mTypesPaymentMethodsDao);
     }
 
     @Override
     public void getPaymentMethods() {
 
-        mPaymentMethodsDao.openConection();
+        mTypesPaymentMethodsDao.openConection();
 
-        List<PaymentMethodModel> paymentMethodModels = mPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> typePaymentMethodsModels = mTypesPaymentMethodsDao.getPaymentMethods();
 
-        mRegisterExpense.deployPaymentMethods(paymentMethodModels);
+        mRegisterExpense.deployPaymentMethods(typePaymentMethodsModels);
     }
 
     private void closeConnection(ConectionDao conectionDao) {

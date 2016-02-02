@@ -1,11 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,9 +13,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
+import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -27,31 +23,31 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class PaymentMethodsDaoImplTest {
+public class TypesTypesPaymentMethodsDaoImplTest {
 
     private static final int NO_VALUE = 0;
     private static final int OPERATIONAL_ERROR = -1;
-    private PaymentMethodsDao mPaymentMethodsDao;
+    private TypesPaymentMethodsDao mTypesPaymentMethodsDao;
 
     @Before
     public void setup() {
         Context context = getTargetContext();
         context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
-        mPaymentMethodsDao = new PaymentMethodsDaoImpl(context);
-        mPaymentMethodsDao.openConection();
+        mTypesPaymentMethodsDao = new TypesPaymentMethodsDaoImpl(context);
+        mTypesPaymentMethodsDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mPaymentMethodsDao.closeConection();
+        mTypesPaymentMethodsDao.closeConection();
     }
 
     @Test
     public void paymentMethodsDao_createPaymentMethod_isTrue() {
 
-        PaymentMethodModel paymentMethodModel = CreatorModels.createPaymentMethodModel();
+        TypePaymentMethodModel typesPaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
 
-        long insertedRecordId = mPaymentMethodsDao.createPaymentMethod(paymentMethodModel);
+        long insertedRecordId = mTypesPaymentMethodsDao.createPaymentMethod(typesPaymentMethodModel);
 
         assertTrue(insertedRecordId != OPERATIONAL_ERROR);
         assertTrue(insertedRecordId > NO_VALUE);
@@ -62,7 +58,7 @@ public class PaymentMethodsDaoImplTest {
 
         int defaultInitialInsertedValues = 4;
 
-        List<PaymentMethodModel> paymentMethods = mPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> paymentMethods = mTypesPaymentMethodsDao.getPaymentMethods();
 
         assertNotNull(paymentMethods);
         assertTrue(!paymentMethods.isEmpty());
@@ -74,18 +70,18 @@ public class PaymentMethodsDaoImplTest {
     public void paymentMethodsDao_matchingPaymentMethodsInitialInsertion_isTrue() {
 
 
-        List<PaymentMethodModel> paymentMethodsList = mPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> paymentMethodsList = mTypesPaymentMethodsDao.getPaymentMethods();
         assertNotNull(paymentMethodsList);
         assertTrue(!paymentMethodsList.isEmpty());
         comparePaymentMethodsResult(paymentMethodsList);
 
     }
 
-    private void comparePaymentMethodsResult(List<PaymentMethodModel> actualPaymentMethodsList) {
+    private void comparePaymentMethodsResult(List<TypePaymentMethodModel> actualPaymentMethodsList) {
 
         for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
-            assertEquals(PaymentMethodsContract.PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
-            assertEquals(PaymentMethodsContract.PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
         }
 
     }

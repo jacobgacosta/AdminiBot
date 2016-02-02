@@ -2,7 +2,7 @@ package io.dojogeek.adminibot.utiltest;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
 
 public class CreatorModels {
@@ -17,33 +17,30 @@ public class CreatorModels {
         return userModel;
     }
 
-    public static PaymentMethodModel createPaymentMethodModel() {
+    public static TypePaymentMethodModel createTypePaymentMethodModel() {
 
-        PaymentMethodModel paymentMethodModel = createPaymentMethodModel(R.string.payment_methods_credit_card,
-                R.string.payment_methods_credit_card_description);
+        TypePaymentMethodModel typePaymentMethodModel = createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
+                R.string.payment_methods_food_coupons_description);
 
-        return paymentMethodModel;
+        return typePaymentMethodModel;
     }
 
-    public static PaymentMethodModel createPaymentMethodModel(int name, int description) {
-        PaymentMethodModel paymentMethodModel = new PaymentMethodModel();
-        paymentMethodModel.name = name;
-        paymentMethodModel.description = description;
+    public static TypePaymentMethodModel createTypePaymentMethodModel(int name, int description) {
+        TypePaymentMethodModel typePaymentMethodModel = new TypePaymentMethodModel();
+        typePaymentMethodModel.name = name;
+        typePaymentMethodModel.description = description;
 
-        return paymentMethodModel;
+        return typePaymentMethodModel;
     }
 
-    public static PaymentMethodModel [] createPaymentMethods() {
+    public static TypePaymentMethodModel[] createTypesPaymentMethods() {
 
-        PaymentMethodModel  [] paymentMethods = {createPaymentMethodModel(R.string.payment_methods_credit_card,
-                R.string.payment_methods_credit_card_description), createPaymentMethodModel(R.string.payment_methods_cash,
-                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_cash,
-                R.string.payment_methods_cash_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
-                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_debit_card,
-                R.string.payment_methods_debit_card_description), createPaymentMethodModel(R.string.payment_methods_food_stamps,
-                R.string.payment_methods_food_stamps_description)};
+        TypePaymentMethodModel[] typesPaymentMethods = {createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
+                R.string.payment_methods_food_coupons_description), createTypePaymentMethodModel(R.string.payment_methods_cash,
+                R.string.payment_methods_cash_description), createTypePaymentMethodModel(R.string.payment_methods_cheque,
+                R.string.payment_methods_cheque_description)};
 
-        return paymentMethods;
+        return typesPaymentMethods;
     }
 
     public static ExpenseTypeModel createExpenseTypeModel() {

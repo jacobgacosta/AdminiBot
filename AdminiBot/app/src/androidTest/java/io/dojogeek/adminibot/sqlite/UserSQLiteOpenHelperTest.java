@@ -45,7 +45,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctCreatedTable_isTrue() {
+    public void sqliteHelper_successfulTableCreation_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 UserContract.User.TABLE_NAME + "'", null);

@@ -11,21 +11,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.PaymentMethodDataUtilTest;
+import io.dojogeek.adminibot.sqlite.utils.TypesPaymentMethodsDataUtilTest;
+import io.dojogeek.adminibot.utiltest.CreatorModels;
 
-import static android.support.test.InstrumentationRegistry.getContext;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class PaymentMethodSQLiteOpenHelperTest {
+public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
-    private PaymentMethodDataUtilTest mPaymentMethodDataUtilTest;
+    private TypesPaymentMethodsDataUtilTest mTypesPaymentMethodsDataUtilTest;
 
     @Before
     public void setUp() {
@@ -46,10 +46,10 @@ public class PaymentMethodSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctTableCreation_isTrue() {
+    public void sqliteHelper_successfullCreationTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
-                PaymentMethodsContract.PaymentMethod.TABLE_NAME + "'", null);
+                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME + "'", null);
 
         if (cursor != null) {
 
@@ -62,18 +62,18 @@ public class PaymentMethodSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_numberOfInsertedPaymentMethods_isEquals() {
 
-        final int insertedValues = 4;
+        final int initialValuesInserted = 3;
 
-        Cursor cursor = mPaymentMethodDataUtilTest.queryAllRecord();
+        Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryAllRecord();
 
-        assertEquals(cursor.getCount(), insertedValues);
+        assertEquals(cursor.getCount(), initialValuesInserted);
 
     }
 
     @Test
-    public void sqliteHelper_insertedPaymentMethods_isEquals() {
+    public void sqliteHelper_insertedPaymentMethods_matchingIsTrue() {
 
-        Cursor cursor = mPaymentMethodDataUtilTest.queryAllRecord();
+        Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryAllRecord();
 
         if (cursor != null && cursor.moveToFirst()) {
             while (cursor.isAfterLast() == false) {
@@ -86,12 +86,12 @@ public class PaymentMethodSQLiteOpenHelperTest {
 
     private void compareResultQueryFields(Cursor currentPosition) {
 
-        long id = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod._ID));
-        int name = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_NAME));
-        int description = currentPosition.getInt(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethod.COLUMN_DESCRIPTION));
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
 
-        String expectedName = PaymentMethodDataUtilTest.getValuePaymentMethodFromId(mContext, id);
-        String expectedDescription = PaymentMethodDataUtilTest.getValuePaymentMethodDescriptionFromId(mContext, id);
+        String expectedName = mTypesPaymentMethodsDataUtilTest.getValuePaymentMethodFromId(mContext, id);
+        String expectedDescription = mTypesPaymentMethodsDataUtilTest.getValuePaymentMethodDescriptionFromId(mContext, id);
 
         assertEquals(expectedName, mContext.getString(name));
         assertEquals(expectedDescription, mContext.getString(description));
@@ -99,6 +99,6 @@ public class PaymentMethodSQLiteOpenHelperTest {
     }
 
     private void loadPaymentMethodUtil() {
-        mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(mSQLiteDatabase);
+        mTypesPaymentMethodsDataUtilTest = new TypesPaymentMethodsDataUtilTest(mSQLiteDatabase);
     }
 }
