@@ -23,7 +23,7 @@ public class TypesPaymentMethodsContract {
 
     public static abstract class TypePaymentMethod implements BaseColumns {
 
-        public static final String TABLE_NAME = "payment_methods ";
+        public static final String TABLE_NAME = "types_payment_methods ";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_NAME_NULLABLE = "null";
