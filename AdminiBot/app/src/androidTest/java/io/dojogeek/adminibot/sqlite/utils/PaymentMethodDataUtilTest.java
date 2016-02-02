@@ -52,6 +52,20 @@ public class PaymentMethodDataUtilTest {
         return context.getString(paymentMethodsDescriptions[getId(id)]);
     }
 
+    public ContentValues createContentValuesFromPaymentMethod(PaymentMethodModel paymentMethodModel) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME, paymentMethodModel.name);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE, paymentMethodModel.reference);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD_ID, paymentMethodModel.typePaymentMethod);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT, paymentMethodModel.availabreCredit);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID, paymentMethodModel.userId);
+
+
+        return contentValues;
+
+    }
+
     private static int getId(long value) {
         return (int) value - ADITIONAL_INDEX;
     }
