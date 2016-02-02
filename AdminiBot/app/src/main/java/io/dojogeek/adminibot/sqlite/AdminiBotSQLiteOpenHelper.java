@@ -54,6 +54,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpenseTypeContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpenseContract.SQL_DELETE_ENTRIES);
         db.execSQL(TypesPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(PaymentMethodsContract.SQL_DELETE_ENTRIES);
     }
 
     private void insertInitialValues(SQLiteDatabase db) {
