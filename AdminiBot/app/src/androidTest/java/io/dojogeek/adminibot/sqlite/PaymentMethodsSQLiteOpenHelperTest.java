@@ -12,6 +12,7 @@ import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.PaymentMethodDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -40,12 +41,8 @@ public class PaymentMethodsSQLiteOpenHelperTest {
         Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME + "'", null);
 
-        if (cursor != null) {
-
-            assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
-
-        }
-
+        assertNotNull(cursor);
+        assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
     }
 
     private void loadPaymentMethodUtil() {
