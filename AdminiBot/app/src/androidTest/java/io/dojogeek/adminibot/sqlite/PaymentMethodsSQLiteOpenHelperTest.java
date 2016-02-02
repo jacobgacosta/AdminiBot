@@ -41,6 +41,11 @@ public class PaymentMethodsSQLiteOpenHelperTest {
 
     }
 
+    @After
+    public void tearDown() throws Exception {
+        mDataBaseConfigurationTest.closeDataBaseConnection();
+    }
+
     @Test
     public void sqliteHelper_creationTablePaymentMethods_isTrue() {
 
