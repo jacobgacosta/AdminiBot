@@ -16,6 +16,7 @@ import io.dojogeek.adminibot.sqlite.utils.PaymentMethodDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -59,15 +60,36 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertionData_isTrue() {
 
-        PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
-
-        long insertedRecordId = mPaymentMethodDataUtilTest.insertPaymentMethod(paymentMethod);
+        long insertedRecordId = insertPaymentMethod();
 
         assertNotEquals(INSERT_ERROR, insertedRecordId);
     }
 
+    @Test
+    public void sqliteHelper_correctDeleteData_isTrue() {
+
+        long insertedRecordId = insertPaymentMethod();
+
+        long deletedRecordId = mPaymentMethodDataUtilTest.deleteRecordWhere(getIdField(insertedRecordId));
+
+        assertEquals(insertedRecordId, deletedRecordId);
+
+    }
+
+    private long insertPaymentMethod() {
+        PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
+
+        long insertedRecordId = mPaymentMethodDataUtilTest.insertPaymentMethod(paymentMethod);
+
+        return insertedRecordId;
+    }
+
     private void loadPaymentMethodUtil() {
         mPaymentMethodDataUtilTest = new PaymentMethodDataUtilTest(mSQLiteDatabase);
+    }
+
+    private String getIdField(long id) {
+        return UserContract.User._ID + " = " + id;
     }
 
 }
