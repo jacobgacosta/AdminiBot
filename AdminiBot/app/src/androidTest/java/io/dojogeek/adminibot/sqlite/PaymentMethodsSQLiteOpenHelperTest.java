@@ -76,8 +76,31 @@ public class PaymentMethodsSQLiteOpenHelperTest {
 
     }
 
-    private long insertPaymentMethod() {
+    @Test
+    public void sqliteHelper_correctReadingData_matchingTrue() {
+
         PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
+
+        long insertedRecordId = insertPaymentMethod(paymentMethod);
+
+        Cursor cursor = mPaymentMethodDataUtilTest.queryRecordWhere(getIdField(insertedRecordId));
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, paymentMethod);
+            }
+        }
+
+    }
+
+    @Test
+    public void sqliteHelper_correctUpdatingData_isTrue() {
+
+    }
+
+    private long insertPaymentMethod(PaymentMethodModel paymentMethod) {
 
         long insertedRecordId = mPaymentMethodDataUtilTest.insertPaymentMethod(paymentMethod);
 
