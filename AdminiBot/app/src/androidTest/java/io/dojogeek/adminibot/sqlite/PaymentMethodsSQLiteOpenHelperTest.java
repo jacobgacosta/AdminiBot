@@ -92,4 +92,21 @@ public class PaymentMethodsSQLiteOpenHelperTest {
         return UserContract.User._ID + " = " + id;
     }
 
+    private void compareResultQueryFields(Cursor currentPosition, PaymentMethodModel paymentMethodModel) {
+
+        String name = currentPosition.getString(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_NAME));
+        String reference = currentPosition.getString(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE));
+        long typePaymentMethodId = currentPosition.getLong(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD_ID));
+        double availableCredit = currentPosition.getDouble(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT));
+        long userId = currentPosition.getLong(currentPosition.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID));
+
+
+
+        assertEquals(paymentMethodModel.name, name);
+        assertEquals(paymentMethodModel.reference, reference);
+        assertEquals(paymentMethodModel.typePaymentMethod, typePaymentMethodId);
+        assertEquals(paymentMethodModel.availabreCredit, availableCredit);
+        assertEquals(paymentMethodModel.userId, userId);
+
+    }
 }
