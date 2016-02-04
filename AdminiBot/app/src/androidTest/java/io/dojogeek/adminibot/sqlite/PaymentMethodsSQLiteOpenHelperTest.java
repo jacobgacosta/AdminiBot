@@ -60,15 +60,19 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctInsertionData_isTrue() {
 
-        long insertedRecordId = insertPaymentMethod();
+        PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
+
+        long insertedRecordId = insertPaymentMethod(paymentMethod);
 
         assertNotEquals(INSERT_ERROR, insertedRecordId);
     }
 
     @Test
-    public void sqliteHelper_correctDeleteData_isTrue() {
+    public void sqliteHelper_correctDeletionData_isTrue() {
 
-        long insertedRecordId = insertPaymentMethod();
+        PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
+
+        long insertedRecordId = insertPaymentMethod(paymentMethod);
 
         long deletedRecordId = mPaymentMethodDataUtilTest.deleteRecordWhere(getIdField(insertedRecordId));
 
