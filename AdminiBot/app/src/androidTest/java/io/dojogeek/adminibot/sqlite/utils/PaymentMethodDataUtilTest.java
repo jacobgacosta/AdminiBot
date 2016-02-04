@@ -28,6 +28,14 @@ public class PaymentMethodDataUtilTest {
         return cursor;
     }
 
+    public Cursor queryRecordWhere(String where) {
+
+        Cursor cursor = mDatabaseOperationsUtilTest.queryRecordWhere(mSQLiteDatabase,
+                PaymentMethodsContract.PaymentMethods.TABLE_NAME, where);
+
+        return cursor;
+    }
+
     public long insertPaymentMethod(PaymentMethodModel paymentMethodModel) {
 
         ContentValues contentValues = createContentValuesFromPaymentMethod(paymentMethodModel);
