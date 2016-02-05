@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
@@ -102,6 +103,25 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_correctUpdatingData_isTrue() {
 
+        PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
+
+        long insertedRecordId = insertPaymentMethod(paymentMethod);
+
+        paymentMethod = CreatorModels.createPaymentMethodModel("Food coupons", "345678OI90", 2, 480, 1);
+
+        ContentValues contentValues = mPaymentMethodDataUtilTest.createContentValuesFromPaymentMethod(paymentMethod);
+
+        long updateRecordId = mPaymentMethodDataUtilTest.updateRecordWhere(contentValues, getIdField(insertedRecordId));
+
+        assertEquals(insertedRecordId, updateRecordId);
+
+        Cursor cursor = mPaymentMethodDataUtilTest.queryRecordWhere(getIdField(updateRecordId));
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, paymentMethod);
+            }
+        }
     }
 
     private long insertPaymentMethod(PaymentMethodModel paymentMethod) {
