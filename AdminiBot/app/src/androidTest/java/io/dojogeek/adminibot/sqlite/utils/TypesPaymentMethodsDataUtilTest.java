@@ -43,6 +43,10 @@ public class TypesPaymentMethodsDataUtilTest {
 
     }
 
+    public long updateRecord(ContentValues contentValues, String where) {
+        return mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, contentValues, where);
+    }
+
     public String getValuePaymentMethodFromId(Context context, long id) {
 
         int [] paymentMethods = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS;
