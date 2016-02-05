@@ -10,17 +10,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.models.PaymentMethodModel;
+import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.sqlite.utils.TypesPaymentMethodsDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
+    private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
@@ -82,6 +87,23 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
             }
         }
 
+    }
+
+    @Test
+    public void sqliteHelper_correctInsertionData_isTrue() {
+
+        TypePaymentMethodModel typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
+
+        long insertedRecordId = insertTypePaymentMethod(typePaymentMethodModel);
+
+        assertNotEquals(INSERT_ERROR, insertedRecordId);
+
+    }
+
+    private long insertTypePaymentMethod(TypePaymentMethodModel paymentMethodModel) {
+        long insertedRecordId = mTypesPaymentMethodsDataUtilTest.insertTypePaymentMethod(paymentMethodModel);
+
+        return insertedRecordId;
     }
 
     private void compareResultQueryFields(Cursor currentPosition) {
