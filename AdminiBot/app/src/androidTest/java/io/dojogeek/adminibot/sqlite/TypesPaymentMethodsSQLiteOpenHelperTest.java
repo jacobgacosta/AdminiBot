@@ -150,6 +150,21 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_deletingData_isTrue() {
+
+        TypePaymentMethodModel typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
+
+        long insertedRecordId = insertTypePaymentMethod(typePaymentMethodModel);
+
+        String where = TypesPaymentMethodsContract.TypePaymentMethod._ID + " = " + insertedRecordId;
+
+        long numberAffectedRows = mTypesPaymentMethodsDataUtilTest.deletePaymentMethod(where);
+
+        assertEquals(AFFECTED_ROWS, numberAffectedRows);
+
+    }
+
     private long insertTypePaymentMethod(TypePaymentMethodModel paymentMethodModel) {
         long insertedRecordId = mTypesPaymentMethodsDataUtilTest.insertTypePaymentMethod(paymentMethodModel);
 
