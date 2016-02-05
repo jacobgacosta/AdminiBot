@@ -27,7 +27,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
-    private static final int  AFFECTED_ROWS_UPDATE = 1;
+    private static final int  AFFECTED_ROWS = 1;
     private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;
@@ -138,7 +138,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
         long rowsUpdated = mTypesPaymentMethodsDataUtilTest.updateRecord(contentValues, where);
 
-        assertEquals(AFFECTED_ROWS_UPDATE, rowsUpdated);
+        assertEquals(AFFECTED_ROWS, rowsUpdated);
 
         Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryRecordWhere(where);
 
