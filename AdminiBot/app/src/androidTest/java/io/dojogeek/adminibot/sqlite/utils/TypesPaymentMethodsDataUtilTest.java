@@ -37,6 +37,12 @@ public class TypesPaymentMethodsDataUtilTest {
         return insertedRecordId;
     }
 
+    public Cursor queryRecordWhere(String where) {
+
+        return mDatabaseOperationsUtilTest.queryRecordWhere(mSQLiteDatabase, TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, where);
+
+    }
+
     public String getValuePaymentMethodFromId(Context context, long id) {
 
         int [] paymentMethods = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS;
