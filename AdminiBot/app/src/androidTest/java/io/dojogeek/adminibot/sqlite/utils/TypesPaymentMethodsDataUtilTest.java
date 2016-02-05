@@ -54,6 +54,10 @@ public class TypesPaymentMethodsDataUtilTest {
         return  context.getString(paymentMethods[getId(id)]);
     }
 
+    public long deletePaymentMethod(String where) {
+        return mDatabaseOperationsUtilTest.deleteRecordWhere(mSQLiteDatabase, TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, where);
+    }
+
     public String getValuePaymentMethodDescriptionFromId(Context context, long id) {
 
         int [] paymentMethodsDescriptions = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS;
