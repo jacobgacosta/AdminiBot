@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
-import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.ExpenseDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.ExpenseDataUtilTest;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;

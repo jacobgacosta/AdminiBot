@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.ExpenseTypeDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.ExpenseTypeDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;

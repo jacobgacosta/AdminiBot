@@ -1,14 +1,11 @@
-package io.dojogeek.adminibot.sqlite.utils;
+package io.dojogeek.adminibot.utiltest.sqlite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.Date;
-
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.ExpenseContract;
-import io.dojogeek.adminibot.sqlite.UserContract;
 import io.dojogeek.adminibot.utils.DateUtils;
 
 public class ExpenseDataUtilTest {

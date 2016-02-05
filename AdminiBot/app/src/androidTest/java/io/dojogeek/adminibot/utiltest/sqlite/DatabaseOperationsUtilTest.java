@@ -1,10 +1,9 @@
-package io.dojogeek.adminibot.sqlite.utils;
+package io.dojogeek.adminibot.utiltest.sqlite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.UserContract;
 
 public class DatabaseOperationsUtilTest {

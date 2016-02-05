@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,8 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.PaymentMethodModel;
-import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.PaymentMethodDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.PaymentMethodDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;

@@ -10,10 +10,8 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import dagger.Module;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.sqlite.utils.UserDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;

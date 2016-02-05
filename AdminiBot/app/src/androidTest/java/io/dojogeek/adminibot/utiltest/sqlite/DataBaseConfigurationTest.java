@@ -1,11 +1,9 @@
-package io.dojogeek.adminibot.sqlite.utils;
+package io.dojogeek.adminibot.utiltest.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 public class DataBaseConfigurationTest {
 

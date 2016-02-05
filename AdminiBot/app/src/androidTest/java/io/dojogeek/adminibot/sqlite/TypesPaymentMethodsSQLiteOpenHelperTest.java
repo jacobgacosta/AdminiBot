@@ -12,10 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
-import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.TypesPaymentMethodsDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.TypesPaymentMethodsDataUtilTest;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;

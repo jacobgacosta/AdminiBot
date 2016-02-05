@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.sqlite.utils;
+package io.dojogeek.adminibot.utiltest.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.sqlite.utils;
+package io.dojogeek.adminibot.utiltest.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 public class TypesPaymentMethodsDataUtilTest {
 

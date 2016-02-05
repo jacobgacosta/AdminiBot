@@ -9,10 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.dojogeek.adminibot.models.UserModel;
-import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
-import io.dojogeek.adminibot.sqlite.utils.UserDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.UserDataUtilTest;
 
-import static android.support.test.InstrumentationRegistry.getContext;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
