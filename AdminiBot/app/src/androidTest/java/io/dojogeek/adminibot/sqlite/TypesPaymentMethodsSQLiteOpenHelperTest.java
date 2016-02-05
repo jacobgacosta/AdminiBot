@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.utils.DataBaseConfigurationTest;
@@ -25,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
+    private static final int  AFFECTED_ROWS_UPDATE = 1;
     private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;
@@ -107,7 +110,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
         long insertedRecordId = insertTypePaymentMethod(typePaymentMethodModel);
 
-        String where = UserContract.User._ID + " = " + insertedRecordId;
+        String where = TypesPaymentMethodsContract.TypePaymentMethod._ID + " = " + insertedRecordId;
 
         Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryRecordWhere(where);
 
@@ -117,6 +120,34 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
                 cursor.moveToNext();
             }
         }
+    }
+
+    @Test
+    public void sqliteHelper_updatingData_isTrue() {
+
+        TypePaymentMethodModel typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
+
+        long insertedRecordId = insertTypePaymentMethod(typePaymentMethodModel);
+
+        typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel(R.string.payment_methods_cash,
+                R.string.payment_methods_cash_description);
+
+        ContentValues contentValues = mTypesPaymentMethodsDataUtilTest.createContentValuesFromTypePaymentMethod(typePaymentMethodModel);
+
+        String where = TypesPaymentMethodsContract.TypePaymentMethod._ID + " = " + insertedRecordId;
+
+        long rowsUpdated = mTypesPaymentMethodsDataUtilTest.updateRecord(contentValues, where);
+
+        assertEquals(AFFECTED_ROWS_UPDATE, rowsUpdated);
+
+        Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryRecordWhere(where);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, typePaymentMethodModel);
+            }
+        }
+
     }
 
     private long insertTypePaymentMethod(TypePaymentMethodModel paymentMethodModel) {
