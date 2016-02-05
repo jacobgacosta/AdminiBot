@@ -53,6 +53,13 @@ public class PaymentMethodDataUtilTest {
         return deletedRecordId;
     }
 
+    public long updateRecordWhere(ContentValues contentValues, String where) {
+        long updatedRecordId = mDatabaseOperationsUtilTest.updateRecord(mSQLiteDatabase, PaymentMethodsContract.PaymentMethods.TABLE_NAME,
+                contentValues, where);
+
+        return updatedRecordId;
+    }
+
     public static String getValuePaymentMethodFromId(Context context, long id) {
 
         int [] paymentMethods = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS;
