@@ -111,11 +111,11 @@ public class PaymentMethodsSQLiteOpenHelperTest {
 
         ContentValues contentValues = mPaymentMethodDataUtilTest.createContentValuesFromPaymentMethod(paymentMethod);
 
-        long updateRecordId = mPaymentMethodDataUtilTest.updateRecordWhere(contentValues, getIdField(insertedRecordId));
+        long updatedRecordId = mPaymentMethodDataUtilTest.updateRecordWhere(contentValues, getIdField(insertedRecordId));
 
-        assertEquals(insertedRecordId, updateRecordId);
+        assertEquals(insertedRecordId, updatedRecordId);
 
-        Cursor cursor = mPaymentMethodDataUtilTest.queryRecordWhere(getIdField(updateRecordId));
+        Cursor cursor = mPaymentMethodDataUtilTest.queryRecordWhere(getIdField(updatedRecordId));
 
         if (cursor.moveToFirst()) {
             while (cursor.isAfterLast()) {
