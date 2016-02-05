@@ -45,7 +45,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_successfulTableCreation_isTrue() {
+    public void sqliteHelper_creationUserTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 UserContract.User.TABLE_NAME + "'", null);
@@ -58,7 +58,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctInsertionData_isTrue() {
+    public void sqliteHelper_insertionData_isTrue() {
 
         UserModel userModel = mUserDataUtilTest.createUserModel();
 
@@ -69,7 +69,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_queryData_isTrue() {
+    public void sqliteHelper_readingData_isTrue() {
 
         UserModel userModel = mUserDataUtilTest.createUserModel();
 
@@ -87,7 +87,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_updateDate_isTrue() {
+    public void sqliteHelper_updatingDate_isTrue() {
 
         UserModel userModel = mUserDataUtilTest.createUserModel();
 
@@ -111,7 +111,7 @@ public class UserSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqlite_correctDeleteData_isTrue() {
+    public void sqlite_deletionData_isTrue() {
 
         UserModel userModel = mUserDataUtilTest.createUserModel();
 

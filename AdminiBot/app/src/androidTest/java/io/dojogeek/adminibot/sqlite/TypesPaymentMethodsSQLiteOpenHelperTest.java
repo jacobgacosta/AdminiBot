@@ -104,7 +104,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_readingInsertedData_isTrue() {
+    public void sqliteHelper_readingInsertedData_isMatchingTrue() {
 
         TypePaymentMethodModel typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
 

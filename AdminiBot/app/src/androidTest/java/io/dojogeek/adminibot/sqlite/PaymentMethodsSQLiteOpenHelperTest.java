@@ -49,7 +49,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_creationTablePaymentMethods_isTrue() {
+    public void sqliteHelper_creationPaymentMethodsTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME + "'", null);
@@ -59,7 +59,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctInsertionData_isTrue() {
+    public void sqliteHelper_insertionData_isTrue() {
 
         PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
 
@@ -69,7 +69,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctDeletionData_isTrue() {
+    public void sqliteHelper_deletionData_isTrue() {
 
         PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
 
@@ -82,7 +82,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctReadingData_matchingTrue() {
+    public void sqliteHelper_readingData_matchingTrue() {
 
         PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
 
@@ -101,7 +101,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctUpdatingData_isTrue() {
+    public void sqliteHelper_updatingData_isTrue() {
 
         PaymentMethodModel paymentMethod = CreatorModels.createPaymentMethodModel();
 
