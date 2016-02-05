@@ -100,13 +100,42 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_readingInsertedData_isTrue() {
+
+        TypePaymentMethodModel typePaymentMethodModel = CreatorModels.createTypePaymentMethodModel();
+
+        long insertedRecordId = insertTypePaymentMethod(typePaymentMethodModel);
+
+        String where = UserContract.User._ID + " = " + insertedRecordId;
+
+        Cursor cursor = mTypesPaymentMethodsDataUtilTest.queryRecordWhere(where);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            while (cursor.isAfterLast() == false) {
+                compareResultQueryFields(cursor, typePaymentMethodModel);
+                cursor.moveToNext();
+            }
+        }
+    }
+
     private long insertTypePaymentMethod(TypePaymentMethodModel paymentMethodModel) {
         long insertedRecordId = mTypesPaymentMethodsDataUtilTest.insertTypePaymentMethod(paymentMethodModel);
 
         return insertedRecordId;
     }
 
-    private void compareResultQueryFields(Cursor currentPosition) {
+    private void compareResultQueryFields(Cursor actualValues, TypePaymentMethodModel expectedValues) {
+
+        int name = actualValues.getInt(actualValues.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
+        int description = actualValues.getInt(actualValues.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
+
+        assertEquals(expectedValues.name, name);
+        assertEquals(expectedValues.description, description);
+
+    }
+
+    private void compareInitialsInsertedFields(Cursor currentPosition) {
 
         long id = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
         int name = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
@@ -123,4 +152,5 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
     private void loadPaymentMethodUtil() {
         mTypesPaymentMethodsDataUtilTest = new TypesPaymentMethodsDataUtilTest(mSQLiteDatabase);
     }
+
 }
