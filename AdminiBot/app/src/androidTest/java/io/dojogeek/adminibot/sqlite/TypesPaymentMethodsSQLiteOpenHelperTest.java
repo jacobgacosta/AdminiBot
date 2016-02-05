@@ -82,7 +82,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
 
         if (cursor != null && cursor.moveToFirst()) {
             while (cursor.isAfterLast() == false) {
-                compareResultQueryFields(cursor);
+                compareInitialsInsertedFields(cursor);
                 cursor.moveToNext();
             }
         }
