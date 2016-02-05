@@ -136,7 +136,7 @@ public class PaymentMethodsSQLiteOpenHelperTest {
     }
 
     private String getIdField(long id) {
-        return UserContract.User._ID + " = " + id;
+        return PaymentMethodsContract.PaymentMethods._ID + " = " + id;
     }
 
     private void compareResultQueryFields(Cursor currentPosition, PaymentMethodModel paymentMethodModel) {
