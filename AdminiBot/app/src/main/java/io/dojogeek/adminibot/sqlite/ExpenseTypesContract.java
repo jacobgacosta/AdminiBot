@@ -34,10 +34,10 @@ public class ExpenseTypesContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES = CREATE_TABLE + ExpenseType.TABLE_NAME + OPEN_PARENTHESIS +
-            ExpenseType._ID + INTEGER + PRIMARY_KEY + COMMA_SEP +
-            ExpenseType.COLUMN_NAME + INTEGER + COMMA_SEP +
-            ExpenseType.COLUMN_DESCRIPTION + INTEGER + CLOSE_PARENTHESIS;
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE " + ExpenseType.TABLE_NAME +
+            "(" + ExpenseType._ID + " INTEGER PRIMARY KEY, " +
+            ExpenseType.COLUMN_NAME + " INTEGER NOT NULL, " +
+            ExpenseType.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + ExpenseType.TABLE_NAME +
             VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
