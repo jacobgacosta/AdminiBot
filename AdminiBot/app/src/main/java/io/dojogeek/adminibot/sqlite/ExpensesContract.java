@@ -27,7 +27,7 @@ public class ExpensesContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " +  Expense.TABLE_NAME +
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE " +  Expense.TABLE_NAME +
             "(" + Expense._ID + " INTEGER PRIMARY KEY, " +
             Expense.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
             Expense.COLUMN_AMOUNT + " REAL NOT NULL, " +
