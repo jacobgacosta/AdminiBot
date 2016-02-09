@@ -42,31 +42,15 @@ public class ExpenseDataUtilTest {
     public ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpenseContract.Expense.COLUMN_NAME, expenseModel.name);
-        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
+        contentValues.put(ExpenseContract.Expense.COLUMN_DESCRIPTION, expenseModel.description);
+        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
+        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dateExpediture);
+        contentValues.put(ExpenseContract.Expense.COLUMN_NEXT_EXIT, expenseModel.nextExit);
         contentValues.put(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.totalAmount);
-        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dataExpediture);
+        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
 
         return contentValues;
 
-    }
-
-    public ExpenseModel createExpenseModel() {
-
-        return createExpenseModel("4566.90", 1, 1, DateUtils.getCurrentData(), "expense test");
-    }
-
-    public ExpenseModel createExpenseModel(String totalAmount, int userId, int expenseType,
-                                           String currentDate, String name) {
-        ExpenseModel expenseModel = new ExpenseModel();
-        expenseModel.totalAmount = totalAmount;
-        expenseModel.userId = userId;
-        expenseModel.expenseTypeId = expenseType;
-        expenseModel.dataExpediture = currentDate;
-        expenseModel.name = name;
-
-        return expenseModel;
     }
 
 }
