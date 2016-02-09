@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class ExpensesPaymentMethodsOpenHelperTest {
 
+    private static final int  AFFECTED_ROWS = 1;
     private static final int NONE_TABLE_CREATED = 0;
     private static final int INSERT_ERROR = -1;
 
@@ -96,6 +97,33 @@ public class ExpensesPaymentMethodsOpenHelperTest {
                 compareResultQueryFields(cursor, amount, paymentMethodId, expenseTypeId);
             }
         }
+    }
+
+    @Test
+    public void sqliteHelper_updatingData_isTrue() {
+
+        double amount = 120.79;
+        long paymentMethodId = 10;
+        long expenseTypeId = 12;
+
+        long insertedRecordId = insertExpensePaymentMethod(amount, paymentMethodId, expenseTypeId);
+
+        ContentValues contentValues = mExpensesPaymentMethodsUtilTest.createContentValues(111, 15, 2);
+
+        String where = ExpensesPaymentMethodsContract.ExpensesPaymentMethods._ID + " = " + insertedRecordId;
+
+        long affectedRows = mExpensesPaymentMethodsUtilTest.updateRecord(contentValues, where);
+
+        assertEquals(AFFECTED_ROWS, affectedRows);
+
+        Cursor cursor = mExpensesPaymentMethodsUtilTest.queryRecordWhere(where);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, amount, paymentMethodId, expenseTypeId);
+            }
+        }
+
     }
 
     private void compareResultQueryFields(Cursor currentPosition, double actualAmount,
