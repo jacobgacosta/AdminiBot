@@ -68,12 +68,35 @@ public class ExpensesPaymentMethodsOpenHelperTest {
         long paymentMethodId = 1;
         long expenseTypeId = 1;
 
+
+        long insertedRecordId = insertExpensePaymentMethod(amount, paymentMethodId, expenseTypeId);
+
+        assertNotEquals(INSERT_ERROR, insertedRecordId);
+
+    }
+
+    @Test
+    public void sqliteHelper_readingData_isTrue() {
+
+        double amount = 6721.90;
+        long paymentMethodId = 3;
+        long expenseTypeId = 2;
+
+        long insertedRecordId = insertExpensePaymentMethod(amount, paymentMethodId, expenseTypeId);
+
+        String where = ExpensesPaymentMethodsContract.ExpensesPaymentMethods._ID + " = " + insertedRecordId;
+
+        mExpensesPaymentMethodsUtilTest.queryRecordWhere(where);
+
+    }
+
+    private long insertExpensePaymentMethod(double amount, long paymentMethodId, long expenseTypeId) {
+
         ContentValues contentValues = mExpensesPaymentMethodsUtilTest.createContentValues(amount, paymentMethodId, expenseTypeId);
 
         long insertedRecordId = mExpensesPaymentMethodsUtilTest.createRecord(contentValues);
 
-        assertNotEquals(INSERT_ERROR, insertedRecordId);
-
+        return insertedRecordId;
     }
 
     private void loadExpensePaymentMethodUtil() {
