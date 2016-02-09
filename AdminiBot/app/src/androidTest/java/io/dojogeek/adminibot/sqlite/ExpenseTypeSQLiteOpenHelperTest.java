@@ -15,6 +15,7 @@ import io.dojogeek.adminibot.utiltest.sqlite.ExpenseTypeDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -50,12 +51,8 @@ public class ExpenseTypeSQLiteOpenHelperTest {
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                         ExpenseTypeContract.ExpenseType.TABLE_NAME + "'", null);
 
-        if (cursor != null) {
-
-            assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
-
-        }
-
+        assertNotNull(cursor);
+        assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
     }
 
     @Test
