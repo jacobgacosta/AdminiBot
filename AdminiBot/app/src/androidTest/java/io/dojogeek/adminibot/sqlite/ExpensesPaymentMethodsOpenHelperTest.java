@@ -17,6 +17,7 @@ import io.dojogeek.adminibot.utiltest.sqlite.ExpenseDataUtilTest;
 import io.dojogeek.adminibot.utiltest.sqlite.ExpensesPaymentMethodsUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -86,7 +87,31 @@ public class ExpensesPaymentMethodsOpenHelperTest {
 
         String where = ExpensesPaymentMethodsContract.ExpensesPaymentMethods._ID + " = " + insertedRecordId;
 
-        mExpensesPaymentMethodsUtilTest.queryRecordWhere(where);
+        Cursor cursor = mExpensesPaymentMethodsUtilTest.queryRecordWhere(where);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, amount, paymentMethodId, expenseTypeId);
+            }
+        }
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition, double actualAmount,
+                                          long actualPaymentMethodId, long actualExpenseTypeId) {
+
+        long expenseId = currentPosition.getLong(currentPosition.
+                getColumnIndex(ExpensesPaymentMethodsContract.ExpensesPaymentMethods.COLUMN_EXPENSE_ID));
+        long paymentMethodId = currentPosition.getLong(currentPosition.
+                getColumnIndex(ExpensesPaymentMethodsContract.ExpensesPaymentMethods.COLUMN_PAYMENTH_METHOD_ID));
+        double amount = currentPosition.getDouble(currentPosition.
+                getColumnIndex(ExpensesPaymentMethodsContract.ExpensesPaymentMethods.COLUMN_AMOUNT));
+
+
+        assertEquals(actualAmount, amount, 0);
+        assertEquals(actualPaymentMethodId, paymentMethodId);
+        assertEquals(actualExpenseTypeId, expenseId);
 
     }
 
