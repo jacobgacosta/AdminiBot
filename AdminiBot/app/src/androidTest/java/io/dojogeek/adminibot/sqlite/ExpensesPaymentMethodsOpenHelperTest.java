@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,8 +14,10 @@ import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.utiltest.sqlite.ExpenseDataUtilTest;
+import io.dojogeek.adminibot.utiltest.sqlite.ExpensesPaymentMethodsUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,11 +25,12 @@ import static org.junit.Assert.assertTrue;
 public class ExpensesPaymentMethodsOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
+    private static final int INSERT_ERROR = -1;
 
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
-    private ExpenseDataUtilTest mExpenseDataUtilTest;
+    private ExpensesPaymentMethodsUtilTest mExpensesPaymentMethodsUtilTest;
 
     @Before
     public void setup() {
@@ -37,6 +41,8 @@ public class ExpensesPaymentMethodsOpenHelperTest {
         mDataBaseConfigurationTest.prepareDataBase();
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
+
+        loadExpensePaymentMethodUtil();
 
     }
 
@@ -53,6 +59,25 @@ public class ExpensesPaymentMethodsOpenHelperTest {
 
         assertNotNull(cursor);
         assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
+    }
+
+    @Test
+    public void sqliteHelper_insertionData_isTrue() {
+
+        double amount = 16956;
+        long paymentMethodId = 1;
+        long expenseTypeId = 1;
+
+        ContentValues contentValues = mExpensesPaymentMethodsUtilTest.createContentValues(amount, paymentMethodId, expenseTypeId);
+
+        long insertedRecordId = mExpensesPaymentMethodsUtilTest.createRecord(contentValues);
+
+        assertNotEquals(INSERT_ERROR, insertedRecordId);
+
+    }
+
+    private void loadExpensePaymentMethodUtil() {
+        mExpensesPaymentMethodsUtilTest = new ExpensesPaymentMethodsUtilTest(mSQLiteDatabase);
     }
 
 }
