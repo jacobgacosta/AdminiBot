@@ -49,7 +49,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     public void sqliteHelper_correctCreatedTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
-                        ExpenseTypeContract.ExpenseType.TABLE_NAME + "'", null);
+                        ExpenseTypesContract.ExpenseType.TABLE_NAME + "'", null);
 
         assertNotNull(cursor);
         assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
@@ -83,9 +83,9 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     private void compareResultQueryFields(Cursor currentPosition) {
 
 
-        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType._ID));
-        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_NAME));
-        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypeContract.ExpenseType.COLUMN_DESCRIPTION));
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
         String expectedName = ExpenseTypeDataUtilTest.getExpenseTypeFromId(mContext, id);
         String expectedDescription = ExpenseTypeDataUtilTest.getExpenseTypeDescriptionFromId(mContext, id);

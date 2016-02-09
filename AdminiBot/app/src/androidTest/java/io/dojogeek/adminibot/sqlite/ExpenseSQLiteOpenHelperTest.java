@@ -57,7 +57,7 @@ public class ExpenseSQLiteOpenHelperTest {
     public void sqliteHelper_creationExpenseTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
-                ExpenseContract.Expense.TABLE_NAME + "'", null);
+                ExpensesContract.Expense.TABLE_NAME + "'", null);
 
         assertNotNull(cursor);
         assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
@@ -139,12 +139,12 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private void compareResultQueryFields(Cursor currentPosition, ExpenseModel expenseModel) {
 
-        String description = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DESCRIPTION));
-        long amount = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
-        String dateExpediture = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
-        String nextExit = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_NEXT_EXIT));
-        long expenseTypeId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID));
-        long userId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
+        String description = currentPosition.getString(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_DESCRIPTION));
+        long amount = currentPosition.getLong(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_AMOUNT));
+        String dateExpediture = currentPosition.getString(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE));
+        String nextExit = currentPosition.getString(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_NEXT_EXIT));
+        long expenseTypeId = currentPosition.getLong(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID));
+        long userId = currentPosition.getLong(currentPosition.getColumnIndex(ExpensesContract.Expense.COLUMN_USER_ID));
 
 
         assertEquals(expenseModel.description, description);

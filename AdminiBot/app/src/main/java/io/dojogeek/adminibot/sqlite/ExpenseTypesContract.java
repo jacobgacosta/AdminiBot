@@ -16,7 +16,7 @@ import static io.dojogeek.adminibot.sqlite.SQLiteConstants.OPEN_QUOTE;
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CLOSE_QUOTE;
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.VALUES;
 
-public class ExpenseTypeContract {
+public class ExpenseTypesContract {
 
     public static final int [] EXPENSES_TYPES = {R.string.expenses_types_foods,
             R.string.expenses_types_clothes, R.string.expenses_types_drinks, R.string.expenses_types_medicals,

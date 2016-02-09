@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
+import io.dojogeek.adminibot.sqlite.ExpenseTypesContract;
 
 public class ExpenseTypeDataUtilTest {
 
@@ -20,21 +20,21 @@ public class ExpenseTypeDataUtilTest {
 
     public Cursor queryAllRecords() {
 
-        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, ExpenseTypeContract.ExpenseType.TABLE_NAME);
+        Cursor cursor = mDatabaseOperationsUtilTest.queryAllRecords(mSQLiteDatabase, ExpenseTypesContract.ExpenseType.TABLE_NAME);
 
         return cursor;
     }
 
     public static String getExpenseTypeFromId(Context context, long id) {
 
-        int [] expectedExpensesTypes = ExpenseTypeContract.EXPENSES_TYPES;
+        int [] expectedExpensesTypes = ExpenseTypesContract.EXPENSES_TYPES;
 
         return context.getString(expectedExpensesTypes[getId(id)]);
     }
 
     public static String getExpenseTypeDescriptionFromId(Context context, long id) {
 
-        int [] expextedExpensesTypesDescriptions = ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS;
+        int [] expextedExpensesTypesDescriptions = ExpenseTypesContract.EXPENSES_TYPES_DESCRIPTIONS;
 
         return context.getString(expextedExpensesTypesDescriptions[getId(id)]);
     }

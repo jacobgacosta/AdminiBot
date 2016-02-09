@@ -10,10 +10,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.sqlite.ExpenseTypeContract;
+import io.dojogeek.adminibot.sqlite.ExpenseTypesContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -79,8 +78,8 @@ public class ExpenseTypeDaoImplTest {
     private void comparePaymentMethodsResult(List<ExpenseTypeModel> actualExpensesTypesList) {
 
         for (int index = 0; index < actualExpensesTypesList.size(); index++) {
-            assertEquals(ExpenseTypeContract.EXPENSES_TYPES[index], actualExpensesTypesList.get(index).name);
-            assertEquals(ExpenseTypeContract.EXPENSES_TYPES_DESCRIPTIONS[index], actualExpensesTypesList.get(index).description);
+            assertEquals(ExpenseTypesContract.EXPENSES_TYPES[index], actualExpensesTypesList.get(index).name);
+            assertEquals(ExpenseTypesContract.EXPENSES_TYPES_DESCRIPTIONS[index], actualExpensesTypesList.get(index).description);
         }
 
     }

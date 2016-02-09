@@ -10,7 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
-import io.dojogeek.adminibot.sqlite.ExpenseContract;
+import io.dojogeek.adminibot.sqlite.ExpensesContract;
 
 public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
@@ -24,7 +24,7 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
         ContentValues contentValues = createContentValues(expenseModel);
 
-        long response = mDatabase.insert(ExpenseContract.Expense.TABLE_NAME, ExpenseContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
+        long response = mDatabase.insert(ExpensesContract.Expense.TABLE_NAME, ExpensesContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
 
         return isValidResponse(response);
 
@@ -35,7 +35,7 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
         List<ExpenseModel> expenseTypeModelList = new ArrayList<>();
 
-        Cursor cursor = mDatabase.query(ExpenseContract.Expense.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(ExpensesContract.Expense.TABLE_NAME, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
 
@@ -55,12 +55,12 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpenseContract.Expense.COLUMN_DESCRIPTION, expenseModel.description);
-        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
-        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dateExpediture);
-        contentValues.put(ExpenseContract.Expense.COLUMN_NEXT_EXIT, expenseModel.nextExit);
-        contentValues.put(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
+        contentValues.put(ExpensesContract.Expense.COLUMN_DESCRIPTION, expenseModel.description);
+        contentValues.put(ExpensesContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
+        contentValues.put(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dateExpediture);
+        contentValues.put(ExpensesContract.Expense.COLUMN_NEXT_EXIT, expenseModel.nextExit);
+        contentValues.put(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
+        contentValues.put(ExpensesContract.Expense.COLUMN_USER_ID, expenseModel.userId);
 
         return contentValues;
 
@@ -70,13 +70,13 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
         ExpenseModel expenseTypeModel = new ExpenseModel();
 
-        long id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.Expense._ID));
-        String description = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_DESCRIPTION));
-        long amount = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
-        String dateExpediture = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
-        String nextExit = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_NEXT_EXIT));
-        long expenseTypeId = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID));
-        long userId = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
+        long id = cursor.getInt(cursor.getColumnIndex(ExpensesContract.Expense._ID));
+        String description = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_DESCRIPTION));
+        long amount = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_AMOUNT));
+        String dateExpediture = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE));
+        String nextExit = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_NEXT_EXIT));
+        long expenseTypeId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID));
+        long userId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_USER_ID));
 
         expenseTypeModel.id = id;
         expenseTypeModel.description = description;
