@@ -139,18 +139,20 @@ public class ExpenseSQLiteOpenHelperTest {
 
     private void compareResultQueryFields(Cursor currentPosition, ExpenseModel expenseModel) {
 
-        String name = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_NAME));
-        long userId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
+        String description = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DESCRIPTION));
+        long amount = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
+        String dateExpediture = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
+        String nextExit = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_NEXT_EXIT));
         long expenseTypeId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID));
-        String amount = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
-        String date = currentPosition.getString(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
+        long userId = currentPosition.getLong(currentPosition.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
 
 
-        assertEquals(expenseModel.name, name);
-        assertEquals(expenseModel.dataExpediture, date);
-        assertEquals(expenseModel.totalAmount, amount);
-        assertEquals(expenseModel.userId, userId);
+        assertEquals(expenseModel.description, description);
+        assertEquals(expenseModel.amount, amount);
+        assertEquals(expenseModel.dateExpediture, dateExpediture);
+        assertEquals(expenseModel.nextExit, nextExit);
         assertEquals(expenseModel.expenseTypeId, expenseTypeId);
+        assertEquals(expenseModel.userId, userId);
 
     }
 
