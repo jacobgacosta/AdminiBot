@@ -126,6 +126,23 @@ public class ExpensesPaymentMethodsOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_deletingData_isTrue() {
+
+        double amount = 4560906;
+        long paymentMethodId = 8;
+        long expenseTypeId = 19;
+
+        long insertedRecordId = insertExpensePaymentMethod(amount, paymentMethodId, expenseTypeId);
+
+        String where = TypesPaymentMethodsContract.TypePaymentMethod._ID + " = " + insertedRecordId;
+
+        long numberAffectedRows = mExpensesPaymentMethodsUtilTest.deleteRecordWhere(where);
+
+        assertEquals(AFFECTED_ROWS, numberAffectedRows);
+
+    }
+
     private void compareResultQueryFields(Cursor currentPosition, double actualAmount,
                                           long actualPaymentMethodId, long actualExpenseTypeId) {
 
