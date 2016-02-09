@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
+import io.dojogeek.adminibot.utiltest.CreatorModels;
 import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.utiltest.sqlite.ExpenseDataUtilTest;
 import io.dojogeek.adminibot.utils.DateUtils;
@@ -53,32 +54,30 @@ public class ExpenseSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctTableCreation_isTrue() {
+    public void sqliteHelper_creationExpenseTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
                 ExpenseContract.Expense.TABLE_NAME + "'", null);
 
-        if (cursor != null) {
+        assertNotNull(cursor);
+        assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
 
-            assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
-
-        }
     }
 
     @Test
-    public void sqliteHelper_correctInsertionData_isTrue() {
+    public void sqliteHelper_insertionData_isTrue() {
 
-        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
-        assertTrue(insertData(expenseModel) > INSERT_ERROR);
+        assertTrue(insertExpenseModelData(expenseModel) > INSERT_ERROR);
     }
 
     @Test
-    public void sqliteHelper_correctQueryData_isTrue() {
+    public void sqliteHelper_readingData_isTrue() {
 
-        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
-        long recordId = insertData(expenseModel);
+        long recordId = insertExpenseModelData(expenseModel);
 
         Cursor cursor = mExpenseDataUtilTest.queryRecordWhere(getIdField(recordId));
 
@@ -92,13 +91,14 @@ public class ExpenseSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqlite_correctUpdateData_isTrue() {
+    public void sqlite_updatingData_isTrue() {
 
-        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
-        long recordId = insertData(expenseModel);
+        long recordId = insertExpenseModelData(expenseModel);
 
-        expenseModel = mExpenseDataUtilTest.createExpenseModel("111.10", 2, 2, DateUtils.getCurrentData(), "expense changed");
+        expenseModel = CreatorModels.createExpenseModel("Expense type test update", 100, DateUtils.getCurrentData(),
+                DateUtils.getCurrentData(), 3, 50);
 
         ContentValues newContentValues = mExpenseDataUtilTest.createContentValues(expenseModel);
 
@@ -116,11 +116,11 @@ public class ExpenseSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqlite_correctDeleteData_isTrue() {
+    public void sqlite_deletionData_isTrue() {
 
-        ExpenseModel expenseModel = mExpenseDataUtilTest.createExpenseModel();
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
-        long createdExpenseId = insertData(expenseModel);
+        long createdExpenseId = insertExpenseModelData(expenseModel);
 
         long deletedRecord = mExpenseDataUtilTest.deleteRecordWhere(getIdField(createdExpenseId));
 
@@ -128,7 +128,7 @@ public class ExpenseSQLiteOpenHelperTest {
 
     }
 
-    private long insertData(ExpenseModel expenseModel) {
+    private long insertExpenseModelData(ExpenseModel expenseModel) {
 
         ContentValues contentValues = mExpenseDataUtilTest.createContentValues(expenseModel);
 
