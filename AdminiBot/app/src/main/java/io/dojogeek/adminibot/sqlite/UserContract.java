@@ -22,11 +22,11 @@ public class UserContract {
 
     }
 
-    public static final String SQL_CREATE_ENTRIES =  CREATE_TABLE + User.TABLE_NAME +  OPEN_PARENTHESIS +
-            User._ID + INTEGER + PRIMARY_KEY + COMMA_SEP +
-            User.COLUMN_NAME + TEXT_TYPE + COMMA_SEP +
-            User.COLUMN_LAST_NAME + TEXT_TYPE + COMMA_SEP +
-            User.COLUMN_EMAIL + TEXT_TYPE  + CLOSE_PARENTHESIS;
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE " +  User.TABLE_NAME +
+            "(" + User._ID + " INTEGER PRIMARY KEY, " +
+            User.COLUMN_NAME + " TEXT NOT NULL, " +
+            User.COLUMN_LAST_NAME + " TEXT NOT NULL, " +
+            User.COLUMN_EMAIL + " TEXT NOT NULL)";
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + User.TABLE_NAME;
 
