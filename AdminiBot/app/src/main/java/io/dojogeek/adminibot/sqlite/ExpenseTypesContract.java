@@ -27,7 +27,7 @@ public class ExpenseTypesContract {
 
     public static abstract class ExpenseType implements BaseColumns {
 
-        public static final String TABLE_NAME = "expenses_types ";
+        public static final String TABLE_NAME = "expenses_types";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_NAME_NULLABLE = "null";
@@ -39,30 +39,30 @@ public class ExpenseTypesContract {
             ExpenseType.COLUMN_NAME + " INTEGER NOT NULL, " +
             ExpenseType.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + ExpenseType.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES[0] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[0] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_1 = "INSERT INTO " + ExpenseType.TABLE_NAME +
+            " VALUES(" + ExpenseType.COLUMN_NAME_NULLABLE + "," +
+            "'" + EXPENSES_TYPES[0] + "'," +
+            "'" + EXPENSES_TYPES_DESCRIPTIONS[0] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_2 = INSERT_INTO + ExpenseType.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES[1] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[1] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_2 = "INSERT INTO " + ExpenseType.TABLE_NAME +
+            " VALUES(" + ExpenseType.COLUMN_NAME_NULLABLE + "," +
+            "'" + EXPENSES_TYPES[1]  + "'," +
+            "'" + EXPENSES_TYPES_DESCRIPTIONS[1] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_3 = INSERT_INTO + ExpenseType.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES[2] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[2] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_3 = "INSERT INTO " + ExpenseType.TABLE_NAME +
+            " VALUES(" + ExpenseType.COLUMN_NAME_NULLABLE + "," +
+            "'" + EXPENSES_TYPES[2] + "'," +
+            "'" + EXPENSES_TYPES_DESCRIPTIONS[2] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_4 = INSERT_INTO + ExpenseType.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES[3] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[3] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_4 = "INSERT INTO " + ExpenseType.TABLE_NAME +
+            " VALUES(" + ExpenseType.COLUMN_NAME_NULLABLE + "," +
+            "'" + EXPENSES_TYPES[3] + "'," +
+            "'" + EXPENSES_TYPES_DESCRIPTIONS[3] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_5 = INSERT_INTO + ExpenseType.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + ExpenseType.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES[4] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + EXPENSES_TYPES_DESCRIPTIONS[4] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_5 = "INSERT INTO " + ExpenseType.TABLE_NAME +
+            " VALUES(" + ExpenseType.COLUMN_NAME_NULLABLE + "," +
+            "'" + EXPENSES_TYPES[4] + "'," +
+            "'" + EXPENSES_TYPES_DESCRIPTIONS[4] + "')";
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + ExpenseType.TABLE_NAME;
 

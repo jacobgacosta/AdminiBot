@@ -23,7 +23,7 @@ public class TypesPaymentMethodsContract {
 
     public static abstract class TypePaymentMethod implements BaseColumns {
 
-        public static final String TABLE_NAME = "types_payment_methods ";
+        public static final String TABLE_NAME = "types_payment_methods";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_NAME_NULLABLE = "null";
@@ -35,20 +35,20 @@ public class TypesPaymentMethodsContract {
             TypePaymentMethod.COLUMN_NAME + " INTEGER NOT NULL, " +
             TypePaymentMethod.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_1 = INSERT_INTO + TypePaymentMethod.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + TypePaymentMethod.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS[0] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS_DESCRIPTIONS[0] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_1 = "INSERT INTO " + TypePaymentMethod.TABLE_NAME +
+            " VALUES(" + TypePaymentMethod.COLUMN_NAME_NULLABLE + "," +
+            "'" + TYPES_PAYMENT_METHODS[0] + "'," +
+            "'" + TYPES_PAYMENT_METHODS_DESCRIPTIONS[0] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_2 = INSERT_INTO + TypePaymentMethod.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + TypePaymentMethod.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS[1] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS_DESCRIPTIONS[1] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_2 = "INSERT INTO " + TypePaymentMethod.TABLE_NAME +
+            " VALUES(" + TypePaymentMethod.COLUMN_NAME_NULLABLE + "," +
+            "'" + TYPES_PAYMENT_METHODS[1]  + "'," +
+            "'" + TYPES_PAYMENT_METHODS_DESCRIPTIONS[1] + "')";
 
-    public static final String SQL_INSERT_INITIAL_VALUES_3 = INSERT_INTO + TypePaymentMethod.TABLE_NAME +
-            VALUES + OPEN_PARENTHESIS + TypePaymentMethod.COLUMN_NAME_NULLABLE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS[2] + CLOSE_QUOTE + COMMA_SEP +
-            OPEN_QUOTE + TYPES_PAYMENT_METHODS_DESCRIPTIONS[2] + CLOSE_QUOTE + CLOSE_PARENTHESIS;
+    public static final String SQL_INSERT_INITIAL_VALUES_3 = "INSERT INTO " + TypePaymentMethod.TABLE_NAME +
+            " VALUES(" + TypePaymentMethod.COLUMN_NAME_NULLABLE + "," +
+            "'" + TYPES_PAYMENT_METHODS[2]  + "'," +
+            "'" + TYPES_PAYMENT_METHODS_DESCRIPTIONS[2] + "')";
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + TypePaymentMethod.TABLE_NAME;
 }
