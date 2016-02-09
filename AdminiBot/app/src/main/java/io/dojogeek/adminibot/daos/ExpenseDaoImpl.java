@@ -55,11 +55,12 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpenseContract.Expense.COLUMN_NAME, expenseModel.name);
-        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
+        contentValues.put(ExpenseContract.Expense.COLUMN_DESCRIPTION, expenseModel.description);
+        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
+        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dateExpediture);
+        contentValues.put(ExpenseContract.Expense.COLUMN_NEXT_EXIT, expenseModel.nextExit);
         contentValues.put(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpenseContract.Expense.COLUMN_AMOUNT, expenseModel.totalAmount);
-        contentValues.put(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dataExpediture);
+        contentValues.put(ExpenseContract.Expense.COLUMN_USER_ID, expenseModel.userId);
 
         return contentValues;
 
@@ -70,16 +71,18 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         ExpenseModel expenseTypeModel = new ExpenseModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(ExpenseContract.Expense._ID));
-        String name = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_NAME));
-        String amount = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
+        String description = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_DESCRIPTION));
+        long amount = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_AMOUNT));
         String dateExpediture = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_DATE_EXPEDITURE));
+        String nextExit = cursor.getString(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_NEXT_EXIT));
         long expenseTypeId = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_EXPENSES_TYPE_ID));
         long userId = cursor.getLong(cursor.getColumnIndex(ExpenseContract.Expense.COLUMN_USER_ID));
 
         expenseTypeModel.id = id;
-        expenseTypeModel.name = name;
-        expenseTypeModel.totalAmount = amount;
-        expenseTypeModel.dataExpediture = dateExpediture;
+        expenseTypeModel.description = description;
+        expenseTypeModel.amount = amount;
+        expenseTypeModel.dateExpediture = dateExpediture;
+        expenseTypeModel.nextExit = nextExit;
         expenseTypeModel.expenseTypeId = expenseTypeId;
         expenseTypeModel.userId = userId;
 
