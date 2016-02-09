@@ -1,12 +1,15 @@
 package io.dojogeek.adminibot.models;
 
+import java.util.Date;
+
 public class ExpenseModel {
 
     public long id;
-    public String name;
-    public long userId;
+    public String description;
+    public double amount;
+    public String dateExpediture;
+    public String nextExit;
     public long expenseTypeId;
-    public String totalAmount;
-    public String dataExpediture;
+    public long userId;
 
 }
