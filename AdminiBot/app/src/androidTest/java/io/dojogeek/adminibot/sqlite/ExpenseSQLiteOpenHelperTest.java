@@ -56,7 +56,7 @@ public class ExpenseSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_creationExpenseTable_isTrue() {
 
-        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                 ExpensesContract.Expense.TABLE_NAME + "'", null);
 
         assertNotNull(cursor);

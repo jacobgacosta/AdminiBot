@@ -3,10 +3,12 @@ package io.dojogeek.adminibot.sqlite;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
@@ -18,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(AndroidJUnit4.class)
 public class UserSQLiteOpenHelperTest {
 
     private static final int INSERT_ERROR = -1;
@@ -46,7 +49,7 @@ public class UserSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_creationUserTable_isTrue() {
 
-        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                 UserContract.User.TABLE_NAME + "'", null);
 
         if (cursor != null) {

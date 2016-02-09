@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,7 +56,7 @@ public class TypesPaymentMethodsSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_creationTypesPaymentMethodsTable_isTrue() {
 
-        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '" +
+        Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                 TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME + "'", null);
 
         if (cursor != null) {
