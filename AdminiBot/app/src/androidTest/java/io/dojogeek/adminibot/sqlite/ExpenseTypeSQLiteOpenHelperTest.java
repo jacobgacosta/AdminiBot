@@ -46,7 +46,7 @@ public class ExpenseTypeSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_correctCreatedTable_isTrue() {
+    public void sqliteHelper_creationExpenseTypeTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
                         ExpenseTypesContract.ExpenseType.TABLE_NAME + "'", null);
