@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class UserSQLiteOpenHelperTest {
+public class UsersSQLiteOpenHelperTest {
 
     private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
@@ -50,7 +50,7 @@ public class UserSQLiteOpenHelperTest {
     public void sqliteHelper_creationUserTable_isTrue() {
 
         Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
-                UserContract.User.TABLE_NAME + "'", null);
+                UsersContract.User.TABLE_NAME + "'", null);
 
         if (cursor != null) {
 
@@ -137,9 +137,9 @@ public class UserSQLiteOpenHelperTest {
 
     private void compareResultQueryFields(Cursor currentPosition, UserModel userModel) {
 
-        String name = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_NAME));
-        String lastName = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_LAST_NAME));
-        String email = currentPosition.getString(currentPosition.getColumnIndex(UserContract.User.COLUMN_EMAIL));
+        String name = currentPosition.getString(currentPosition.getColumnIndex(UsersContract.User.COLUMN_NAME));
+        String lastName = currentPosition.getString(currentPosition.getColumnIndex(UsersContract.User.COLUMN_LAST_NAME));
+        String email = currentPosition.getString(currentPosition.getColumnIndex(UsersContract.User.COLUMN_EMAIL));
 
 
         assertEquals(userModel.name, name);
@@ -154,6 +154,6 @@ public class UserSQLiteOpenHelperTest {
     }
 
     private String getIdField(long id) {
-        return UserContract.User._ID + " = " + id;
+        return UsersContract.User._ID + " = " + id;
     }
 }

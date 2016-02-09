@@ -10,7 +10,7 @@ import static io.dojogeek.adminibot.sqlite.SQLiteConstants.OPEN_PARENTHESIS;
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CLOSE_PARENTHESIS;
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
 
-public class UserContract {
+public class UsersContract {
 
     public static abstract class User implements BaseColumns {
 

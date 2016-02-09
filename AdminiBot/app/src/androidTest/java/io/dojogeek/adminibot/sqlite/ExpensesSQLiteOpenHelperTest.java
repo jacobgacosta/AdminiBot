@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class ExpenseSQLiteOpenHelperTest {
+public class ExpensesSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
     private static final int INSERT_ERROR = -1;
@@ -161,6 +161,6 @@ public class ExpenseSQLiteOpenHelperTest {
     }
 
     private String getIdField(long id) {
-        return UserContract.User._ID + " = " + id;
+        return UsersContract.User._ID + " = " + id;
     }
 }

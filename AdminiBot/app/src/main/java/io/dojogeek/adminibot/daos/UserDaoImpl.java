@@ -10,7 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.UserModel;
-import io.dojogeek.adminibot.sqlite.UserContract;
+import io.dojogeek.adminibot.sqlite.UsersContract;
 
 public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 
@@ -24,7 +24,7 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 
         ContentValues contentValues = createContentValues(userModel);
 
-        long response = mDatabase.insert(UserContract.User.TABLE_NAME, UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+        long response = mDatabase.insert(UsersContract.User.TABLE_NAME, UsersContract.User.COLUMN_NAME_NULLABLE, contentValues);
 
         return isValidResponse(response);
     }
@@ -32,7 +32,7 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     @Override
     public List<UserModel> getUsers() {
 
-        Cursor cursor = mDatabase.query(UserContract.User.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(UsersContract.User.TABLE_NAME, null, null, null, null, null, null);
 
         List<UserModel> userModels = new ArrayList<>();
 
@@ -50,9 +50,9 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     private ContentValues createContentValues(UserModel user) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(UserContract.User.COLUMN_NAME, user.name);
-        contentValues.put(UserContract.User.COLUMN_LAST_NAME, user.lastName);
-        contentValues.put(UserContract.User.COLUMN_EMAIL, user.email);
+        contentValues.put(UsersContract.User.COLUMN_NAME, user.name);
+        contentValues.put(UsersContract.User.COLUMN_LAST_NAME, user.lastName);
+        contentValues.put(UsersContract.User.COLUMN_EMAIL, user.email);
 
         return contentValues;
 
@@ -62,10 +62,10 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 
         UserModel userModel = new UserModel();
 
-        long id = cursor.getInt(cursor.getColumnIndex(UserContract.User._ID));
-        String name = cursor.getString(cursor.getColumnIndex(UserContract.User.COLUMN_NAME));
-        String lastName = cursor.getString(cursor.getColumnIndex(UserContract.User.COLUMN_LAST_NAME));
-        String email = cursor.getString(cursor.getColumnIndex(UserContract.User.COLUMN_EMAIL));
+        long id = cursor.getInt(cursor.getColumnIndex(UsersContract.User._ID));
+        String name = cursor.getString(cursor.getColumnIndex(UsersContract.User.COLUMN_NAME));
+        String lastName = cursor.getString(cursor.getColumnIndex(UsersContract.User.COLUMN_LAST_NAME));
+        String email = cursor.getString(cursor.getColumnIndex(UsersContract.User.COLUMN_EMAIL));
 
         userModel.id = id;
         userModel.name = name;

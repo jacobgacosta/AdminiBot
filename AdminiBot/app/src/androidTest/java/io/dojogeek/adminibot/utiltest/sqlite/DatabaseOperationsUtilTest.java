@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import io.dojogeek.adminibot.sqlite.UserContract;
+import io.dojogeek.adminibot.sqlite.UsersContract;
 
 public class DatabaseOperationsUtilTest {
 
@@ -54,7 +54,7 @@ public class DatabaseOperationsUtilTest {
     private long createRecord(String tableName, ContentValues contentValues) {
 
         long insertedRecordId = mSQLiteDatabase.insertOrThrow(tableName,
-                UserContract.User.COLUMN_NAME_NULLABLE, contentValues);
+                UsersContract.User.COLUMN_NAME_NULLABLE, contentValues);
 
         return insertedRecordId;
     }

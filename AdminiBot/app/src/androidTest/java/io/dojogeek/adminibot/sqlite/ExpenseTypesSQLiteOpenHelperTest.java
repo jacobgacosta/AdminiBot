@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
-public class ExpenseTypeSQLiteOpenHelperTest {
+public class ExpenseTypesSQLiteOpenHelperTest {
 
     private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;

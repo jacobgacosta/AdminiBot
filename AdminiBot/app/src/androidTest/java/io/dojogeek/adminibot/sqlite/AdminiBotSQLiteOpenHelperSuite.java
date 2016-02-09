@@ -4,8 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ExpenseTypeSQLiteOpenHelperTest.class, TypesPaymentMethodsSQLiteOpenHelperTest.class,
-        ExpenseSQLiteOpenHelperTest.class, UserSQLiteOpenHelperTest.class,
+@Suite.SuiteClasses({ExpenseTypesSQLiteOpenHelperTest.class, TypesPaymentMethodsSQLiteOpenHelperTest.class,
+        ExpensesSQLiteOpenHelperTest.class, UsersSQLiteOpenHelperTest.class,
         PaymentMethodsSQLiteOpenHelperTest.class, ExpensesPaymentMethodsOpenHelperTest.class})
 public class AdminiBotSQLiteOpenHelperSuite {
 }
