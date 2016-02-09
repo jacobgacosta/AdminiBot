@@ -1,11 +1,15 @@
 package io.dojogeek.adminibot.utiltest;
 
+import java.util.Date;
+
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
+import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
+import io.dojogeek.adminibot.utils.DateUtils;
 
 public class CreatorModels {
 
@@ -80,5 +84,25 @@ public class CreatorModels {
         paymentMethod.userId = userId;
 
         return paymentMethod;
+    }
+
+    public static ExpenseModel createExpenseModel() {
+
+        return createExpenseModel("Expense type test", 567.90, DateUtils.getCurrentData(), DateUtils.getCurrentData(),
+                1, 20);
+    }
+
+    public static ExpenseModel createExpenseModel(String description, double amount, String dateExpediture,
+                                           String nextExit, long expenseTypeId, long userId) {
+
+        ExpenseModel expenseModel = new ExpenseModel();
+        expenseModel.description = description;
+        expenseModel.amount = amount;
+        expenseModel.dateExpediture = dateExpediture;
+        expenseModel.nextExit = nextExit;
+        expenseModel.expenseTypeId = expenseTypeId;
+        expenseModel. userId = userId;
+
+        return expenseModel;
     }
 }
