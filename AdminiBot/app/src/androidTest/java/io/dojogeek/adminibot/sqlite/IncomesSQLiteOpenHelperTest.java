@@ -17,6 +17,7 @@ import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.utiltest.sqlite.IncomesDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -70,6 +71,26 @@ public class IncomesSQLiteOpenHelperTest {
         assertTrue(insertIncome(incomeModel) > INSERT_ERROR);
     }
 
+    @Test
+    public void sqliteHelper_readingData_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long recordId = insertIncome(incomeModel);
+
+        String where = UsersContract.User._ID + " = " + recordId;
+
+        Cursor cursor = mIncomesDataUtilTest.queryRecordWhere(where);
+
+        assertNotNull(cursor);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, incomeModel);
+            }
+        }
+    }
+
     private long insertIncome(IncomeModel incomeModel) {
 
         ContentValues contentValues = mIncomesDataUtilTest.createContentValues(incomeModel);
@@ -81,6 +102,23 @@ public class IncomesSQLiteOpenHelperTest {
 
     private void loadIncomesUtil() {
         mIncomesDataUtilTest = new IncomesDataUtilTest(mSQLiteDatabase);
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition, IncomeModel incomeModel) {
+
+        String description = currentPosition.getString(currentPosition.getColumnIndex(IncomesContract.Incomes.COLUMN_DESCRIPTION));
+        double amount = currentPosition.getDouble(currentPosition.getColumnIndex(IncomesContract.Incomes.COLUMN_AMOUNT));
+        String date = currentPosition.getString(currentPosition.getColumnIndex(IncomesContract.Incomes.COLUMN_DATE));
+        String nextEntry = currentPosition.getString(currentPosition.getColumnIndex(IncomesContract.Incomes.COLUMN_NEXT_ENTRY));
+        long userId = currentPosition.getLong(currentPosition.getColumnIndex(IncomesContract.Incomes.COLUMN_USER_ID));
+
+
+        assertEquals(incomeModel.description, description);
+        assertEquals(incomeModel.amount, amount, 0);
+        assertEquals(incomeModel.date, date);
+        assertEquals(incomeModel.nextDate, nextEntry);
+        assertEquals(incomeModel.userId, userId);
+
     }
 
 }
