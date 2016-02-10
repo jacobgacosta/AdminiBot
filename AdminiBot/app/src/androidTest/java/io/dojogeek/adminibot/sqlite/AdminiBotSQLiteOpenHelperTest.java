@@ -14,6 +14,23 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class AdminiBotSQLiteOpenHelperTest {
 
+    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
+    private Context mContext;
 
+    @Before
+    public void setup() {
+
+        mContext = getTargetContext();
+        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+
+    }
+
+    @Test
+    public void sqliteHelper_sameGetInstante_isTrue() {
+
+        AdminiBotSQLiteOpenHelper expectedAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+
+        assertEquals(expectedAdminiBotSQLiteOpenHelper, mAdminiBotSQLiteOpenHelper);
+    }
 
 }
