@@ -120,6 +120,21 @@ public class IncomesSQLiteOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_deletingData_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long recordId = insertIncome(incomeModel);
+
+        String where = UsersContract.User._ID + " = " + recordId;
+
+        long deletedRows = mIncomesDataUtilTest.deleteRecordWhere(where);
+
+        assertEquals(AFFECTED_ROWS, deletedRows);
+
+    }
+
     private long insertIncome(IncomeModel incomeModel) {
 
         ContentValues contentValues = mIncomesDataUtilTest.createContentValues(incomeModel);
