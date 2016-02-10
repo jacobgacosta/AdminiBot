@@ -6,6 +6,7 @@ import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
+import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
@@ -104,5 +105,26 @@ public class CreatorModels {
         expenseModel. userId = userId;
 
         return expenseModel;
+    }
+
+    public static IncomeModel createIncomeModel() {
+
+        IncomeModel incomeModel = createIncomeModel("Test description", 24506.90, DateUtils.getCurrentData(), DateUtils.getCurrentData(),
+                1);
+
+        return incomeModel;
+    }
+
+    public static IncomeModel createIncomeModel(String description, double amount, String date, String nextDate,
+                                                long userId) {
+
+        IncomeModel incomeModel = new IncomeModel();
+        incomeModel.description = description;
+        incomeModel.amount = amount;
+        incomeModel.date = date;
+        incomeModel.nextDate = nextDate;
+        incomeModel.userId = userId;
+
+        return incomeModel;
     }
 }
