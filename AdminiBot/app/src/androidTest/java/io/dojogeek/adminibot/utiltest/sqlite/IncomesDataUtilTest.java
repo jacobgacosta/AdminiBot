@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import io.dojogeek.adminibot.models.IncomesModel;
+import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
 
 public class IncomesDataUtilTest {
@@ -38,14 +38,14 @@ public class IncomesDataUtilTest {
         return mDatabaseOperationsUtilTest.deleteRecordWhere(mSQLiteDatabase, IncomesContract.Incomes.TABLE_NAME, where);
     }
 
-    public ContentValues createContentValues(IncomesModel incomesModel) {
+    public ContentValues createContentValues(IncomeModel incomeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesContract.Incomes.COLUMN_DESCRIPTION, incomesModel.description);
-        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomesModel.amount);
-        contentValues.put(IncomesContract.Incomes.COLUMN_DATE, incomesModel.date);
-        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY, incomesModel.nextDate);
-        contentValues.put(IncomesContract.Incomes.COLUMN_USER_ID, incomesModel.userId);
+        contentValues.put(IncomesContract.Incomes.COLUMN_DESCRIPTION, incomeModel.description);
+        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomeModel.amount);
+        contentValues.put(IncomesContract.Incomes.COLUMN_DATE, incomeModel.date);
+        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY, incomeModel.nextDate);
+        contentValues.put(IncomesContract.Incomes.COLUMN_USER_ID, incomeModel.userId);
 
         return contentValues;
 
