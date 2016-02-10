@@ -144,10 +144,10 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     private ExpenseModel fillExpense() {
 
         ExpenseModel expense = new ExpenseModel();
-        expense.dataExpediture = DateUtils.getCurrentData();
+        /*expense.dataExpediture = DateUtils.getCurrentData();
         expense.name = mName.getText().toString();
         expense.expenseTypeId = mExpenseTypeModelList.get(mExpensesTypes.getSelectedItemPosition()).id;
-        expense.totalAmount = getTotalAmount();
+        expense.totalAmount = getTotalAmount();*/
 
         return expense;
     }
