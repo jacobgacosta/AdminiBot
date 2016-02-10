@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.utiltest.CreatorModels;
 import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
 import io.dojogeek.adminibot.utiltest.sqlite.IncomesDataUtilTest;
 
@@ -57,6 +60,23 @@ public class IncomesSQLiteOpenHelperTest {
         assertNotNull(cursor);
         assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
 
+    }
+
+    @Test
+    public void sqliteHelper_insertionData_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        assertTrue(insertIncome(incomeModel) > INSERT_ERROR);
+    }
+
+    private long insertIncome(IncomeModel incomeModel) {
+
+        ContentValues contentValues = mIncomesDataUtilTest.createContentValues(incomeModel);
+
+        long insertedRecordId = mIncomesDataUtilTest.createRecord(contentValues);
+
+        return insertedRecordId;
     }
 
     private void loadIncomesUtil() {
