@@ -18,6 +18,7 @@ import io.dojogeek.adminibot.utiltest.sqlite.IncomesDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -89,6 +90,34 @@ public class IncomesSQLiteOpenHelperTest {
                 compareResultQueryFields(cursor, incomeModel);
             }
         }
+    }
+
+    @Test
+    public void sqliteHelper_updatingData_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long recordId = insertIncome(incomeModel);
+
+        String where = UsersContract.User._ID + " = " + recordId;
+
+        incomeModel = CreatorModels.createIncomeModel();
+        incomeModel.description = "Test update description";
+
+        ContentValues newValues = mIncomesDataUtilTest.createContentValues(incomeModel);
+
+        long updatedRowsAffected = mIncomesDataUtilTest.updateRecord(newValues, where);
+
+        assertEquals(AFFECTED_ROWS, updatedRowsAffected);
+
+        Cursor cursor = mIncomesDataUtilTest.queryRecordWhere(where);
+
+        if (cursor.moveToFirst()) {
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor, incomeModel);
+            }
+        }
+
     }
 
     private long insertIncome(IncomeModel incomeModel) {
