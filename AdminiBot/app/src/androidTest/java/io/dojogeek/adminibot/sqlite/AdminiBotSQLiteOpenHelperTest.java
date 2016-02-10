@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
@@ -31,6 +33,15 @@ public class AdminiBotSQLiteOpenHelperTest {
         AdminiBotSQLiteOpenHelper expectedAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
 
         assertEquals(expectedAdminiBotSQLiteOpenHelper, mAdminiBotSQLiteOpenHelper);
+    }
+
+    @Test
+    public void sqliteHelper_creationDB_isTrue() {
+
+        File db = mContext.getDatabasePath(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+
+        assertTrue(db.exists());
+
     }
 
 }
