@@ -1,6 +1,6 @@
 package io.dojogeek.adminibot.models;
 
-public class IncomesModel {
+public class IncomeModel {
 
     public long id;
     public String description;
