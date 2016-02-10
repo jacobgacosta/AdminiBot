@@ -1,16 +1,21 @@
 package io.dojogeek.adminibot.sqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
+import io.dojogeek.adminibot.utiltest.sqlite.IncomesDataUtilTest;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class IncomesSQLiteOpenHelperTest {
@@ -22,6 +27,7 @@ public class IncomesSQLiteOpenHelperTest {
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private DataBaseConfigurationTest mDataBaseConfigurationTest;
+    private IncomesDataUtilTest mIncomesDataUtilTest;
 
     @Before
     public void setup() {
@@ -33,11 +39,28 @@ public class IncomesSQLiteOpenHelperTest {
 
         mSQLiteDatabase = mDataBaseConfigurationTest.getSQLiteDatabase();
 
+        loadIncomesUtil();
+
     }
 
     @After
     public void tearDown() throws Exception {
         mDataBaseConfigurationTest.closeDataBaseConnection();
+    }
+
+    @Test
+    public void sqliteHelper_creationIncomesTable_isTrue() {
+
+        Cursor cursor = mSQLiteDatabase.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" +
+                IncomesContract.Incomes.TABLE_NAME + "'", null);
+
+        assertNotNull(cursor);
+        assertTrue(cursor.getCount() > NONE_TABLE_CREATED);
+
+    }
+
+    private void loadIncomesUtil() {
+        mIncomesDataUtilTest = new IncomesDataUtilTest(mSQLiteDatabase);
     }
 
 }
