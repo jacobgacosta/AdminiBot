@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -72,6 +73,21 @@ public class ExpenseTypeDaoImplTest {
 
         assertNotEquals(OPERATIONAL_ERROR, rowsUpdated);
         assertEquals(SUCCESS_CODE, rowsUpdated);
+    }
+
+    @Test
+    public void expenseTypeDao_creationAndObtainingExpenseType_isTrue() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        ExpenseTypeModel expenseType = mExpenseTypeDao.getExpenseTypeById(insertedExpenseTypeId);
+
+        assertNotNull(expenseType);
+        assertEquals(expenseTypeModel.name, expenseType.name);
+        assertEquals(expenseTypeModel.description, expenseType.description);
+
     }
 
     private ExpenseTypeModel changeExpenseTypeValues(ExpenseTypeModel expenseTypeModel) {
