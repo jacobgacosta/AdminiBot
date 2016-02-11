@@ -6,8 +6,9 @@ import io.dojogeek.adminibot.models.UserModel;
 
 public interface UserDao extends ConectionDao {
 
-    boolean createUser(UserModel userModel);
+    long createUser(UserModel userModel);
 
     List<UserModel> getUsers();
 
+    void removeAllUsers();
 }
