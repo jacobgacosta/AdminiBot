@@ -39,6 +39,7 @@ public class ExpenseTypeDaoImplTest {
 
     @After
     public void finishTest() {
+        mExpenseTypeDao.removeAllExpensesTypes();
         mExpenseTypeDao.closeConection();
     }
 
