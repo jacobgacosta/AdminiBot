@@ -38,6 +38,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     @After
     public void tearDown() {
         closeDataBaseConnection();
+        deleteDataBase();
     }
 
     @Test
@@ -99,5 +100,9 @@ public class AdminiBotSQLiteOpenHelperTest {
 
     public SQLiteDatabase openDataBaseConnection() {
         return mAdminiBotSQLiteOpenHelper.getReadableDatabase();
+    }
+
+    public void deleteDataBase() {
+        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 }
