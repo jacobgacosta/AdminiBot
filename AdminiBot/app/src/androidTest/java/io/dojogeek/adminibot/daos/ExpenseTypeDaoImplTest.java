@@ -32,7 +32,7 @@ public class ExpenseTypeDaoImplTest {
     @Before
     public void setup() {
         Context context = getTargetContext();
-        context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+
         mExpenseTypeDao = new ExpenseTypeDaoImpl(context);
         mExpenseTypeDao.openConection();
     }
