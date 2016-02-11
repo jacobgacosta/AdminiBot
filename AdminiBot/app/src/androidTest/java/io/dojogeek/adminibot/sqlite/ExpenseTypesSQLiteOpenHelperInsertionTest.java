@@ -50,6 +50,37 @@ public class ExpenseTypesSQLiteOpenHelperInsertionTest {
 
     }
 
+    @Test
+    public void sqliteHelper_recordMatching_isEquals() {
+
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpenseTypesContract.ExpenseType.TABLE_NAME,
+                null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor);
+                cursor.moveToNext();
+            }
+        }
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition) {
+
+
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_DESCRIPTION));
+
+        String expectedName = mContext.getString(ExpenseTypesContract.EXPENSES_TYPES[((int) id)]);
+        String expectedDescription = mContext.getString(ExpenseTypesContract.EXPENSES_TYPES_DESCRIPTIONS[((int) id)]);
+
+        assertEquals(expectedName, mContext.getString(name));
+        assertEquals(expectedDescription, mContext.getString(description));
+
+    }
+
+
     private void loadSQLiteHelper() {
         mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
     }
