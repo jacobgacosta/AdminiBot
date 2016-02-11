@@ -47,6 +47,11 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
         return userModels;
     }
 
+    @Override
+    public void removeAllUsers() {
+        mDatabase.execSQL("DELETE FROM " + UsersContract.User.TABLE_NAME);
+    }
+
     private ContentValues createContentValues(UserModel user) {
 
         ContentValues contentValues = new ContentValues();
