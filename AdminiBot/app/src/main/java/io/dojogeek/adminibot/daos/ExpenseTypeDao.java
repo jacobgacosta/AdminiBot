@@ -12,5 +12,7 @@ public interface ExpenseTypeDao extends ConectionDao {
 
     ExpenseTypeModel getExpenseTypeById(long id);
 
+    long updateExpensetype(ExpenseTypeModel expenseTypeModel, String where);
+
     void removeAllExpensesTypes();
 }
