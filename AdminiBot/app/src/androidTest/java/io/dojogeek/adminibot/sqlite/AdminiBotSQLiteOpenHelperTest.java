@@ -75,7 +75,8 @@ public class AdminiBotSQLiteOpenHelperTest {
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME,
                 TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME,
                 IncomesPaymentMethodsContract.IncomesPaymentMethods.TABLE_NAME, BankCardsContract.BankCard.TABLE_NAME,
-                IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, ExpensesBankCardsContract.BankCard.TABLE_NAME};
+                IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, ExpensesBankCardsContract.BankCard.TABLE_NAME,
+                CardTypeContract.CardType.TABLE_NAME};
 
         for (String table : tables) {
             Cursor cursor = selectTable(table);
