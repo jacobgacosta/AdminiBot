@@ -13,7 +13,7 @@ public class ExpensesContract {
         public static final String COLUMN_AMOUNT = "amount";
         public static final String COLUMN_DATE_EXPEDITURE = "date_expediture";
         public static final String COLUMN_NEXT_EXIT = "next_exit";
-        public static final String COLUMN_EXPENSES_TYPE_ID = "expenses_type_id";
+        public static final String COLUMN_EXPENSES_TYPE_ID = "expense_type_id";
         public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_NAME_NULLABLE = "null";
 
