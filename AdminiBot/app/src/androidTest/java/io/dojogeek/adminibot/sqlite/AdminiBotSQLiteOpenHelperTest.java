@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 
-import io.dojogeek.adminibot.utiltest.sqlite.DataBaseConfigurationTest;
-
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
