@@ -11,4 +11,6 @@ public interface ExpenseTypeDao extends ConectionDao {
     List<ExpenseTypeModel> getExpensesTypes();
 
     ExpenseTypeModel getExpenseTypeById(long id);
+
+    void removeAllExpensesTypes();
 }
