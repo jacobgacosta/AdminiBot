@@ -44,4 +44,12 @@ public class AdminiBotSQLiteOpenHelperTest {
 
     }
 
+    @Test
+    public void sqliteHelper_versionDB_isTrue() {
+
+        int version = mAdminiBotSQLiteOpenHelper.getReadableDatabase().getVersion();
+        mAdminiBotSQLiteOpenHelper.close();
+
+        assertEquals(AdminiBotSQLiteOpenHelper.DATABASE_VERSION, version);
+    }
 }
