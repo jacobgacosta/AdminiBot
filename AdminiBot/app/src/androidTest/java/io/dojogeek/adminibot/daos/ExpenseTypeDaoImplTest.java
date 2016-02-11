@@ -54,34 +54,4 @@ public class ExpenseTypeDaoImplTest {
         assertTrue(insertedExpenseTypeId > NO_VALUE);
     }
 
-    @Test
-    public void expenseTypeDao_numberInsertedExpensesTypes_isTrue() {
-
-        int numberOfinitialInsertedValues =  5;
-
-        List<ExpenseTypeModel> expenseTypeModelList =  mExpenseTypeDao.getExpensesTypes();
-
-        assertNotNull(expenseTypeModelList);
-        assertTrue(!expenseTypeModelList.isEmpty());
-        assertEquals(numberOfinitialInsertedValues, expenseTypeModelList.size());
-
-    }
-
-    @Test
-    public void expenseTypeDa_matchingExpenseTypeInitialInsertion_isTrue() {
-        List<ExpenseTypeModel> expensesTypesList = mExpenseTypeDao.getExpensesTypes();
-        assertNotNull(expensesTypesList);
-        assertTrue(!expensesTypesList.isEmpty());
-        comparePaymentMethodsResult(expensesTypesList);
-
-    }
-
-    private void comparePaymentMethodsResult(List<ExpenseTypeModel> actualExpensesTypesList) {
-
-        for (int index = 0; index < actualExpensesTypesList.size(); index++) {
-            assertEquals(ExpensesTypesContract.EXPENSES_TYPES[index], actualExpensesTypesList.get(index).name);
-            assertEquals(ExpensesTypesContract.EXPENSES_TYPES_DESCRIPTIONS[index], actualExpensesTypesList.get(index).description);
-        }
-
-    }
 }
