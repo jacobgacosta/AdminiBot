@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.UsersContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -59,18 +60,55 @@ public class UserDaoImplTest {
 
         mUserDao.createUser(userModel);
 
-        List<UserModel> users = mUserDao.getUsers();
+        List<UserModel> actualUsers = mUserDao.getUsers();
 
-        assertNotNull(users);
-        assertTrue(!users.isEmpty());
-        assertEquals(UNIQUE_USER, users.size());
-        compareResultUserModel(userModel, users);
+        verifyGetUsersResult(actualUsers);
+        compareResultUserModel(userModel, actualUsers);
 
     }
 
-    private void compareResultUserModel(UserModel userModel, List<UserModel> users) {
+    @Test
+    public void userDao_updatingUser_isTrue() {
 
-        for (UserModel user : users) {
+        UserModel userModel = CreatorModels.createUserModel();
+
+        long insertedRecordId = mUserDao.createUser(userModel);
+
+        String where = UsersContract.User._ID + "= " + insertedRecordId;
+
+        userModel = changeUserModelValues(userModel);
+
+        long updatedRows = mUserDao.updateUser(userModel, where);
+
+        assertEquals(UNIQUE_USER, updatedRows);
+
+        List<UserModel> actualUsers = mUserDao.getUsers();
+
+        verifyGetUsersResult(actualUsers);
+
+        compareResultUserModel(userModel, actualUsers);
+
+    }
+
+    private UserModel changeUserModelValues(UserModel userModel) {
+        userModel.name = "Junit";
+        userModel.email = "updatetest@gmail.com";
+        userModel.lastName = "Jacoco";
+
+        return userModel;
+    }
+
+    private void verifyGetUsersResult(List<UserModel> userModelList) {
+
+        assertNotNull(userModelList);
+        assertTrue(!userModelList.isEmpty());
+        assertEquals(UNIQUE_USER, userModelList.size());
+
+    }
+
+    private void compareResultUserModel(UserModel userModel, List<UserModel> actualUsers) {
+
+        for (UserModel user : actualUsers) {
             assertEquals(userModel.name, user.name);
             assertEquals(userModel.lastName, user.lastName);
             assertEquals(userModel.email, user.email);
