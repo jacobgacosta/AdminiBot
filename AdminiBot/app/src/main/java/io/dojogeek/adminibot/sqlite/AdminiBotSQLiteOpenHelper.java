@@ -50,6 +50,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesPaymentMethodsContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(BankCardsContract.SQL_CREATE_TABLE);
     }
 
     private void deleteTables(SQLiteDatabase db) {
@@ -61,6 +62,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(BankCardsContract.SQL_DELETE_ENTRIES);
     }
 
     private void insertInitialValues(SQLiteDatabase db) {
