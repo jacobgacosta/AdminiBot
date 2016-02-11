@@ -10,5 +10,7 @@ public interface UserDao extends ConectionDao {
 
     List<UserModel> getUsers();
 
+    long updateUser(UserModel userModel, String where);
+
     void removeAllUsers();
 }
