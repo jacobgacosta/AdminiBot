@@ -20,13 +20,13 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     }
 
     @Override
-    public boolean createUser(UserModel userModel) {
+    public long createUser(UserModel userModel) {
 
         ContentValues contentValues = createContentValues(userModel);
 
         long response = mDatabase.insert(UsersContract.User.TABLE_NAME, UsersContract.User.COLUMN_NAME_NULLABLE, contentValues);
 
-        return isValidResponse(response);
+        return response;
     }
 
     @Override

@@ -22,13 +22,7 @@ public class RegisterUserPresenterImpl implements RegisterUserPresenter {
 
         mUserDao.openConection();
 
-        boolean isCreated = mUserDao.createUser(userModel);
-
-        if (isCreated) {
-            mRegisterUser.showNotification(R.string.register_ok);
-        } else {
-            mRegisterUser.showNotification(R.string.register_failed);
-        }
+        long isCreated = mUserDao.createUser(userModel);
 
     }
 
