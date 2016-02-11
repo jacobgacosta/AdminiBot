@@ -75,6 +75,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
 
         insertExpensesTypes(db);
         insertPaymentMethods(db);
+        insertCardTypes(db);
     }
 
     private void insertExpensesTypes(SQLiteDatabase db) {
@@ -89,6 +90,12 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_1);
         db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_2);
         db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_3);
+    }
+
+    private void insertCardTypes(SQLiteDatabase db) {
+        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_2);
+        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_3);
     }
 
 }
