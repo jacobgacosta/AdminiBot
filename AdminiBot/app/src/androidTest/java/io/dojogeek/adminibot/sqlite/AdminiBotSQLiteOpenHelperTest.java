@@ -62,9 +62,44 @@ public class AdminiBotSQLiteOpenHelperTest {
     @Test
     public void sqliteHelper_versionDB_isTrue() {
 
-        int version = mAdminiBotSQLiteOpenHelper.getReadableDatabase().getVersion();
-        mAdminiBotSQLiteOpenHelper.close();
+        int version = mSQLiteDatabase.getVersion();
 
         assertEquals(AdminiBotSQLiteOpenHelper.DATABASE_VERSION, version);
+    }
+
+    @Test
+    public void sqliteHelper_creationTables_isTrue() {
+
+        String [] tables = {ExpensesContract.Expense.TABLE_NAME,
+                ExpensesPaymentMethodsContract.ExpensesPaymentMethods.TABLE_NAME,
+                ExpenseTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
+                PaymentMethodsContract.PaymentMethods.TABLE_NAME,
+                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME};
+
+        for (String table : tables) {
+            Cursor cursor = selectTable(table);
+            assertNotNull(cursor);
+            assertNotEquals(INSERT_ERROR, NONE_TABLE_CREATED);
+        }
+
+
+    }
+
+    private Cursor selectTable(String tableName) {
+        String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName +
+                "'";
+        return mSQLiteDatabase.rawQuery(query, null);
+    }
+
+    private void loadSQLiteHelper() {
+        mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
+    }
+
+    public void closeDataBaseConnection() {
+        mAdminiBotSQLiteOpenHelper.close();
+    }
+
+    public SQLiteDatabase openDataBaseConnection() {
+        return mAdminiBotSQLiteOpenHelper.getReadableDatabase();
     }
 }
