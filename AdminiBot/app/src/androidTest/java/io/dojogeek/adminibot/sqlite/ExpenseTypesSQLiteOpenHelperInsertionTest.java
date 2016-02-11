@@ -17,8 +17,6 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExpenseTypesSQLiteOpenHelperInsertionTest {
 
-    private static final int INSERT_ERROR = -1;
-    private static final int NONE_TABLE_CREATED = 0;
     private Context mContext;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
