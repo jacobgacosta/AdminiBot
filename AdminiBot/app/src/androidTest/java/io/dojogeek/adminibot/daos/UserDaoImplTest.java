@@ -53,7 +53,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_getUser_isTrue() {
+    public void userDao_obtainingUser_isTrue() {
 
         UserModel userModel = CreatorModels.createUserModel();
 
