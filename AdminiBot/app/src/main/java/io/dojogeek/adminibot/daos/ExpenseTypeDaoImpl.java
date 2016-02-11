@@ -53,7 +53,23 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     @Override
     public ExpenseTypeModel getExpenseTypeById(long id) {
 
-        return null;
+        String [] args = {String.valueOf(id)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                expenseTypeModel = getExpenseTypeModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return expenseTypeModel;
     }
 
     @Override
