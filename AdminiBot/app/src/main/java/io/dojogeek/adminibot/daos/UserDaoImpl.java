@@ -48,6 +48,16 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     }
 
     @Override
+    public long updateUser(UserModel userModel, String where) {
+
+        ContentValues contentValues = createContentValues(userModel);
+
+        long updatedRows = mDatabase.update(UsersContract.User.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
+    @Override
     public void removeAllUsers() {
         mDatabase.execSQL("DELETE FROM " + UsersContract.User.TABLE_NAME);
     }
