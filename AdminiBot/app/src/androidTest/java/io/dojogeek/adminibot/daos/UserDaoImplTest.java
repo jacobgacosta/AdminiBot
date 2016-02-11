@@ -29,23 +29,27 @@ public class UserDaoImplTest {
 
     @Before
     public void setup() {
+
         Context context = getTargetContext();
-        context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+
         mUserDao = new UserDaoImpl(context);
         mUserDao.openConection();
     }
 
     @After
     public void finishTest() {
+        mUserDao.removeAllUsers();
         mUserDao.closeConection();
     }
 
     @Test
-    public void userDao_createUser_isTrue() {
+    public void userDao_creationUser_isTrue() {
 
-        boolean isInserted = mUserDao.createUser(CreatorModels.createUserModel());
+        UserModel user = CreatorModels.createUserModel();
 
-        assertTrue(isInserted);
+        long insertedRecordId = mUserDao.createUser(user);
+
+        assertEquals(UNIQUE_USER, insertedRecordId);
     }
 
     @Test
