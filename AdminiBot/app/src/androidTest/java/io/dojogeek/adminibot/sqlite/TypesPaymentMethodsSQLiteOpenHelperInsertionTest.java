@@ -48,6 +48,35 @@ public class TypesPaymentMethodsSQLiteOpenHelperInsertionTest {
 
     }
 
+    @Test
+    public void sqliteHelper_recordMatching_isEquals() {
+
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME,
+                null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast()) {
+                compareResultQueryFields(cursor);
+                cursor.moveToNext();
+            }
+        }
+    }
+
+    private void compareResultQueryFields(Cursor currentPosition) {
+
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
+
+        String expectedName = mContext.getString(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[((int) id)]);
+        String expectedDescription = mContext.getString(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS[((int) id)]);
+
+        assertEquals(expectedName, mContext.getString(name));
+        assertEquals(expectedDescription, mContext.getString(description));
+
+    }
+
     private void loadSQLiteHelper() {
         mAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
     }
