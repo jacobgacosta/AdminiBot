@@ -73,12 +73,13 @@ public class AdminiBotSQLiteOpenHelperTest {
                 ExpensesPaymentMethodsContract.ExpensesPaymentMethods.TABLE_NAME,
                 ExpensesTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME,
-                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME};
+                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME,
+                IncomesPaymentMethodsContract.IncomesPaymentMethods.TABLE_NAME};
 
         for (String table : tables) {
             Cursor cursor = selectTable(table);
             assertNotNull(cursor);
-            assertNotEquals(INSERT_ERROR, NONE_TABLE_CREATED);
+            assertNotEquals(NONE_TABLE_CREATED, cursor.getCount());
         }
 
 
