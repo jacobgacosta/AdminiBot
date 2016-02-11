@@ -56,6 +56,11 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
         return null;
     }
 
+    @Override
+    public void removeAllExpensesTypes() {
+        mDatabase.execSQL("DELETE FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME);
+    }
+
     private ExpenseTypeModel getExpenseTypeModelFromCursor(Cursor cursor) {
 
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
