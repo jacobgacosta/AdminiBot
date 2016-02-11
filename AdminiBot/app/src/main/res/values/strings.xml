@@ -93,4 +93,13 @@
     <string name="payment_methods_cash_description">Dinero en efectivo</string>
     <string name="payment_methods_cheque_description">Documento de pago</string>
 
+    <!-- Card types -->
+    <string name="card_types_credit">Crédito</string>
+    <string name="card_types_debit">Débito</string>
+    <string name="card_types_prepaid">Prepago</string>
+
+    <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
+    <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
+    <string name="card_types_prepaid_description">Cualquier tarjeta prepágo</string>
+
 </resources>
