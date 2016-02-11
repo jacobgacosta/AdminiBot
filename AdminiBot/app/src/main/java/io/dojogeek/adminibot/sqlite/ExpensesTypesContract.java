@@ -6,7 +6,7 @@ import io.dojogeek.adminibot.R;
 
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
 
-public class ExpenseTypesContract {
+public class ExpensesTypesContract {
 
     public static final int [] EXPENSES_TYPES = {R.string.expenses_types_foods,
             R.string.expenses_types_clothes, R.string.expenses_types_drinks, R.string.expenses_types_medicals,

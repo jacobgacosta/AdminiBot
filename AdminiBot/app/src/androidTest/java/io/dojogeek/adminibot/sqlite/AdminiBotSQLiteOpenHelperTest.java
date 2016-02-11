@@ -70,7 +70,7 @@ public class AdminiBotSQLiteOpenHelperTest {
 
         String [] tables = {ExpensesContract.Expense.TABLE_NAME,
                 ExpensesPaymentMethodsContract.ExpensesPaymentMethods.TABLE_NAME,
-                ExpenseTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
+                ExpensesTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME,
                 TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME};
 

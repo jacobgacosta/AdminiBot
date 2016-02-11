@@ -15,7 +15,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class ExpenseTypesSQLiteOpenHelperInsertionTest {
+public class ExpensesTypesSQLiteOpenHelperInsertionTest {
 
     private Context mContext;
     private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
@@ -41,7 +41,7 @@ public class ExpenseTypesSQLiteOpenHelperInsertionTest {
 
         final int insertedInitialValues = 5;
 
-        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpenseTypesContract.ExpenseType.TABLE_NAME,
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME,
                 null);
 
         assertEquals(insertedInitialValues, cursor.getCount());
@@ -51,7 +51,7 @@ public class ExpenseTypesSQLiteOpenHelperInsertionTest {
     @Test
     public void sqliteHelper_recordMatching_isEquals() {
 
-        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpenseTypesContract.ExpenseType.TABLE_NAME,
+        Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME,
                 null);
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -66,12 +66,12 @@ public class ExpenseTypesSQLiteOpenHelperInsertionTest {
     private void compareResultQueryFields(Cursor currentPosition) {
 
 
-        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType._ID));
-        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_NAME));
-        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_DESCRIPTION));
+        long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType._ID));
+        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
+        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        String expectedName = mContext.getString(ExpenseTypesContract.EXPENSES_TYPES[((int) id)]);
-        String expectedDescription = mContext.getString(ExpenseTypesContract.EXPENSES_TYPES_DESCRIPTIONS[((int) id)]);
+        String expectedName = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES[((int) id)]);
+        String expectedDescription = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES_DESCRIPTIONS[((int) id)]);
 
         assertEquals(expectedName, mContext.getString(name));
         assertEquals(expectedDescription, mContext.getString(description));

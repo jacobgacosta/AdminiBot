@@ -10,7 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
-import io.dojogeek.adminibot.sqlite.ExpenseTypesContract;
+import io.dojogeek.adminibot.sqlite.ExpensesTypesContract;
 
 public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDao {
 
@@ -24,7 +24,7 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
 
         ContentValues contentValues = createContentValues(expenseType);
 
-        long insertedRecordId = mDatabase.insert(ExpenseTypesContract.ExpenseType.TABLE_NAME, ExpenseTypesContract.ExpenseType.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedRecordId = mDatabase.insert(ExpensesTypesContract.ExpenseType.TABLE_NAME, ExpensesTypesContract.ExpenseType.COLUMN_NAME_NULLABLE, contentValues);
 
         return insertedRecordId;
     }
@@ -34,7 +34,7 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
 
         List<ExpenseTypeModel> expenseTypeModelList = new ArrayList<>();
 
-        Cursor cursor = mDatabase.query(ExpenseTypesContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(ExpensesTypesContract.ExpenseType.TABLE_NAME, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
 
@@ -60,9 +60,9 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
 
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
 
-        long id = cursor.getInt(cursor.getColumnIndex(ExpenseTypesContract.ExpenseType._ID));
-        int name = cursor.getInt(cursor.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_NAME));
-        int description = cursor.getInt(cursor.getColumnIndex(ExpenseTypesContract.ExpenseType.COLUMN_DESCRIPTION));
+        long id = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType._ID));
+        int name = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
+        int description = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
         expenseTypeModel.id = id;
         expenseTypeModel.name = name;
@@ -75,8 +75,8 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     private ContentValues createContentValues(ExpenseTypeModel expenseTypeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpenseTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name);
-        contentValues.put(ExpenseTypesContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
+        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name);
+        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
 
         return contentValues;
     }
