@@ -77,7 +77,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_creationAndUpdatingUser_isTrue() {
+    public void userDao_creationUpdatingAndObtainingUser_isTrue() {
 
         UserModel expectedUserModel = CreatorModels.createUserModel();
 
