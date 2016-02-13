@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
+import io.dojogeek.adminibot.sqlite.ExpensesContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -18,6 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExpenseDaoImplTest {
 
+    private static final int SUCCESS_OPERATION = 1;
     private static final int OPERATIONAL_ERROR = -1;
     private ExpenseDao mExpenseDao;
 
@@ -42,6 +44,31 @@ public class ExpenseDaoImplTest {
 
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
 
+    }
+
+    @Test
+    public void expenseDao_creationAndObtainingExpense_isTrue() {
+
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+
+        long insertedRecordId = mExpenseDao.createExpense(expenseModel);
+
+        ExpenseModel newExpenseModel = changeExpenseModelValues(expenseModel);
+
+        String where = ExpensesContract.Expense._ID + "= " + insertedRecordId;
+
+        long updatedRows = mExpenseDao.updateExpense(newExpenseModel, where);
+
+        assertEquals(SUCCESS_OPERATION, updatedRows);
+    }
+
+    private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
+
+        expenseModel.amount = 7357.90;
+        expenseModel.description = "Update description";
+        expenseModel.expenseTypeId = 3;
+
+        return expenseModel;
     }
 
 }
