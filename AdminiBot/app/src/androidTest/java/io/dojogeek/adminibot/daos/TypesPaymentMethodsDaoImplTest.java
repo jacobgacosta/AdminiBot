@@ -23,7 +23,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class TypesTypesPaymentMethodsDaoImplTest {
+public class TypesPaymentMethodsDaoImplTest {
 
     private static final int NO_VALUE = 0;
     private static final int OPERATIONAL_ERROR = -1;
