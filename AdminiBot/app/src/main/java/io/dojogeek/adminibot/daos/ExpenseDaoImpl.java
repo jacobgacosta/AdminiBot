@@ -20,13 +20,13 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     }
 
     @Override
-    public boolean createExpense(ExpenseModel expenseModel) {
+    public long createExpense(ExpenseModel expenseModel) {
 
         ContentValues contentValues = createContentValues(expenseModel);
 
         long response = mDatabase.insert(ExpensesContract.Expense.TABLE_NAME, ExpensesContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
 
-        return isValidResponse(response);
+        return response;
 
     }
 

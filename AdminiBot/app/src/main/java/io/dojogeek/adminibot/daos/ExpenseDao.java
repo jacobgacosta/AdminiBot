@@ -6,7 +6,7 @@ import io.dojogeek.adminibot.models.ExpenseModel;
 
 public interface ExpenseDao extends ConectionDao {
 
-    boolean createExpense(ExpenseModel expenseModel);
+    long createExpense(ExpenseModel expenseModel);
 
     List<ExpenseModel> getExpenses();
 

@@ -54,13 +54,8 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
         UserModel userModel = mUserDao.getUsers().get(INDEX_UNIQUE_USER);
         expenseModel.userId = userModel.id;
 
-        boolean isCreated = mExpenseDao.createExpense(expenseModel);
+        long isCreated = mExpenseDao.createExpense(expenseModel);
 
-        if (isCreated) {
-            mRegisterExpense.showNotification(R.string.expense_registered_ok);
-        } else {
-            mRegisterExpense.showNotification(R.string.register_failed);
-        }
     }
 
     @Override
