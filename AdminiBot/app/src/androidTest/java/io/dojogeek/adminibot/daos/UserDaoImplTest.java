@@ -20,6 +20,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -41,74 +42,79 @@ public class UserDaoImplTest {
 
     @After
     public void finishTest() {
-        mUserDao.removeAllUsers();
         mUserDao.closeConection();
+        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
     @Test
     public void userDao_creationUser_isTrue() {
 
-        UserModel user = CreatorModels.createUserModel();
+        UserModel userModel = CreatorModels.createUserModel();
 
-        long insertedRecordId = mUserDao.createUser(user);
+        long insertedRecordId = createUser(userModel);
 
         assertEquals(UNIQUE_USER, insertedRecordId);
+
     }
 
     @Test
     public void userDao_creationAndObtainingUser_isTrue() {
 
-        UserModel expectedUser = CreatorModels.createUserModel();
+        UserModel expectedUserModel = CreatorModels.createUserModel();
 
-        mUserDao.createUser(expectedUser);
+        createUser(expectedUserModel);
 
-        List<UserModel> actualUsers = mUserDao.getUsers();
-
-        verifyGetUsersResult(actualUsers);
-        compareResultUserModel(expectedUser, actualUsers);
-
-    }
-
-    @Test
-    public void userDao_creationAndupdatingUser_isTrue() {
-
-        UserModel userModel = CreatorModels.createUserModel();
-
-        long insertedRecordId = mUserDao.createUser(userModel);
-
-        String where = UsersContract.User._ID + "= " + insertedRecordId;
-
-        UserModel newUserModel = changeUserModelValues(userModel);
-
-        long updatedRows = mUserDao.updateUser(newUserModel, where);
-
-        assertEquals(UNIQUE_USER, updatedRows);
-
-    }
-
-    private UserModel changeUserModelValues(UserModel userModel) {
-        userModel.name = "Junit";
-        userModel.email = "updatetest@gmail.com";
-        userModel.lastName = "Jacoco";
-
-        return userModel;
-    }
-
-    private void verifyGetUsersResult(List<UserModel> userModelList) {
+        List<UserModel> userModelList = mUserDao.getUsers();
 
         assertNotNull(userModelList);
         assertTrue(!userModelList.isEmpty());
         assertEquals(UNIQUE_USER, userModelList.size());
 
-    }
-
-    private void compareResultUserModel(UserModel userModel, List<UserModel> actualUsers) {
-
-        for (UserModel user : actualUsers) {
-            assertEquals(userModel.name, user.name);
-            assertEquals(userModel.lastName, user.lastName);
-            assertEquals(userModel.email, user.email);
+        for (UserModel actualUserModel : userModelList) {
+            compareUserModels(actualUserModel, expectedUserModel);
         }
+
     }
 
+    @Test
+    public void userDao_creationAndUpdatingUser_isTrue() {
+
+        UserModel expectedUserModel = CreatorModels.createUserModel();
+
+        long insertedRecordId = createUser(expectedUserModel);
+
+        UserModel updatedUserModel = changeUserModelValues(expectedUserModel);
+
+        String where = UsersContract.User._ID + "= " + insertedRecordId;
+
+        mUserDao.updateUser(updatedUserModel, where);
+
+        List<UserModel> userModelList = mUserDao.getUsers();
+
+        compareUserModels(updatedUserModel, userModelList.get(0));
+
+    }
+
+    private long createUser(UserModel userModel) {
+
+        long insertedRecordId = mUserDao.createUser(userModel);
+
+        return insertedRecordId;
+    }
+
+    private void compareUserModels(UserModel expectedUserModel, UserModel actualUserModel) {
+
+        assertEquals(expectedUserModel.name, actualUserModel.name);
+        assertEquals(expectedUserModel.email, actualUserModel.email);
+        assertEquals(expectedUserModel.lastName, actualUserModel.lastName);
+
+    }
+
+    private UserModel changeUserModelValues(UserModel userModel) {
+        userModel.name = "Jacoco";
+        userModel.lastName = "Test";
+        userModel.email = "update@dojogeek.io";
+
+        return userModel;
+    }
 }
