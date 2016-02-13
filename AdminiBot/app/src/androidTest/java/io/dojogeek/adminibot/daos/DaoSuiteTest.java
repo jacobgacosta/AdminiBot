@@ -11,7 +11,7 @@ import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({UserDaoImplTest.class, ExpenseTypeDaoImplTest.class})
+@Suite.SuiteClasses({UserDaoImplTest.class, ExpenseTypeDaoImplTest.class, ExpenseDaoImplTest.class})
 public class DaoSuiteTest {
 
     @AfterClass
