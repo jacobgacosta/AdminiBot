@@ -47,7 +47,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_creationAndObtainingExpense_isTrue() {
+    public void expenseDao_creationAndUpdatingExpense_isTrue() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
