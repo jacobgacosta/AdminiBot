@@ -31,6 +31,16 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     }
 
     @Override
+    public long updateExpense(ExpenseModel expenseModel, String where) {
+
+        ContentValues contentValues = createContentValues(expenseModel);
+
+        long updatedRows = mDatabase.update(ExpensesContract.Expense.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
+    @Override
     public List<ExpenseModel> getExpenses() {
 
         List<ExpenseModel> expenseTypeModelList = new ArrayList<>();
