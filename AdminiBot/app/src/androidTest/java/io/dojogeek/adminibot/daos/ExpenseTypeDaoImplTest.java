@@ -43,7 +43,6 @@ public class ExpenseTypeDaoImplTest {
 
     @After
     public void finishTest() {
-        mExpenseTypeDao.removeAllExpensesTypes();
         mExpenseTypeDao.closeConection();
     }
 
@@ -54,8 +53,7 @@ public class ExpenseTypeDaoImplTest {
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
-        assertTrue(insertedExpenseTypeId != OPERATIONAL_ERROR);
-        assertTrue(insertedExpenseTypeId > NO_VALUE);
+        assertNotEquals(OPERATIONAL_ERROR, insertedExpenseTypeId);
     }
 
     @Test
@@ -65,14 +63,13 @@ public class ExpenseTypeDaoImplTest {
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
-        expenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
+        ExpenseTypeModel newExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
 
         String where = ExpensesTypesContract.ExpenseType._ID + "= " + insertedExpenseTypeId;
 
-        long rowsUpdated = mExpenseTypeDao.updateExpensetype(expenseTypeModel, where);
+        long rowsUpdated = mExpenseTypeDao.updateExpensetype(newExpenseTypeModel, where);
 
-        assertNotEquals(OPERATIONAL_ERROR, rowsUpdated);
-        assertEquals(SUCCESS_CODE, rowsUpdated);
+        assertNotEquals(NO_VALUE, rowsUpdated);
     }
 
     @Test
