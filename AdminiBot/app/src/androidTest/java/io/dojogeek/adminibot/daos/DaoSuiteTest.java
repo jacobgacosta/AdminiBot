@@ -14,12 +14,4 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 @Suite.SuiteClasses({UserDaoImplTest.class, ExpenseTypeDaoImplTest.class, ExpenseDaoImplTest.class})
 public class DaoSuiteTest {
 
-    @AfterClass
-    public void deleteDataBase() {
-
-        Context context = getTargetContext();
-        context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
-
-    }
-
 }
