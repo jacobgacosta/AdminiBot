@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,13 +28,14 @@ public class UserDaoImplTest {
 
     private static int UNIQUE_USER = 1;
     private UserDao mUserDao;
+    private Context mContext;
 
     @Before
     public void setup() {
 
-        Context context = getTargetContext();
+        mContext = getTargetContext();
 
-        mUserDao = new UserDaoImpl(context);
+        mUserDao = new UserDaoImpl(mContext);
         mUserDao.openConection();
     }
 
@@ -54,21 +56,21 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_obtainingUser_isTrue() {
+    public void userDao_creationAndObtainingUser_isTrue() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel expectedUser = CreatorModels.createUserModel();
 
-        mUserDao.createUser(userModel);
+        mUserDao.createUser(expectedUser);
 
         List<UserModel> actualUsers = mUserDao.getUsers();
 
         verifyGetUsersResult(actualUsers);
-        compareResultUserModel(userModel, actualUsers);
+        compareResultUserModel(expectedUser, actualUsers);
 
     }
 
     @Test
-    public void userDao_updatingUser_isTrue() {
+    public void userDao_creationAndupdatingUser_isTrue() {
 
         UserModel userModel = CreatorModels.createUserModel();
 
@@ -76,17 +78,11 @@ public class UserDaoImplTest {
 
         String where = UsersContract.User._ID + "= " + insertedRecordId;
 
-        userModel = changeUserModelValues(userModel);
+        UserModel newUserModel = changeUserModelValues(userModel);
 
-        long updatedRows = mUserDao.updateUser(userModel, where);
+        long updatedRows = mUserDao.updateUser(newUserModel, where);
 
         assertEquals(UNIQUE_USER, updatedRows);
-
-        List<UserModel> actualUsers = mUserDao.getUsers();
-
-        verifyGetUsersResult(actualUsers);
-
-        compareResultUserModel(userModel, actualUsers);
 
     }
 
