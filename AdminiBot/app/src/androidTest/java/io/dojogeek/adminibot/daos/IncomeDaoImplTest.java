@@ -51,7 +51,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_creationAndObtainingIncomeById() {
+    public void incomeDao_creationAndObtainingIncomeById_isTrue() {
 
         IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
 
@@ -66,4 +66,5 @@ public class IncomeDaoImplTest {
         assertEquals(expectedIncomeModel.nextDate, actualIncome.nextDate);
         assertEquals(expectedIncomeModel.userId, actualIncome.userId);
     }
+
 }
