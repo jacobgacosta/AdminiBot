@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.IncomesContract;
 import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
@@ -23,6 +24,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class IncomeDaoImplTest {
 
+    private static final int SUCCESS_OPERATION = 1;
     private static final int OPERATIONAL_ERROR = -1;
     private static final int NO_OPERATION = 0;
 
@@ -78,9 +80,29 @@ public class IncomeDaoImplTest {
 
         List<IncomeModel> expectedIncomeModels = createIncomes(numberOfIncomesToCreate);
 
-        List<IncomeModel> actualIncomeModels =  mIncomeDao.getIncomes();
+        List<IncomeModel> actualIncomeModels = mIncomeDao.getIncomes();
 
         compareIncomesList(expectedIncomeModels, actualIncomeModels);
+    }
+
+    @Test
+    public void incomeDao_creationUpdatingAndObtainingIncomeById_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
+
+        IncomeModel expectedNewIncomeModel = changeIncomeModelValues(incomeModel);
+
+        String where = IncomesContract.Incomes._ID + "= " +  insertedRecordId;
+
+        long updatedRows = mIncomeDao.updateIncome(expectedNewIncomeModel, where);
+
+        assertEquals(SUCCESS_OPERATION, updatedRows);
+
+        IncomeModel actualUpdatedIncome = mIncomeDao.getIncomeById(insertedRecordId);
+
+        compareIncomes(expectedNewIncomeModel, actualUpdatedIncome);
     }
 
     private List<IncomeModel> createIncomes(int numberOfIncomesToCreate) {
@@ -109,12 +131,26 @@ public class IncomeDaoImplTest {
             IncomeModel actualIncomeModel = actualIncomes.get(index);
             IncomeModel expectedIncomeModel = expectedIncomes.get(index);
 
-            assertEquals(expectedIncomeModel.description, actualIncomeModel.description);
-            assertEquals(expectedIncomeModel.amount, actualIncomeModel.amount, 0);
-            assertEquals(expectedIncomeModel.date, actualIncomeModel.date);
-            assertEquals(expectedIncomeModel.nextDate, actualIncomeModel.nextDate);
-            assertEquals(expectedIncomeModel.userId, actualIncomeModel.userId);
+            compareIncomes(expectedIncomeModel, actualIncomeModel);
         }
+    }
 
+    private void compareIncomes(IncomeModel expectedIncomeModel, IncomeModel actualIncomeModel) {
+        assertNotNull(actualIncomeModel);
+        assertEquals(expectedIncomeModel.description, actualIncomeModel.description);
+        assertEquals(expectedIncomeModel.amount, actualIncomeModel.amount, 0);
+        assertEquals(expectedIncomeModel.date, actualIncomeModel.date);
+        assertEquals(expectedIncomeModel.nextDate, actualIncomeModel.nextDate);
+        assertEquals(expectedIncomeModel.userId, actualIncomeModel.userId);
+    }
+
+    private IncomeModel changeIncomeModelValues(IncomeModel incomeModel) {
+        incomeModel.description = "updated description";
+        incomeModel.amount = 120.60;
+        incomeModel.date = DateUtils.getCurrentData();
+        incomeModel.nextDate = null;
+        incomeModel.userId = 1;
+
+        return incomeModel;
     }
 }

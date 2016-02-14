@@ -73,6 +73,16 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
         return incomeModelList;
     }
 
+    @Override
+    public long updateIncome(IncomeModel incomeModel, String where) {
+
+        ContentValues contentValues = createContentValues(incomeModel);
+
+        long updatedRows = mDatabase.update(IncomesContract.Incomes.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
     private ContentValues createContentValues(IncomeModel incomeModel) {
 
         ContentValues contentValues = new ContentValues();
