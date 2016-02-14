@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.IncomeModel;
@@ -46,6 +49,28 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
         }
 
         return incomeModel;
+    }
+
+    @Override
+    public List<IncomeModel> getIncomes() {
+
+        List<IncomeModel> incomeModelList = new ArrayList<>();
+
+        Cursor cursor = mDatabase.query(IncomesContract.Incomes.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                IncomeModel incomeModel = getIncomeModelFromCursor(cursor);
+
+                incomeModelList.add(incomeModel);
+
+                cursor.moveToNext();
+            }
+        }
+
+        return incomeModelList;
     }
 
     private ContentValues createContentValues(IncomeModel incomeModel) {

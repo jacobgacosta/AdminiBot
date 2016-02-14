@@ -1,5 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
+import java.util.List;
+
 import io.dojogeek.adminibot.models.IncomeModel;
 
 public interface IncomeDao extends ConectionDao {
@@ -8,4 +10,5 @@ public interface IncomeDao extends ConectionDao {
 
     IncomeModel getIncomeById(long incomeId);
 
+    List<IncomeModel> getIncomes();
 }
