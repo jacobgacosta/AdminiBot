@@ -6,4 +6,6 @@ public interface IncomeDao extends ConectionDao {
 
     long createIncome(IncomeModel incomeModel);
 
+    IncomeModel getIncomeById(long incomeId);
+
 }

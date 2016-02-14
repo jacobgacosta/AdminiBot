@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -34,6 +35,7 @@ public class IncomeDaoImplTest {
     @After
     public void finishTest() {
         mIncomeDao.closeConection();
+        mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
     @Test
@@ -46,5 +48,22 @@ public class IncomeDaoImplTest {
         assertNotEquals(NO_OPERATION, insertedRecordId);
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
 
+    }
+
+    @Test
+    public void incomeDao_createAndObtainingIncomeById() {
+
+        IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
+
+        long insertedRecordId = mIncomeDao.createIncome(expectedIncomeModel);
+
+        IncomeModel actualIncome = mIncomeDao.getIncomeById(insertedRecordId);
+
+        assertNotNull(actualIncome);
+        assertEquals(expectedIncomeModel.description, actualIncome.description);
+        assertEquals(expectedIncomeModel.amount, actualIncome.amount, 0);
+        assertEquals(expectedIncomeModel.date, actualIncome.date);
+        assertEquals(expectedIncomeModel.nextDate, actualIncome.nextDate);
+        assertEquals(expectedIncomeModel.userId, actualIncome.userId);
     }
 }
