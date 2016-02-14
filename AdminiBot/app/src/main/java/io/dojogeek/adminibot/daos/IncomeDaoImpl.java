@@ -83,6 +83,17 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
         return updatedRows;
     }
 
+    @Override
+    public long deleteIncome(long incomeId) {
+
+        String [] arg = {String.valueOf(incomeId)};
+
+        int deletedRows = mDatabase.delete(IncomesContract.Incomes.TABLE_NAME,
+                IncomesContract.Incomes._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(IncomeModel incomeModel) {
 
         ContentValues contentValues = new ContentValues();

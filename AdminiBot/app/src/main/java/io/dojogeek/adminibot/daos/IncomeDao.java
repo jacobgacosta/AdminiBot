@@ -13,4 +13,6 @@ public interface IncomeDao extends ConectionDao {
     List<IncomeModel> getIncomes();
 
     long updateIncome(IncomeModel incomeModel, String where);
+
+    long deleteIncome(long incomeId);
 }

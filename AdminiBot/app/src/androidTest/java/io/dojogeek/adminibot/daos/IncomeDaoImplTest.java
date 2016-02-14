@@ -105,6 +105,18 @@ public class IncomeDaoImplTest {
         compareIncomes(expectedNewIncomeModel, actualUpdatedIncome);
     }
 
+    @Test
+    public void incomeDao_creationAndDeletionIncome_isTrue() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
+
+        long deletedRows = mIncomeDao.deleteIncome(insertedRecordId);
+
+        assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
     private List<IncomeModel> createIncomes(int numberOfIncomesToCreate) {
 
         List<IncomeModel> incomeModelList = new ArrayList<>();
