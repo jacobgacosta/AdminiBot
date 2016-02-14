@@ -77,14 +77,20 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
 
         ContentValues contentValues = createContentValues(expenseTypeModel);
 
-        long updatedRecords =mDatabase.update(ExpensesTypesContract.ExpenseType.TABLE_NAME, contentValues, where, null);
+        long updatedRecords = mDatabase.update(ExpensesTypesContract.ExpenseType.TABLE_NAME, contentValues, where, null);
 
         return updatedRecords;
     }
 
     @Override
-    public void removeAllExpensesTypes() {
-        mDatabase.execSQL("DELETE FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME);
+    public long removeExpenseTypeById(long expenseTypeId) {
+
+        String [] arg = {String.valueOf(expenseTypeId)};
+
+        int deletedRows = mDatabase.delete(ExpensesTypesContract.ExpenseType.TABLE_NAME,
+                ExpensesTypesContract.ExpenseType._ID + "= ?", arg);
+
+        return deletedRows;
     }
 
     private ExpenseTypeModel getExpenseTypeModelFromCursor(Cursor cursor) {
