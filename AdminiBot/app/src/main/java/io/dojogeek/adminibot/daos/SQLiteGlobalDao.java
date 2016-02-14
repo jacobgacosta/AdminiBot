@@ -7,8 +7,6 @@ import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
 public class SQLiteGlobalDao {
 
-    private static final int INVALID_RESPONSE = -1;
-
     protected AdminiBotSQLiteOpenHelper mHelper;
     protected SQLiteDatabase mDatabase;
 
@@ -23,13 +21,4 @@ public class SQLiteGlobalDao {
     public void closeConection() {
         mHelper.close();
     }
-
-    protected boolean isValidResponse(long response) {
-        if (response > INVALID_RESPONSE) {
-            return true;
-        }
-
-        return false;
-    }
-
 }
