@@ -12,4 +12,6 @@ public interface ExpenseDao extends ConectionDao {
 
     List<ExpenseModel> getExpenses();
 
+    ExpenseModel getExpenseById(long expenseId);
+
 }

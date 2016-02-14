@@ -62,6 +62,28 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         return expenseTypeModelList;
     }
 
+    @Override
+    public ExpenseModel getExpenseById(long expenseId) {
+
+        String [] args = {String.valueOf(expenseId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesContract.Expense.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        ExpenseModel expenseModel = new ExpenseModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                expenseModel = getExpenseModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return expenseModel;
+    }
+
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
@@ -78,25 +100,25 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     private ExpenseModel getExpenseModelFromCursor(Cursor cursor) {
 
-        ExpenseModel expenseTypeModel = new ExpenseModel();
+        ExpenseModel expenseModel = new ExpenseModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(ExpensesContract.Expense._ID));
         String description = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_DESCRIPTION));
-        long amount = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_AMOUNT));
+        double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_AMOUNT));
         String dateExpediture = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE));
         String nextExit = cursor.getString(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_NEXT_EXIT));
         long expenseTypeId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID));
         long userId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_USER_ID));
 
-        expenseTypeModel.id = id;
-        expenseTypeModel.description = description;
-        expenseTypeModel.amount = amount;
-        expenseTypeModel.dateExpediture = dateExpediture;
-        expenseTypeModel.nextExit = nextExit;
-        expenseTypeModel.expenseTypeId = expenseTypeId;
-        expenseTypeModel.userId = userId;
+        expenseModel.id = id;
+        expenseModel.description = description;
+        expenseModel.amount = amount;
+        expenseModel.dateExpediture = dateExpediture;
+        expenseModel.nextExit = nextExit;
+        expenseModel.expenseTypeId = expenseTypeId;
+        expenseModel.userId = userId;
 
-        return expenseTypeModel;
+        return expenseModel;
 
     }
 
