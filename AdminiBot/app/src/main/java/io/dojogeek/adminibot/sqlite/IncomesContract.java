@@ -24,7 +24,7 @@ public class IncomesContract {
             Incomes.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
             Incomes.COLUMN_AMOUNT + " REAL NOT NULL, " +
             Incomes.COLUMN_DATE + " TEXT NOT NULL, " +
-            Incomes.COLUMN_NEXT_ENTRY + " TEXT NOT NULL, " +
+            Incomes.COLUMN_NEXT_ENTRY + " TEXT, " +
             Incomes.COLUMN_USER_ID + " INTEGER NOT NULL)";
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + Incomes.TABLE_NAME;
