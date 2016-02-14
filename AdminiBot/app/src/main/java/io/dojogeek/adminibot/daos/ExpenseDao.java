@@ -14,4 +14,5 @@ public interface ExpenseDao extends ConectionDao {
 
     ExpenseModel getExpenseById(long expenseId);
 
+    long deleteExpense(long expenseId);
 }

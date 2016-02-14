@@ -101,6 +101,18 @@ public class ExpenseDaoImplTest {
 
     }
 
+    @Test
+    public void expenseDao_creationAndDeleteExpense_isTrue() {
+
+        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+
+        long insertedRecordId = mExpenseDao.createExpense(expenseModel);
+
+        long deletedRows = mExpenseDao.deleteExpense(insertedRecordId);
+
+        assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
     private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
 
         expenseModel.amount = 7357.90;

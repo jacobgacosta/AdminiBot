@@ -84,6 +84,17 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         return expenseModel;
     }
 
+    @Override
+    public long deleteExpense(long expenseId) {
+
+        String [] arg = {String.valueOf(expenseId)};
+
+        int deletedRows = mDatabase.delete(ExpensesContract.Expense.TABLE_NAME,
+                ExpensesContract.Expense._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
