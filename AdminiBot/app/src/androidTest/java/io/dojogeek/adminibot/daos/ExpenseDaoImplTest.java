@@ -68,6 +68,19 @@ public class ExpenseDaoImplTest {
 
 
     @Test
+    public void expenseDao_creationAndObtainingExpenseById_isTrue() {
+
+        ExpenseModel expectedExpenseModel = CreatorModels.createExpenseModel();
+
+        long insertedRecordId = mExpenseDao.createExpense(expectedExpenseModel);
+
+        ExpenseModel actualExpenseModel = mExpenseDao.getExpenseById(insertedRecordId);
+
+        compareExpenses(expectedExpenseModel, actualExpenseModel);
+
+    }
+
+    @Test
     public void expenseDao_creationAndUpdatingExpense_isTrue() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
@@ -101,6 +114,16 @@ public class ExpenseDaoImplTest {
             mExpenseDao.createExpense(expenseModel);
         }
 
+    }
+
+    private void compareExpenses(ExpenseModel expectedExpense, ExpenseModel actualExpense) {
+        assertNotNull(actualExpense);
+        assertEquals(expectedExpense.expenseTypeId, actualExpense.expenseTypeId);
+        assertEquals(expectedExpense.userId, actualExpense.userId);
+        assertEquals(expectedExpense.nextExit, actualExpense.nextExit);
+        assertEquals(expectedExpense.dateExpediture, actualExpense.dateExpediture);
+        assertEquals(expectedExpense.amount, actualExpense.amount, 0);
+        assertEquals(expectedExpense.description, actualExpense.description);
     }
 
 }
