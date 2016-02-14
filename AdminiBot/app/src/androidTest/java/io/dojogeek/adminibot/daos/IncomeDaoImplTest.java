@@ -51,7 +51,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_createAndObtainingIncomeById() {
+    public void incomeDao_creationAndObtainingIncomeById() {
 
         IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
 
