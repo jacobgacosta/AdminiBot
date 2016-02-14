@@ -81,7 +81,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_creationAndUpdatingExpense_isTrue() {
+    public void expenseDao_creationUpdatingAndObtainingExpenseById_isTrue() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
@@ -94,6 +94,11 @@ public class ExpenseDaoImplTest {
         long updatedRows = mExpenseDao.updateExpense(newExpenseModel, where);
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
+
+        ExpenseModel updatedExpenseModel = mExpenseDao.getExpenseById(insertedRecordId);
+
+        compareExpenses(newExpenseModel, updatedExpenseModel);
+
     }
 
     private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
