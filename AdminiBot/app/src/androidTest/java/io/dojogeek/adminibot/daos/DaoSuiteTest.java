@@ -12,7 +12,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({UserDaoImplTest.class, ExpenseTypeDaoImplTest.class, ExpenseDaoImplTest.class,
-        IncomeDaoImplTest.class})
+        IncomeDaoImplTest.class, BankCardDaoImplTest.class})
 public class DaoSuiteTest {
 
 }
