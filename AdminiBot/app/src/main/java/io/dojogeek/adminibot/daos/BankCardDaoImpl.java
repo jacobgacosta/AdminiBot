@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,28 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         return result;
     }
 
+    @Override
+    public BankCardModel getBankCardById(long cardBankId) {
+
+        String [] args = {String.valueOf(cardBankId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + BankCardsContract.BankCard.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        BankCardModel bankCardModel = new BankCardModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                bankCardModel = getBankCardModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return bankCardModel;
+    }
+
     private ContentValues createContentValues(BankCardModel bankCardModel) {
 
         ContentValues contentValues = new ContentValues();
@@ -37,5 +60,31 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         contentValues.put(BankCardsContract.BankCard.COLUMN_USER_ID, bankCardModel.userId);
 
         return contentValues;
+    }
+
+    private BankCardModel getBankCardModelFromCursor(Cursor cursor) {
+
+        BankCardModel bankCardModel = new BankCardModel();
+
+        long id = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard._ID));
+        String name = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_NAME));
+        String number = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_NUMBER));
+        long bankId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_BANK_ID));
+        long trademarkId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID));
+        double availableCredit = cursor.getDouble(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE));
+        long cardTypeId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CARD_TYPE_ID));
+        long userId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_USER_ID));
+
+        bankCardModel.id = id;
+        bankCardModel.name = name;
+        bankCardModel.number = number;
+        bankCardModel.bankId = bankId;
+        bankCardModel.trademarkId = trademarkId;
+        bankCardModel.availableCredit = availableCredit;
+        bankCardModel.cardTypeId = cardTypeId;
+        bankCardModel.userId = userId;
+
+        return bankCardModel;
+
     }
 }

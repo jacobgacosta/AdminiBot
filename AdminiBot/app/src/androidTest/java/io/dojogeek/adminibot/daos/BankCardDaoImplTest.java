@@ -49,4 +49,24 @@ public class BankCardDaoImplTest {
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
     }
 
+    @Test
+    public void bankCardDao_creationAndObtainingBankCardById_isTrue() {
+
+        BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
+
+        long insertedRecordId = mBankCardDao.createBankCard(expectedBankCardModel);
+
+        BankCardModel actualBankCardModel = mBankCardDao.getBankCardById(insertedRecordId);
+
+        assertNotNull(actualBankCardModel);
+        assertEquals(expectedBankCardModel.name, actualBankCardModel.name);
+        assertEquals(expectedBankCardModel.number, actualBankCardModel.number);
+        assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
+        assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
+        assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
+        assertEquals(expectedBankCardModel.cardTypeId, actualBankCardModel.cardTypeId);
+        assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
+
+    }
+
 }
