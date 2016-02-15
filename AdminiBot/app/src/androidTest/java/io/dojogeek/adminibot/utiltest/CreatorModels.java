@@ -4,6 +4,7 @@ import java.util.Date;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
+import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
@@ -126,5 +127,27 @@ public class CreatorModels {
         incomeModel.userId = userId;
 
         return incomeModel;
+    }
+
+    public static BankCardModel createBankCardModel() {
+        BankCardModel bankCardModel = createBankCardModel("Bancomer", "123456789012345678", 2, 2,
+                24000.00, 2, 1);
+
+        return bankCardModel;
+    }
+
+    public static BankCardModel createBankCardModel(String name, String number, long bankId, long trademarkId,
+                                                    double availableCredit, long cardTypeId, long userId) {
+
+        BankCardModel bankCardModel = new BankCardModel();
+        bankCardModel.name = name;
+        bankCardModel.number = number;
+        bankCardModel.bankId = bankId;
+        bankCardModel.trademarkId = trademarkId;
+        bankCardModel.availableCredit = availableCredit;
+        bankCardModel.cardTypeId = cardTypeId;
+        bankCardModel.userId = userId;
+
+        return bankCardModel;
     }
 }
