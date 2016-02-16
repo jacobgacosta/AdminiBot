@@ -77,8 +77,6 @@ public class BankCardDaoImplTest {
 
         int numberOfBankCardToCreate = 5;
 
-        BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
-
         List<BankCardModel> expectedBankCardModels = createBankCardModels(numberOfBankCardToCreate);
 
         List<BankCardModel> actualBankCardModels = mBankCardDao.getBankCards();
