@@ -17,7 +17,7 @@ public enum CardTypeEnum {
         return mCardType;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 }
