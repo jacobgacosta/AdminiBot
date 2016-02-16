@@ -106,6 +106,19 @@ public class BankCardDaoImplTest {
 
     }
 
+    @Test
+    public void bankCardDao_creationAndDeletionBankCard_isTrue() {
+
+        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+
+        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+
+        long deletedRows = mBankCardDao.deleteBankCard(insertedRecordId);
+
+        assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
+
     private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
 
         List<BankCardModel> bankCardModels = new ArrayList<>();

@@ -84,6 +84,16 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
 
     }
 
+    @Override
+    public long deleteBankCard(long bankCardId) {
+        String [] arg = {String.valueOf(bankCardId)};
+
+        int deletedRows = mDatabase.delete(BankCardsContract.BankCard.TABLE_NAME,
+                BankCardsContract.BankCard._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(BankCardModel bankCardModel) {
 
         ContentValues contentValues = new ContentValues();
