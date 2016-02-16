@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
@@ -69,4 +72,61 @@ public class BankCardDaoImplTest {
 
     }
 
+    @Test
+    public void bankCardDao_creationAndObtainingAllBankCards_isTrue() {
+
+        int numberOfBankCardToCreate = 5;
+
+        BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
+
+        List<BankCardModel> expectedBankCardModels = createBankCardModels(numberOfBankCardToCreate);
+
+        List<BankCardModel> actualBankCardModels = mBankCardDao.getBankCards();
+
+        compareBankCardsList(expectedBankCardModels, actualBankCardModels);
+    }
+
+    private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
+
+        List<BankCardModel> bankCardModels = new ArrayList<>();
+
+        for (int index = 1; index <= numberOfBankCardToCreate; index++) {
+
+            BankCardModel bankCardModel = CreatorModels.createBankCardModel("Bancomer " + index,
+                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, 2 + index,
+                    1 + index);
+
+            mBankCardDao.createBankCard(bankCardModel);
+            bankCardModels.add(bankCardModel);
+
+        }
+
+        return bankCardModels;
+    }
+
+    private void compareBankCardsList(List<BankCardModel> expectedBankCards, List<BankCardModel> actualBankCards) {
+
+        assertNotNull(actualBankCards);
+        assertTrue(!actualBankCards.isEmpty());
+        assertEquals(expectedBankCards.size(), actualBankCards.size());
+
+        for (int index = 0; index < actualBankCards.size(); index++) {
+
+            BankCardModel actualBankCardModel = actualBankCards.get(index);
+            BankCardModel expectedBankCardModel = actualBankCards.get(index);
+
+            compareBankCards(expectedBankCardModel, actualBankCardModel);
+        }
+    }
+
+    private void compareBankCards(BankCardModel expectedBankCardModel, BankCardModel actualBankCardModel) {
+        assertNotNull(actualBankCardModel);
+        assertEquals(expectedBankCardModel.name, actualBankCardModel.name);
+        assertEquals(expectedBankCardModel.number, actualBankCardModel.number);
+        assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
+        assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
+        assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
+        assertEquals(expectedBankCardModel.cardTypeId, actualBankCardModel.cardTypeId);
+        assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
+    }
 }

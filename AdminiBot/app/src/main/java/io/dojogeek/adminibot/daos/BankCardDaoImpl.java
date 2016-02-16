@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.models.BankCardModel;
@@ -46,6 +49,28 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         }
 
         return bankCardModel;
+    }
+
+    @Override
+    public List<BankCardModel> getBankCards() {
+
+        List<BankCardModel> bankCardModelList = new ArrayList<>();
+
+        Cursor cursor = mDatabase.query(BankCardsContract.BankCard.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                BankCardModel bankCardModel = getBankCardModelFromCursor(cursor);
+
+                bankCardModelList.add(bankCardModel);
+
+                cursor.moveToNext();
+            }
+        }
+
+        return bankCardModelList;
     }
 
     private ContentValues createContentValues(BankCardModel bankCardModel) {
