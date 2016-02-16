@@ -80,6 +80,17 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
         return updatedRows;
     }
 
+    @Override
+    public long deleteCardDetail(long cardDetailId) {
+
+        String [] arg = {String.valueOf(cardDetailId)};
+
+        int deletedRows = mDatabase.delete(CardDetailContract.CardDetail.TABLE_NAME,
+                CardDetailContract.CardDetail._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(CardDetailModel cardDetailModel) {
 
         ContentValues contentValues = new ContentValues();

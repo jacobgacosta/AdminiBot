@@ -97,6 +97,18 @@ public class CardDetailDaoImplTest {
 
     }
 
+    @Test
+    public void cardDetailDao_creationAndDeletionCardDetail_isTrue() {
+
+        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+
+        long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
+
+        long deletedRows = mCardDetailDao.deleteCardDetail(insertedRecordId);
+
+        assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
     private void compareCardsDetails(CardDetailModel expectedCardDetailModel, CardDetailModel actualCardDetailModel) {
 
         assertNotNull(actualCardDetailModel);
