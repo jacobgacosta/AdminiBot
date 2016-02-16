@@ -4,6 +4,7 @@ import java.util.Date;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
+import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
@@ -132,13 +133,13 @@ public class CreatorModels {
 
     public static BankCardModel createBankCardModel() {
         BankCardModel bankCardModel = createBankCardModel("Bancomer", "123456789012345678", 2, 2,
-                24000.00, 2, 1);
+                24000.00, CardTypeEnum.CREDIT_CARD, 1);
 
         return bankCardModel;
     }
 
     public static BankCardModel createBankCardModel(String name, String number, long bankId, long trademarkId,
-                                                    double availableCredit, long cardTypeId, long userId) {
+                                                    double availableCredit, CardTypeEnum cardType, long userId) {
 
         BankCardModel bankCardModel = new BankCardModel();
         bankCardModel.name = name;
@@ -146,7 +147,7 @@ public class CreatorModels {
         bankCardModel.bankId = bankId;
         bankCardModel.trademarkId = trademarkId;
         bankCardModel.availableCredit = availableCredit;
-        bankCardModel.cardTypeId = cardTypeId;
+        bankCardModel.cardType = cardType;
         bankCardModel.userId = userId;
 
         return bankCardModel;

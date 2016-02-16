@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
@@ -68,7 +69,7 @@ public class BankCardDaoImplTest {
         assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
         assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
         assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
-        assertEquals(expectedBankCardModel.cardTypeId, actualBankCardModel.cardTypeId);
+        assertEquals(expectedBankCardModel.cardType, actualBankCardModel.cardType);
         assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
 
     }
@@ -121,12 +122,11 @@ public class BankCardDaoImplTest {
     @Test
     public void bankCardDao_creationAndObtainingBankCardsByCardType_isTrue() {
 
-        long cardTypeId = 2;
         int numberOfBankCardToCreate = 4;
 
         List<BankCardModel> expectedBankCardsModels = createBankCardModels(numberOfBankCardToCreate);
 
-        List<BankCardModel> actualBankCardsModels = mBankCardDao.getBankCardByCartTypeId(cardTypeId);
+        List<BankCardModel> actualBankCardsModels = mBankCardDao.getBankCardByCartType(CardTypeEnum.DEBIT_CARD);
 
         compareBankCardsList(expectedBankCardsModels, actualBankCardsModels);
 
@@ -140,7 +140,7 @@ public class BankCardDaoImplTest {
         for (int index = 1; index <= numberOfBankCardToCreate; index++) {
 
             BankCardModel bankCardModel = CreatorModels.createBankCardModel("Bancomer " + index,
-                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, 2, 1 + index);
+                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, CardTypeEnum.DEBIT_CARD, 1 + index);
 
             mBankCardDao.createBankCard(bankCardModel);
             bankCardModels.add(bankCardModel);
@@ -172,7 +172,7 @@ public class BankCardDaoImplTest {
         assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
         assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
         assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
-        assertEquals(expectedBankCardModel.cardTypeId, actualBankCardModel.cardTypeId);
+        assertEquals(expectedBankCardModel.cardType, actualBankCardModel.cardType);
         assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
     }
 
@@ -182,7 +182,7 @@ public class BankCardDaoImplTest {
         bankCardModel.bankId = 1;
         bankCardModel.trademarkId = 1;
         bankCardModel.availableCredit = 8743.90;
-        bankCardModel.cardTypeId = 1;
+        bankCardModel.cardType = CardTypeEnum.CREDIT_CARD;
         bankCardModel.userId = 2;
 
         return bankCardModel;
