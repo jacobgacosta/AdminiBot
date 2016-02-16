@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.CardDetailContract;
+import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -74,6 +76,27 @@ public class CardDetailDaoImplTest {
 
     }
 
+    @Test
+    public void cardDetailDao_creationUpdatingAndObtainingCardDetailById_isTrue() {
+
+        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+
+        long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
+
+        CardDetailModel expectedUpdatedCardDetail = changeCardDetailValues(cardDetailModel);
+
+        String where = CardDetailContract.CardDetail._ID + "= " + insertedRecordId;
+
+        long updatedRows = mCardDetailDao.updateCardDetail(expectedUpdatedCardDetail, where);
+
+        assertEquals(SUCCESS_OPERATION, updatedRows);
+
+        CardDetailModel actualCardDetailModel = mCardDetailDao.getCardDetailById(insertedRecordId);
+
+        compareCardsDetails(expectedUpdatedCardDetail, actualCardDetailModel);
+
+    }
+
     private void compareCardsDetails(CardDetailModel expectedCardDetailModel, CardDetailModel actualCardDetailModel) {
 
         assertNotNull(actualCardDetailModel);
@@ -82,5 +105,16 @@ public class CardDetailDaoImplTest {
         assertEquals(expectedCardDetailModel.currentBalance, actualCardDetailModel.currentBalance, 0);
         assertEquals(expectedCardDetailModel.cuttoffDate, actualCardDetailModel.cuttoffDate);
         assertEquals(expectedCardDetailModel.payDayLimit, actualCardDetailModel.payDayLimit);
+    }
+
+    private CardDetailModel changeCardDetailValues(CardDetailModel cardDetailModel) {
+
+        cardDetailModel.bankCardId = 4;
+        cardDetailModel.creditLimit = 25000.00;
+        cardDetailModel.payDayLimit = DateUtils.getCurrentData();
+        cardDetailModel.currentBalance = 24980.00;
+        cardDetailModel.cuttoffDate = DateUtils.getCurrentData();
+
+        return cardDetailModel;
     }
 }

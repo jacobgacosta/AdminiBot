@@ -9,4 +9,6 @@ public interface CardDetailDao extends ConectionDao {
     CardDetailModel getCardDetailById(long cardDetailId);
 
     CardDetailModel getCardDetailByBankCardId(long bankCardId);
+
+    long updateCardDetail(CardDetailModel cardDetailModel, String where);
 }

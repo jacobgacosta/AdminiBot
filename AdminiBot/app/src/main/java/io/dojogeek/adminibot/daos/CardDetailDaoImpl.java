@@ -70,6 +70,16 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
         return cardDetailModel;
     }
 
+    @Override
+    public long updateCardDetail(CardDetailModel cardDetailModel, String where) {
+
+        ContentValues contentValues = createContentValues(cardDetailModel);
+
+        long updatedRows = mDatabase.update(CardDetailContract.CardDetail.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
     private ContentValues createContentValues(CardDetailModel cardDetailModel) {
 
         ContentValues contentValues = new ContentValues();
