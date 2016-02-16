@@ -95,6 +95,28 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         return deletedRows;
     }
 
+    @Override
+    public List<ExpenseModel> getExpenseByExpenseTypeId(long expenseTypeId) {
+        String [] args = {String.valueOf(expenseTypeId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesContract.Expense.TABLE_NAME +
+                " WHERE expense_type_id = ? ", args);
+
+        List<ExpenseModel> expenseModelList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                ExpenseModel expenseModel = getExpenseModelFromCursor(cursor);
+                expenseModelList.add(expenseModel);
+                cursor.moveToNext();
+            }
+        }
+
+        return expenseModelList;
+    }
+
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();

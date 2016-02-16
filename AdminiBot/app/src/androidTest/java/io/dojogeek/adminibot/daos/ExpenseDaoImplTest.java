@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
@@ -113,6 +114,19 @@ public class ExpenseDaoImplTest {
         assertEquals(SUCCESS_OPERATION, deletedRows);
     }
 
+    @Test
+    public void expenseDao_createAndObtainingExpenseByExpenseTypeId_isTrue() {
+
+        int numberOfInsertions = 5;
+        int expenseTypeId = 2;
+
+        List<ExpenseModel> expectedExpensesModels = createExpenses(numberOfInsertions);
+
+        List<ExpenseModel> actualExpensesModels = mExpenseDao.getExpenseByExpenseTypeId(expenseTypeId);
+
+        compareExpensesList(expectedExpensesModels, actualExpensesModels);
+    }
+
     private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
 
         expenseModel.amount = 7357.90;
@@ -122,15 +136,19 @@ public class ExpenseDaoImplTest {
         return expenseModel;
     }
 
-    private void createExpenses(int numberOfDummyInsertions) {
+    private List<ExpenseModel> createExpenses(int numberOfDummyInsertions) {
+
+        List<ExpenseModel> expenseModelList = new ArrayList<>();
 
         for (int index = 1; index <= numberOfDummyInsertions; index++) {
             ExpenseModel expenseModel = CreatorModels.createExpenseModel("Expense type test " + index,
-                    567.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), index, 20 + index);
+                    567.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), 2, 20 + index);
 
             mExpenseDao.createExpense(expenseModel);
+            expenseModelList.add(expenseModel);
         }
 
+        return expenseModelList;
     }
 
     private void compareExpenses(ExpenseModel expectedExpense, ExpenseModel actualExpense) {
@@ -141,6 +159,28 @@ public class ExpenseDaoImplTest {
         assertEquals(expectedExpense.dateExpediture, actualExpense.dateExpediture);
         assertEquals(expectedExpense.amount, actualExpense.amount, 0);
         assertEquals(expectedExpense.description, actualExpense.description);
+    }
+
+    private void compareExpensesList(List<ExpenseModel> expectedExpenses, List<ExpenseModel> actualExpenses) {
+
+        assertNotNull(actualExpenses);
+        assertTrue(!actualExpenses.isEmpty());
+        assertEquals(expectedExpenses.size(), actualExpenses.size());
+
+        for (int index = 0; index < actualExpenses.size(); index++) {
+
+            ExpenseModel actualExpenseModel = actualExpenses.get(index);
+            ExpenseModel expectedExpenseModel = expectedExpenses.get(index);
+
+            assertEquals(expectedExpenseModel.description, actualExpenseModel.description);
+            assertEquals(expectedExpenseModel.amount, actualExpenseModel.amount, 0);
+            assertEquals(expectedExpenseModel.nextExit, actualExpenseModel.nextExit);
+            assertEquals(expectedExpenseModel.dateExpediture, actualExpenseModel.dateExpediture);
+            assertEquals(expectedExpenseModel.expenseTypeId, actualExpenseModel.expenseTypeId);
+            assertEquals(expectedExpenseModel.userId, actualExpenseModel.userId);
+
+        }
+
     }
 
 }
