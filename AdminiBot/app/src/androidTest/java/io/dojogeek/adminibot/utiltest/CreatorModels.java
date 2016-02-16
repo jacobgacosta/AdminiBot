@@ -5,6 +5,7 @@ import java.util.Date;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.models.BankCardModel;
+import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
@@ -149,5 +150,26 @@ public class CreatorModels {
         bankCardModel.userId = userId;
 
         return bankCardModel;
+    }
+
+    public static CardDetailModel createCardDetailModel() {
+
+        CardDetailModel cardDetailModel = createCardDetailModel(7632.90, 8378.00, DateUtils.getCurrentData(), DateUtils.getCurrentData(),
+                4);
+
+        return cardDetailModel;
+    }
+
+    public static CardDetailModel createCardDetailModel(double creditLimit, double currentBalance,
+                                                        String cuttoffDate, String payDayLimit, long bankCardId) {
+
+        CardDetailModel cardDetailModel = new CardDetailModel();
+        cardDetailModel.creditLimit = creditLimit;
+        cardDetailModel.currentBalance = currentBalance;
+        cardDetailModel.cuttoffDate = cuttoffDate;
+        cardDetailModel.payDayLimit = payDayLimit;
+        cardDetailModel.bankCardId = bankCardId;
+
+        return cardDetailModel;
     }
 }
