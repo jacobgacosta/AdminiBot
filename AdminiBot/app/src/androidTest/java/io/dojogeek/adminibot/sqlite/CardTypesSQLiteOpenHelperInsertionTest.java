@@ -68,8 +68,8 @@ public class CardTypesSQLiteOpenHelperInsertionTest {
         int name = currentPosition.getInt(currentPosition.getColumnIndex(CardTypeContract.CardType.COLUMN_NAME));
         int description = currentPosition.getInt(currentPosition.getColumnIndex(CardTypeContract.CardType.COLUMN_DESCRIPTION));
 
-        String expectedName = mContext.getString(CardTypeContract.CARD_TYPES[((int) id)]);
-        String expectedDescription = mContext.getString(CardTypeContract.CARD_TYPES_DESCRIPTIONS[((int) id)]);
+        String expectedName = CardTypeContract.CARD_TYPES[((int) id)].getCardType();
+        String expectedDescription = CardTypeContract.CARD_TYPES[((int) id)].getDescription();
 
         assertEquals(expectedName, mContext.getString(name));
         assertEquals(expectedDescription, mContext.getString(description));
