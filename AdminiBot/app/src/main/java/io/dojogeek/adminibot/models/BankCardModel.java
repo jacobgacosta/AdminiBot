@@ -1,5 +1,7 @@
 package io.dojogeek.adminibot.models;
 
+import io.dojogeek.adminibot.enums.CardTypeEnum;
+
 public class BankCardModel {
 
     public long id;
@@ -8,7 +10,7 @@ public class BankCardModel {
     public long bankId;
     public long trademarkId;
     public double availableCredit;
-    public long cardTypeId;
+    public CardTypeEnum cardType;
     public long userId;
 
 }
