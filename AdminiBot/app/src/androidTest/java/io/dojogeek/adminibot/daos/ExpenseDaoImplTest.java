@@ -58,13 +58,11 @@ public class ExpenseDaoImplTest {
 
         int numberOfInsertions = 5;
 
-        createExpenses(numberOfInsertions);
+        List<ExpenseModel> expectedExpenses = createExpenses(numberOfInsertions);
 
-        List<ExpenseModel> expenses = mExpenseDao.getExpenses();
+        List<ExpenseModel> actualExpenses = mExpenseDao.getExpenses();
 
-        assertNotNull(expenses);
-        assertTrue(!expenses.isEmpty());
-        assertEquals(numberOfInsertions, expenses.size());
+        compareExpensesList(expectedExpenses, actualExpenses);
     }
 
 
