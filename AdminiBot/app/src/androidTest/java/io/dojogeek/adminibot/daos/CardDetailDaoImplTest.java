@@ -58,6 +58,24 @@ public class CardDetailDaoImplTest {
 
         CardDetailModel actualCardDetailModel = mCardDetailDao.getCardDetailById(insertedRecordId);
 
+        compareCardsDetails(expectedCardDetailModel, actualCardDetailModel);
+    }
+
+    @Test
+    public void cardDetailDao_creationAndObtainingCardDetailByBankCardId_isTrue() {
+
+        CardDetailModel expectedCardDetailModel = CreatorModels.createCardDetailModel();
+
+        mCardDetailDao.createCardDetail(expectedCardDetailModel);
+
+        CardDetailModel actualCardDetailModel = mCardDetailDao.getCardDetailByBankCardId(expectedCardDetailModel.bankCardId);
+
+        compareCardsDetails(expectedCardDetailModel, actualCardDetailModel);
+
+    }
+
+    private void compareCardsDetails(CardDetailModel expectedCardDetailModel, CardDetailModel actualCardDetailModel) {
+
         assertNotNull(actualCardDetailModel);
         assertEquals(expectedCardDetailModel.bankCardId, actualCardDetailModel.bankCardId);
         assertEquals(expectedCardDetailModel.creditLimit, actualCardDetailModel.creditLimit, 0);

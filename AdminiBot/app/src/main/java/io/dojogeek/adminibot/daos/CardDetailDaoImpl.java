@@ -49,6 +49,27 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
         return cardDetailModel;
     }
 
+    @Override
+    public CardDetailModel getCardDetailByBankCardId(long bankCardId) {
+        String [] args = {String.valueOf(bankCardId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + CardDetailContract.CardDetail.TABLE_NAME +
+                " WHERE bank_card_id = ? ", args);
+
+        CardDetailModel cardDetailModel = new CardDetailModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                cardDetailModel = getCardDetailModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return cardDetailModel;
+    }
+
     private ContentValues createContentValues(CardDetailModel cardDetailModel) {
 
         ContentValues contentValues = new ContentValues();
