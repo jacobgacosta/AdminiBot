@@ -118,6 +118,20 @@ public class BankCardDaoImplTest {
         assertEquals(SUCCESS_OPERATION, deletedRows);
     }
 
+    @Test
+    public void bankCardDao_creationAndObtainingBankCardsByCardType_isTrue() {
+
+        long cardTypeId = 2;
+        int numberOfBankCardToCreate = 4;
+
+        List<BankCardModel> expectedBankCardsModels = createBankCardModels(numberOfBankCardToCreate);
+
+        List<BankCardModel> actualBankCardsModels = mBankCardDao.getBankCardByCartTypeId(cardTypeId);
+
+        compareBankCardsList(expectedBankCardsModels, actualBankCardsModels);
+
+    }
+
 
     private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
 
@@ -126,8 +140,7 @@ public class BankCardDaoImplTest {
         for (int index = 1; index <= numberOfBankCardToCreate; index++) {
 
             BankCardModel bankCardModel = CreatorModels.createBankCardModel("Bancomer " + index,
-                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, 2 + index,
-                    1 + index);
+                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, 2, 1 + index);
 
             mBankCardDao.createBankCard(bankCardModel);
             bankCardModels.add(bankCardModel);

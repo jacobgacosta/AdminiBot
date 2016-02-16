@@ -15,4 +15,6 @@ public interface BankCardDao extends ConectionDao {
     long updateBankCard(BankCardModel bankCardModel, String where);
 
     long deleteBankCard(long bankCardId);
+
+    List<BankCardModel> getBankCardByCartTypeId(long cardTypeId);
 }

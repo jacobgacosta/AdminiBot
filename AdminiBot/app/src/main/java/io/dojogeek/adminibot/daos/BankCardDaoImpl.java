@@ -94,6 +94,30 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         return deletedRows;
     }
 
+    @Override
+    public List<BankCardModel> getBankCardByCartTypeId(long cardTypeId) {
+
+        String [] args = {String.valueOf(cardTypeId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + BankCardsContract.BankCard.TABLE_NAME +
+                " WHERE card_type_id = ? ", args);
+
+
+        List<BankCardModel> bankCardModelList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                BankCardModel bankCardModel = getBankCardModelFromCursor(cursor);
+                bankCardModelList.add(bankCardModel);
+                cursor.moveToNext();
+            }
+        }
+
+        return bankCardModelList;
+    }
+
     private ContentValues createContentValues(BankCardModel bankCardModel) {
 
         ContentValues contentValues = new ContentValues();
