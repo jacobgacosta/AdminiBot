@@ -3,16 +3,14 @@ package io.dojogeek.adminibot.sqlite;
 import android.provider.BaseColumns;
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.enums.CardTypeEnum;
 
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
 
 public class CardTypeContract {
 
-    public static final int [] CARD_TYPES = {R.string.card_types_credit,
-            R.string.card_types_debit, R.string.card_types_prepaid};
-
-    public static final int [] CARD_TYPES_DESCRIPTIONS = {R.string.card_types_credit_description,
-            R.string.card_types_debit_description, R.string.card_types_prepaid_description};
+    public static final CardTypeEnum [] CARD_TYPES = {CardTypeEnum.CREDIT_CARD,
+            CardTypeEnum.DEBIT_CARD, CardTypeEnum.PREPAID_CARD};
 
     public static abstract class CardType implements BaseColumns {
 
