@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.daos;
 
 import java.util.List;
 
+import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 
 public interface BankCardDao extends ConectionDao {
@@ -16,5 +17,5 @@ public interface BankCardDao extends ConectionDao {
 
     long deleteBankCard(long bankCardId);
 
-    List<BankCardModel> getBankCardByCartTypeId(long cardTypeId);
+    List<BankCardModel> getBankCardByCartType(CardTypeEnum cardType);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
 
@@ -95,9 +96,9 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     }
 
     @Override
-    public List<BankCardModel> getBankCardByCartTypeId(long cardTypeId) {
+    public List<BankCardModel> getBankCardByCartType(CardTypeEnum cardType) {
 
-        String [] args = {String.valueOf(cardTypeId)};
+        String [] args = {cardType.name()};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + BankCardsContract.BankCard.TABLE_NAME +
                 " WHERE card_type_id = ? ", args);
@@ -126,7 +127,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         contentValues.put(BankCardsContract.BankCard.COLUMN_BANK_ID, bankCardModel.bankId);
         contentValues.put(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID, bankCardModel.trademarkId);
         contentValues.put(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE, bankCardModel.availableCredit);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_CARD_TYPE_ID, bankCardModel.cardTypeId);
+        contentValues.put(BankCardsContract.BankCard.COLUMN_CARD_TYPE, bankCardModel.cardType.name());
         contentValues.put(BankCardsContract.BankCard.COLUMN_USER_ID, bankCardModel.userId);
 
         return contentValues;
@@ -142,7 +143,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         long bankId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_BANK_ID));
         long trademarkId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID));
         double availableCredit = cursor.getDouble(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE));
-        long cardTypeId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CARD_TYPE_ID));
+        String cardType = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CARD_TYPE));
         long userId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_USER_ID));
 
         bankCardModel.id = id;
@@ -151,7 +152,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         bankCardModel.bankId = bankId;
         bankCardModel.trademarkId = trademarkId;
         bankCardModel.availableCredit = availableCredit;
-        bankCardModel.cardTypeId = cardTypeId;
+        bankCardModel.cardType = CardTypeEnum.valueOf(cardType);
         bankCardModel.userId = userId;
 
         return bankCardModel;
