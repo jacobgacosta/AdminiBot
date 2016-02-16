@@ -25,23 +25,23 @@ public class CardTypeContract {
 
     public static final String SQL_CREATE_TABLE = "CREATE TABLE " + CardType.TABLE_NAME +
             "(" + CardType._ID + " INTEGER PRIMARY KEY, " +
-            CardType.COLUMN_NAME + " INTEGER NOT NULL, " +
-            CardType.COLUMN_DESCRIPTION + " INTEGER NOT NULL)";
+            CardType.COLUMN_NAME + " TEXT NOT NULL, " +
+            CardType.COLUMN_DESCRIPTION + " TEXT NOT NULL)";
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = "INSERT INTO " + CardType.TABLE_NAME +
             " VALUES(" + CardType.COLUMN_NAME_NULLABLE + "," +
-            "'" + CARD_TYPES[0] + "'," +
-            "'" + CARD_TYPES_DESCRIPTIONS[0] + "')";
+            "'" + CARD_TYPES[0].getCardType() + "'," +
+            "'" + CARD_TYPES[0].getmDescription() + "')";
 
     public static final String SQL_INSERT_INITIAL_VALUES_2 = "INSERT INTO " + CardType.TABLE_NAME +
             " VALUES(" + CardType.COLUMN_NAME_NULLABLE + "," +
-            "'" + CARD_TYPES[1] + "'," +
-            "'" + CARD_TYPES_DESCRIPTIONS[1] + "')";
+            "'" + CARD_TYPES[1].getCardType() + "'," +
+            "'" + CARD_TYPES[1].getmDescription() + "')";
 
     public static final String SQL_INSERT_INITIAL_VALUES_3 = "INSERT INTO " + CardType.TABLE_NAME +
             " VALUES(" + CardType.COLUMN_NAME_NULLABLE + "," +
-            "'" + CARD_TYPES[2] + "'," +
-            "'" + CARD_TYPES_DESCRIPTIONS[2] + "')";
+            "'" + CARD_TYPES[2].getCardType() + "'," +
+            "'" + CARD_TYPES[2].getmDescription() + "')";
 
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + CardType.TABLE_NAME;
