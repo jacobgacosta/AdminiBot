@@ -14,7 +14,7 @@ public class BankCardsContract {
         public static final String COLUMN_BANK_ID = "bank_id";
         public static final String COLUMN_TRADEMARK_ID = "trademark_id";
         public static final String COLUMN_CREDIT_AVAILABLE = "credit_available";
-        public static final String COLUMN_CARD_TYPE_ID = "card_type_id";
+        public static final String COLUMN_CARD_TYPE = "card_type_id";
         public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_NAME_NULLABLE = "null";
 
@@ -27,7 +27,7 @@ public class BankCardsContract {
             BankCard.COLUMN_BANK_ID + " INTEGER NOT NULL, " +
             BankCard.COLUMN_TRADEMARK_ID + " INTEGER NOT NULL, " +
             BankCard.COLUMN_CREDIT_AVAILABLE + " REAL NOT NULL, " +
-            BankCard.COLUMN_CARD_TYPE_ID + " INTEGER NOT NULL, " +
+            BankCard.COLUMN_CARD_TYPE + " TEXT NOT NULL, " +
             BankCard.COLUMN_USER_ID + " INTEGER NOT NULL)";
 
 
