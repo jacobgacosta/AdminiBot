@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.BankCardsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -84,6 +85,27 @@ public class BankCardDaoImplTest {
         compareBankCardsList(expectedBankCardModels, actualBankCardModels);
     }
 
+    @Test
+    public void bankCardDao_creationUpdatingAndOntainingBankCardById_istrue() {
+
+        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+
+        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+
+        String where = BankCardsContract.BankCard._ID + "= " +  insertedRecordId;
+
+        BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
+
+        long updatedRows = mBankCardDao.updateBankCard(expectedUpdatedBankCard, where);
+
+        assertEquals(SUCCESS_OPERATION, updatedRows);
+
+        BankCardModel actualUpdatedBankCardModel = mBankCardDao.getBankCardById(insertedRecordId);
+
+        compareBankCards(expectedUpdatedBankCard, actualUpdatedBankCardModel);
+
+    }
+
     private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
 
         List<BankCardModel> bankCardModels = new ArrayList<>();
@@ -126,5 +148,17 @@ public class BankCardDaoImplTest {
         assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
         assertEquals(expectedBankCardModel.cardTypeId, actualBankCardModel.cardTypeId);
         assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
+    }
+
+    private BankCardModel changeBankCardValues(BankCardModel bankCardModel) {
+        bankCardModel.name = "Updated name";
+        bankCardModel.number = "123456789012345658";
+        bankCardModel.bankId = 1;
+        bankCardModel.trademarkId = 1;
+        bankCardModel.availableCredit = 8743.90;
+        bankCardModel.cardTypeId = 1;
+        bankCardModel.userId = 2;
+
+        return bankCardModel;
     }
 }

@@ -73,6 +73,17 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         return bankCardModelList;
     }
 
+    @Override
+    public long updateBankCard(BankCardModel bankCardModel, String where) {
+
+        ContentValues contentValues = createContentValues(bankCardModel);
+
+        long updatedRows = mDatabase.update(BankCardsContract.BankCard.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+
+    }
+
     private ContentValues createContentValues(BankCardModel bankCardModel) {
 
         ContentValues contentValues = new ContentValues();

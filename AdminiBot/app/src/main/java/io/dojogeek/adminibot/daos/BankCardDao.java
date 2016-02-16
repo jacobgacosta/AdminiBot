@@ -11,4 +11,6 @@ public interface BankCardDao extends ConectionDao {
     BankCardModel getBankCardById(long cardBankId);
 
     List<BankCardModel> getBankCards();
+
+    long updateBankCard(BankCardModel bankCardModel, String where);
 }
