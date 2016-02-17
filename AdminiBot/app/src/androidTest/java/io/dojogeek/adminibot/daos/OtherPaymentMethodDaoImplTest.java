@@ -14,6 +14,7 @@ import java.util.List;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -85,6 +86,27 @@ public class OtherPaymentMethodDaoImplTest {
 
     }
 
+    @Test
+    public void otherPaymentMethod_creationUpdatingAndObtainingOtherPaymentMethodById_isTrue() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        OtherPaymentMethodModel expectedUpdatedOtherPaymentMethodModel = changeOtherPaymentMethodValues(otherPaymentMethodModel);
+
+        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
+
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(expectedUpdatedOtherPaymentMethodModel, where);
+
+        assertEquals(SUCCESS_OPERATION, updatedRows);
+
+        OtherPaymentMethodModel actualOtherPaymentMethodModel = mOtherPaymentMethodDao.getOtherPaymentMethodById(insertedRecordId);
+
+        comparePaymentMethodModels(expectedUpdatedOtherPaymentMethodModel, actualOtherPaymentMethodModel);
+
+    }
+
     private List<OtherPaymentMethodModel> createOtherPaymentMethods(int numberOfInsertions) {
 
         List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
@@ -129,6 +151,16 @@ public class OtherPaymentMethodDaoImplTest {
         assertEquals(expectedOtherPaymentMethodModel.availableCredit, actualOtherPaymentMethodModel.availableCredit, 0);
         assertEquals(expectedOtherPaymentMethodModel.name, actualOtherPaymentMethodModel.name);
 
+    }
 
+    private OtherPaymentMethodModel changeOtherPaymentMethodValues(OtherPaymentMethodModel otherPaymentMethodModel) {
+
+        otherPaymentMethodModel.userId = 2;
+        otherPaymentMethodModel.availableCredit = 32000;
+        otherPaymentMethodModel.typePaymentMethod = TypePaymentMethodEnum.CASH;
+        otherPaymentMethodModel.referenceNumber = "65787439KDUFI";
+        otherPaymentMethodModel.name = "Other payment method test";
+
+        return otherPaymentMethodModel;
     }
 }
