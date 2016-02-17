@@ -22,6 +22,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.assertNotNull;
 
+@Deprecated
 @RunWith(AndroidJUnit4.class)
 public class TypesPaymentMethodsDaoImplTest {
 
@@ -80,8 +81,8 @@ public class TypesPaymentMethodsDaoImplTest {
     private void comparePaymentMethodsResult(List<TypePaymentMethodModel> actualPaymentMethodsList) {
 
         for (int index = 0; index < actualPaymentMethodsList.size(); index++) {
-            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index], actualPaymentMethodsList.get(index).name);
-            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS[index], actualPaymentMethodsList.get(index).description);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index].getName(), actualPaymentMethodsList.get(index).name);
+            assertEquals(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[index].getDescription(), actualPaymentMethodsList.get(index).description);
         }
 
     }

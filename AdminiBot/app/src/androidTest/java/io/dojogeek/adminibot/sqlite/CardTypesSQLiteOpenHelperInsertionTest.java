@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 
+@Deprecated
 @RunWith(AndroidJUnit4.class)
 public class CardTypesSQLiteOpenHelperInsertionTest {
 

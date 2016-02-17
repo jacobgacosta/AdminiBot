@@ -14,6 +14,7 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
 
+@Deprecated
 @RunWith(AndroidJUnit4.class)
 public class TypesPaymentMethodsSQLiteOpenHelperInsertionTest {
 
@@ -69,8 +70,8 @@ public class TypesPaymentMethodsSQLiteOpenHelperInsertionTest {
         int name = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
         int description = currentPosition.getInt(currentPosition.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
 
-        String expectedName = mContext.getString(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[((int) id)]);
-        String expectedDescription = mContext.getString(TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS_DESCRIPTIONS[((int) id)]);
+        String expectedName = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[((int) id)].getName();
+        String expectedDescription = TypesPaymentMethodsContract.TYPES_PAYMENT_METHODS[((int) id)].getDescription();
 
         assertEquals(expectedName, mContext.getString(name));
         assertEquals(expectedDescription, mContext.getString(description));

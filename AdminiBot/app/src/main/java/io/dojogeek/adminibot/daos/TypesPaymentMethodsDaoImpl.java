@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
+@Deprecated
 public class TypesPaymentMethodsDaoImpl extends SQLiteGlobalDao implements TypesPaymentMethodsDao {
 
     @Inject
@@ -56,12 +58,12 @@ public class TypesPaymentMethodsDaoImpl extends SQLiteGlobalDao implements Types
         TypePaymentMethodModel paymentMethodModel = new TypePaymentMethodModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod._ID));
-        int name = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
-        int description = cursor.getInt(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
+        String name = cursor.getString(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME));
+        String description = cursor.getString(cursor.getColumnIndex(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION));
 
-        paymentMethodModel.id = id;
-        paymentMethodModel.name = name;
-        paymentMethodModel.description = description;
+        /*paymentMethodModel.id = id;
+        paymentMethodModel.name = TypePaymentMethodEnum.valueOf(name);
+        paymentMethodModel.description = TypePaymentMethodEnum.valueOf(description);*/
 
         return paymentMethodModel;
 
@@ -70,8 +72,8 @@ public class TypesPaymentMethodsDaoImpl extends SQLiteGlobalDao implements Types
     private ContentValues createContentValues(TypePaymentMethodModel paymentMethod) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME, paymentMethod.name);
-        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION, paymentMethod.description);
+        /*contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_NAME, paymentMethod.name.name());
+        contentValues.put(TypesPaymentMethodsContract.TypePaymentMethod.COLUMN_DESCRIPTION, paymentMethod.description.name());*/
 
         return contentValues;
     }
