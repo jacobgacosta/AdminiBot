@@ -51,7 +51,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationAndObtainingById_isTrue() {
+    public void otherPaymentMethod_creationAndObtainingOtherPaymentMethodById_isTrue() {
 
         OtherPaymentMethodModel expectedOtherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -67,4 +67,6 @@ public class OtherPaymentMethodDaoImplTest {
         assertEquals(expectedOtherPaymentMethodModel.typePaymentMethod, actualoOtherPaymentMethodModel.typePaymentMethod);
         assertEquals(expectedOtherPaymentMethodModel.userId, actualoOtherPaymentMethodModel.userId);
     }
+
+    
 }
