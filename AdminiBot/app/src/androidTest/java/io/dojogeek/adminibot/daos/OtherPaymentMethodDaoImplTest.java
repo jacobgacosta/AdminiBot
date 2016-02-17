@@ -8,6 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
@@ -68,5 +72,63 @@ public class OtherPaymentMethodDaoImplTest {
         assertEquals(expectedOtherPaymentMethodModel.userId, actualoOtherPaymentMethodModel.userId);
     }
 
-    
+    @Test
+    public void otherPaymentMethod_creationAndObtainingAllOtherPaymentMethods_isTrue() {
+
+        int numberOfInsertions = 5;
+
+        List<OtherPaymentMethodModel> expectedOtherPaymentMethodModelList = createOtherPaymentMethods(numberOfInsertions);
+
+        List<OtherPaymentMethodModel> actualOtherPaymentMethodModelList = mOtherPaymentMethodDao.getOtherPaymentMethods();
+
+        compareOtherPaymentMethodModelList(expectedOtherPaymentMethodModelList, actualOtherPaymentMethodModelList);
+
+    }
+
+    private List<OtherPaymentMethodModel> createOtherPaymentMethods(int numberOfInsertions) {
+
+        List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
+
+        for (int index = 1; index <= numberOfInsertions;index++) {
+
+            OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.
+                    createOtherPaymentMethodModel(24000.00 + index,
+                            "test other payment method " + index, "4567AKI9084" + index, TypePaymentMethodEnum.FOOD_COUPONS, 1);
+
+            mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+            otherPaymentMethodModelList.add(otherPaymentMethodModel);
+        }
+
+        return otherPaymentMethodModelList;
+    }
+
+    private void compareOtherPaymentMethodModelList(List<OtherPaymentMethodModel> expectedOtherPaymentMethodModelList,
+                                                    List<OtherPaymentMethodModel> actualOtherPaymentMethodModelList) {
+
+        assertNotNull(actualOtherPaymentMethodModelList);
+        assertTrue(!actualOtherPaymentMethodModelList.isEmpty());
+        assertEquals(expectedOtherPaymentMethodModelList.size(), actualOtherPaymentMethodModelList.size());
+
+        for (int index = 0; index < actualOtherPaymentMethodModelList.size(); index++) {
+
+            OtherPaymentMethodModel actualOtherPaymentMethodModel =  actualOtherPaymentMethodModelList.get(index);
+            OtherPaymentMethodModel expectedOtherPaymentMethodModel =  expectedOtherPaymentMethodModelList.get(index);
+
+            comparePaymentMethodModels(expectedOtherPaymentMethodModel, actualOtherPaymentMethodModel);
+        }
+
+    }
+
+    private void comparePaymentMethodModels(OtherPaymentMethodModel expectedOtherPaymentMethodModel,
+                                            OtherPaymentMethodModel actualOtherPaymentMethodModel) {
+
+
+        assertEquals(expectedOtherPaymentMethodModel.userId, actualOtherPaymentMethodModel.userId);
+        assertEquals(expectedOtherPaymentMethodModel.referenceNumber, actualOtherPaymentMethodModel.referenceNumber);
+        assertEquals(expectedOtherPaymentMethodModel.typePaymentMethod, actualOtherPaymentMethodModel.typePaymentMethod);
+        assertEquals(expectedOtherPaymentMethodModel.availableCredit, actualOtherPaymentMethodModel.availableCredit, 0);
+        assertEquals(expectedOtherPaymentMethodModel.name, actualOtherPaymentMethodModel.name);
+
+
+    }
 }

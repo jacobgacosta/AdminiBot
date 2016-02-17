@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
@@ -49,6 +52,28 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
 
         return otherPaymentMethodModel;
 
+    }
+
+    @Override
+    public List<OtherPaymentMethodModel> getOtherPaymentMethods() {
+
+        List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
+
+        Cursor cursor = mDatabase.query(PaymentMethodsContract.PaymentMethods.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                OtherPaymentMethodModel otherPaymentMethodModel = getOtherPaymentMethodModelFromCursor(cursor);
+
+                otherPaymentMethodModelList.add(otherPaymentMethodModel);
+
+                cursor.moveToNext();
+            }
+        }
+
+        return otherPaymentMethodModelList;
     }
 
     private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
