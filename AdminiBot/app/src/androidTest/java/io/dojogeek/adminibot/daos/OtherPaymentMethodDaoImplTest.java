@@ -8,9 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+
+import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class OtherPaymentMethodDaoImplTest {
@@ -35,5 +39,14 @@ public class OtherPaymentMethodDaoImplTest {
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
-    
+    @Test
+    public void otherPaymentMethod_creationOtherPaymentMethod_isTrue() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        assertNotEquals(NO_OPERATION, insertedRecordId);
+        assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
+    }
 }
