@@ -6,4 +6,5 @@ public interface OtherPaymentMethodDao extends ConectionDao {
 
     long createOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel);
 
+    OtherPaymentMethodModel getOtherPaymentMethodById(long otherPaymentMethodId);
 }

@@ -2,9 +2,11 @@ package io.dojogeek.adminibot.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 
@@ -26,6 +28,29 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         return resutl;
     }
 
+    @Override
+    public OtherPaymentMethodModel getOtherPaymentMethodById(long otherPaymentMethodId) {
+
+        String [] args = {String.valueOf(otherPaymentMethodId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + PaymentMethodsContract.PaymentMethods.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                otherPaymentMethodModel = getOtherPaymentMethodModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return otherPaymentMethodModel;
+
+    }
+
     private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         ContentValues contentValues = new ContentValues();
@@ -40,5 +65,23 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
                 otherPaymentMethodModel.userId);
 
         return contentValues;
+    }
+
+    private OtherPaymentMethodModel getOtherPaymentMethodModelFromCursor(Cursor cursor) {
+
+        String name = cursor.getString(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_NAME));
+        String reference = cursor.getString(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE));
+        String paymentMethod = cursor.getString(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD));
+        double availableCredit = cursor.getDouble(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT));
+        long userId = cursor.getLong(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID));
+
+        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
+        otherPaymentMethodModel.name = name;
+        otherPaymentMethodModel.referenceNumber = reference;
+        otherPaymentMethodModel.typePaymentMethod = TypePaymentMethodEnum.valueOf(paymentMethod);
+        otherPaymentMethodModel.availableCredit = availableCredit;
+        otherPaymentMethodModel.userId = userId;
+
+        return otherPaymentMethodModel;
     }
 }

@@ -49,4 +49,22 @@ public class OtherPaymentMethodDaoImplTest {
         assertNotEquals(NO_OPERATION, insertedRecordId);
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
     }
+
+    @Test
+    public void otherPaymentMethod_creationAndObtainingById_isTrue() {
+
+        OtherPaymentMethodModel expectedOtherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(expectedOtherPaymentMethodModel);
+
+        OtherPaymentMethodModel actualoOtherPaymentMethodModel = mOtherPaymentMethodDao.
+                getOtherPaymentMethodById(insertedRecordId);
+
+        assertNotNull(actualoOtherPaymentMethodModel);
+        assertEquals(expectedOtherPaymentMethodModel.name, actualoOtherPaymentMethodModel.name);
+        assertEquals(expectedOtherPaymentMethodModel.availableCredit, actualoOtherPaymentMethodModel.availableCredit, 0);
+        assertEquals(expectedOtherPaymentMethodModel.referenceNumber, actualoOtherPaymentMethodModel.referenceNumber);
+        assertEquals(expectedOtherPaymentMethodModel.typePaymentMethod, actualoOtherPaymentMethodModel.typePaymentMethod);
+        assertEquals(expectedOtherPaymentMethodModel.userId, actualoOtherPaymentMethodModel.userId);
+    }
 }
