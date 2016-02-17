@@ -13,4 +13,6 @@ public interface OtherPaymentMethodDao extends ConectionDao {
     List<OtherPaymentMethodModel> getOtherPaymentMethods();
 
     long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, String where);
+
+    long deleteOtherPaymentMethod(long otherPaymentMethodId);
 }

@@ -85,6 +85,16 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         return updatedRows;
     }
 
+    @Override
+    public long deleteOtherPaymentMethod(long otherPaymentMethodId) {
+        String [] arg = {String.valueOf(otherPaymentMethodId)};
+
+        int deletedRows = mDatabase.delete(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
+                PaymentMethodsContract.PaymentMethods._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         ContentValues contentValues = new ContentValues();

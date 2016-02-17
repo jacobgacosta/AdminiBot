@@ -107,6 +107,18 @@ public class OtherPaymentMethodDaoImplTest {
 
     }
 
+    @Test
+    public void otherPaymentMethod_creationAndDeletionOtherPaymentMethod_isTrue() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        long deletedRows = mOtherPaymentMethodDao.deleteOtherPaymentMethod(insertedRecordId);
+
+        assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
     private List<OtherPaymentMethodModel> createOtherPaymentMethods(int numberOfInsertions) {
 
         List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
