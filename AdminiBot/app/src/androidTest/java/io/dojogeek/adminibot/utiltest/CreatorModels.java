@@ -5,11 +5,13 @@ import java.util.Date;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.models.UserModel;
@@ -172,5 +174,28 @@ public class CreatorModels {
         cardDetailModel.bankCardId = bankCardId;
 
         return cardDetailModel;
+    }
+
+    public static OtherPaymentMethodModel createOtherPaymentMethodModel() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = createOtherPaymentMethodModel(24000.00,
+                "test other payment method", "4567AKI90843", TypePaymentMethodEnum.FOOD_COUPONS, 1);
+
+        return otherPaymentMethodModel;
+    }
+
+    public static OtherPaymentMethodModel createOtherPaymentMethodModel(double availableCredit, String name,
+                                                                        String referenceNumber,
+                                                                        TypePaymentMethodEnum typePaymentMethod,
+                                                                        long userId) {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
+        otherPaymentMethodModel.availableCredit = availableCredit;
+        otherPaymentMethodModel.name = name;
+        otherPaymentMethodModel.referenceNumber = referenceNumber;
+        otherPaymentMethodModel.typePaymentMethod = typePaymentMethod;
+        otherPaymentMethodModel.userId = userId;
+
+        return otherPaymentMethodModel;
     }
 }
