@@ -73,7 +73,7 @@ public class AdminiBotSQLiteOpenHelperTest {
                 ExpensesPaymentMethodsContract.ExpensesPaymentMethods.TABLE_NAME,
                 ExpensesTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME,
-                TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME, UsersContract.User.TABLE_NAME,
+                /*TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME*/ UsersContract.User.TABLE_NAME,
                 IncomesPaymentMethodsContract.IncomesPaymentMethods.TABLE_NAME, BankCardsContract.BankCard.TABLE_NAME,
                 IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, ExpensesBankCardsContract.BankCard.TABLE_NAME,
                 /*CardTypeContract.CardType.TABLE_NAME*/ CardDetailContract.CardDetail.TABLE_NAME};
