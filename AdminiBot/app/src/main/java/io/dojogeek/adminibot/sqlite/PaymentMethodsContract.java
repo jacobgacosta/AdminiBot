@@ -11,7 +11,7 @@ public class PaymentMethodsContract {
         public static final String TABLE_NAME = "payment_methods";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_REFERENCE = "reference";
-        public static final String COLUMN_TYPE_PAYMENT_METHOD_ID = "type_payment_method_id";
+        public static final String COLUMN_TYPE_PAYMENT_METHOD = "type_payment_method";
         public static final String COLUMN_AVAILABLE_CREDIT = "available_credit";
         public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_NAME_NULLABLE = "null";
@@ -22,7 +22,7 @@ public class PaymentMethodsContract {
             PaymentMethods._ID  + " INTEGER PRIMARY KEY, " +
             PaymentMethods.COLUMN_NAME + " TEXT NOT NULL, " +
             PaymentMethods.COLUMN_REFERENCE + " TEXT NOT NULL, " +
-            PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD_ID + " INTEGER NOT NULL, " +
+            PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD + " TEXT NOT NULL, " +
             PaymentMethods.COLUMN_AVAILABLE_CREDIT + " REAL NOT NULL, " +
             PaymentMethods.COLUMN_USER_ID + " INTEGER NOT NULL)";
 
