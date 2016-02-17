@@ -2,7 +2,7 @@ package io.dojogeek.adminibot.models;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
-public class OtherPaymentMethod {
+public class OtherPaymentMethodModel {
 
     public long id;
     public String name;
