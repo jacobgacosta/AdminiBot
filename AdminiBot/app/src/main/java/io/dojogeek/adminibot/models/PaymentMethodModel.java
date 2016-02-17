@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.models;
 
+@Deprecated
 public class PaymentMethodModel {
 
     public long id;
