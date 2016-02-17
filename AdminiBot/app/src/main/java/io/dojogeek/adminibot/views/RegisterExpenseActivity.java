@@ -69,7 +69,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         List<String> paymentMethods = new ArrayList<>();
 
         for (TypePaymentMethodModel typePaymentMethodModel : typesPaymentMethodsModelList) {
-            paymentMethods.add(getString(typePaymentMethodModel.name));
+            //paymentMethods.add(typePaymentMethodModel.name.getName());
         }
 
         mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);
