@@ -80,5 +80,11 @@ public class MovementExpenseBankCardDaoImplTest {
                 getMovementExpenseBankCardById(insertedRecordId);
 
         assertThat(actualMovementExpenseBankCardModel, notNullValue());
+        assertThat(actualMovementExpenseBankCardModel.amount, is(expectedMovementExpenseBankCardModel.amount));
+        assertThat(actualMovementExpenseBankCardModel.bankCardId, is(expectedMovementExpenseBankCardModel.bankCardId));
+        assertThat(actualMovementExpenseBankCardModel.date, is(expectedMovementExpenseBankCardModel.date));
+        assertThat(actualMovementExpenseBankCardModel.description, is(expectedMovementExpenseBankCardModel.description));
+        assertThat(actualMovementExpenseBankCardModel.expenseId, is(expectedMovementExpenseBankCardModel.expenseId));
     }
+
 }
