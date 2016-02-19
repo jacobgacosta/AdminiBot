@@ -11,6 +11,7 @@ import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
@@ -197,5 +198,27 @@ public class CreatorModels {
         otherPaymentMethodModel.userId = userId;
 
         return otherPaymentMethodModel;
+    }
+
+    public static MovementExpenseBankCardModel createMovementExpenseBankCardModel() {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = createMovementExpenseBankCardModel(2340,
+                2, DateUtils.getCurrentData(), "test description", 2);
+
+        return movementExpenseBankCardModel;
+    }
+
+    public static MovementExpenseBankCardModel createMovementExpenseBankCardModel(double amount, long bankCardId,
+                                                                                  String date, String description,
+                                                                                  long expenseId) {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
+        movementExpenseBankCardModel.amount = amount;
+        movementExpenseBankCardModel.bankCardId = bankCardId;
+        movementExpenseBankCardModel.date = date;
+        movementExpenseBankCardModel.description = description;
+        movementExpenseBankCardModel.expenseId = expenseId;
+
+        return movementExpenseBankCardModel;
     }
 }
