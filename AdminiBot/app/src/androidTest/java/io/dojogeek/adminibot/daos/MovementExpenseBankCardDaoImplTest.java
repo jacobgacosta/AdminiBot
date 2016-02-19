@@ -58,6 +58,15 @@ public class MovementExpenseBankCardDaoImplTest {
 
     }
 
-    
+    @Test
+    public void movementExpenseBankCardDao_creationMovementExpenseBankCardWithNullRequiredField_isFalse() {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        movementExpenseBankCardModel.description = null;
+
+        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+
+        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+    }
 
 }
