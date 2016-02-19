@@ -18,8 +18,8 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
 
         ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
 
-        long result = mDatabase.insert(ExpensesBankCardsContract.BankCard.TABLE_NAME,
-                ExpensesBankCardsContract.BankCard.COLUMN_NAME_NULLABLE, contentValues);
+        long result = mDatabase.insert(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME,
+                ExpensesBankCardsContract.ExpensesBankCard.COLUMN_NAME_NULLABLE, contentValues);
 
         return result;
     }
@@ -29,7 +29,7 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
 
         String [] args = {String.valueOf(movementExpenseBankCardModelId)};
 
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.BankCard.TABLE_NAME +
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME +
                 " WHERE _ID = ? ", args);
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
@@ -50,22 +50,22 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_DESCRIPTION, movementExpenseBankCardModel.description);
-        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.amount);
-        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.expenseId);
-        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.bankCardId);
-        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_DATE, movementExpenseBankCardModel.date);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, movementExpenseBankCardModel.description);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.amount);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.expenseId);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.bankCardId);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, movementExpenseBankCardModel.date);
 
         return contentValues;
     }
 
     private MovementExpenseBankCardModel getMovementExpenseBankCardModelFromCursor(Cursor cursor) {
 
-        String description = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_DESCRIPTION));
-        double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_AMOUNT));
-        long expenseId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_EXPENSE_ID));
-        long bankCardId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_BANK_CARD_ID));
-        String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_DATE));
+        String description = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION));
+        double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT));
+        long expenseId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID));
+        long bankCardId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID));
+        String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE));
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
         movementExpenseBankCardModel.description = description;
