@@ -51,4 +51,13 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
     }
 
+    @Test(expected = RuntimeException.class)
+    public void movementExpenseBankCardDao_creationMovementExpenseBankCardWithNullModel_isException() {
+
+        mMovementExpenseBankCardDao.createMovementExpenseBankCard(null);
+
+    }
+
+    
+
 }
