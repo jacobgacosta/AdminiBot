@@ -69,4 +69,16 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
     }
 
+    @Test
+    public void movementExpenseBankCardDao_creationAndObtainingMovementExpenseBankCardById_isTrue() {
+
+        MovementExpenseBankCardModel expectedMovementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+
+        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(expectedMovementExpenseBankCardModel);
+
+        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mMovementExpenseBankCardDao.
+                getMovementExpenseBankCardById(insertedRecordId);
+
+        assertThat(actualMovementExpenseBankCardModel, notNullValue());
+    }
 }

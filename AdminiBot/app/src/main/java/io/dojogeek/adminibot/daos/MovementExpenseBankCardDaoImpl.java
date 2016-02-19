@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.daos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
@@ -23,6 +24,29 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
         return result;
     }
 
+    @Override
+    public MovementExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) {
+
+        String [] args = {String.valueOf(movementExpenseBankCardModelId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.BankCard.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return movementExpenseBankCardModel;
+
+    }
+
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
@@ -30,7 +54,26 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
         contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.amount);
         contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.expenseId);
         contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.bankCardId);
+        contentValues.put(ExpensesBankCardsContract.BankCard.COLUMN_DATE, movementExpenseBankCardModel.date);
 
         return contentValues;
+    }
+
+    private MovementExpenseBankCardModel getMovementExpenseBankCardModelFromCursor(Cursor cursor) {
+
+        String description = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_DESCRIPTION));
+        double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_AMOUNT));
+        long expenseId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_EXPENSE_ID));
+        long bankCardId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_BANK_CARD_ID));
+        String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.BankCard.COLUMN_DATE));
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
+        movementExpenseBankCardModel.description = description;
+        movementExpenseBankCardModel.amount = amount;
+        movementExpenseBankCardModel.expenseId = expenseId;
+        movementExpenseBankCardModel.bankCardId = bankCardId;
+        movementExpenseBankCardModel.date = date;
+
+        return movementExpenseBankCardModel;
     }
 }
