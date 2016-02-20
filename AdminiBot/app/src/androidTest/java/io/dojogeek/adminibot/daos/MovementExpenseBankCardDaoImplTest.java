@@ -27,7 +27,7 @@ import static org.hamcrest.CoreMatchers.*;
 @RunWith(AndroidJUnit4.class)
 public class MovementExpenseBankCardDaoImplTest {
 
-    private static final int SUCCESS_OPERATION = 1;
+    private static final long SUCCESS_OPERATION = 1;
     private static final long OPERATIONAL_ERROR = -1;
     private static final long NO_OPERATION = 0;
 
@@ -172,6 +172,18 @@ public class MovementExpenseBankCardDaoImplTest {
         long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
 
         assertThat(updatedRows, is(NO_OPERATION));
+    }
+
+    @Test
+    public void movementExpenseBankCardDao_creationAndDeletionMovementExpenseBankCard_isTrue() {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+
+        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+
+        long deletedRows = mMovementExpenseBankCardDao.deleteMovementExpenseBankCard(insertedRecordId);
+
+        assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
 
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
