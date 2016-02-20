@@ -7,6 +7,7 @@ import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
 public class SQLiteGlobalDao {
 
+    protected final int NO_DATA = 0;
     protected AdminiBotSQLiteOpenHelper mHelper;
     protected SQLiteDatabase mDatabase;
 
