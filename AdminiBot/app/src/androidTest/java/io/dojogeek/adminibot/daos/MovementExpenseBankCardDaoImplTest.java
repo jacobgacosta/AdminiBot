@@ -100,5 +100,64 @@ public class MovementExpenseBankCardDaoImplTest {
 
     }
 
+    @Test
+    public void movementExpenseBankCardDao_creationAndObtainingAllMovementExpenseBankCard_isTrue() {
 
+        int numberOfInsertions = 7;
+
+        List<MovementExpenseBankCardModel> expectedMovementExpenseBankCardModels = createMovementExpenseBankCard(numberOfInsertions);
+
+        List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels = mMovementExpenseBankCardDao.getMovementsExpensesBankCards();
+
+        compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
+    }
+
+    private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
+
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModels = new ArrayList<>();
+
+        for (int index = 1; index <= numberOfInsertions; index++) {
+
+            MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.
+                    createMovementExpenseBankCardModel(2340 + index,
+                            2, DateUtils.getCurrentData(), "test description" + index, 2);
+
+            mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+            movementExpenseBankCardModels.add(movementExpenseBankCardModel);
+        }
+
+        return movementExpenseBankCardModels;
+    }
+
+    private void compareMovementsExpensesBankCardsModelsList(List<MovementExpenseBankCardModel> expectedMovementExpenseBankCardModels,
+                                                             List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels) {
+
+        assertNotNull(actualMovementExpenseBankCardModels);
+        assertThat(actualMovementExpenseBankCardModels, is(not(nullValue())));
+        assertThat(actualMovementExpenseBankCardModels.size(), is(expectedMovementExpenseBankCardModels.size()));
+
+        for (int index = 0; index < actualMovementExpenseBankCardModels.size(); index++) {
+
+            MovementExpenseBankCardModel actualMovementExpenseBankCardModel =
+                    actualMovementExpenseBankCardModels.get(index);
+
+            MovementExpenseBankCardModel expectedMovementExpenseBankCardModel =
+                    expectedMovementExpenseBankCardModels.get(index);
+
+            compareMovementExpenseBankCardModels(expectedMovementExpenseBankCardModel, actualMovementExpenseBankCardModel);
+        }
+
+    }
+
+    private void compareMovementExpenseBankCardModels(MovementExpenseBankCardModel expectedMovementExpenseBankCardModel,
+                                                      MovementExpenseBankCardModel actualMovementExpenseBankCardModel) {
+
+        assertNotNull(actualMovementExpenseBankCardModel);
+        assertThat(expectedMovementExpenseBankCardModel.description, is(actualMovementExpenseBankCardModel.description));
+        assertThat(expectedMovementExpenseBankCardModel.expenseId, is(actualMovementExpenseBankCardModel.expenseId));
+        assertThat(expectedMovementExpenseBankCardModel.date, is(actualMovementExpenseBankCardModel.date));
+        assertThat(expectedMovementExpenseBankCardModel.bankCardId, is(actualMovementExpenseBankCardModel.bankCardId));
+        assertThat(expectedMovementExpenseBankCardModel.amount, is(actualMovementExpenseBankCardModel.amount));
+
+    }
 }
