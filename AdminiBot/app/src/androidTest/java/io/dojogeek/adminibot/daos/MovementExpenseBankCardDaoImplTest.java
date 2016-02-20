@@ -146,7 +146,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = SQLiteConstraintException.class)
-    public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardWithNullRequiredField_isException() {
+    public void movementExpenseBankCardDao_creationAndUpdatindMovementExpenseBankCardWithNullRequiredField_isException() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -158,6 +158,20 @@ public class MovementExpenseBankCardDaoImplTest {
 
         mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
 
+    }
+
+    @Test
+    public void movementExpenseBankCardDao_creationAndUpdatingMovementExpenseBankCardByInexistentId_isFalse() {
+
+        int inexistentId = 4;
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+
+        String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + inexistentId;
+
+        long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
     }
 
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
