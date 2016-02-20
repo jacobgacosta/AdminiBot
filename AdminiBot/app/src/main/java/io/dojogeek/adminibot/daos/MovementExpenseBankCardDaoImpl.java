@@ -69,6 +69,15 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
 
     }
 
+    @Override
+    public long updateMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel, String where) {
+        ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
+
+        long updatedRows = mDatabase.update(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();

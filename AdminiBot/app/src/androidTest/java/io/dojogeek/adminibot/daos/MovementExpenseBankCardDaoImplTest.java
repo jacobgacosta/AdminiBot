@@ -14,6 +14,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
 import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
@@ -121,6 +122,26 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(movementExpenseBankCardModelList.isEmpty(), is(true));
     }
 
+    @Test
+    public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+
+        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+
+        String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
+
+        MovementExpenseBankCardModel updatedMovementExpenseBankCardModel =
+                changeMovementExpenseBankCardModelFields(movementExpenseBankCardModel);
+
+        long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(updatedMovementExpenseBankCardModel, where);
+
+        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mMovementExpenseBankCardDao.
+                getMovementExpenseBankCardById(updatedRows);
+
+        compareMovementExpenseBankCardModels(updatedMovementExpenseBankCardModel, actualMovementExpenseBankCardModel);
+    }
+
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModels = new ArrayList<>();
@@ -168,5 +189,17 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(expectedMovementExpenseBankCardModel.bankCardId, is(actualMovementExpenseBankCardModel.bankCardId));
         assertThat(expectedMovementExpenseBankCardModel.amount, is(actualMovementExpenseBankCardModel.amount));
 
+    }
+
+    private MovementExpenseBankCardModel changeMovementExpenseBankCardModelFields(MovementExpenseBankCardModel
+                                                                                          movementExpenseBankCardModel) {
+
+        movementExpenseBankCardModel.bankCardId = 3;
+        movementExpenseBankCardModel.date = DateUtils.getCurrentData();
+        movementExpenseBankCardModel.description = "updated description";
+        movementExpenseBankCardModel.expenseId = 2;
+        movementExpenseBankCardModel.amount = 98743.90;
+
+        return movementExpenseBankCardModel;
     }
 }
