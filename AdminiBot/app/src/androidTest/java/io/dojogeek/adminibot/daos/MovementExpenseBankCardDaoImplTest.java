@@ -8,8 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -70,7 +75,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndObtainingMovementExpenseBankCardById_isTrue() {
+    public void movementExpenseBankCardDao_creationAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
 
         MovementExpenseBankCardModel expectedMovementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -86,5 +91,14 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(actualMovementExpenseBankCardModel.description, is(expectedMovementExpenseBankCardModel.description));
         assertThat(actualMovementExpenseBankCardModel.expenseId, is(expectedMovementExpenseBankCardModel.expenseId));
     }
+
+    @Test(expected = DataException.class)
+    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithInexistentId_isFalse() throws DataException {
+
+        int movementExpenseBankCardId = 2;
+        mMovementExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
+
+    }
+
 
 }
