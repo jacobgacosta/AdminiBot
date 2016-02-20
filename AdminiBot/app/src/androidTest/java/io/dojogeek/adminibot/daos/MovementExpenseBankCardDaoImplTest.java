@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -142,6 +143,21 @@ public class MovementExpenseBankCardDaoImplTest {
                 getMovementExpenseBankCardById(updatedRows);
 
         compareMovementExpenseBankCardModels(updatedMovementExpenseBankCardModel, actualMovementExpenseBankCardModel);
+    }
+
+    @Test(expected = SQLiteConstraintException.class)
+    public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardWithNullRequiredField_isException() {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+
+        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+
+        String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
+
+        movementExpenseBankCardModel.description = null;
+
+        mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
+
     }
 
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
