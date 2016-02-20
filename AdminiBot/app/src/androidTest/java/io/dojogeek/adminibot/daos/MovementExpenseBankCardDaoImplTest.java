@@ -136,6 +136,8 @@ public class MovementExpenseBankCardDaoImplTest {
 
         long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(updatedMovementExpenseBankCardModel, where);
 
+        assertThat(updatedRows, is(not(OPERATIONAL_ERROR)));
+
         MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mMovementExpenseBankCardDao.
                 getMovementExpenseBankCardById(updatedRows);
 
