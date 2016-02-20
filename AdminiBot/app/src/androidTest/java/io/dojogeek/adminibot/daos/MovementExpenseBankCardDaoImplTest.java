@@ -186,6 +186,17 @@ public class MovementExpenseBankCardDaoImplTest {
         assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
 
+    @Test
+    public void movementExpenseBankCardDao_creationAndDeletionMovementExpenseBankCardWithNonexistentId_isFalse() {
+
+        long nonExistentId = 2;
+
+        long deletedRows = mMovementExpenseBankCardDao.deleteMovementExpenseBankCard(nonExistentId);
+
+        assertThat(deletedRows, is(NO_OPERATION));
+
+    }
+
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModels = new ArrayList<>();
