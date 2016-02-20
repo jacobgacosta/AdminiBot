@@ -112,6 +112,15 @@ public class MovementExpenseBankCardDaoImplTest {
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
     }
 
+    @Test
+    public void movementExpenseBankCardDao_obtainingAllMovementExpenseBankCardWhitoutRecords_isTrue() {
+
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList =
+                mMovementExpenseBankCardDao.getMovementsExpensesBankCards();
+
+        assertThat(movementExpenseBankCardModelList.isEmpty(), is(true));
+    }
+
     private List<MovementExpenseBankCardModel> createMovementExpenseBankCard(int numberOfInsertions) {
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModels = new ArrayList<>();
