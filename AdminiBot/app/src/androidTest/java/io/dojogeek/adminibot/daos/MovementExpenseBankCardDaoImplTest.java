@@ -93,7 +93,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = DataException.class)
-    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithInexistentId_isFalse() throws DataException {
+    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithInexistentId_isException() throws DataException {
 
         int movementExpenseBankCardId = 2;
         mMovementExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
