@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
 
@@ -25,23 +26,18 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
     }
 
     @Override
-    public MovementExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) {
+    public MovementExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) throws DataException {
 
         String [] args = {String.valueOf(movementExpenseBankCardModelId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME +
                 " WHERE _ID = ? ", args);
 
-        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
-
-        if (cursor.moveToFirst()) {
-
-            while (cursor.isAfterLast() == false) {
-
-                movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
-                cursor.moveToNext();
-            }
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
         }
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = fillMovementExpenseBankCardModel(cursor);
 
         return movementExpenseBankCardModel;
 
@@ -75,5 +71,30 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
         movementExpenseBankCardModel.date = date;
 
         return movementExpenseBankCardModel;
+    }
+
+    private MovementExpenseBankCardModel fillMovementExpenseBankCardModel(Cursor cursor) {
+
+        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return movementExpenseBankCardModel;
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
