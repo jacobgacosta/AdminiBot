@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.ExpenseModel;
 
-public interface ExpenseDao extends ConectionDao {
+public interface ExpenseDao extends ConnectionDao {
 
     long createExpense(ExpenseModel expenseModel);
 

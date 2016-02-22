@@ -2,7 +2,7 @@ package io.dojogeek.adminibot.daos;
 
 import io.dojogeek.adminibot.models.CardDetailModel;
 
-public interface CardDetailDao extends ConectionDao {
+public interface CardDetailDao extends ConnectionDao {
 
     long createCardDetail(CardDetailModel cardDetailModel);
 

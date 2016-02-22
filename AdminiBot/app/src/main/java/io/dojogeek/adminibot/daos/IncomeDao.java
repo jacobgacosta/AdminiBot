@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.IncomeModel;
 
-public interface IncomeDao extends ConectionDao {
+public interface IncomeDao extends ConnectionDao {
 
     long createIncome(IncomeModel incomeModel);
 

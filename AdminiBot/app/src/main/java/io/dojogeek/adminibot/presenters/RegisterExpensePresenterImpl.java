@@ -2,8 +2,7 @@ package io.dojogeek.adminibot.presenters;
 
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.daos.ConectionDao;
+import io.dojogeek.adminibot.daos.ConnectionDao;
 import io.dojogeek.adminibot.daos.ExpenseDao;
 import io.dojogeek.adminibot.daos.ExpenseTypeDao;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDao;
@@ -76,7 +75,7 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
         mRegisterExpense.deployPaymentMethods(typePaymentMethodsModels);
     }
 
-    private void closeConnection(ConectionDao conectionDao) {
-        conectionDao.closeConection();
+    private void closeConnection(ConnectionDao connectionDao) {
+        connectionDao.closeConection();
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 
-public interface BankCardDao extends ConectionDao {
+public interface BankCardDao extends ConnectionDao {
 
     long createBankCard(BankCardModel bankCardModel);
 
