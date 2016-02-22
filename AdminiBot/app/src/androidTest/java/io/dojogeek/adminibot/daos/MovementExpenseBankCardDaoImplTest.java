@@ -95,7 +95,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = DataException.class)
-    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithInexistentId_isException() throws DataException {
+    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithNonexistentId_isException() throws DataException {
 
         int movementExpenseBankCardId = 2;
         mMovementExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
@@ -137,16 +137,19 @@ public class MovementExpenseBankCardDaoImplTest {
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
     }
 
-    @Test(expected = DataException.class)
-    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentExpenseId_isException() throws DataException {
+    @Test
+    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentExpenseId_isException() {
+
         long nonExistentExpenseId = 4;
 
-        mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(nonExistentExpenseId);
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList =
+                mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(nonExistentExpenseId);
 
+        assertThat(movementExpenseBankCardModelList.isEmpty(), is(true));
     }
 
     @Test
-    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByBankCardId_isTrue() throws DataException {
+    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByBankCardId_isTrue() {
 
         int numberOfInsertions = 4;
         long bankCardId = 2;
@@ -159,6 +162,17 @@ public class MovementExpenseBankCardDaoImplTest {
 
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModelList,
                 actualMovementExpenseBankCardModelList);
+    }
+
+    @Test
+    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentBankCardId_isTrue() {
+
+        long bankCardId = 4;
+
+        List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModelList =
+                mMovementExpenseBankCardDao.getMovementExpenseBankCardByBankCardId(bankCardId);
+
+        assertThat(actualMovementExpenseBankCardModelList.isEmpty(), is(true));
     }
 
     @Test
