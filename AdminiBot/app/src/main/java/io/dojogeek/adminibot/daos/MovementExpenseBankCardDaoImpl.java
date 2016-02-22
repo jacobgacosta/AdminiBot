@@ -91,7 +91,7 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
     }
 
     @Override
-    public List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) throws DataException {
+    public List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) {
 
         String [] args = {String.valueOf(expenseId)};
 
@@ -99,7 +99,7 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
                 " WHERE expense_id = ? ", args);
 
         if (isEmptyResult(cursor)) {
-            throw new DataException("no data!");
+            return new ArrayList<>();
         }
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
@@ -109,7 +109,7 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
     }
 
     @Override
-    public List<MovementExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) throws DataException{
+    public List<MovementExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) {
 
         String [] args = {String.valueOf(bankCardId)};
 
@@ -117,7 +117,7 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
                 " WHERE bank_card_id = ? ", args);
 
         if (isEmptyResult(cursor)) {
-            throw new DataException("no data!");
+            return new ArrayList<>();
         }
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
