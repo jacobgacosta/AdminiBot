@@ -137,6 +137,14 @@ public class MovementExpenseBankCardDaoImplTest {
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
     }
 
+    @Test(expected = DataException.class)
+    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentExpenseId_isException() throws DataException {
+        long nonExistentExpenseId = 4;
+
+        mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(nonExistentExpenseId);
+
+    }
+
     @Test
     public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
 
