@@ -90,6 +90,24 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
 
     }
 
+    @Override
+    public List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) throws DataException {
+
+        String [] args = {String.valueOf(expenseId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME +
+                " WHERE expense_id = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
+
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
+
+        return movementExpenseBankCardModelList;
+
+    }
+
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
@@ -134,6 +152,23 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
         }
 
         return movementExpenseBankCardModel;
+    }
+
+    private List<MovementExpenseBankCardModel> fillMovementExpenseBankCardModelList(Cursor cursor) {
+
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                MovementExpenseBankCardModel movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                movementExpenseBankCardModelList.add(movementExpenseBankCardModel);
+                cursor.moveToNext();
+            }
+        }
+
+        return movementExpenseBankCardModelList;
     }
 
     private boolean isEmptyResult(Cursor cursor) {

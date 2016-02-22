@@ -124,6 +124,20 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
+    public void movementExpenseBankCardDao_obtainingMovementsExpensesBankCardsByExpenseId_isTrue() throws DataException {
+
+        int numberOfInsertions = 7;
+        int expenseId = 2;
+
+        List<MovementExpenseBankCardModel> expectedMovementExpenseBankCardModels = createMovementExpenseBankCard(numberOfInsertions);
+
+        List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels =
+                mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(expenseId);
+
+        compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
+    }
+
+    @Test
     public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();

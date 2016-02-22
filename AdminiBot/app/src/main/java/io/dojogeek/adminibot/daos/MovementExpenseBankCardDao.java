@@ -17,4 +17,6 @@ public interface MovementExpenseBankCardDao extends ConectionDao {
                                        String where);
 
     long deleteMovementExpenseBankCard(long movementExpenseBankCardModelId);
+
+    List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) throws DataException;
 }
