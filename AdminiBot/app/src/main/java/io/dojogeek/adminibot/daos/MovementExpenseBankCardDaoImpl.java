@@ -108,6 +108,23 @@ public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements M
 
     }
 
+    @Override
+    public List<MovementExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) throws DataException{
+
+        String [] args = {String.valueOf(bankCardId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME +
+                " WHERE bank_card_id = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
+
+        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
+
+        return movementExpenseBankCardModelList;
+    }
+
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
