@@ -12,6 +12,7 @@ import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
+import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
@@ -220,5 +221,27 @@ public class CreatorModels {
         movementExpenseBankCardModel.expenseId = expenseId;
 
         return movementExpenseBankCardModel;
+    }
+
+    public static MovementIncomeBankCardModel createMovementIncomeBankCard(){
+
+        MovementIncomeBankCardModel movementIncomeBankCardModel =
+                createMovementIncomeBankCardModel(3409.80, 2, DateUtils.getCurrentData(), "Test description", 2);
+
+        return movementIncomeBankCardModel;
+    }
+
+    public static MovementIncomeBankCardModel createMovementIncomeBankCardModel(double amount, long bankCardId,
+                                                                                String date, String description,
+                                                                                long incomeId) {
+
+        MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
+        movementIncomeBankCardModel.amount = amount;
+        movementIncomeBankCardModel.bankCardId = bankCardId;
+        movementIncomeBankCardModel.date = date;
+        movementIncomeBankCardModel.description = description;
+        movementIncomeBankCardModel.incomeId = incomeId;
+
+        return movementIncomeBankCardModel;
     }
 }
