@@ -8,9 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -94,6 +98,68 @@ public class MovementIncomeBankCardDaoImplTest {
         long nonExistentMovementIncomeBankCardId = 4;
 
         mMovementIncomeBankCardDao.getMovementIncomeBankCardById(nonExistentMovementIncomeBankCardId);
+
+    }
+
+    @Test
+    public void movementIncomeBankCardDao_creationAndObtainingAllMovementsIncomesBankCards_isTrue() {
+
+        int numberOfInsertions = 5;
+
+        List<MovementIncomeBankCardModel> expectedMovementIncomeBankCardModels = createMovementsIncomesBankCards(numberOfInsertions);
+
+        List<MovementIncomeBankCardModel> actualMovementIncomeBankCardModels = mMovementIncomeBankCardDao.getMovementsIncomesBankCards();
+
+        compareMovementsIncomesBankCardsModelsList(expectedMovementIncomeBankCardModels, actualMovementIncomeBankCardModels);
+
+    }
+
+    private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
+
+        List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
+
+        for (int index = 0; index < numberOfInsertions; index++) {
+
+            MovementIncomeBankCardModel movementIncomeBankCardModel =
+                    CreatorModels.createMovementIncomeBankCardModel(3409.80 + index, 2,
+                            DateUtils.getCurrentData(), "Test description " + index, 2);
+
+            mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
+            movementIncomeBankCardModels.add(movementIncomeBankCardModel);
+        }
+
+        return movementIncomeBankCardModels;
+    }
+
+    private void compareMovementsIncomesBankCardsModelsList(List<MovementIncomeBankCardModel> expectedMovementIncomeBankCardModels,
+                                                            List<MovementIncomeBankCardModel> actualMovementIncomeBankCardModels) {
+
+        assertThat(actualMovementIncomeBankCardModels, is(notNullValue()));
+        assertThat(actualMovementIncomeBankCardModels.isEmpty(), is(false));
+        assertThat(actualMovementIncomeBankCardModels.size(), is(expectedMovementIncomeBankCardModels.size()));
+
+        for (int index = 0; index < actualMovementIncomeBankCardModels.size(); index++) {
+
+            MovementIncomeBankCardModel actualMovementIncomeBankCardModel =
+                    actualMovementIncomeBankCardModels.get(index);
+
+            MovementIncomeBankCardModel expectedMovementIncomeBankCardModel =
+                    expectedMovementIncomeBankCardModels.get(index);
+
+            compareMovementsIncomesBankCardsModels(expectedMovementIncomeBankCardModel, actualMovementIncomeBankCardModel);
+        }
+
+    }
+
+    private void compareMovementsIncomesBankCardsModels(MovementIncomeBankCardModel expectedMovementIncomeBankCardModel,
+                                                        MovementIncomeBankCardModel actualMovementIncomeBankCardModel) {
+
+        assertThat(actualMovementIncomeBankCardModel, is(notNullValue()));
+        assertThat(actualMovementIncomeBankCardModel.incomeId, is(expectedMovementIncomeBankCardModel.incomeId));
+        assertThat(actualMovementIncomeBankCardModel.description, is(expectedMovementIncomeBankCardModel.description));
+        assertThat(actualMovementIncomeBankCardModel.date, is(expectedMovementIncomeBankCardModel.date));
+        assertThat(actualMovementIncomeBankCardModel.bankCardId, is(expectedMovementIncomeBankCardModel.bankCardId));
+        assertThat(actualMovementIncomeBankCardModel.amount, is(expectedMovementIncomeBankCardModel.amount));
 
     }
 }

@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.exceptions.DataException;
@@ -43,6 +46,28 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         MovementIncomeBankCardModel movementIncomeBankCardModel = fillMovementIncomeBankCardModel(cursor);
 
         return movementIncomeBankCardModel;
+    }
+
+    @Override
+    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCards() {
+
+        List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
+
+        Cursor cursor = mDatabase.query(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                MovementIncomeBankCardModel movementIncomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+
+                movementIncomeBankCardModels.add(movementIncomeBankCardModel);
+
+                cursor.moveToNext();
+            }
+        }
+
+        return movementIncomeBankCardModels;
     }
 
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
