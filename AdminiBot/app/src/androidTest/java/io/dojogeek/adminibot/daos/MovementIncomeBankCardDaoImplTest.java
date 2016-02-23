@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
@@ -67,5 +68,18 @@ public class MovementIncomeBankCardDaoImplTest {
         long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
 
         assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+    }
+
+    @Test
+    public void movementIncomeBankCarddao_creationAndObtainingMovementIncomeBankCardById_isTrue() throws DataException {
+
+        MovementIncomeBankCardModel movementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+
+        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
+
+        MovementIncomeBankCardModel actualMovementIncomeBankCardModel =
+                mMovementIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
+
+        assertThat(actualMovementIncomeBankCardModel, is(notNullValue()));
     }
 }
