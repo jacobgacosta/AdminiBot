@@ -55,6 +55,17 @@ public class MovementIncomeBankCardDaoImplTest {
     public void movementIncomeBankCarddao_creationMovementIncomeBankCardWithNullModel_isFalse() {
 
         mMovementIncomeBankCardDao.createMovementIncomeBankCard(null);
-        
+
+    }
+
+    @Test
+    public void movementIncomeBankCarddao_creationMovementIncomeBankCardWithNullRequiredField_isFalse() {
+
+        MovementIncomeBankCardModel movementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+        movementIncomeBankCardModel.description = null;
+
+        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
+
+        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
     }
 }
