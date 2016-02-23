@@ -52,6 +52,7 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT, movementIncomeBankCard.amount);
         contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID, movementIncomeBankCard.incomeId);
         contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID, movementIncomeBankCard.bankCardId);
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE, movementIncomeBankCard.date);
 
         return contentValues;
     }
@@ -87,12 +88,14 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         double amount = cursor.getDouble(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT));
         long incomeId = cursor.getLong(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID));
         long bankCardId = cursor.getLong(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID));
+        String date = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE));
 
         MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
         movementIncomeBankCardModel.description = description;
         movementIncomeBankCardModel.amount = amount;
         movementIncomeBankCardModel.incomeId = incomeId;
         movementIncomeBankCardModel.bankCardId = bankCardId;
+        movementIncomeBankCardModel.date = date;
 
         return movementIncomeBankCardModel;
     }
