@@ -73,13 +73,18 @@ public class MovementIncomeBankCardDaoImplTest {
     @Test
     public void movementIncomeBankCarddao_creationAndObtainingMovementIncomeBankCardById_isTrue() throws DataException {
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+        MovementIncomeBankCardModel expectedMovementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
+        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(expectedMovementIncomeBankCardModel);
 
         MovementIncomeBankCardModel actualMovementIncomeBankCardModel =
                 mMovementIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
 
         assertThat(actualMovementIncomeBankCardModel, is(notNullValue()));
+        assertThat(actualMovementIncomeBankCardModel.amount, is(expectedMovementIncomeBankCardModel.amount));
+        assertThat(actualMovementIncomeBankCardModel.bankCardId, is(expectedMovementIncomeBankCardModel.bankCardId));
+        assertThat(actualMovementIncomeBankCardModel.date, is(expectedMovementIncomeBankCardModel.date));
+        assertThat(actualMovementIncomeBankCardModel.description, is(expectedMovementIncomeBankCardModel.description));
+        assertThat(actualMovementIncomeBankCardModel.incomeId, is(expectedMovementIncomeBankCardModel.incomeId));
     }
 }
