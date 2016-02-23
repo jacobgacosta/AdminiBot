@@ -50,4 +50,11 @@ public class MovementIncomeBankCardDaoImplTest {
         assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
     }
+
+    @Test(expected = NullPointerException.class)
+    public void movementIncomeBankCarddao_creationMovementIncomeBankCardWithNullModel_isFalse() {
+
+        mMovementIncomeBankCardDao.createMovementIncomeBankCard(null);
+        
+    }
 }
