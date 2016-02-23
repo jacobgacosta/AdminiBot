@@ -43,7 +43,7 @@ public class MovementIncomeBankCardDaoImplTest {
     @Test
     public void movementIncomeBankCardDao_creationMovementIncomeBankCard_isTrue() {
 
-        MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCard();
+        MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
 
         long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
 
