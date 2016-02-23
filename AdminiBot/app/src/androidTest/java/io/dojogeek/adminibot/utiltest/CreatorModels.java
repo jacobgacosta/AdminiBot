@@ -223,7 +223,7 @@ public class CreatorModels {
         return movementExpenseBankCardModel;
     }
 
-    public static MovementIncomeBankCardModel createMovementIncomeBankCard(){
+    public static MovementIncomeBankCardModel createMovementIncomeBankCardModel(){
 
         MovementIncomeBankCardModel movementIncomeBankCardModel =
                 createMovementIncomeBankCardModel(3409.80, 2, DateUtils.getCurrentData(), "Test description", 2);
