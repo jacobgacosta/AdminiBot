@@ -13,6 +13,7 @@ public class IncomesBankCardsContract {
         public static final String COLUMN_AMOUNT = "amount";
         public static final String COLUMN_INCOME_ID = "income_id";
         public static final String COLUMN_BANK_CARD_ID = "bank_card_id";
+        public static final String COLUMN_DATE = "date";
         public static final String COLUMN_NAME_NULLABLE = "null";
 
     }
@@ -22,6 +23,7 @@ public class IncomesBankCardsContract {
             IncomesBankCards.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
             IncomesBankCards.COLUMN_AMOUNT + " REAL NOT NULL, " +
             IncomesBankCards.COLUMN_INCOME_ID + " INTEGER NOT NULL, " +
+            IncomesBankCards.COLUMN_DATE + " TEXT NOT NULL, " +
             IncomesBankCards.COLUMN_BANK_CARD_ID + " INTEGER NOT NULL)";
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + IncomesBankCards.TABLE_NAME;
