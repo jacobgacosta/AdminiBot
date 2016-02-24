@@ -197,6 +197,17 @@ public class MovementIncomeBankCardDaoImplTest {
         compareMovementsIncomesBankCardsModels(updatedMovementIncomeBankCardModel, actualMovementIncomeBankCardModel);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullvalue_isException() {
+
+        MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = null;
+
+        String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + 2;
+
+        mMovementIncomeBankCardDao.updateMovementIncomeBankCard(updatedMovementIncomeBankCardModel, where);
+
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
