@@ -164,6 +164,17 @@ public class MovementIncomeBankCardDaoImplTest {
 
     }
 
+    @Test
+    public void movementIncomeBankCardDao_creationAndObtainingMovementsIncomesBankCardsByNonExistentBankCardId_isFalse() {
+
+        int nonExistentId = 0;
+
+        List<MovementIncomeBankCardModel> actualMovementIncomeBankCardModelList =
+                mMovementIncomeBankCardDao.getMovementsIncomesBankCardsByBankCardId(nonExistentId);
+
+        assertThat(actualMovementIncomeBankCardModelList.isEmpty(), is(true));
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
