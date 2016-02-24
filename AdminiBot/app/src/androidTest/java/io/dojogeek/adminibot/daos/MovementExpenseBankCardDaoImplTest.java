@@ -124,7 +124,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_obtainingMovementsExpensesBankCardsByExpenseId_isTrue() throws DataException {
+    public void movementExpenseBankCardDao_obtainingMovementsExpensesBankCardsByExpenseId_isTrue() {
 
         int numberOfInsertions = 7;
         int expenseId = 2;
