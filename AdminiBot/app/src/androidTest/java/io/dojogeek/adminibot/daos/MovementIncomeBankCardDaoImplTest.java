@@ -14,6 +14,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.sqlite.IncomesBankCardsContract;
 import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
@@ -175,6 +176,27 @@ public class MovementIncomeBankCardDaoImplTest {
         assertThat(actualMovementIncomeBankCardModelList.isEmpty(), is(true));
     }
 
+    @Test
+    public void movementIncomeBankCardDao_creationUpdatingAndObtainingMovementIncomeBankCardById_isTrue() throws DataException {
+
+        MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+
+        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+
+        MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = changeMovementIncomeBankCardFields(movementIncomeBankCard);
+
+        String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + insertedRecordId;
+
+        long updatedRows = mMovementIncomeBankCardDao.updateMovementIncomeBankCard(updatedMovementIncomeBankCardModel, where);
+
+        assertThat(updatedRows, is(SUCCESS_OPERATION));
+
+        MovementIncomeBankCardModel actualMovementIncomeBankCardModel =
+                mMovementIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
+
+        compareMovementsIncomesBankCardsModels(updatedMovementIncomeBankCardModel, actualMovementIncomeBankCardModel);
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
@@ -222,5 +244,16 @@ public class MovementIncomeBankCardDaoImplTest {
         assertThat(actualMovementIncomeBankCardModel.bankCardId, is(expectedMovementIncomeBankCardModel.bankCardId));
         assertThat(actualMovementIncomeBankCardModel.amount, is(expectedMovementIncomeBankCardModel.amount));
 
+    }
+
+    private MovementIncomeBankCardModel changeMovementIncomeBankCardFields(MovementIncomeBankCardModel movementIncomeBankCardModel) {
+
+        movementIncomeBankCardModel.amount = 309.00;
+        movementIncomeBankCardModel.bankCardId = 2;
+        movementIncomeBankCardModel.date = DateUtils.getCurrentData();
+        movementIncomeBankCardModel.description = "updated description";
+        movementIncomeBankCardModel.incomeId = 3;
+
+        return movementIncomeBankCardModel;
     }
 }
