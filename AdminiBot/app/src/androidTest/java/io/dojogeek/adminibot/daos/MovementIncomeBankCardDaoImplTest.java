@@ -249,6 +249,16 @@ public class MovementIncomeBankCardDaoImplTest {
         assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
 
+    @Test
+    public void movementIncomeBankCardDao_creationAndDeletionMovementIncomeBankCardWithNonExistentId_isFalse() {
+
+        long nonExistentId = 2;
+
+        long deletedRows = mMovementIncomeBankCardDao.deleteMovementIncomeBankCard(nonExistentId);
+
+        assertThat(deletedRows, is(NO_OPERATION));
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
