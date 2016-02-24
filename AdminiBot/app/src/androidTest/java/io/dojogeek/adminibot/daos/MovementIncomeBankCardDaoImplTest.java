@@ -114,6 +114,14 @@ public class MovementIncomeBankCardDaoImplTest {
 
     }
 
+    @Test
+    public void movementIncomeBankCardDao_obtainingAllMovementsIncomesBankCardsWhitoutRecords_isTrue() {
+
+        List<MovementIncomeBankCardModel> movementIncomeBankCardModelList = mMovementIncomeBankCardDao.getMovementsIncomesBankCards();
+
+        assertThat(movementIncomeBankCardModelList.isEmpty(), is(true));
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
