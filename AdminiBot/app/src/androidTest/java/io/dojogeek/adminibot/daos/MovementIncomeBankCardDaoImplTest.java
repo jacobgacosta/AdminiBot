@@ -198,7 +198,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullvalue_isException() {
+    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullValue_isException() {
 
         MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = null;
 
