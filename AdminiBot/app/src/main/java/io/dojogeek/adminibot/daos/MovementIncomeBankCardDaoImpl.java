@@ -87,6 +87,23 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         return movementExpenseBankCardModelList;
     }
 
+    @Override
+    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId) {
+
+        String [] args = {String.valueOf(bankCardId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesBankCardsContract.IncomesBankCards.TABLE_NAME +
+                " WHERE bank_card_id = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            return new ArrayList<>();
+        }
+
+        List<MovementIncomeBankCardModel> movementIncomeBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
+
+        return movementIncomeBankCardModelList;
+    }
+
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
