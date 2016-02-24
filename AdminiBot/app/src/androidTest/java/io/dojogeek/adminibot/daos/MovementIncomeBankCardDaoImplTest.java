@@ -209,7 +209,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithWhereNullValue_isException() {
+    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithWhereNullValue_isFalse() {
 
         MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
 
