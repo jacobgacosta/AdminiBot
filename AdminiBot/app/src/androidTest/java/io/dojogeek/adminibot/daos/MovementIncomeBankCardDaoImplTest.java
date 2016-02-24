@@ -208,6 +208,18 @@ public class MovementIncomeBankCardDaoImplTest {
 
     }
 
+    @Test
+    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithWhereNullValue_isException() {
+
+        MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+
+        String where = null;
+
+        long updatedRows = mMovementIncomeBankCardDao.updateMovementIncomeBankCard(updatedMovementIncomeBankCardModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+    }
+
     private List<MovementIncomeBankCardModel> createMovementsIncomesBankCards(int numberOfInsertions) {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
