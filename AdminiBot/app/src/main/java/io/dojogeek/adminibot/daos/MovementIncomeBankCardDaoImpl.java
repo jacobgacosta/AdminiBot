@@ -115,6 +115,17 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         return updatedRows;
     }
 
+    @Override
+    public long deleteMovementIncomeBankCard(long movementIncomeBankCardId) {
+
+        String [] arg = {String.valueOf(movementIncomeBankCardId)};
+
+        int deletedRows = mDatabase.delete(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME,
+                IncomesBankCardsContract.IncomesBankCards._ID + "= ?", arg);
+
+        return deletedRows;
+    }
+
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();

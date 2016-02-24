@@ -18,4 +18,6 @@ public interface MovementIncomeBankCardDao extends ConnectionDao {
     List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId);
 
     long updateMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCardModel, String where);
+
+    long deleteMovementIncomeBankCard(long movementIncomeBankCardId);
 }
