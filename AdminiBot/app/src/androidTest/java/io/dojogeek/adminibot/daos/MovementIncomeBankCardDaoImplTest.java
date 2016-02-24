@@ -138,7 +138,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_createAndObtainingMovementsIncomesBankCardsByNonExistentIncomeId_isFalse() {
+    public void movementIncomeBankCardDao_creationAndObtainingMovementsIncomesBankCardsByNonExistentIncomeId_isFalse() {
 
         long incomeId = 0;
 
