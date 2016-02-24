@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -216,6 +217,22 @@ public class MovementIncomeBankCardDaoImplTest {
         String where = null;
 
         long updatedRows = mMovementIncomeBankCardDao.updateMovementIncomeBankCard(updatedMovementIncomeBankCardModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+    }
+
+    @Test(expected = SQLiteConstraintException.class)
+    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullRequiredField_isException() {
+
+        MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+
+        long insertedRecordId = mMovementIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+
+        movementIncomeBankCard.description = null;
+
+        String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + insertedRecordId;
+
+        long updatedRows = mMovementIncomeBankCardDao.updateMovementIncomeBankCard(movementIncomeBankCard, where);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
