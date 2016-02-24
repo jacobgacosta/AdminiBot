@@ -12,4 +12,6 @@ public interface MovementIncomeBankCardDao extends ConnectionDao {
     MovementIncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException;
 
     List<MovementIncomeBankCardModel> getMovementsIncomesBankCards();
+
+    List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId);
 }

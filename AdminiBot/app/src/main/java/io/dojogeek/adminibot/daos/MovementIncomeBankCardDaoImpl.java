@@ -70,6 +70,23 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         return movementIncomeBankCardModels;
     }
 
+    @Override
+    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId) {
+
+        String [] args = {String.valueOf(incomeId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesBankCardsContract.IncomesBankCards.TABLE_NAME +
+                " WHERE income_id = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            return new ArrayList<>();
+        }
+
+        List<MovementIncomeBankCardModel> movementExpenseBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
+
+        return movementExpenseBankCardModelList;
+    }
+
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
@@ -123,5 +140,22 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         movementIncomeBankCardModel.date = date;
 
         return movementIncomeBankCardModel;
+    }
+
+    private List<MovementIncomeBankCardModel> fillMovementIncomeBankCardModelList(Cursor cursor) {
+
+        List<MovementIncomeBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                MovementIncomeBankCardModel movementIncomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                movementExpenseBankCardModelList.add(movementIncomeBankCardModel);
+                cursor.moveToNext();
+            }
+        }
+
+        return movementExpenseBankCardModelList;
     }
 }
