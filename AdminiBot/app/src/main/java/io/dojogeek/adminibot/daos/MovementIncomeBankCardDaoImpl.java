@@ -104,6 +104,17 @@ public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements Mo
         return movementIncomeBankCardModelList;
     }
 
+    @Override
+    public long updateMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCardModel,
+                                             String where) {
+
+        ContentValues contentValues = createContentValues(movementIncomeBankCardModel);
+
+        long updatedRows = mDatabase.update(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, contentValues, where, null);
+
+        return updatedRows;
+    }
+
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
