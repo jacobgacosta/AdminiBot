@@ -104,7 +104,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void testMovementsIncomesBankCards_successObtainingList() {
+    public void testGetMovementsIncomesBankCards_successObtainingList() {
 
         int numberOfInsertions = 5;
 
@@ -117,7 +117,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void testMovementsIncomesBankCards_withNoRecords_isEmptyList() {
+    public void testGetMovementsIncomesBankCards_withNoRecords_isEmptyList() {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModelList = mMovementIncomeBankCardDao.getMovementsIncomesBankCards();
 

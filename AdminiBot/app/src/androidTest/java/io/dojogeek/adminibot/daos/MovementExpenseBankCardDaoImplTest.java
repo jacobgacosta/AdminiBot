@@ -103,7 +103,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void getMovementsExpensesBankCards_successObtainingList() {
+    public void getGetMovementsExpensesBankCards_successObtainingList() {
 
         int numberOfInsertions = 7;
 
