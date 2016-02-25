@@ -83,7 +83,7 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     }
 
     @Override
-    public long removeExpenseTypeById(long expenseTypeId) {
+    public long deleteExpenseTypeById(long expenseTypeId) {
 
         String [] arg = {String.valueOf(expenseTypeId)};
 
