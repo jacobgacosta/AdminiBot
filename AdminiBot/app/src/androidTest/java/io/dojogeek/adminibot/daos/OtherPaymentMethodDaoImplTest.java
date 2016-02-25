@@ -45,7 +45,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationOtherPaymentMethod_isTrue() {
+    public void testCreateOtherPaymentMethod_successInsertion() {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -56,7 +56,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationAndObtainingOtherPaymentMethodById_isTrue() {
+    public void testGetOtherPaymentMethodById_successObtaining() {
 
         OtherPaymentMethodModel expectedOtherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -74,7 +74,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationAndObtainingAllOtherPaymentMethods_isTrue() {
+    public void testGetOtherPaymentMethods_successObtainingList() {
 
         int numberOfInsertions = 5;
 
@@ -87,7 +87,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationUpdatingAndObtainingOtherPaymentMethodById_isTrue() {
+    public void testUpdateOtherPaymentMethod_successUpdating() {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -108,7 +108,7 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void otherPaymentMethod_creationAndDeletionOtherPaymentMethod_isTrue() {
+    public void testDeleteOtherPaymentMethod_successDeletion() {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 

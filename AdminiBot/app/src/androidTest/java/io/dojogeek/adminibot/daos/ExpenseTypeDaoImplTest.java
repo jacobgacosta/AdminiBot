@@ -50,7 +50,7 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void expenseTypeDao_creationExpenseType_isTrue() {
+    public void testCreateExpenseType_successInsertion() {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
 
@@ -60,7 +60,7 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void expenseTypeDao_creationAndObtainingExpenseTypeById_isTrue() {
+    public void testGetExpenseTypeById_successObtaining() {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
 
@@ -75,7 +75,7 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void expenseTypeDao_obtainingAllExpensesTypesInitiallyInserted_isTrue() {
+    public void testGetExpensesTypes_successObtainingList() {
 
         int initiallyInsertedExpensesTypes = 5;
 
@@ -89,7 +89,7 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void expenseTypeDao_creationUpdatingAndObtainingExpenseTypeById_isTrue() {
+    public void testUpdateExpensetype_successUpdating() {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
 
@@ -109,11 +109,11 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void expenseTypeDao_deletionOfExpenseTypeInitiallyInserted_isTrue() {
+    public void testDeleteExpenseTypeById_successDeletion() {
 
         long initiallyInsertedExpenseTypeId = 3;
 
-        long removedRows = mExpenseTypeDao.removeExpenseTypeById(initiallyInsertedExpenseTypeId);
+        long removedRows = mExpenseTypeDao.deleteExpenseTypeById(initiallyInsertedExpenseTypeId);
 
         assertEquals(1, removedRows);
 

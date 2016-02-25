@@ -48,7 +48,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationMovementExpenseBankCard_isTrue() {
+    public void testCreateMovementExpenseBankCard_successInsertion() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -59,14 +59,14 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void movementExpenseBankCardDao_creationMovementExpenseBankCardWithNullModel_isException() {
+    public void testCreateMovementExpenseBankCard_withNullModel_isException() {
 
         mMovementExpenseBankCardDao.createMovementExpenseBankCard(null);
 
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationMovementExpenseBankCardWithNullRequiredField_isFalse() {
+    public void testCreateMovementExpenseBankCard_withNullRequiredField_noInsertion() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
         movementExpenseBankCardModel.description = null;
@@ -77,7 +77,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
+    public void testGetMovementExpenseBankCardById_successObtaining() throws DataException {
 
         MovementExpenseBankCardModel expectedMovementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -95,7 +95,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = DataException.class)
-    public void movementExpenseBankCardDao_obtainingMovementExpenseBankCardWithNonexistentId_isException() throws DataException {
+    public void testGetMovementExpenseBankCardById_withNonExistentId_isException() throws DataException {
 
         int movementExpenseBankCardId = 2;
         mMovementExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
@@ -103,7 +103,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndObtainingAllMovementExpenseBankCard_isTrue() {
+    public void getMovementsExpensesBankCards_successObtainingList() {
 
         int numberOfInsertions = 7;
 
@@ -115,7 +115,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_obtainingAllMovementExpenseBankCardWhitoutRecords_isTrue() {
+    public void testGetMovementsExpensesBankCards_withNoRecords_isEmptyList() {
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList =
                 mMovementExpenseBankCardDao.getMovementsExpensesBankCards();
@@ -124,7 +124,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_obtainingMovementsExpensesBankCardsByExpenseId_isTrue() {
+    public void testGetMovementsExpensesBankCardsByExpenseId_successObtaining() {
 
         int numberOfInsertions = 7;
         int expenseId = 2;
@@ -138,7 +138,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentExpenseId_isException() {
+    public void testGetMovementsExpensesBankCardsByExpenseId_withNonExistentExpenseId_isEmptyList() {
 
         long nonExistentExpenseId = 4;
 
@@ -149,7 +149,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByBankCardId_isTrue() {
+    public void testGetMovementExpenseBankCardByBankCardId_successObtaining() {
 
         int numberOfInsertions = 4;
         long bankCardId = 2;
@@ -165,7 +165,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDa_obtainingMovementsExpensesBankCardsByNonExistentBankCardId_isTrue() {
+    public void testGetMovementExpenseBankCardByBankCardId_withNonExistentBankCardId_isEmptyList() {
 
         long bankCardId = 4;
 
@@ -176,7 +176,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationUpdatindAndObtainingMovementExpenseBankCardById_isTrue() throws DataException {
+    public void testUpdateMovementExpenseBankCard_successUpdating() throws DataException {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -198,7 +198,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test(expected = SQLiteConstraintException.class)
-    public void movementExpenseBankCardDao_creationAndUpdatindMovementExpenseBankCardWithNullRequiredField_isException() {
+    public void testUpdateMovementExpenseBankCard_withNullRequiredField_isException() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -213,7 +213,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndUpdatingMovementExpenseBankCardByInexistentId_isFalse() {
+    public void testUpdateMovementExpenseBankCard_withNonExistentId_noUpdating() {
 
         int inexistentId = 4;
 
@@ -227,7 +227,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndDeletionMovementExpenseBankCard_isTrue() {
+    public void testDeleteMovementExpenseBankCard_successDeletion() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
@@ -239,7 +239,7 @@ public class MovementExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void movementExpenseBankCardDao_creationAndDeletionMovementExpenseBankCardWithNonexistentId_isFalse() {
+    public void testDeleteMovementExpenseBankCard_withNonexistentId_noDeletion() {
 
         long nonExistentId = 2;
 

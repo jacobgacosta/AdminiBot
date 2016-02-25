@@ -47,7 +47,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_creationUser_isTrue() {
+    public void testCreateUser_successInsertion() {
 
         UserModel userModel = CreatorModels.createUserModel();
 
@@ -58,7 +58,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_creationAndObtainingUser_isTrue() {
+    public void testGetUsers_successObtainingSingleUser() {
 
         UserModel expectedUserModel = CreatorModels.createUserModel();
 
@@ -77,7 +77,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void userDao_creationUpdatingAndObtainingUser_isTrue() {
+    public void testUpdateUser_successUpdating() {
 
         UserModel expectedUserModel = CreatorModels.createUserModel();
 

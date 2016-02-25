@@ -40,7 +40,7 @@ public class CardDetailDaoImplTest {
     }
 
     @Test
-    public void cardDetailDao_creationCardDetail_isTrue() {
+    public void testCreateCardDetail_successInsertion() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 
@@ -52,7 +52,7 @@ public class CardDetailDaoImplTest {
     }
 
     @Test
-    public void cardDetailDao_creationAndObtainingCardDetailById_isTrue() {
+    public void testGetCardDetailById_successObtaining() {
 
         CardDetailModel expectedCardDetailModel = CreatorModels.createCardDetailModel();
 
@@ -64,7 +64,7 @@ public class CardDetailDaoImplTest {
     }
 
     @Test
-    public void cardDetailDao_creationAndObtainingCardDetailByBankCardId_isTrue() {
+    public void testGetCardDetailByBankCardId_successObtaining() {
 
         CardDetailModel expectedCardDetailModel = CreatorModels.createCardDetailModel();
 
@@ -77,7 +77,7 @@ public class CardDetailDaoImplTest {
     }
 
     @Test
-    public void cardDetailDao_creationUpdatingAndObtainingCardDetailById_isTrue() {
+    public void testUpdateCardDetail_successUpdating() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 
@@ -98,7 +98,7 @@ public class CardDetailDaoImplTest {
     }
 
     @Test
-    public void cardDetailDao_creationAndDeletionCardDetail_isTrue() {
+    public void testDeleteCardDetail_successDeletion() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 

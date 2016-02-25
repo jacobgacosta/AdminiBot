@@ -43,7 +43,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_creationExpense_isTrue() {
+    public void testCreateExpense_successInsertion() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
@@ -54,7 +54,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_obtainingAllExpensesInitiallyInserted_isTrue() {
+    public void testGetExpenses_successObtainingList() {
 
         int numberOfInsertions = 5;
 
@@ -67,7 +67,7 @@ public class ExpenseDaoImplTest {
 
 
     @Test
-    public void expenseDao_creationAndObtainingExpenseById_isTrue() {
+    public void testGetExpenseById_successObtaining() {
 
         ExpenseModel expectedExpenseModel = CreatorModels.createExpenseModel();
 
@@ -80,7 +80,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_creationUpdatingAndObtainingExpenseById_isTrue() {
+    public void testUpdateExpense_successUpdating() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
@@ -101,7 +101,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_creationAndDeleteExpense_isTrue() {
+    public void testDeleteExpense_successDeletion() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
 
@@ -113,7 +113,7 @@ public class ExpenseDaoImplTest {
     }
 
     @Test
-    public void expenseDao_createAndObtainingExpenseByExpenseTypeId_isTrue() {
+    public void testGetExpenseByExpenseTypeId_successObtaining() {
 
         int numberOfInsertions = 5;
         int expenseTypeId = 2;

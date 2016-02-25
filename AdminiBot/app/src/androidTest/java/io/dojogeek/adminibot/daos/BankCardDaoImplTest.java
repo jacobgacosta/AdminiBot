@@ -44,7 +44,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationBankCard_isTrue() {
+    public void testCreateBankCard_successInsertion() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
@@ -55,7 +55,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationAndObtainingBankCardById_isTrue() {
+    public void testGetBankCardById_successObtaining() {
 
         BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
 
@@ -75,7 +75,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationAndObtainingAllBankCards_isTrue() {
+    public void testGetBankCards_successObtainingList() {
 
         int numberOfBankCardToCreate = 5;
 
@@ -87,7 +87,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationUpdatingAndOntainingBankCardById_istrue() {
+    public void testUpdateBankCard_successUpdating() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
@@ -108,7 +108,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationAndDeletionBankCard_isTrue() {
+    public void testDeleteBankCard_successDeletion() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
@@ -120,7 +120,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void bankCardDao_creationAndObtainingBankCardsByCardType_isTrue() {
+    public void testGetBankCardByCartType_successObtaining() {
 
         int numberOfBankCardToCreate = 4;
 

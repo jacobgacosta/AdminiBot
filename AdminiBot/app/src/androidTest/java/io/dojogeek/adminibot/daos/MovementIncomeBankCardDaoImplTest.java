@@ -48,7 +48,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationMovementIncomeBankCard_isTrue() {
+    public void testCreateMovementIncomeBankCard_successInsertion() {
 
         MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -59,14 +59,14 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void movementIncomeBankCarddao_creationMovementIncomeBankCardWithNullModel_isFalse() {
+    public void testCreateMovementIncomeBankCard_withNullModel_isException() {
 
         mMovementIncomeBankCardDao.createMovementIncomeBankCard(null);
 
     }
 
     @Test
-    public void movementIncomeBankCarddao_creationMovementIncomeBankCardWithNullRequiredField_isFalse() {
+    public void testCreateMovementIncomeBankCard_withNullRequiredField_noInsertion() {
 
         MovementIncomeBankCardModel movementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
         movementIncomeBankCardModel.description = null;
@@ -77,7 +77,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndObtainingMovementIncomeBankCardById_isTrue() throws DataException {
+    public void testGetMovementIncomeBankCardById_successObtaining() throws DataException {
 
         MovementIncomeBankCardModel expectedMovementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -95,7 +95,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test(expected = DataException.class)
-    public void movementIncomeBankCardDao_obtainingMovementIncomeBankCardByNonExistentId_isFalse() throws DataException {
+    public void testGetMovementIncomeBankCardById_withNonExistentId_isException() throws DataException {
 
         long nonExistentMovementIncomeBankCardId = 4;
 
@@ -104,7 +104,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndObtainingAllMovementsIncomesBankCards_isTrue() {
+    public void testMovementsIncomesBankCards_successObtainingList() {
 
         int numberOfInsertions = 5;
 
@@ -117,7 +117,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_obtainingAllMovementsIncomesBankCardsWhitoutRecords_isTrue() {
+    public void testMovementsIncomesBankCards_withNoRecords_isEmptyList() {
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModelList = mMovementIncomeBankCardDao.getMovementsIncomesBankCards();
 
@@ -125,7 +125,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_createAndObtainingMovementsIncomesBankCardsByIncomeId_isTrue() {
+    public void testGetMovementsIncomesBankCardsByIncomeId_successObtainingList() {
 
         int numberOfInsertions = 5;
 
@@ -140,7 +140,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndObtainingMovementsIncomesBankCardsByNonExistentIncomeId_isFalse() {
+    public void testGetMovementsIncomesBankCardsByIncomeId_withNonExistentId_isEmptyList() {
 
         long incomeId = 0;
 
@@ -151,7 +151,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndObtainingMovementsIncomesBankCardsByBankCardId_isTrue() {
+    public void testGetMovementsIncomesBankCardsByBankCardId_successObtainingList() {
 
         int numberOfInsertions = 4;
         long bankCardId = 2;
@@ -167,7 +167,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndObtainingMovementsIncomesBankCardsByNonExistentBankCardId_isFalse() {
+    public void testGetMovementsIncomesBankCardsByBankCardId_withNonExistentBankCardId_isEmptyList() {
 
         int nonExistentId = 0;
 
@@ -178,7 +178,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationUpdatingAndObtainingMovementIncomeBankCardById_isTrue() throws DataException {
+    public void testUpdateMovementIncomeBankCard_successUpdating() throws DataException {
 
         MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -199,7 +199,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullValue_isException() {
+    public void testUpdateMovementIncomeBankCard_withNullModel_isException() {
 
         MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = null;
 
@@ -210,7 +210,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithWhereNullValue_isFalse() {
+    public void testUpdateMovementIncomeBankCard_withNullWhereSentence_noUpdating() {
 
         MovementIncomeBankCardModel updatedMovementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -222,7 +222,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test(expected = SQLiteConstraintException.class)
-    public void movementIncomeBankCardDao_updatingMovementIncomeBankCardWithNullRequiredField_isException() {
+    public void testUpdateMovementIncomeBankCard_withNullRequiredField_isException() {
 
         MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -238,7 +238,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndDeletionMovementIncomeBankCard_isTrue() {
+    public void testDeleteMovementIncomeBankCard_successDeletion() {
 
         MovementIncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
 
@@ -250,7 +250,7 @@ public class MovementIncomeBankCardDaoImplTest {
     }
 
     @Test
-    public void movementIncomeBankCardDao_creationAndDeletionMovementIncomeBankCardWithNonExistentId_isFalse() {
+    public void testDeleteMovementIncomeBankCard_withNonExistentId_noDeletion() {
 
         long nonExistentId = 2;
 

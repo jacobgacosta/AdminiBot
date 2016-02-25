@@ -45,7 +45,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_createIncome_isTrue() {
+    public void testcCreateIncome_successInsertion() {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
 
@@ -57,7 +57,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_creationAndObtainingIncomeById_isTrue() {
+    public void testGetIncomeById_successObtaining() {
 
         IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
 
@@ -74,7 +74,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_creationAndObtainingAllIncomes_isTrue() {
+    public void testGetIncomes_successObtainingList() {
 
         int numberOfIncomesToCreate = 5;
 
@@ -86,7 +86,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_creationUpdatingAndObtainingIncomeById_isTrue() {
+    public void testUpdateIncome_successUpdate() {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
 
@@ -106,7 +106,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void incomeDao_creationAndDeletionIncome_isTrue() {
+    public void testDeleteIncome_successDeletion() {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
 
