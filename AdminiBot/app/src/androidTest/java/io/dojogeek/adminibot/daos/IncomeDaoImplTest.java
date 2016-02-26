@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
@@ -21,12 +23,15 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 @RunWith(AndroidJUnit4.class)
 public class IncomeDaoImplTest {
 
     private static final int SUCCESS_OPERATION = 1;
-    private static final int OPERATIONAL_ERROR = -1;
-    private static final int NO_OPERATION = 0;
+    private static final long OPERATIONAL_ERROR = -1;
+    private static final long NO_OPERATION = 0;
 
     private Context mContext;
     private IncomeDao mIncomeDao;
@@ -45,7 +50,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testcCreateIncome_successInsertion() {
+    public void testCreateIncome_successInsertion() {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
 
@@ -56,8 +61,28 @@ public class IncomeDaoImplTest {
 
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testCreateIncome_withNullModel_isException() {
+
+        IncomeModel incomeModel = null;
+
+        mIncomeDao.createIncome(incomeModel);
+
+    }
+
     @Test
-    public void testGetIncomeById_successObtaining() {
+    public void testCreateIncome_withNullRequiredField_noInsertion() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        incomeModel.description = null;
+
+        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
+
+        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+    }
+
+    @Test
+    public void testGetIncomeById_successObtaining() throws DataException {
 
         IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
 
@@ -73,6 +98,15 @@ public class IncomeDaoImplTest {
         assertEquals(expectedIncomeModel.userId, actualIncome.userId);
     }
 
+    @Test(expected = DataException.class)
+    public void testGetIncomeById_withNonExistentId_isException() throws DataException {
+
+        long nonExistentId = 5;
+
+        mIncomeDao.getIncomeById(nonExistentId);
+
+    }
+
     @Test
     public void testGetIncomes_successObtainingList() {
 
@@ -86,7 +120,15 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testUpdateIncome_successUpdate() {
+    public void testGetIncomes_withNoRecords_isEmptyList() {
+
+        List<IncomeModel> actualIncomeModels = mIncomeDao.getIncomes();
+
+        assertThat(actualIncomeModels.isEmpty(), is(true));
+    }
+
+    @Test
+    public void testUpdateIncome_successUpdate() throws DataException {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
 
@@ -105,6 +147,45 @@ public class IncomeDaoImplTest {
         compareIncomes(expectedNewIncomeModel, actualUpdatedIncome);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testUpdateIncome_withNullModel_isException() {
+
+        String where = IncomesContract.Incomes._ID + "= " +  2;
+
+        mIncomeDao.updateIncome(null, where);
+
+    }
+
+    @Test
+    public void testUpdateIncome_withNonExistentId_noUpdating() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long nonExistentId = 2;
+
+        String where = IncomesContract.Incomes._ID + "= " +  nonExistentId;
+
+        long updatedRows = mIncomeDao.updateIncome(incomeModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+
+    }
+
+    @Test(expected = SQLiteConstraintException.class)
+    public void testUpdateIncome_withNullRequiredField_isException() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
+
+        incomeModel.description = null;
+
+        String where = IncomesContract.Incomes._ID + "= " +  insertedRecordId;
+
+        mIncomeDao.updateIncome(incomeModel, where);
+
+    }
+
     @Test
     public void testDeleteIncome_successDeletion() {
 
@@ -115,6 +196,21 @@ public class IncomeDaoImplTest {
         long deletedRows = mIncomeDao.deleteIncome(insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
+    @Test
+    public void testDeleteIncome_withNonExistentId_noDeletion() {
+
+        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+
+        mIncomeDao.createIncome(incomeModel);
+
+        long nonExistentId = 5;
+
+        long deletedRows = mIncomeDao.deleteIncome(nonExistentId);
+
+        assertThat(deletedRows, is(NO_OPERATION));
+
     }
 
     private List<IncomeModel> createIncomes(int numberOfIncomesToCreate) {
