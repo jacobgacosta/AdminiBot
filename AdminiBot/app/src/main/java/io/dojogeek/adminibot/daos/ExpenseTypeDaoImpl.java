@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.ExpensesTypesContract;
 
@@ -52,12 +53,16 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     }
 
     @Override
-    public ExpenseTypeModel getExpenseTypeById(long id) {
+    public ExpenseTypeModel getExpenseTypeById(long id) throws DataException {
 
         String [] args = {String.valueOf(id)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME +
                 " WHERE _ID = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
 
@@ -119,4 +124,12 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
         return contentValues;
     }
 
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
+    }
 }
