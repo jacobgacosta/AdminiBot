@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.ExpensesContract;
 
@@ -63,12 +64,16 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     }
 
     @Override
-    public ExpenseModel getExpenseById(long expenseId) {
+    public ExpenseModel getExpenseById(long expenseId) throws DataException {
 
         String [] args = {String.valueOf(expenseId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesContract.Expense.TABLE_NAME +
                 " WHERE _ID = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         ExpenseModel expenseModel = new ExpenseModel();
 
@@ -155,4 +160,12 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     }
 
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
+    }
 }

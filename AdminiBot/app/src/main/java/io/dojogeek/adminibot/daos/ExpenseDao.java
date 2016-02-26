@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.daos;
 
 import java.util.List;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseModel;
 
 public interface ExpenseDao extends ConnectionDao {
@@ -12,7 +13,7 @@ public interface ExpenseDao extends ConnectionDao {
 
     List<ExpenseModel> getExpenses();
 
-    ExpenseModel getExpenseById(long expenseId);
+    ExpenseModel getExpenseById(long expenseId) throws DataException;
 
     long deleteExpense(long expenseId);
 
