@@ -5,14 +5,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
+
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
+
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(AndroidJUnit4.class)
 public class ExpensesTypesSQLiteOpenHelperInsertionTest {
@@ -54,9 +61,13 @@ public class ExpensesTypesSQLiteOpenHelperInsertionTest {
         Cursor cursor = mSQLiteDatabase.rawQuery("SELECT * FROM " + ExpensesTypesContract.ExpenseType.TABLE_NAME,
                 null);
 
-        if (cursor != null && cursor.moveToFirst()) {
+        assertNotNull(cursor);
+        assertThat(cursor.getCount(), greaterThan(0));
 
-            while (cursor.isAfterLast()) {
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
                 compareResultQueryFields(cursor);
                 cursor.moveToNext();
             }
@@ -67,14 +78,14 @@ public class ExpensesTypesSQLiteOpenHelperInsertionTest {
 
 
         long id = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType._ID));
-        int name = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
-        int description = currentPosition.getInt(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
+        String name = currentPosition.getString(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
+        String description = currentPosition.getString(currentPosition.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        String expectedName = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES[((int) id)]);
-        String expectedDescription = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES_DESCRIPTIONS[((int) id)]);
+        ExpenseTypeEnum expectedName = ExpensesTypesContract.EXPENSES_TYPES[((int) id - 1)];
+        String expectedDescription = ExpensesTypesContract.EXPENSES_TYPES[((int) id - 1)].getDescription();
 
-        assertEquals(expectedName, mContext.getString(name));
-        assertEquals(expectedDescription, mContext.getString(description));
+        assertEquals(expectedName, ExpenseTypeEnum.valueOf(name));
+        assertEquals(expectedDescription, description);
 
     }
 

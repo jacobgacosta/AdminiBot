@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
@@ -57,6 +58,25 @@ public class ExpenseTypeDaoImplTest {
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
         assertNotEquals(OPERATIONAL_ERROR, insertedExpenseTypeId);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateExpenseType_withNullModel_isException() {
+
+        ExpenseTypeModel expenseTypeModel = null;
+
+        mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateExpenseType_withNullRequiredField_isException() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        expenseTypeModel.name = null;
+
+        mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
     }
 
     @Test
@@ -122,8 +142,8 @@ public class ExpenseTypeDaoImplTest {
 
     private ExpenseTypeModel changeExpenseTypeValues(ExpenseTypeModel expenseTypeModel) {
 
-        expenseTypeModel.name = R.string.expenses_types_luxuries;
-        expenseTypeModel.description = R.string.expenses_types_clothes;
+        expenseTypeModel.name = ExpenseTypeEnum.CLOTHES;
+        expenseTypeModel.description = ExpenseTypeEnum.CLOTHES.getDescription();
 
         return expenseTypeModel;
     }
@@ -141,11 +161,11 @@ public class ExpenseTypeDaoImplTest {
         for (int index = 0; index < actualExpenseTypeModelList.size(); index++) {
             ExpenseTypeModel actualExpenseTypeModel = actualExpenseTypeModelList.get(index);
 
-            String expectedName = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES[index]);
-            String expectedDescription = mContext.getString(ExpensesTypesContract.EXPENSES_TYPES_DESCRIPTIONS[index]);
+            ExpenseTypeEnum expectedName = ExpensesTypesContract.EXPENSES_TYPES[index];
+            String expectedDescription = ExpensesTypesContract.EXPENSES_TYPES[index].getDescription();
 
-            assertEquals(expectedName, mContext.getString(actualExpenseTypeModel.name));
-            assertEquals(expectedDescription, mContext.getString(actualExpenseTypeModel.description));
+            assertEquals(expectedName, actualExpenseTypeModel.name);
+            assertEquals(expectedDescription, actualExpenseTypeModel.description);
 
         }
 

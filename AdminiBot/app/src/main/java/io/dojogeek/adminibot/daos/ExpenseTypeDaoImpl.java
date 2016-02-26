@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.ExpensesTypesContract;
 
@@ -98,11 +99,11 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
 
         long id = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType._ID));
-        int name = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
-        int description = cursor.getInt(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
+        String name = cursor.getString(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
+        String description = cursor.getString(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
         expenseTypeModel.id = id;
-        expenseTypeModel.name = name;
+        expenseTypeModel.name = ExpenseTypeEnum.valueOf(name);
         expenseTypeModel.description = description;
 
         return expenseTypeModel;
@@ -112,7 +113,7 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     private ContentValues createContentValues(ExpenseTypeModel expenseTypeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name);
+        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name.name());
         contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
 
         return contentValues;

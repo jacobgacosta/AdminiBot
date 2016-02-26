@@ -5,6 +5,7 @@ import java.util.Date;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.PaymentMethod;
 import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
@@ -58,16 +59,16 @@ public class CreatorModels {
     }
 
     public static ExpenseTypeModel createExpenseTypeModel() {
-        ExpenseTypeModel expenseTypeModel = createExpenseTypeModel(R.string.expenses_types_drinks,
-                R.string.expenses_types_foods);
+        ExpenseTypeModel expenseTypeModel = createExpenseTypeModel(ExpenseTypeEnum.ALCOHOL,
+                ExpenseTypeEnum.ALCOHOL.getDescription());
 
         return expenseTypeModel;
     }
 
-    public static ExpenseTypeModel createExpenseTypeModel(int name, int description) {
+    public static ExpenseTypeModel createExpenseTypeModel(ExpenseTypeEnum expenseTypeEnum, String description) {
 
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
-        expenseTypeModel.name = name;
+        expenseTypeModel.name = expenseTypeEnum;
         expenseTypeModel.description = description;
 
         return expenseTypeModel;
