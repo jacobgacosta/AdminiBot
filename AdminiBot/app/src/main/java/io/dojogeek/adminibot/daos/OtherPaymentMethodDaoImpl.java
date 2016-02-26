@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 
@@ -32,12 +33,16 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     }
 
     @Override
-    public OtherPaymentMethodModel getOtherPaymentMethodById(long otherPaymentMethodId) {
+    public OtherPaymentMethodModel getOtherPaymentMethodById(long otherPaymentMethodId) throws DataException {
 
         String [] args = {String.valueOf(otherPaymentMethodId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + PaymentMethodsContract.PaymentMethods.TABLE_NAME +
                 " WHERE _ID = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
 
@@ -127,5 +132,14 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         otherPaymentMethodModel.userId = userId;
 
         return otherPaymentMethodModel;
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
