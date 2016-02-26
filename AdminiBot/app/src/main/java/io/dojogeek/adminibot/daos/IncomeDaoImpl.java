@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
 
@@ -30,12 +31,16 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     }
 
     @Override
-    public IncomeModel getIncomeById(long incomeId) {
+    public IncomeModel getIncomeById(long incomeId) throws DataException {
 
         String [] args = {String.valueOf(incomeId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesContract.Incomes.TABLE_NAME +
                 " WHERE _ID = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         IncomeModel incomeModel = new IncomeModel();
 
@@ -122,5 +127,14 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
         incomeModel.userId = userId;
 
         return incomeModel;
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
