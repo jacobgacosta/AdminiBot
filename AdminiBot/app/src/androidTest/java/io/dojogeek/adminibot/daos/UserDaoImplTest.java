@@ -173,7 +173,7 @@ public class UserDaoImplTest {
     }
 
     @Test(expected = SQLiteConstraintException.class)
-    public void testUpdateUser_withNullRequiredField_noUpdate() {
+    public void testUpdateUser_withNullRequiredField_isException() {
 
         UserModel userModel = CreatorModels.createUserModel();
 
@@ -185,7 +185,6 @@ public class UserDaoImplTest {
 
         long updatedRows = mUserDao.updateUser(userModel, where);
 
-        assertThat(updatedRows, is(NO_OPERATION));
     }
 
     private long createUser(UserModel userModel) {
