@@ -14,6 +14,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
@@ -28,10 +29,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 @RunWith(AndroidJUnit4.class)
 public class ExpenseTypeDaoImplTest {
 
-    private static final int NO_VALUE = 0;
+    private static final long NO_OPERATION = 0;
     private static final int OPERATIONAL_ERROR = -1;
     private ExpenseTypeDao mExpenseTypeDao;
     private Context mContext;
@@ -80,7 +84,7 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void testGetExpenseTypeById_successObtaining() {
+    public void testGetExpenseTypeById_successObtaining() throws DataException {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
 
@@ -94,8 +98,21 @@ public class ExpenseTypeDaoImplTest {
 
     }
 
+    @Test(expected = DataException.class)
+    public void testGetExpenseTypeById_withNonExistentId_isException() throws DataException {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        long nonExistentId = 7;
+
+        mExpenseTypeDao.getExpenseTypeById(nonExistentId);
+
+    }
+
     @Test
-    public void testGetExpensesTypes_successObtainingList() {
+    public void testGetExpensesTypes_obtainingInitialInsertedRecords_successObtainingList() {
 
         int initiallyInsertedExpensesTypes = 5;
 
@@ -109,33 +126,93 @@ public class ExpenseTypeDaoImplTest {
     }
 
     @Test
-    public void testUpdateExpensetype_successUpdating() {
+    public void testUpdateExpensetype_successUpdating() throws DataException {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
-        ExpenseTypeModel expectedNewExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
+        ExpenseTypeModel expectedUpdatedExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
 
         String where = ExpensesTypesContract.ExpenseType._ID + "= " + insertedExpenseTypeId;
 
-        long rowsUpdated = mExpenseTypeDao.updateExpensetype(expectedNewExpenseTypeModel, where);
+        long rowsUpdated = mExpenseTypeDao.updateExpensetype(expectedUpdatedExpenseTypeModel, where);
 
-        assertNotEquals(NO_VALUE, rowsUpdated);
+        assertNotEquals(NO_OPERATION, rowsUpdated);
 
         ExpenseTypeModel actualExpenseTypeModel = mExpenseTypeDao.getExpenseTypeById(insertedExpenseTypeId);
 
-        compareExpensesModels(expectedNewExpenseTypeModel, actualExpenseTypeModel);
+        compareExpensesModels(expectedUpdatedExpenseTypeModel, actualExpenseTypeModel);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testUpdateExpensetype_withNullModel_isException() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        ExpenseTypeModel expectedNewExpenseTypeModel = null;
+
+        String where = ExpensesTypesContract.ExpenseType._ID + "= " + insertedExpenseTypeId;
+
+        mExpenseTypeDao.updateExpensetype(expectedNewExpenseTypeModel, where);
+
     }
 
     @Test
-    public void testDeleteExpenseTypeById_successDeletion() {
+    public void testUpdateExpensetype_withNonExistentId_noUpdating() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        ExpenseTypeModel expectedUpdatedExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
+
+        long nonExistentId = 9;
+
+        String where = ExpensesTypesContract.ExpenseType._ID + "= " + nonExistentId;
+
+        long updatedRows = mExpenseTypeDao.updateExpensetype(expectedUpdatedExpenseTypeModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testUpdateExpensetype_withNullRequiredField_isException() {
+
+        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+
+        long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
+
+        ExpenseTypeModel expectedUpdatedExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
+        expectedUpdatedExpenseTypeModel.name = null;
+
+        String where = ExpensesTypesContract.ExpenseType._ID + "= " + insertedExpenseTypeId;
+
+        mExpenseTypeDao.updateExpensetype(expectedUpdatedExpenseTypeModel, where);
+
+    }
+
+    @Test
+    public void testDeleteExpenseType_successDeletion() {
 
         long initiallyInsertedExpenseTypeId = 3;
 
         long removedRows = mExpenseTypeDao.deleteExpenseTypeById(initiallyInsertedExpenseTypeId);
 
         assertEquals(1, removedRows);
+
+    }
+
+    @Test
+    public void testDeleteExpenseType_withNonExistenId_noDeletion() {
+
+        long nonExistentId = 9;
+
+        long removedRows = mExpenseTypeDao.deleteExpenseTypeById(nonExistentId);
+
+        assertThat(removedRows, is(NO_OPERATION));
 
     }
 
