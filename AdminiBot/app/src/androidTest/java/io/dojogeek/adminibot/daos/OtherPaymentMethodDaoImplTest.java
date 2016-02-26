@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
@@ -20,13 +22,14 @@ import io.dojogeek.adminibot.utiltest.CreatorModels;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
 public class OtherPaymentMethodDaoImplTest {
 
     private static final int SUCCESS_OPERATION = 1;
-    private static final int OPERATIONAL_ERROR = -1;
-    private static final int NO_OPERATION = 0;
+    private static final long OPERATIONAL_ERROR = -1;
+    private static final long NO_OPERATION = 0;
 
     private Context mContext;
     private OtherPaymentMethodDao mOtherPaymentMethodDao;
@@ -55,8 +58,28 @@ public class OtherPaymentMethodDaoImplTest {
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testCreateOtherPaymentMethod_withNullModel_isException() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = null;
+
+        mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+    }
+
     @Test
-    public void testGetOtherPaymentMethodById_successObtaining() {
+    public void testCreateOtherPaymentMethod_withNullRequieredField_noInsertion() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+        otherPaymentMethodModel.name = null;
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+    }
+
+    @Test
+    public void testGetOtherPaymentMethodById_successObtaining() throws DataException {
 
         OtherPaymentMethodModel expectedOtherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -73,6 +96,15 @@ public class OtherPaymentMethodDaoImplTest {
         assertEquals(expectedOtherPaymentMethodModel.userId, actualoOtherPaymentMethodModel.userId);
     }
 
+    @Test(expected = DataException.class)
+    public void testGetOtherPaymentMethodById_withNonExistentId_isException() throws DataException {
+
+        long nonExistentId = 4;
+
+        mOtherPaymentMethodDao.getOtherPaymentMethodById(nonExistentId);
+
+    }
+
     @Test
     public void testGetOtherPaymentMethods_successObtainingList() {
 
@@ -87,7 +119,15 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
-    public void testUpdateOtherPaymentMethod_successUpdating() {
+    public void testGetOtherPaymentMethods_withNoRecords_isEmptyList() {
+
+        List<OtherPaymentMethodModel> actualOtherPaymentMethodModelList = mOtherPaymentMethodDao.getOtherPaymentMethods();
+
+        assertThat(actualOtherPaymentMethodModelList.isEmpty(), is(true));
+    }
+
+    @Test
+    public void testUpdateOtherPaymentMethod_successUpdating() throws DataException {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
 
@@ -107,6 +147,51 @@ public class OtherPaymentMethodDaoImplTest {
 
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testUpdateOtherPaymentMethod_withNullModel_isException() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
+
+        mOtherPaymentMethodDao.updateOtherPaymentMethod(null, where);
+
+    }
+
+    @Test
+    public void testUpdateOtherPaymentMethod_withNonExistentId_noUpdating() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        long nonExistentId = 5;
+
+        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + nonExistentId;
+
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+    }
+
+    @Test(expected = SQLiteConstraintException.class)
+    public void testUpdateOtherPaymentMethod_withNullRequiredField_isException() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        otherPaymentMethodModel.name = null;
+
+        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
+
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, where);
+
+        assertThat(updatedRows, is(NO_OPERATION));
+    }
+
     @Test
     public void testDeleteOtherPaymentMethod_successDeletion() {
 
@@ -117,6 +202,21 @@ public class OtherPaymentMethodDaoImplTest {
         long deletedRows = mOtherPaymentMethodDao.deleteOtherPaymentMethod(insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, deletedRows);
+    }
+
+    @Test
+    public void testDeleteOtherPaymentMethod_withNonExistentId_noDeletion() {
+
+        OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
+
+        mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+
+        long nonExistentId = 5;
+
+        long deletedRows = mOtherPaymentMethodDao.deleteOtherPaymentMethod(nonExistentId);
+
+        assertThat(deletedRows, is(NO_OPERATION));
+
     }
 
     private List<OtherPaymentMethodModel> createOtherPaymentMethods(int numberOfInsertions) {
