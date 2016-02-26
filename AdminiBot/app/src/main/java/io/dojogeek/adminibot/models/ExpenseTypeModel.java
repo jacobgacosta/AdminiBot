@@ -1,9 +1,11 @@
 package io.dojogeek.adminibot.models;
 
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
+
 public class ExpenseTypeModel {
 
     public long id;
-    public int name;
-    public int description;
+    public ExpenseTypeEnum name;
+    public String description;
 
 }
