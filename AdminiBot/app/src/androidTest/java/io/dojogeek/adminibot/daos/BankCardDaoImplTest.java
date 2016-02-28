@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
@@ -20,12 +21,13 @@ import io.dojogeek.adminibot.utiltest.CreatorModels;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
 public class BankCardDaoImplTest {
 
     private static final int SUCCESS_OPERATION = 1;
-    private static final int OPERATIONAL_ERROR = -1;
+    private static final long OPERATIONAL_ERROR = -1;
     private static final int NO_OPERATION = 0;
     private BankCardDao mBankCardDao;
     private Context mContext;
@@ -54,8 +56,27 @@ public class BankCardDaoImplTest {
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testCreateBankCard_withNullModel_isException() {
+
+        BankCardModel bankCardModel = null;
+
+        mBankCardDao.createBankCard(bankCardModel);
+    }
+
     @Test
-    public void testGetBankCardById_successObtaining() {
+    public void testCreateBankCard_withNullRequiredField_noInsertion() {
+
+        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        bankCardModel.name = null;
+
+        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+
+        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+    }
+
+    @Test
+    public void testGetBankCardById_successObtaining() throws DataException {
 
         BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
 
@@ -74,6 +95,15 @@ public class BankCardDaoImplTest {
 
     }
 
+    @Test(expected = DataException.class)
+    public void testGetBankCardById_withNonExistentId_isException() throws DataException {
+
+        long nonExistentId = 2;
+
+        mBankCardDao.getBankCardById(nonExistentId);
+
+    }
+
     @Test
     public void testGetBankCards_successObtainingList() {
 
@@ -87,7 +117,7 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void testUpdateBankCard_successUpdating() {
+    public void testUpdateBankCard_successUpdating() throws DataException {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
