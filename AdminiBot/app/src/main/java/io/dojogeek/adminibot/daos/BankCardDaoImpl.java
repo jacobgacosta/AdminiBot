@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
 
@@ -31,12 +32,16 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     }
 
     @Override
-    public BankCardModel getBankCardById(long cardBankId) {
+    public BankCardModel getBankCardById(long cardBankId) throws DataException {
 
         String [] args = {String.valueOf(cardBankId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + BankCardsContract.BankCard.TABLE_NAME +
                 " WHERE _ID = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         BankCardModel bankCardModel = new BankCardModel();
 
@@ -157,5 +162,14 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
 
         return bankCardModel;
 
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
