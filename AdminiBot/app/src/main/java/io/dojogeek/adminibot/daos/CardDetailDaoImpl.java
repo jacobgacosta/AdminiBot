@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.sqlite.CardDetailContract;
 
@@ -28,33 +29,15 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
     }
 
     @Override
-    public CardDetailModel getCardDetailById(long cardDetailId) {
-
-        String [] args = {String.valueOf(cardDetailId)};
-
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + CardDetailContract.CardDetail.TABLE_NAME +
-                " WHERE _ID = ? ", args);
-
-        CardDetailModel cardDetailModel = new CardDetailModel();
-
-        if (cursor.moveToFirst()) {
-
-            while (cursor.isAfterLast() == false) {
-
-                cardDetailModel = getCardDetailModelFromCursor(cursor);
-                cursor.moveToNext();
-            }
-        }
-
-        return cardDetailModel;
-    }
-
-    @Override
-    public CardDetailModel getCardDetailByBankCardId(long bankCardId) {
+    public CardDetailModel getCardDetailByBankCardId(long bankCardId) throws DataException {
         String [] args = {String.valueOf(bankCardId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + CardDetailContract.CardDetail.TABLE_NAME +
                 " WHERE bank_card_id = ? ", args);
+
+        if (isEmptyResult(cursor)) {
+            throw new DataException("no data!");
+        }
 
         CardDetailModel cardDetailModel = new CardDetailModel();
 
@@ -122,5 +105,14 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
         cardDetailModel.bankCardId = bankCardId;
 
         return cardDetailModel;
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
