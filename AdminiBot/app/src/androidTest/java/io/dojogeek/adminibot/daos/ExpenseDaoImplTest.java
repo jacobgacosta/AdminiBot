@@ -24,8 +24,6 @@ import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import static org.junit.Assert.*;
-
 @RunWith(AndroidJUnit4.class)
 public class ExpenseDaoImplTest {
 
