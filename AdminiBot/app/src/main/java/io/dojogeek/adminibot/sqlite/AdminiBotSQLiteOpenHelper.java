@@ -47,9 +47,9 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesContract.SQL_CREATE_TABLE);
         db.execSQL(TypesPaymentMethodsContract.SQL_CREATE_TABLE);
         db.execSQL(PaymentMethodsContract.SQL_CREATE_TABLE);
-        db.execSQL(ExpensesPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesContract.SQL_CREATE_TABLE);
-        db.execSQL(IncomesPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(IncomesOthersPaymentMethodsContract.SQL_CREATE_TABLE);
         db.execSQL(BankCardsContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesBankCardsContract.SQL_CREATE_TABLE);
         db.execSQL(ExpensesBankCardsContract.SQL_CREATE_TABLE);
@@ -63,9 +63,9 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesContract.SQL_DELETE_ENTRIES);
         //db.execSQL(TypesPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(PaymentMethodsContract.SQL_DELETE_ENTRIES);
-        db.execSQL(ExpensesPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesContract.SQL_DELETE_ENTRIES);
-        db.execSQL(IncomesPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(IncomesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(BankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesBankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesBankCardsContract.SQL_DELETE_ENTRIES);

@@ -70,11 +70,11 @@ public class AdminiBotSQLiteOpenHelperTest {
     public void sqliteHelper_creationTables_isTrue() {
 
         String [] tables = {ExpensesContract.Expense.TABLE_NAME,
-                ExpensesPaymentMethodsContract.ExpensesPaymentMethods.TABLE_NAME,
+                ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
                 ExpensesTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.TABLE_NAME,
                 /*TypesPaymentMethodsContract.TypePaymentMethod.TABLE_NAME*/ UsersContract.User.TABLE_NAME,
-                IncomesPaymentMethodsContract.IncomesPaymentMethods.TABLE_NAME, BankCardsContract.BankCard.TABLE_NAME,
+                IncomesOthersPaymentMethodsContract.IncomePaymentMethod.TABLE_NAME, BankCardsContract.BankCard.TABLE_NAME,
                 IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME,
                 /*CardTypeContract.CardType.TABLE_NAME*/ CardDetailContract.CardDetail.TABLE_NAME};
 
