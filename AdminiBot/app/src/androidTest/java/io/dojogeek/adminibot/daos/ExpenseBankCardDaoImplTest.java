@@ -25,25 +25,25 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
-public class MovementExpenseBankCardDaoImplTest {
+public class ExpenseBankCardDaoImplTest {
 
     private static final long SUCCESS_OPERATION = 1;
     private static final long OPERATIONAL_ERROR = -1;
     private static final long NO_OPERATION = 0;
 
     private Context mContext;
-    private MovementExpenseBankCardDao mMovementExpenseBankCardDao;
+    private ExpenseBankCardDao mExpenseBankCardDao;
 
     @Before
     public void setup() {
         mContext = getTargetContext();
-        mMovementExpenseBankCardDao = new MovementExpenseBankCardDaoImpl(mContext);
-        mMovementExpenseBankCardDao.openConection();
+        mExpenseBankCardDao = new ExpenseBankCardDaoImpl(mContext);
+        mExpenseBankCardDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mMovementExpenseBankCardDao.closeConection();
+        mExpenseBankCardDao.closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
@@ -52,7 +52,7 @@ public class MovementExpenseBankCardDaoImplTest {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
         assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
@@ -61,7 +61,7 @@ public class MovementExpenseBankCardDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testCreateMovementExpenseBankCard_withNullModel_isException() {
 
-        mMovementExpenseBankCardDao.createMovementExpenseBankCard(null);
+        mExpenseBankCardDao.createMovementExpenseBankCard(null);
 
     }
 
@@ -71,7 +71,7 @@ public class MovementExpenseBankCardDaoImplTest {
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
         movementExpenseBankCardModel.description = null;
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
         assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
     }
@@ -81,9 +81,9 @@ public class MovementExpenseBankCardDaoImplTest {
 
         MovementExpenseBankCardModel expectedMovementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(expectedMovementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expectedMovementExpenseBankCardModel);
 
-        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mMovementExpenseBankCardDao.
+        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mExpenseBankCardDao.
                 getMovementExpenseBankCardById(insertedRecordId);
 
         assertThat(actualMovementExpenseBankCardModel, notNullValue());
@@ -98,7 +98,7 @@ public class MovementExpenseBankCardDaoImplTest {
     public void testGetMovementExpenseBankCardById_withNonExistentId_isException() throws DataException {
 
         int movementExpenseBankCardId = 2;
-        mMovementExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
+        mExpenseBankCardDao.getMovementExpenseBankCardById(movementExpenseBankCardId);
 
     }
 
@@ -109,7 +109,7 @@ public class MovementExpenseBankCardDaoImplTest {
 
         List<MovementExpenseBankCardModel> expectedMovementExpenseBankCardModels = createMovementExpenseBankCard(numberOfInsertions);
 
-        List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels = mMovementExpenseBankCardDao.getMovementsExpensesBankCards();
+        List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels = mExpenseBankCardDao.getMovementsExpensesBankCards();
 
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
     }
@@ -118,7 +118,7 @@ public class MovementExpenseBankCardDaoImplTest {
     public void testGetMovementsExpensesBankCards_withNoRecords_isEmptyList() {
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList =
-                mMovementExpenseBankCardDao.getMovementsExpensesBankCards();
+                mExpenseBankCardDao.getMovementsExpensesBankCards();
 
         assertThat(movementExpenseBankCardModelList.isEmpty(), is(true));
     }
@@ -132,7 +132,7 @@ public class MovementExpenseBankCardDaoImplTest {
         List<MovementExpenseBankCardModel> expectedMovementExpenseBankCardModels = createMovementExpenseBankCard(numberOfInsertions);
 
         List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModels =
-                mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(expenseId);
+                mExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(expenseId);
 
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModels, actualMovementExpenseBankCardModels);
     }
@@ -143,7 +143,7 @@ public class MovementExpenseBankCardDaoImplTest {
         long nonExistentExpenseId = 4;
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList =
-                mMovementExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(nonExistentExpenseId);
+                mExpenseBankCardDao.getMovementsExpensesBankCardsByExpenseId(nonExistentExpenseId);
 
         assertThat(movementExpenseBankCardModelList.isEmpty(), is(true));
     }
@@ -158,7 +158,7 @@ public class MovementExpenseBankCardDaoImplTest {
                 createMovementExpenseBankCard(numberOfInsertions);
 
         List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModelList =
-                mMovementExpenseBankCardDao.getMovementExpenseBankCardByBankCardId(bankCardId);
+                mExpenseBankCardDao.getMovementExpenseBankCardByBankCardId(bankCardId);
 
         compareMovementsExpensesBankCardsModelsList(expectedMovementExpenseBankCardModelList,
                 actualMovementExpenseBankCardModelList);
@@ -170,7 +170,7 @@ public class MovementExpenseBankCardDaoImplTest {
         long bankCardId = 4;
 
         List<MovementExpenseBankCardModel> actualMovementExpenseBankCardModelList =
-                mMovementExpenseBankCardDao.getMovementExpenseBankCardByBankCardId(bankCardId);
+                mExpenseBankCardDao.getMovementExpenseBankCardByBankCardId(bankCardId);
 
         assertThat(actualMovementExpenseBankCardModelList.isEmpty(), is(true));
     }
@@ -180,18 +180,18 @@ public class MovementExpenseBankCardDaoImplTest {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
         String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
 
         MovementExpenseBankCardModel updatedMovementExpenseBankCardModel =
                 changeMovementExpenseBankCardModelFields(movementExpenseBankCardModel);
 
-        long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(updatedMovementExpenseBankCardModel, where);
+        long updatedRows = mExpenseBankCardDao.updateMovementExpenseBankCard(updatedMovementExpenseBankCardModel, where);
 
         assertThat(updatedRows, is(not(OPERATIONAL_ERROR)));
 
-        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mMovementExpenseBankCardDao.
+        MovementExpenseBankCardModel actualMovementExpenseBankCardModel = mExpenseBankCardDao.
                 getMovementExpenseBankCardById(updatedRows);
 
         compareMovementExpenseBankCardModels(updatedMovementExpenseBankCardModel, actualMovementExpenseBankCardModel);
@@ -202,13 +202,13 @@ public class MovementExpenseBankCardDaoImplTest {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
         String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
 
         movementExpenseBankCardModel.description = null;
 
-        mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
+        mExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
 
     }
 
@@ -221,7 +221,7 @@ public class MovementExpenseBankCardDaoImplTest {
 
         String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + inexistentId;
 
-        long updatedRows = mMovementExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
+        long updatedRows = mExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
@@ -231,9 +231,9 @@ public class MovementExpenseBankCardDaoImplTest {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
 
-        long insertedRecordId = mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
-        long deletedRows = mMovementExpenseBankCardDao.deleteMovementExpenseBankCard(insertedRecordId);
+        long deletedRows = mExpenseBankCardDao.deleteMovementExpenseBankCard(insertedRecordId);
 
         assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
@@ -243,7 +243,7 @@ public class MovementExpenseBankCardDaoImplTest {
 
         long nonExistentId = 2;
 
-        long deletedRows = mMovementExpenseBankCardDao.deleteMovementExpenseBankCard(nonExistentId);
+        long deletedRows = mExpenseBankCardDao.deleteMovementExpenseBankCard(nonExistentId);
 
         assertThat(deletedRows, is(NO_OPERATION));
 
@@ -259,7 +259,7 @@ public class MovementExpenseBankCardDaoImplTest {
                     createMovementExpenseBankCardModel(2340 + index,
                             2, DateUtils.getCurrentData(), "test description" + index, 2);
 
-            mMovementExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
+            mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
             movementExpenseBankCardModels.add(movementExpenseBankCardModel);
         }
 

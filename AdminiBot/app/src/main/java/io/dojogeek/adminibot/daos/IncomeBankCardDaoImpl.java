@@ -13,10 +13,10 @@ import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.IncomesBankCardsContract;
 
-public class MovementIncomeBankCardDaoImpl extends SQLiteGlobalDao implements MovementIncomeBankCardDao {
+public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBankCardDao {
 
     @Inject
-    public MovementIncomeBankCardDaoImpl(Context context) {
+    public IncomeBankCardDaoImpl(Context context) {
         super(context);
     }
 

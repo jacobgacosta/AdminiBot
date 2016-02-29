@@ -11,9 +11,9 @@ import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
 
-public class MovementExpenseBankCardDaoImpl extends SQLiteGlobalDao implements MovementExpenseBankCardDao {
+public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBankCardDao {
 
-    public MovementExpenseBankCardDaoImpl(Context context) {
+    public ExpenseBankCardDaoImpl(Context context) {
         super(context);
     }
 
