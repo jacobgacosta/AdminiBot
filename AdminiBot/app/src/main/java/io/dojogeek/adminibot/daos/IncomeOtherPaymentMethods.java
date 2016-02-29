@@ -1,4 +1,4 @@
 package io.dojogeek.adminibot.daos;
 
-public class IncomeOtherPaymentMethods {
+public interface IncomeOtherPaymentMethods {
 }
