@@ -13,6 +13,7 @@ import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.models.IncomeOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
@@ -264,5 +265,24 @@ public class CreatorModels {
         expenseOtherPaymentMethodModel.otherPaymentMethodId = otherPaymentMethodId;
 
         return expenseOtherPaymentMethodModel;
+    }
+
+    public static IncomeOtherPaymentMethodModel createIncomeOtherPaymentMethodModel() {
+
+        IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel =
+                createIncomeOtherPaymentMethodModel(2345.90, 2, 2);
+
+        return incomeOtherPaymentMethodModel;
+    }
+
+    public static IncomeOtherPaymentMethodModel createIncomeOtherPaymentMethodModel(double amount, long incomeId,
+                                                                             long otherPaymentMethodId) {
+
+        IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel = new IncomeOtherPaymentMethodModel();
+        incomeOtherPaymentMethodModel.amount = amount;
+        incomeOtherPaymentMethodModel.incomeId = incomeId;
+        incomeOtherPaymentMethodModel.otherPaymentMethodId = otherPaymentMethodId;
+
+        return incomeOtherPaymentMethodModel;
     }
 }
