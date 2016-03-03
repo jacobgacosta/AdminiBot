@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({UserDaoImplTest.class, ExpenseTypeDaoImplTest.class, ExpenseDaoImplTest.class,
         IncomeDaoImplTest.class, BankCardDaoImplTest.class, CardDetailDaoImplTest.class,
         OtherPaymentMethodDaoImplTest.class, ExpenseBankCardDaoImplTest.class,
-        IncomeBankCardDaoImplTest.class, ExpenseOtherPaymentMethodDaoTest.class})
+        IncomeBankCardDaoImplTest.class, ExpenseOtherPaymentMethodDaoTest.class,
+        IncomeOtherPaymentMethodsDaoTest.class})
 public class DaoSuiteTest {
 
 }
