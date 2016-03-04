@@ -29,13 +29,16 @@
         <activity
             android:name=".views.RegisterExpenseActivity"
             android:label="@string/title_activity_expense_registration"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".views.MainActivity">
-
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.MainActivity" />
-
+        </activity>
+        <activity
+            android:name=".views.ExpensesInboxActivity"
+            android:label="@string/title_activity_expenses_inbox"
+            android:theme="@style/CustomActionBarTheme" >
         </activity>
     </application>
 
