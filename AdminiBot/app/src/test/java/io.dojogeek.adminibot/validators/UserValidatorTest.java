@@ -1,10 +1,9 @@
-package io.dojogeek.adminibot.utils.validators;
+package io.dojogeek.adminibot.validators;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.validators.UserValidator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

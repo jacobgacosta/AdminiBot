@@ -1,10 +1,8 @@
-package io.dojogeek.adminibot.utils.validators;
+package io.dojogeek.adminibot.validators;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
-import io.dojogeek.adminibot.validators.LenghtValidator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

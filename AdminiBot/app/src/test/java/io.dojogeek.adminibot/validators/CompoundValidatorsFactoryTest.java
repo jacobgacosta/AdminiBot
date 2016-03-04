@@ -1,15 +1,9 @@
-package io.dojogeek.adminibot.utils.validators;
-
-import junit.framework.Assert;
+package io.dojogeek.adminibot.validators;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
-import io.dojogeek.adminibot.validators.CompoundValidator;
-import io.dojogeek.adminibot.validators.CompoundValidatorsFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;

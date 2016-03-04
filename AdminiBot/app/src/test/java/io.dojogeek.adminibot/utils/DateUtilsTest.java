@@ -1,11 +1,9 @@
-package io.dojogeek.adminibot.utils.utils;
+package io.dojogeek.adminibot.utils;
 
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import io.dojogeek.adminibot.utils.DateUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
