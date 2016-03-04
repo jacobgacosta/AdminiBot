@@ -101,5 +101,6 @@
     <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
     <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
     <string name="card_types_prepaid_description">Cualquier tarjeta prepágo</string>
+    <string name="title_activity_expenses_inbox">Gastos</string>
 
 </resources>
