@@ -20,8 +20,6 @@ public class RegisterUserPresenterImpl implements RegisterUserPresenter {
     @Override
     public void addUser(UserModel userModel) {
 
-        mUserDao.openConection();
-
         long isCreated = mUserDao.createUser(userModel);
 
     }
@@ -30,7 +28,6 @@ public class RegisterUserPresenterImpl implements RegisterUserPresenter {
 
     @Override
     public void unnusedView() {
-        mUserDao.closeConection();
     }
 
 
