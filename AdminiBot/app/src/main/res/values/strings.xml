@@ -103,4 +103,8 @@
     <string name="card_types_prepaid_description">Cualquier tarjeta prepágo</string>
     <string name="title_activity_expenses_inbox">Gastos</string>
 
+    <!-- messages -->
+    <string name="success_deletion">Registro eliminado</string>
+    <string name="error_deletion">Error al intentar borrar registro, intente más tarde</string>
+
 </resources>
