@@ -38,12 +38,11 @@ public class IncomeBankCardDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mIncomeBankCardDao = new IncomeBankCardDaoImpl(mContext);
-        mIncomeBankCardDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mIncomeBankCardDao.closeConection();
+        ((IncomeBankCardDaoImpl)mIncomeBankCardDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

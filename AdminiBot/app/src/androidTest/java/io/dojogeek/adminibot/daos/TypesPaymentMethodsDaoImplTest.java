@@ -35,12 +35,11 @@ public class TypesPaymentMethodsDaoImplTest {
         Context context = getTargetContext();
         context.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
         mTypesPaymentMethodsDao = new TypesPaymentMethodsDaoImpl(context);
-        mTypesPaymentMethodsDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mTypesPaymentMethodsDao.closeConection();
+        ((TypesPaymentMethodsDaoImpl) mTypesPaymentMethodsDao).closeConection();
     }
 
     @Test

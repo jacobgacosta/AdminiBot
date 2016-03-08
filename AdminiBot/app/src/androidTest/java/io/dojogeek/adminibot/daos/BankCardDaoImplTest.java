@@ -37,12 +37,11 @@ public class BankCardDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mBankCardDao = new BankCardDaoImpl(mContext);
-        mBankCardDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mBankCardDao.closeConection();
+        ((BankCardDaoImpl)mBankCardDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

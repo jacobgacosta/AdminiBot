@@ -45,12 +45,11 @@ public class UserDaoImplTest {
         mContext = getTargetContext();
 
         mUserDao = new UserDaoImpl(mContext);
-        mUserDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mUserDao.closeConection();
+        ((UserDaoImpl) mUserDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

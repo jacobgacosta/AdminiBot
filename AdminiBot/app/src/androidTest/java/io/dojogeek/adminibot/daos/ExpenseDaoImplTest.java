@@ -37,12 +37,11 @@ public class ExpenseDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mExpenseDao = new ExpenseDaoImpl(mContext);
-        mExpenseDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mExpenseDao.closeConection();
+        ((ExpenseDaoImpl)mExpenseDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

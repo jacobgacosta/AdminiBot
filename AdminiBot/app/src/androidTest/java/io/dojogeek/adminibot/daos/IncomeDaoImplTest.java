@@ -40,12 +40,11 @@ public class IncomeDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mIncomeDao = new IncomeDaoImpl(mContext);
-        mIncomeDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mIncomeDao.closeConection();
+        ((IncomeDaoImpl) mIncomeDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

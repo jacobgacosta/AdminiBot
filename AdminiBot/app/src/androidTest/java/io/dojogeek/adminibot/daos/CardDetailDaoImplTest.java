@@ -34,12 +34,11 @@ public class CardDetailDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mCardDetailDao = new CardDetailDaoImpl(mContext);
-        mCardDetailDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mCardDetailDao.closeConection();
+        ((CardDetailDaoImpl)mCardDetailDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

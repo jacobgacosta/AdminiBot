@@ -38,12 +38,11 @@ public class OtherPaymentMethodDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mOtherPaymentMethodDao = new OtherPaymentMethodDaoImpl(mContext);
-        mOtherPaymentMethodDao.openConection();
     }
 
     @After
     public void finishTest() {
-        mOtherPaymentMethodDao.closeConection();
+        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
