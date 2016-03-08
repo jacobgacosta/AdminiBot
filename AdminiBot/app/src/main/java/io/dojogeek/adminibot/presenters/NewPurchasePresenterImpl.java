@@ -19,8 +19,6 @@ public class NewPurchasePresenterImpl implements NewPurchasePresenter {
     @Override
     public void loadExpenses() {
 
-        mExpenseDao.openConection();
-
         List<ExpenseModel> expenseModels = mExpenseDao.getExpenses();
 
         mInbox.listExpenses(expenseModels);
