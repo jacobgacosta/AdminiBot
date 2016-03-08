@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeOtherPaymentMethodModel;
 
-public interface IncomeOtherPaymentMethodsDao extends ConnectionDao {
+public interface IncomeOtherPaymentMethodsDao {
 
     long createIncomeOtherPaymentMethod(IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel);
 

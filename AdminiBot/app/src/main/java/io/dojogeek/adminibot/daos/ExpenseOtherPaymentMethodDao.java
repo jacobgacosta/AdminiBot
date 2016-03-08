@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 
-public interface ExpenseOtherPaymentMethodDao extends ConnectionDao {
+public interface ExpenseOtherPaymentMethodDao {
 
     long createExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel);
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.models.UserModel;
 
-public interface UserDao extends ConnectionDao {
+public interface UserDao {
 
     long createUser(UserModel userModel);
 

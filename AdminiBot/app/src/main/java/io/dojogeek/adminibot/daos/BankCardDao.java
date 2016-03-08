@@ -6,7 +6,7 @@ import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 
-public interface BankCardDao extends ConnectionDao {
+public interface BankCardDao {
 
     long createBankCard(BankCardModel bankCardModel);
 

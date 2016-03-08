@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
 
-public interface ExpenseBankCardDao extends ConnectionDao {
+public interface ExpenseBankCardDao {
 
     long createMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel);
 

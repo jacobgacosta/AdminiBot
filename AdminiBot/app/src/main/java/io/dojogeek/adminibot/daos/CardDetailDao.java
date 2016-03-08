@@ -3,7 +3,7 @@ package io.dojogeek.adminibot.daos;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.CardDetailModel;
 
-public interface CardDetailDao extends ConnectionDao {
+public interface CardDetailDao {
 
     long createCardDetail(CardDetailModel cardDetailModel);
 

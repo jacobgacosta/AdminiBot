@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 
-public interface ExpenseTypeDao extends ConnectionDao {
+public interface ExpenseTypeDao {
 
     long createExpenseType(ExpenseTypeModel expenseType);
 

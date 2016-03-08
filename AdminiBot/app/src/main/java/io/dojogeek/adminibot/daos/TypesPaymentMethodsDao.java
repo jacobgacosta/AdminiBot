@@ -5,7 +5,7 @@ import java.util.List;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 
 @Deprecated
-public interface TypesPaymentMethodsDao extends ConnectionDao {
+public interface TypesPaymentMethodsDao {
 
     List<TypePaymentMethodModel> getPaymentMethods();
 
