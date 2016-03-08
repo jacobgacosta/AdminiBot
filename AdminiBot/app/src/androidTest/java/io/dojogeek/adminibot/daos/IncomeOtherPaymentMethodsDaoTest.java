@@ -38,7 +38,7 @@ public class IncomeOtherPaymentMethodsDaoTest {
 
     @After
     public void finishTest() {
-        ((IncomeOtherPaymentMethodsDaoImpl) mIncomeOtherPaymentMethodsDao).closeConection();
+        ((IncomeOtherPaymentMethodsDaoImpl) mIncomeOtherPaymentMethodsDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

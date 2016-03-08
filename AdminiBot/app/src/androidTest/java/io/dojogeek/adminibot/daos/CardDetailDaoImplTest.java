@@ -38,7 +38,7 @@ public class CardDetailDaoImplTest {
 
     @After
     public void finishTest() {
-        ((CardDetailDaoImpl)mCardDetailDao).closeConection();
+        ((CardDetailDaoImpl)mCardDetailDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

@@ -39,7 +39,7 @@ public class TypesPaymentMethodsDaoImplTest {
 
     @After
     public void finishTest() {
-        ((TypesPaymentMethodsDaoImpl) mTypesPaymentMethodsDao).closeConection();
+        ((TypesPaymentMethodsDaoImpl) mTypesPaymentMethodsDao).closeConnection();
     }
 
     @Test

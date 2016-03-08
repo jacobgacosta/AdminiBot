@@ -41,7 +41,7 @@ public class ExpenseDaoImplTest {
 
     @After
     public void finishTest() {
-        ((ExpenseDaoImpl)mExpenseDao).closeConection();
+        ((ExpenseDaoImpl)mExpenseDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

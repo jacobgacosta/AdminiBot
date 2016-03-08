@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +37,7 @@ public class ExpenseOtherPaymentMethodDaoTest {
 
     @After
     public void finishTest() {
-        ((ExpenseOtherPaymentMethodDaoImpl)mExpenseOtherPaymentMethodDao).closeConection();
+        ((ExpenseOtherPaymentMethodDaoImpl)mExpenseOtherPaymentMethodDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

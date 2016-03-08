@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import io.dojogeek.adminibot.models.UserModel;
@@ -49,7 +48,7 @@ public class UserDaoImplTest {
 
     @After
     public void finishTest() {
-        ((UserDaoImpl) mUserDao).closeConection();
+        ((UserDaoImpl) mUserDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

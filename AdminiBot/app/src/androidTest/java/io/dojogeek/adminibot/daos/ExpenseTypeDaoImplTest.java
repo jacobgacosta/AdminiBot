@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -9,13 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.ExpensesTypesContract;
@@ -49,7 +45,7 @@ public class ExpenseTypeDaoImplTest {
 
     @After
     public void finishTest() {
-        ((ExpenseTypeDaoImpl)mExpenseTypeDao).closeConection();
+        ((ExpenseTypeDaoImpl)mExpenseTypeDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

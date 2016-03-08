@@ -42,7 +42,7 @@ public class OtherPaymentMethodDaoImplTest {
 
     @After
     public void finishTest() {
-        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConection();
+        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

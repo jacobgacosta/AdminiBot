@@ -44,7 +44,7 @@ public class IncomeDaoImplTest {
 
     @After
     public void finishTest() {
-        ((IncomeDaoImpl) mIncomeDao).closeConection();
+        ((IncomeDaoImpl) mIncomeDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

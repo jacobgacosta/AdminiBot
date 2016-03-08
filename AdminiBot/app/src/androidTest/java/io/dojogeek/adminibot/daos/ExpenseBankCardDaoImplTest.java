@@ -42,7 +42,7 @@ public class ExpenseBankCardDaoImplTest {
 
     @After
     public void finishTest() {
-        ((ExpenseBankCardDaoImpl)mExpenseBankCardDao).closeConection();
+        ((ExpenseBankCardDaoImpl)mExpenseBankCardDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 

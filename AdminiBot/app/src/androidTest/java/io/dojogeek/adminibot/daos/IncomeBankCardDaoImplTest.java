@@ -42,7 +42,7 @@ public class IncomeBankCardDaoImplTest {
 
     @After
     public void finishTest() {
-        ((IncomeBankCardDaoImpl)mIncomeBankCardDao).closeConection();
+        ((IncomeBankCardDaoImpl)mIncomeBankCardDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
