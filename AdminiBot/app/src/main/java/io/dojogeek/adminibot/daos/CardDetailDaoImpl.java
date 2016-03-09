@@ -20,6 +20,8 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
     @Override
     public long createCardDetail(CardDetailModel cardDetailModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(cardDetailModel);
 
         long result = mDatabase.insert(CardDetailContract.CardDetail.TABLE_NAME, CardDetailContract.CardDetail.COLUMN_NAME_NULLABLE,
@@ -30,6 +32,9 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
 
     @Override
     public CardDetailModel getCardDetailByBankCardId(long bankCardId) throws DataException {
+
+        openConnection();
+
         String [] args = {String.valueOf(bankCardId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + CardDetailContract.CardDetail.TABLE_NAME +
@@ -56,6 +61,8 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
     @Override
     public long updateCardDetail(CardDetailModel cardDetailModel, String where) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(cardDetailModel);
 
         long updatedRows = mDatabase.update(CardDetailContract.CardDetail.TABLE_NAME, contentValues, where, null);
@@ -65,6 +72,8 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
 
     @Override
     public long deleteCardDetail(long cardDetailId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(cardDetailId)};
 

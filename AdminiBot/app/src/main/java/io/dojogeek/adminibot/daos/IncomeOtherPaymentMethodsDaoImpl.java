@@ -20,6 +20,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
     @Override
     public long createIncomeOtherPaymentMethod(IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(incomeOtherPaymentMethodModel);
 
         long result = mDatabase.insert(IncomesOthersPaymentMethodsContract.IncomePaymentMethod.TABLE_NAME,
@@ -30,6 +32,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
 
     @Override
     public IncomeOtherPaymentMethodModel getIncomeOtherPaymentMethodById(long incomeOtherPaymentMethodModelId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(incomeOtherPaymentMethodModelId)};
 
@@ -58,6 +62,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
     @Override
     public List<IncomeOtherPaymentMethodModel> getIncomesOthersPaymentMethods() {
 
+        openConnection();
+
         List<IncomeOtherPaymentMethodModel> incomeOtherPaymentMethodModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(IncomesOthersPaymentMethodsContract.IncomePaymentMethod.TABLE_NAME,
@@ -82,6 +88,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
     @Override
     public List<IncomeOtherPaymentMethodModel> getIncomeOtherPaymentMethodByIncomeId(long incomeId) {
 
+        openConnection();
+
         String [] args = {String.valueOf(incomeId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesOthersPaymentMethodsContract.IncomePaymentMethod.TABLE_NAME +
@@ -100,6 +108,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
     @Override
     public List<IncomeOtherPaymentMethodModel> getIncomeOtherPaymentMethodByPaymentMethodId(long paymentMethodId) {
 
+        openConnection();
+
         String [] args = {String.valueOf(paymentMethodId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesOthersPaymentMethodsContract.IncomePaymentMethod.TABLE_NAME +
@@ -117,6 +127,8 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
 
     @Override
     public long deleteIncomeOtherPaymentMethod(long incomeOtherPaymentMethodModelId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(incomeOtherPaymentMethodModelId)};
 

@@ -23,6 +23,8 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     @Override
     public long createIncome(IncomeModel incomeModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(incomeModel);
 
         long insertedIncomeId = mDatabase.insert(IncomesContract.Incomes.TABLE_NAME, IncomesContract.Incomes.COLUMN_NAME_NULLABLE, contentValues);
@@ -32,6 +34,8 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
 
     @Override
     public IncomeModel getIncomeById(long incomeId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(incomeId)};
 
@@ -59,6 +63,8 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     @Override
     public List<IncomeModel> getIncomes() {
 
+        openConnection();
+
         List<IncomeModel> incomeModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(IncomesContract.Incomes.TABLE_NAME, null, null, null, null, null, null);
@@ -81,6 +87,8 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     @Override
     public long updateIncome(IncomeModel incomeModel, String where) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(incomeModel);
 
         long updatedRows = mDatabase.update(IncomesContract.Incomes.TABLE_NAME, contentValues, where, null);
@@ -90,6 +98,8 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
 
     @Override
     public long deleteIncome(long incomeId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(incomeId)};
 

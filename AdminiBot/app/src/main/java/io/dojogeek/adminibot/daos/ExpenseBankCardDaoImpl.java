@@ -20,6 +20,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     @Override
     public long createMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
 
         long result = mDatabase.insert(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME,
@@ -30,6 +32,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public MovementExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(movementExpenseBankCardModelId)};
 
@@ -48,6 +52,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<MovementExpenseBankCardModel> getMovementsExpensesBankCards() {
+
+        openConnection();
 
         List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
 
@@ -71,6 +77,9 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public long updateMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel, String where) {
+
+        openConnection();
+
         ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
 
         long updatedRows = mDatabase.update(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME, contentValues, where, null);
@@ -80,6 +89,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public long deleteMovementExpenseBankCard(long movementExpenseBankCardModelId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(movementExpenseBankCardModelId)};
 
@@ -92,6 +103,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(expenseId)};
 
@@ -110,6 +123,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<MovementExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(bankCardId)};
 

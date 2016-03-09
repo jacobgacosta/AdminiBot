@@ -22,6 +22,8 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     @Override
     public long createUser(UserModel userModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(userModel);
 
         long response = mDatabase.insert(UsersContract.User.TABLE_NAME, UsersContract.User.COLUMN_NAME_NULLABLE, contentValues);
@@ -31,6 +33,8 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 
     @Override
     public List<UserModel> getUsers() {
+
+        openConnection();
 
         Cursor cursor = mDatabase.query(UsersContract.User.TABLE_NAME, null, null, null, null, null, null);
 
@@ -50,6 +54,8 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     @Override
     public long updateUser(UserModel userModel, String where) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(userModel);
 
         long updatedRows = mDatabase.update(UsersContract.User.TABLE_NAME, contentValues, where, null);
@@ -59,6 +65,9 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
 
     @Override
     public void removeAllUsers() {
+
+        openConnection();
+
         mDatabase.execSQL("DELETE FROM " + UsersContract.User.TABLE_NAME);
     }
 

@@ -24,6 +24,8 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     @Override
     public long createOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(otherPaymentMethodModel);
 
         long resutl = mDatabase.insert(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
@@ -34,6 +36,8 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
 
     @Override
     public OtherPaymentMethodModel getOtherPaymentMethodById(long otherPaymentMethodId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(otherPaymentMethodId)};
 
@@ -62,6 +66,8 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     @Override
     public List<OtherPaymentMethodModel> getOtherPaymentMethods() {
 
+        openConnection();
+
         List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(PaymentMethodsContract.PaymentMethods.TABLE_NAME, null, null, null, null, null, null);
@@ -83,6 +89,9 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
 
     @Override
     public long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, String where) {
+
+        openConnection();
+
         ContentValues contentValues = createContentValues(otherPaymentMethodModel);
 
         long updatedRows = mDatabase.update(PaymentMethodsContract.PaymentMethods.TABLE_NAME, contentValues, where, null);
@@ -92,6 +101,9 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
 
     @Override
     public long deleteOtherPaymentMethod(long otherPaymentMethodId) {
+
+        openConnection();
+
         String [] arg = {String.valueOf(otherPaymentMethodId)};
 
         int deletedRows = mDatabase.delete(PaymentMethodsContract.PaymentMethods.TABLE_NAME,

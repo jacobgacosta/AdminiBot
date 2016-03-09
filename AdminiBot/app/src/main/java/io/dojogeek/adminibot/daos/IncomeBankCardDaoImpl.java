@@ -23,6 +23,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     @Override
     public long createMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCard) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(movementIncomeBankCard);
 
         long response = mDatabase.insert(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME,
@@ -33,6 +35,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
     @Override
     public MovementIncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(movementIncomeBankCardId)};
 
@@ -50,6 +54,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
     @Override
     public List<MovementIncomeBankCardModel> getMovementsIncomesBankCards() {
+
+        openConnection();
 
         List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
 
@@ -73,6 +79,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     @Override
     public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId) {
 
+        openConnection();
+
         String [] args = {String.valueOf(incomeId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesBankCardsContract.IncomesBankCards.TABLE_NAME +
@@ -89,6 +97,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
     @Override
     public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(bankCardId)};
 
@@ -108,6 +118,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     public long updateMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCardModel,
                                              String where) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(movementIncomeBankCardModel);
 
         long updatedRows = mDatabase.update(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, contentValues, where, null);
@@ -117,6 +129,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
     @Override
     public long deleteMovementIncomeBankCard(long movementIncomeBankCardId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(movementIncomeBankCardId)};
 
