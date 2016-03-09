@@ -31,7 +31,7 @@ public class ExpensesInboxPresenterTest {
     private ExpensesInboxPresenter mExpensesInboxPresenter = new ExpensesInboxPresenterImpl(mExpensesInboxActivity, mExpenseDao);
 
     @Test
-    public void testListExpenses_correctFlowWithListOfRecords() {
+    public void testGetExpenses_successfulObtainingExpensesList() {
 
         List<ExpenseModel> expenseModelList = getExpensesList();
 
@@ -45,7 +45,7 @@ public class ExpensesInboxPresenterTest {
     }
 
     @Test
-    public void testListExpenses_correctFlowWithEmptyList() {
+    public void testGetExpenses_obtainingEmptyExpensesList() {
 
         List<ExpenseModel> emptyExpenseModelList =  new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class ExpensesInboxPresenterTest {
     }
 
     @Test
-    public void testDeleteExpense_successDeletion() {
+    public void testDeleteExpense_successfulDeletion() {
 
         long deletedRows = 1;
         long expenseId = 4;
@@ -72,7 +72,7 @@ public class ExpensesInboxPresenterTest {
     }
 
     @Test
-    public void testDeleteExpense_errorDeletion() {
+    public void testDeleteExpens_deletionError() {
 
         long deletedRows = 0;
         long expenseId = 1;
@@ -86,9 +86,9 @@ public class ExpensesInboxPresenterTest {
     }
 
     @Test
-    public void testCloseConnection_correctInvocationAfterUnnusedView() {
+    public void testCloseConnection_successfulInvocationOfUnusedView() {
 
-        mExpensesInboxPresenter.unnusedView();
+        mExpensesInboxPresenter.unusedView();
 
         verify(mExpenseDao).closeConnection();
 
