@@ -112,6 +112,32 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         return deletedRows;
     }
 
+    @Override
+    public List<OtherPaymentMethodModel> getOtherPaymentMethodByType(TypePaymentMethodEnum typePaymentMethodEnum) {
+
+        openConnection();
+
+        String [] args = {typePaymentMethodEnum.name()};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + PaymentMethodsContract.PaymentMethods.TABLE_NAME +
+                " WHERE type_payment_method = ? ", args);
+
+
+        List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                OtherPaymentMethodModel otherPaymentMethodModel = getOtherPaymentMethodModelFromCursor(cursor);
+                otherPaymentMethodModelList.add(otherPaymentMethodModel);
+                cursor.moveToNext();
+            }
+        }
+
+        return otherPaymentMethodModelList;
+    }
+
     private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         ContentValues contentValues = new ContentValues();

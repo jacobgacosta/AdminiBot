@@ -126,6 +126,35 @@ public class OtherPaymentMethodDaoImplTest {
     }
 
     @Test
+    public void testGetOtherPaymentMethodByType_successObtainingList() {
+
+        TypePaymentMethodEnum typePaymentMethodEnum = TypePaymentMethodEnum.FOOD_COUPONS;
+
+        int numberOfInsertions = 5;
+
+        List<OtherPaymentMethodModel> expectedOtherPaymentMethodModelList = createOtherPaymentMethods(numberOfInsertions);
+
+        List<OtherPaymentMethodModel> actualOtherPaymentMethodModelList =
+                mOtherPaymentMethodDao.getOtherPaymentMethodByType(typePaymentMethodEnum);
+
+        compareOtherPaymentMethodModelList(expectedOtherPaymentMethodModelList, actualOtherPaymentMethodModelList);
+
+    }
+
+    @Test
+    public void testGetOtherPaymentMethodByType_withNoExistentType_isEmptyList() {
+
+        TypePaymentMethodEnum typePaymentMethodEnum = TypePaymentMethodEnum.CHEQUE;
+
+        List<OtherPaymentMethodModel> actualOtherPaymentMethodModelList =
+                mOtherPaymentMethodDao.getOtherPaymentMethodByType(typePaymentMethodEnum);
+
+
+        assertThat(actualOtherPaymentMethodModelList, is(notNullValue()));
+        assertThat(actualOtherPaymentMethodModelList.isEmpty(), is(true));
+    }
+
+    @Test
     public void testUpdateOtherPaymentMethod_successUpdating() throws DataException {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
