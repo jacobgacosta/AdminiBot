@@ -149,13 +149,13 @@ public class CreatorModels {
                                                     double availableCredit, CardTypeEnum cardType, long userId) {
 
         BankCardModel bankCardModel = new BankCardModel();
-        bankCardModel.name = name;
-        bankCardModel.number = number;
-        bankCardModel.bankId = bankId;
-        bankCardModel.trademarkId = trademarkId;
-        bankCardModel.availableCredit = availableCredit;
-        bankCardModel.cardType = cardType;
-        bankCardModel.userId = userId;
+        bankCardModel.setName(name);
+        bankCardModel.setNumber(number);
+        bankCardModel.setBankId(bankId);
+        bankCardModel.setTrademarkId(trademarkId);
+        bankCardModel.setAvailableCredit(availableCredit);
+        bankCardModel.setCardType(cardType);
+        bankCardModel.setUserId(userId);
 
         return bankCardModel;
     }

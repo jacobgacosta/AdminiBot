@@ -140,13 +140,13 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     private ContentValues createContentValues(BankCardModel bankCardModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(BankCardsContract.BankCard.COLUMN_NAME, bankCardModel.name);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_NUMBER, bankCardModel.number);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_BANK_ID, bankCardModel.bankId);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID, bankCardModel.trademarkId);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE, bankCardModel.availableCredit);
-        contentValues.put(BankCardsContract.BankCard.COLUMN_CARD_TYPE, bankCardModel.cardType.name());
-        contentValues.put(BankCardsContract.BankCard.COLUMN_USER_ID, bankCardModel.userId);
+        contentValues.put(BankCardsContract.BankCard.COLUMN_NAME, bankCardModel.getName());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_NUMBER, bankCardModel.getNumber());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_BANK_ID, bankCardModel.getBankId());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID, bankCardModel.getTrademarkId());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE, bankCardModel.getAvailableCredit());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_CARD_TYPE, bankCardModel.getCardType().name());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_USER_ID, bankCardModel.getUserId());
 
         return contentValues;
     }
@@ -164,14 +164,14 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         String cardType = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CARD_TYPE));
         long userId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_USER_ID));
 
-        bankCardModel.id = id;
-        bankCardModel.name = name;
-        bankCardModel.number = number;
-        bankCardModel.bankId = bankId;
-        bankCardModel.trademarkId = trademarkId;
-        bankCardModel.availableCredit = availableCredit;
-        bankCardModel.cardType = CardTypeEnum.valueOf(cardType);
-        bankCardModel.userId = userId;
+        bankCardModel.setId(id);
+        bankCardModel.setName(name);
+        bankCardModel.setNumber(number);
+        bankCardModel.setBankId(bankId);
+        bankCardModel.setTrademarkId(trademarkId);
+        bankCardModel.setAvailableCredit(availableCredit);
+        bankCardModel.setCardType(CardTypeEnum.valueOf(cardType));
+        bankCardModel.setUserId(userId);
 
         return bankCardModel;
 

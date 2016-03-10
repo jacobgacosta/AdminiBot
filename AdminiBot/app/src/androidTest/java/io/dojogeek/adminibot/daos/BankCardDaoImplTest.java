@@ -68,7 +68,7 @@ public class BankCardDaoImplTest {
     public void testCreateBankCard_withNullRequiredField_noInsertion() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
-        bankCardModel.name = null;
+        bankCardModel.setName(null);
 
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
@@ -85,13 +85,13 @@ public class BankCardDaoImplTest {
         BankCardModel actualBankCardModel = mBankCardDao.getBankCardById(insertedRecordId);
 
         assertNotNull(actualBankCardModel);
-        assertEquals(expectedBankCardModel.name, actualBankCardModel.name);
-        assertEquals(expectedBankCardModel.number, actualBankCardModel.number);
-        assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
-        assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
-        assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
-        assertEquals(expectedBankCardModel.cardType, actualBankCardModel.cardType);
-        assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
+        assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
+        assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
+        assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
+        assertEquals(expectedBankCardModel.getTrademarkId(), actualBankCardModel.getTrademarkId());
+        assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
+        assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
+        assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
 
     }
 
@@ -170,7 +170,7 @@ public class BankCardDaoImplTest {
         String where = BankCardsContract.BankCard._ID + "= " +  insertedRecordId;
 
         BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
-        expectedUpdatedBankCard.name = null;
+        expectedUpdatedBankCard.setName(null);
 
         mBankCardDao.updateBankCard(expectedUpdatedBankCard, where);
 
@@ -267,23 +267,23 @@ public class BankCardDaoImplTest {
 
     private void compareBankCards(BankCardModel expectedBankCardModel, BankCardModel actualBankCardModel) {
         assertNotNull(actualBankCardModel);
-        assertEquals(expectedBankCardModel.name, actualBankCardModel.name);
-        assertEquals(expectedBankCardModel.number, actualBankCardModel.number);
-        assertEquals(expectedBankCardModel.bankId, actualBankCardModel.bankId);
-        assertEquals(expectedBankCardModel.trademarkId, actualBankCardModel.trademarkId);
-        assertEquals(expectedBankCardModel.availableCredit, actualBankCardModel.availableCredit, 0);
-        assertEquals(expectedBankCardModel.cardType, actualBankCardModel.cardType);
-        assertEquals(expectedBankCardModel.userId, actualBankCardModel.userId);
+        assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
+        assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
+        assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
+        assertEquals(expectedBankCardModel.getTrademarkId(), actualBankCardModel.getTrademarkId());
+        assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
+        assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
+        assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
     }
 
     private BankCardModel changeBankCardValues(BankCardModel bankCardModel) {
-        bankCardModel.name = "Updated name";
-        bankCardModel.number = "123456789012345658";
-        bankCardModel.bankId = 1;
-        bankCardModel.trademarkId = 1;
-        bankCardModel.availableCredit = 8743.90;
-        bankCardModel.cardType = CardTypeEnum.CREDIT_CARD;
-        bankCardModel.userId = 2;
+        bankCardModel.setName("Updated name");
+        bankCardModel.setNumber("123456789012345658");
+        bankCardModel.setBankId(1);
+        bankCardModel.setTrademarkId(1);
+        bankCardModel.setAvailableCredit(8743.90);
+        bankCardModel.setCardType(CardTypeEnum.CREDIT_CARD);
+        bankCardModel.setUserId(2);
 
         return bankCardModel;
     }
