@@ -8,7 +8,7 @@ public interface ExpensesInboxPresenter {
 
     void getExpenses();
 
-    void unnusedView();
+    void unusedView();
 
     void deleteExpense(long expenseId);
 }

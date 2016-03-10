@@ -41,7 +41,7 @@ public class ExpensesInboxPresenterImpl implements ExpensesInboxPresenter {
     }
 
     @Override
-    public void unnusedView() {
+    public void unusedView() {
         closeConnection(mExpenseDao);
     }
 
