@@ -143,11 +143,11 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION, movementIncomeBankCard.description);
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT, movementIncomeBankCard.amount);
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID, movementIncomeBankCard.incomeId);
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID, movementIncomeBankCard.bankCardId);
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE, movementIncomeBankCard.date);
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION, movementIncomeBankCard.getDescription());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT, movementIncomeBankCard.getAmount());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID, movementIncomeBankCard.getIncomeId());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID, movementIncomeBankCard.getBankCardId());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE, movementIncomeBankCard.getDate());
 
         return contentValues;
     }
@@ -186,11 +186,11 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
         String date = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE));
 
         MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
-        movementIncomeBankCardModel.description = description;
-        movementIncomeBankCardModel.amount = amount;
-        movementIncomeBankCardModel.incomeId = incomeId;
-        movementIncomeBankCardModel.bankCardId = bankCardId;
-        movementIncomeBankCardModel.date = date;
+        movementIncomeBankCardModel.setDescription(description);
+        movementIncomeBankCardModel.setAmount(amount);
+        movementIncomeBankCardModel.setIncomeId(incomeId);
+        movementIncomeBankCardModel.setBankCardId(bankCardId);
+        movementIncomeBankCardModel.setDate(date);
 
         return movementIncomeBankCardModel;
     }

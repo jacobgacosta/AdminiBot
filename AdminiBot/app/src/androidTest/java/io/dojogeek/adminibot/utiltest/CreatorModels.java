@@ -239,11 +239,11 @@ public class CreatorModels {
                                                                                 long incomeId) {
 
         MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
-        movementIncomeBankCardModel.amount = amount;
-        movementIncomeBankCardModel.bankCardId = bankCardId;
-        movementIncomeBankCardModel.date = date;
-        movementIncomeBankCardModel.description = description;
-        movementIncomeBankCardModel.incomeId = incomeId;
+        movementIncomeBankCardModel.setAmount(amount);
+        movementIncomeBankCardModel.setBankCardId(bankCardId);
+        movementIncomeBankCardModel.setDate(date);
+        movementIncomeBankCardModel.setDescription(description);
+        movementIncomeBankCardModel.setIncomeId(incomeId);
 
         return movementIncomeBankCardModel;
     }

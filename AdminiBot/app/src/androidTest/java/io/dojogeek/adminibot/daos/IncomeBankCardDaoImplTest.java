@@ -68,7 +68,7 @@ public class IncomeBankCardDaoImplTest {
     public void testCreateMovementIncomeBankCard_withNullRequiredField_noInsertion() {
 
         MovementIncomeBankCardModel movementIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
-        movementIncomeBankCardModel.description = null;
+        movementIncomeBankCardModel.setDescription(null);
 
         long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCardModel);
 
@@ -86,11 +86,11 @@ public class IncomeBankCardDaoImplTest {
                 mIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
 
         assertThat(actualMovementIncomeBankCardModel, is(notNullValue()));
-        assertThat(actualMovementIncomeBankCardModel.amount, is(expectedMovementIncomeBankCardModel.amount));
-        assertThat(actualMovementIncomeBankCardModel.bankCardId, is(expectedMovementIncomeBankCardModel.bankCardId));
-        assertThat(actualMovementIncomeBankCardModel.date, is(expectedMovementIncomeBankCardModel.date));
-        assertThat(actualMovementIncomeBankCardModel.description, is(expectedMovementIncomeBankCardModel.description));
-        assertThat(actualMovementIncomeBankCardModel.incomeId, is(expectedMovementIncomeBankCardModel.incomeId));
+        assertThat(actualMovementIncomeBankCardModel.getAmount(), is(expectedMovementIncomeBankCardModel.getAmount()));
+        assertThat(actualMovementIncomeBankCardModel.getBankCardId(), is(expectedMovementIncomeBankCardModel.getBankCardId()));
+        assertThat(actualMovementIncomeBankCardModel.getDate(), is(expectedMovementIncomeBankCardModel.getDate()));
+        assertThat(actualMovementIncomeBankCardModel.getDescription(), is(expectedMovementIncomeBankCardModel.getDescription()));
+        assertThat(actualMovementIncomeBankCardModel.getIncomeId(), is(expectedMovementIncomeBankCardModel.getIncomeId()));
     }
 
     @Test(expected = DataException.class)
@@ -227,7 +227,7 @@ public class IncomeBankCardDaoImplTest {
 
         long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
 
-        movementIncomeBankCard.description = null;
+        movementIncomeBankCard.setDescription(null);
 
         String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + insertedRecordId;
 
@@ -299,21 +299,21 @@ public class IncomeBankCardDaoImplTest {
                                                         MovementIncomeBankCardModel actualMovementIncomeBankCardModel) {
 
         assertThat(actualMovementIncomeBankCardModel, is(notNullValue()));
-        assertThat(actualMovementIncomeBankCardModel.incomeId, is(expectedMovementIncomeBankCardModel.incomeId));
-        assertThat(actualMovementIncomeBankCardModel.description, is(expectedMovementIncomeBankCardModel.description));
-        assertThat(actualMovementIncomeBankCardModel.date, is(expectedMovementIncomeBankCardModel.date));
-        assertThat(actualMovementIncomeBankCardModel.bankCardId, is(expectedMovementIncomeBankCardModel.bankCardId));
-        assertThat(actualMovementIncomeBankCardModel.amount, is(expectedMovementIncomeBankCardModel.amount));
+        assertThat(actualMovementIncomeBankCardModel.getIncomeId(), is(expectedMovementIncomeBankCardModel.getIncomeId()));
+        assertThat(actualMovementIncomeBankCardModel.getDescription(), is(expectedMovementIncomeBankCardModel.getDescription()));
+        assertThat(actualMovementIncomeBankCardModel.getDate(), is(expectedMovementIncomeBankCardModel.getDate()));
+        assertThat(actualMovementIncomeBankCardModel.getBankCardId(), is(expectedMovementIncomeBankCardModel.getBankCardId()));
+        assertThat(actualMovementIncomeBankCardModel.getAmount(), is(expectedMovementIncomeBankCardModel.getAmount()));
 
     }
 
     private MovementIncomeBankCardModel changeMovementIncomeBankCardFields(MovementIncomeBankCardModel movementIncomeBankCardModel) {
 
-        movementIncomeBankCardModel.amount = 309.00;
-        movementIncomeBankCardModel.bankCardId = 2;
-        movementIncomeBankCardModel.date = DateUtils.getCurrentData();
-        movementIncomeBankCardModel.description = "updated description";
-        movementIncomeBankCardModel.incomeId = 3;
+        movementIncomeBankCardModel.setAmount(309.00);
+        movementIncomeBankCardModel.setBankCardId(2);
+        movementIncomeBankCardModel.setDate(DateUtils.getCurrentData());
+        movementIncomeBankCardModel.setDescription("updated description");
+        movementIncomeBankCardModel.setIncomeId(3);
 
         return movementIncomeBankCardModel;
     }
