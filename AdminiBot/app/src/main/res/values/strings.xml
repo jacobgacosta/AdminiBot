@@ -106,5 +106,7 @@
     <!-- messages -->
     <string name="success_deletion">Registro eliminado</string>
     <string name="error_deletion">Error al intentar borrar registro, intente más tarde</string>
+    <string name="expenses_success_creation">Gasto agregado</string>
+    <string name="expenses_error_creation">Se produjo un error al agregar gasto, intente más tarde</string>
 
 </resources>
