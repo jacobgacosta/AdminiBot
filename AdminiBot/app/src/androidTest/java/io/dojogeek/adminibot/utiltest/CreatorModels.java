@@ -195,11 +195,11 @@ public class CreatorModels {
                                                                         long userId) {
 
         OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
-        otherPaymentMethodModel.availableCredit = availableCredit;
-        otherPaymentMethodModel.name = name;
-        otherPaymentMethodModel.referenceNumber = referenceNumber;
-        otherPaymentMethodModel.typePaymentMethod = typePaymentMethod;
-        otherPaymentMethodModel.userId = userId;
+        otherPaymentMethodModel.setAvailableCredit(availableCredit);
+        otherPaymentMethodModel.setName(name);
+        otherPaymentMethodModel.setReferenceNumber(referenceNumber);
+        otherPaymentMethodModel.setTypePaymentMethod(typePaymentMethod);
+        otherPaymentMethodModel.setUserId(userId);
 
         return otherPaymentMethodModel;
     }

@@ -141,15 +141,15 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME, otherPaymentMethodModel.name);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME, otherPaymentMethodModel.getName());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE,
-                otherPaymentMethodModel.referenceNumber);
+                otherPaymentMethodModel.getReferenceNumber());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD,
-                otherPaymentMethodModel.typePaymentMethod.name());
+                otherPaymentMethodModel.getTypePaymentMethod().name());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT,
-                otherPaymentMethodModel.availableCredit);
+                otherPaymentMethodModel.getAvailableCredit());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID,
-                otherPaymentMethodModel.userId);
+                otherPaymentMethodModel.getUserId());
 
         return contentValues;
     }
@@ -163,11 +163,11 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         long userId = cursor.getLong(cursor.getColumnIndex(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID));
 
         OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
-        otherPaymentMethodModel.name = name;
-        otherPaymentMethodModel.referenceNumber = reference;
-        otherPaymentMethodModel.typePaymentMethod = TypePaymentMethodEnum.valueOf(paymentMethod);
-        otherPaymentMethodModel.availableCredit = availableCredit;
-        otherPaymentMethodModel.userId = userId;
+        otherPaymentMethodModel.setName(name);
+        otherPaymentMethodModel.setReferenceNumber(reference);
+        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.valueOf(paymentMethod));
+        otherPaymentMethodModel.setAvailableCredit(availableCredit);
+        otherPaymentMethodModel.setUserId(userId);
 
         return otherPaymentMethodModel;
     }

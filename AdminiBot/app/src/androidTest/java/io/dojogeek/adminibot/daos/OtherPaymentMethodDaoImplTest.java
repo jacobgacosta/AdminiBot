@@ -70,7 +70,7 @@ public class OtherPaymentMethodDaoImplTest {
     public void testCreateOtherPaymentMethod_withNullRequieredField_noInsertion() {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
-        otherPaymentMethodModel.name = null;
+        otherPaymentMethodModel.setName(null);
 
         long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
 
@@ -88,11 +88,11 @@ public class OtherPaymentMethodDaoImplTest {
                 getOtherPaymentMethodById(insertedRecordId);
 
         assertNotNull(actualoOtherPaymentMethodModel);
-        assertEquals(expectedOtherPaymentMethodModel.name, actualoOtherPaymentMethodModel.name);
-        assertEquals(expectedOtherPaymentMethodModel.availableCredit, actualoOtherPaymentMethodModel.availableCredit, 0);
-        assertEquals(expectedOtherPaymentMethodModel.referenceNumber, actualoOtherPaymentMethodModel.referenceNumber);
-        assertEquals(expectedOtherPaymentMethodModel.typePaymentMethod, actualoOtherPaymentMethodModel.typePaymentMethod);
-        assertEquals(expectedOtherPaymentMethodModel.userId, actualoOtherPaymentMethodModel.userId);
+        assertEquals(expectedOtherPaymentMethodModel.getName(), actualoOtherPaymentMethodModel.getName());
+        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualoOtherPaymentMethodModel.getAvailableCredit(), 0);
+        assertEquals(expectedOtherPaymentMethodModel.getReferenceNumber(), actualoOtherPaymentMethodModel.getReferenceNumber());
+        assertEquals(expectedOtherPaymentMethodModel.getTypePaymentMethod(), actualoOtherPaymentMethodModel.getTypePaymentMethod());
+        assertEquals(expectedOtherPaymentMethodModel.getUserId(), actualoOtherPaymentMethodModel.getUserId());
     }
 
     @Test(expected = DataException.class)
@@ -211,7 +211,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
 
-        otherPaymentMethodModel.name = null;
+        otherPaymentMethodModel.setName(null);
 
         String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
 
@@ -285,21 +285,21 @@ public class OtherPaymentMethodDaoImplTest {
                                             OtherPaymentMethodModel actualOtherPaymentMethodModel) {
 
 
-        assertEquals(expectedOtherPaymentMethodModel.userId, actualOtherPaymentMethodModel.userId);
-        assertEquals(expectedOtherPaymentMethodModel.referenceNumber, actualOtherPaymentMethodModel.referenceNumber);
-        assertEquals(expectedOtherPaymentMethodModel.typePaymentMethod, actualOtherPaymentMethodModel.typePaymentMethod);
-        assertEquals(expectedOtherPaymentMethodModel.availableCredit, actualOtherPaymentMethodModel.availableCredit, 0);
-        assertEquals(expectedOtherPaymentMethodModel.name, actualOtherPaymentMethodModel.name);
+        assertEquals(expectedOtherPaymentMethodModel.getUserId(), actualOtherPaymentMethodModel.getUserId());
+        assertEquals(expectedOtherPaymentMethodModel.getReferenceNumber(), actualOtherPaymentMethodModel.getReferenceNumber());
+        assertEquals(expectedOtherPaymentMethodModel.getTypePaymentMethod(), actualOtherPaymentMethodModel.getTypePaymentMethod());
+        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualOtherPaymentMethodModel.getAvailableCredit(), 0);
+        assertEquals(expectedOtherPaymentMethodModel.getName(), actualOtherPaymentMethodModel.getName());
 
     }
 
     private OtherPaymentMethodModel changeOtherPaymentMethodValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
-        otherPaymentMethodModel.userId = 2;
-        otherPaymentMethodModel.availableCredit = 32000;
-        otherPaymentMethodModel.typePaymentMethod = TypePaymentMethodEnum.CASH;
-        otherPaymentMethodModel.referenceNumber = "65787439KDUFI";
-        otherPaymentMethodModel.name = "Other payment method test";
+        otherPaymentMethodModel.setUserId(2);
+        otherPaymentMethodModel.setAvailableCredit(32000);
+        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
+        otherPaymentMethodModel.setReferenceNumber("65787439KDUFI");
+        otherPaymentMethodModel.setName("Other payment method test");
 
         return otherPaymentMethodModel;
     }
