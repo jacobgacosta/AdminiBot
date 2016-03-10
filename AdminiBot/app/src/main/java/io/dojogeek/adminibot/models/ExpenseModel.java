@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.models;
 
 import java.util.Date;
+import java.util.List;
 
 public class ExpenseModel {
 
@@ -11,5 +12,5 @@ public class ExpenseModel {
     public String nextExit;
     public long expenseTypeId;
     public long userId;
-
+    public List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels;
 }
