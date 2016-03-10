@@ -76,12 +76,12 @@ public class IncomeOtherPaymentMethodsDaoTest {
 
         assertThat(actualIncomeOtherPaymentMethodModel, is(notNullValue()));
 
-        assertThat(actualIncomeOtherPaymentMethodModel.amount,
-                is(expectedIncomeOtherPaymentMethodModel.amount));
-        assertThat(actualIncomeOtherPaymentMethodModel.incomeId,
-                is(expectedIncomeOtherPaymentMethodModel.incomeId));
-        assertThat(actualIncomeOtherPaymentMethodModel.otherPaymentMethodId,
-                is(expectedIncomeOtherPaymentMethodModel.otherPaymentMethodId));
+        assertThat(actualIncomeOtherPaymentMethodModel.getAmount(),
+                is(expectedIncomeOtherPaymentMethodModel.getAmount()));
+        assertThat(actualIncomeOtherPaymentMethodModel.getIncomeId(),
+                is(expectedIncomeOtherPaymentMethodModel.getIncomeId()));
+        assertThat(actualIncomeOtherPaymentMethodModel.getOtherPaymentMethodId(),
+                is(expectedIncomeOtherPaymentMethodModel.getOtherPaymentMethodId()));
 
     }
 
@@ -129,7 +129,8 @@ public class IncomeOtherPaymentMethodsDaoTest {
         mIncomeOtherPaymentMethodsDao.createIncomeOtherPaymentMethod(expectedIncomeOtherPaymentMethodModel);
 
         List<IncomeOtherPaymentMethodModel> incomeOtherPaymentMethodModelList =
-                mIncomeOtherPaymentMethodsDao.getIncomeOtherPaymentMethodByIncomeId(expectedIncomeOtherPaymentMethodModel.incomeId);
+                mIncomeOtherPaymentMethodsDao.
+                        getIncomeOtherPaymentMethodByIncomeId(expectedIncomeOtherPaymentMethodModel.getIncomeId());
 
         assertThat(incomeOtherPaymentMethodModelList.isEmpty(), is(false));
         assertThat(incomeOtherPaymentMethodModelList.size(), is(1));
@@ -159,7 +160,8 @@ public class IncomeOtherPaymentMethodsDaoTest {
         mIncomeOtherPaymentMethodsDao.createIncomeOtherPaymentMethod(expectedIncomeOtherPaymentMethodModel);
 
         List<IncomeOtherPaymentMethodModel> incomeOtherPaymentMethodModelList =
-                mIncomeOtherPaymentMethodsDao.getIncomeOtherPaymentMethodByPaymentMethodId(expectedIncomeOtherPaymentMethodModel.otherPaymentMethodId);
+                mIncomeOtherPaymentMethodsDao.
+                        getIncomeOtherPaymentMethodByPaymentMethodId(expectedIncomeOtherPaymentMethodModel.getOtherPaymentMethodId());
 
         assertThat(incomeOtherPaymentMethodModelList.isEmpty(), is(false));
         assertThat(incomeOtherPaymentMethodModelList.size(), is(1));
@@ -248,12 +250,12 @@ public class IncomeOtherPaymentMethodsDaoTest {
 
 
         assertThat(actualIncomeOtherPaymentMethodModel, is(notNullValue()));
-        assertThat(actualIncomeOtherPaymentMethodModel.otherPaymentMethodId,
-                is(expectedIncomeOtherPaymentMethodModel.otherPaymentMethodId));
-        assertThat(actualIncomeOtherPaymentMethodModel.incomeId,
-                is(expectedIncomeOtherPaymentMethodModel.incomeId));
-        assertThat(actualIncomeOtherPaymentMethodModel.amount,
-                is(expectedIncomeOtherPaymentMethodModel.amount));
+        assertThat(actualIncomeOtherPaymentMethodModel.getOtherPaymentMethodId(),
+                is(expectedIncomeOtherPaymentMethodModel.getOtherPaymentMethodId()));
+        assertThat(actualIncomeOtherPaymentMethodModel.getIncomeId(),
+                is(expectedIncomeOtherPaymentMethodModel.getIncomeId()));
+        assertThat(actualIncomeOtherPaymentMethodModel.getAmount(),
+                is(expectedIncomeOtherPaymentMethodModel.getAmount()));
 
     }
 

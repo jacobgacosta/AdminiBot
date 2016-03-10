@@ -142,11 +142,11 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(IncomesOthersPaymentMethodsContract.IncomePaymentMethod.COLUMN_AMOUNT,
-                incomeOtherPaymentMethodModel.amount);
+                incomeOtherPaymentMethodModel.getAmount());
         contentValues.put(IncomesOthersPaymentMethodsContract.IncomePaymentMethod.COLUMN_INCOME_ID,
-                incomeOtherPaymentMethodModel.incomeId);
+                incomeOtherPaymentMethodModel.getIncomeId());
         contentValues.put(IncomesOthersPaymentMethodsContract.IncomePaymentMethod.COLUMN_PAYMENTH_METHOD_ID,
-                incomeOtherPaymentMethodModel.otherPaymentMethodId);
+                incomeOtherPaymentMethodModel.getOtherPaymentMethodId());
 
         return contentValues;
     }
@@ -171,9 +171,9 @@ public class IncomeOtherPaymentMethodsDaoImpl extends SQLiteGlobalDao implements
                         IncomePaymentMethod.COLUMN_PAYMENTH_METHOD_ID));
 
         IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel = new IncomeOtherPaymentMethodModel();
-        incomeOtherPaymentMethodModel.amount = amount;
-        incomeOtherPaymentMethodModel.incomeId = incomeId;
-        incomeOtherPaymentMethodModel.otherPaymentMethodId = paymentMethodId;
+        incomeOtherPaymentMethodModel.setAmount(amount);
+        incomeOtherPaymentMethodModel.setIncomeId(incomeId);
+        incomeOtherPaymentMethodModel.setOtherPaymentMethodId(paymentMethodId);
 
         return incomeOtherPaymentMethodModel;
     }

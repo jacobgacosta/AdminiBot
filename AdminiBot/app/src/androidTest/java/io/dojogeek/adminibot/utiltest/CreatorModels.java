@@ -279,9 +279,9 @@ public class CreatorModels {
                                                                              long otherPaymentMethodId) {
 
         IncomeOtherPaymentMethodModel incomeOtherPaymentMethodModel = new IncomeOtherPaymentMethodModel();
-        incomeOtherPaymentMethodModel.amount = amount;
-        incomeOtherPaymentMethodModel.incomeId = incomeId;
-        incomeOtherPaymentMethodModel.otherPaymentMethodId = otherPaymentMethodId;
+        incomeOtherPaymentMethodModel.setAmount(amount);
+        incomeOtherPaymentMethodModel.setIncomeId(incomeId);
+        incomeOtherPaymentMethodModel.setOtherPaymentMethodId(otherPaymentMethodId);
 
         return incomeOtherPaymentMethodModel;
     }
