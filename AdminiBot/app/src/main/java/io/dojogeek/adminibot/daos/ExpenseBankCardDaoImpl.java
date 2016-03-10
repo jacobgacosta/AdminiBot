@@ -143,11 +143,11 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, movementExpenseBankCardModel.description);
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.amount);
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.expenseId);
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.bankCardId);
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, movementExpenseBankCardModel.date);
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, movementExpenseBankCardModel.getDescription());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.getAmount());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.getExpenseId());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.getBankCardId());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, movementExpenseBankCardModel.getDate());
 
         return contentValues;
     }
@@ -161,11 +161,11 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
         String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE));
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
-        movementExpenseBankCardModel.description = description;
-        movementExpenseBankCardModel.amount = amount;
-        movementExpenseBankCardModel.expenseId = expenseId;
-        movementExpenseBankCardModel.bankCardId = bankCardId;
-        movementExpenseBankCardModel.date = date;
+        movementExpenseBankCardModel.setDescription(description);
+        movementExpenseBankCardModel.setAmount(amount);
+        movementExpenseBankCardModel.setExpenseId(expenseId);
+        movementExpenseBankCardModel.setBankCardId(bankCardId);
+        movementExpenseBankCardModel.setDate(date);
 
         return movementExpenseBankCardModel;
     }

@@ -217,11 +217,11 @@ public class CreatorModels {
                                                                                   long expenseId) {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
-        movementExpenseBankCardModel.amount = amount;
-        movementExpenseBankCardModel.bankCardId = bankCardId;
-        movementExpenseBankCardModel.date = date;
-        movementExpenseBankCardModel.description = description;
-        movementExpenseBankCardModel.expenseId = expenseId;
+        movementExpenseBankCardModel.setAmount(amount);
+        movementExpenseBankCardModel.setBankCardId(bankCardId);
+        movementExpenseBankCardModel.setDate(date);
+        movementExpenseBankCardModel.setDescription(description);
+        movementExpenseBankCardModel.setExpenseId(expenseId);
 
         return movementExpenseBankCardModel;
     }

@@ -68,7 +68,7 @@ public class ExpenseBankCardDaoImplTest {
     public void testCreateMovementExpenseBankCard_withNullRequiredField_noInsertion() {
 
         MovementExpenseBankCardModel movementExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
-        movementExpenseBankCardModel.description = null;
+        movementExpenseBankCardModel.setDescription(null);
 
         long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(movementExpenseBankCardModel);
 
@@ -86,11 +86,11 @@ public class ExpenseBankCardDaoImplTest {
                 getMovementExpenseBankCardById(insertedRecordId);
 
         assertThat(actualMovementExpenseBankCardModel, notNullValue());
-        assertThat(actualMovementExpenseBankCardModel.amount, is(expectedMovementExpenseBankCardModel.amount));
-        assertThat(actualMovementExpenseBankCardModel.bankCardId, is(expectedMovementExpenseBankCardModel.bankCardId));
-        assertThat(actualMovementExpenseBankCardModel.date, is(expectedMovementExpenseBankCardModel.date));
-        assertThat(actualMovementExpenseBankCardModel.description, is(expectedMovementExpenseBankCardModel.description));
-        assertThat(actualMovementExpenseBankCardModel.expenseId, is(expectedMovementExpenseBankCardModel.expenseId));
+        assertThat(actualMovementExpenseBankCardModel.getAmount(), is(expectedMovementExpenseBankCardModel.getAmount()));
+        assertThat(actualMovementExpenseBankCardModel.getBankCardId(), is(expectedMovementExpenseBankCardModel.getBankCardId()));
+        assertThat(actualMovementExpenseBankCardModel.getDate(), is(expectedMovementExpenseBankCardModel.getDate()));
+        assertThat(actualMovementExpenseBankCardModel.getDescription(), is(expectedMovementExpenseBankCardModel.getDescription()));
+        assertThat(actualMovementExpenseBankCardModel.getExpenseId(), is(expectedMovementExpenseBankCardModel.getExpenseId()));
     }
 
     @Test(expected = DataException.class)
@@ -205,7 +205,7 @@ public class ExpenseBankCardDaoImplTest {
 
         String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
 
-        movementExpenseBankCardModel.description = null;
+        movementExpenseBankCardModel.setDescription(null);
 
         mExpenseBankCardDao.updateMovementExpenseBankCard(movementExpenseBankCardModel, where);
 
@@ -289,22 +289,22 @@ public class ExpenseBankCardDaoImplTest {
                                                       MovementExpenseBankCardModel actualMovementExpenseBankCardModel) {
 
         assertNotNull(actualMovementExpenseBankCardModel);
-        assertThat(expectedMovementExpenseBankCardModel.description, is(actualMovementExpenseBankCardModel.description));
-        assertThat(expectedMovementExpenseBankCardModel.expenseId, is(actualMovementExpenseBankCardModel.expenseId));
-        assertThat(expectedMovementExpenseBankCardModel.date, is(actualMovementExpenseBankCardModel.date));
-        assertThat(expectedMovementExpenseBankCardModel.bankCardId, is(actualMovementExpenseBankCardModel.bankCardId));
-        assertThat(expectedMovementExpenseBankCardModel.amount, is(actualMovementExpenseBankCardModel.amount));
+        assertThat(expectedMovementExpenseBankCardModel.getDescription(), is(actualMovementExpenseBankCardModel.getDescription()));
+        assertThat(expectedMovementExpenseBankCardModel.getExpenseId(), is(actualMovementExpenseBankCardModel.getExpenseId()));
+        assertThat(expectedMovementExpenseBankCardModel.getDate(), is(actualMovementExpenseBankCardModel.getDate()));
+        assertThat(expectedMovementExpenseBankCardModel.getBankCardId(), is(actualMovementExpenseBankCardModel.getBankCardId()));
+        assertThat(expectedMovementExpenseBankCardModel.getAmount(), is(actualMovementExpenseBankCardModel.getAmount()));
 
     }
 
     private MovementExpenseBankCardModel changeMovementExpenseBankCardModelFields(MovementExpenseBankCardModel
                                                                                           movementExpenseBankCardModel) {
 
-        movementExpenseBankCardModel.bankCardId = 3;
-        movementExpenseBankCardModel.date = DateUtils.getCurrentData();
-        movementExpenseBankCardModel.description = "updated description";
-        movementExpenseBankCardModel.expenseId = 2;
-        movementExpenseBankCardModel.amount = 98743.90;
+        movementExpenseBankCardModel.setBankCardId(3);
+        movementExpenseBankCardModel.setDate(DateUtils.getCurrentData());
+        movementExpenseBankCardModel.setDescription("updated description");
+        movementExpenseBankCardModel.setExpenseId(2);
+        movementExpenseBankCardModel.setAmount(98743.90);
 
         return movementExpenseBankCardModel;
     }
