@@ -74,7 +74,7 @@ public class UserDaoImplTest {
     public void testCreateUser_withNullRequiredField_noInsertion() {
 
         UserModel userModel = CreatorModels.createUserModel();
-        userModel.name = null;
+        userModel.setName(null);
 
         long insertedRecordId = createUser(userModel);
 
@@ -149,7 +149,7 @@ public class UserDaoImplTest {
 
         String where = null;
 
-        userModel.name = "Jacocoman";
+        userModel.setName("Jacocoman");
 
         long updatedRows = mUserDao.updateUser(userModel, where);
 
@@ -179,7 +179,7 @@ public class UserDaoImplTest {
 
         String where = UsersContract.User._ID + "= " + insertedRecordId;
 
-        userModel.name = null;
+        userModel.setName(null);
 
         long updatedRows = mUserDao.updateUser(userModel, where);
 
@@ -194,16 +194,16 @@ public class UserDaoImplTest {
 
     private void compareUserModels(UserModel expectedUserModel, UserModel actualUserModel) {
 
-        assertEquals(expectedUserModel.name, actualUserModel.name);
-        assertEquals(expectedUserModel.email, actualUserModel.email);
-        assertEquals(expectedUserModel.lastName, actualUserModel.lastName);
+        assertEquals(expectedUserModel.getName(), actualUserModel.getName());
+        assertEquals(expectedUserModel.getEmail(), actualUserModel.getEmail());
+        assertEquals(expectedUserModel.getLastName(), actualUserModel.getLastName());
 
     }
 
     private UserModel changeUserModelValues(UserModel userModel) {
-        userModel.name = "Jacoco";
-        userModel.lastName = "Test";
-        userModel.email = "update@dojogeek.io";
+        userModel.setName("Jacoco");
+        userModel.setLastName("Test");
+        userModel.setEmail("update@dojogeek.io");
 
         return userModel;
     }

@@ -110,9 +110,9 @@ public class RegisterUserActivity extends BaseActivity implements RegisterUser, 
         mUser = fillUser();
 
         UserValidator userValidator = new UserValidator();
-        userValidator.setName(mUser.name);
-        userValidator.setLastName(mUser.lastName);
-        userValidator.setEmail(mUser.email);
+        userValidator.setName(mUser.getName());
+        userValidator.setLastName(mUser.getLastName());
+        userValidator.setEmail(mUser.getEmail());
 
         return userValidator;
     }
@@ -120,9 +120,9 @@ public class RegisterUserActivity extends BaseActivity implements RegisterUser, 
     private UserModel fillUser() {
 
         UserModel userModel = new UserModel();
-        userModel.name = mName.getText().toString();
-        userModel.lastName = mLastName.getText().toString();
-        userModel.email = mEmail.getText().toString();
+        userModel.setName(mName.getText().toString());
+        userModel.setLastName(mLastName.getText().toString());
+        userModel.setEmail(mEmail.getText().toString());
 
         return userModel;
 

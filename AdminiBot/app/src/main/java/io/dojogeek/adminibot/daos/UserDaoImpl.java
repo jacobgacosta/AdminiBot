@@ -74,9 +74,9 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
     private ContentValues createContentValues(UserModel user) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(UsersContract.User.COLUMN_NAME, user.name);
-        contentValues.put(UsersContract.User.COLUMN_LAST_NAME, user.lastName);
-        contentValues.put(UsersContract.User.COLUMN_EMAIL, user.email);
+        contentValues.put(UsersContract.User.COLUMN_NAME, user.getName());
+        contentValues.put(UsersContract.User.COLUMN_LAST_NAME, user.getLastName());
+        contentValues.put(UsersContract.User.COLUMN_EMAIL, user.getEmail());
 
         return contentValues;
 
@@ -91,10 +91,10 @@ public class UserDaoImpl extends SQLiteGlobalDao implements UserDao {
         String lastName = cursor.getString(cursor.getColumnIndex(UsersContract.User.COLUMN_LAST_NAME));
         String email = cursor.getString(cursor.getColumnIndex(UsersContract.User.COLUMN_EMAIL));
 
-        userModel.id = id;
-        userModel.name = name;
-        userModel.lastName = lastName;
-        userModel.email = email;
+        userModel.setId(id);
+        userModel.setName(name);
+        userModel.setLastName(lastName);
+        userModel.setEmail(email);
 
         return userModel;
 

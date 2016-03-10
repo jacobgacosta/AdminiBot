@@ -27,9 +27,9 @@ public class CreatorModels {
     public static UserModel createUserModel() {
 
         UserModel userModel = new UserModel();
-        userModel.name = "Jacob";
-        userModel.lastName = "Guzman";
-        userModel.email = "jgacosta@dojogeek.io";
+        userModel.setName("Jacob");
+        userModel.setLastName("Guzman");
+        userModel.setEmail("jgacosta@dojogeek.io");
 
         return userModel;
     }
