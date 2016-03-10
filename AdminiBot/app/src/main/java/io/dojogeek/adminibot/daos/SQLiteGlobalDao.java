@@ -21,6 +21,18 @@ public class SQLiteGlobalDao {
         }
     }
 
+    public void beginTransaction() {
+        mDatabase.beginTransaction();
+    }
+
+    public void setTransactionSuccessful() {
+        mDatabase.setTransactionSuccessful();
+    }
+
+    public void endTransaction() {
+        mDatabase.endTransaction();
+    }
+
     public void closeConnection() {
         mHelper.close();
     }
