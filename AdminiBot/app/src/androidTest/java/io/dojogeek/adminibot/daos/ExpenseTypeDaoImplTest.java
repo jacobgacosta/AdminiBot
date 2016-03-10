@@ -72,7 +72,7 @@ public class ExpenseTypeDaoImplTest {
     public void testCreateExpenseType_withNullRequiredField_isException() {
 
         ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
-        expenseTypeModel.name = null;
+        expenseTypeModel.setName(null);
 
         mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -88,8 +88,8 @@ public class ExpenseTypeDaoImplTest {
         ExpenseTypeModel expenseType = mExpenseTypeDao.getExpenseTypeById(insertedExpenseTypeId);
 
         assertNotNull(expenseType);
-        assertEquals(expenseTypeModel.name, expenseType.name);
-        assertEquals(expenseTypeModel.description, expenseType.description);
+        assertEquals(expenseTypeModel.getName(), expenseType.getName());
+        assertEquals(expenseTypeModel.getDescription(), expenseType.getDescription());
 
     }
 
@@ -181,7 +181,7 @@ public class ExpenseTypeDaoImplTest {
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
         ExpenseTypeModel expectedUpdatedExpenseTypeModel = changeExpenseTypeValues(expenseTypeModel);
-        expectedUpdatedExpenseTypeModel.name = null;
+        expectedUpdatedExpenseTypeModel.setName(null);
 
         String where = ExpensesTypesContract.ExpenseType._ID + "= " + insertedExpenseTypeId;
 
@@ -214,8 +214,8 @@ public class ExpenseTypeDaoImplTest {
 
     private ExpenseTypeModel changeExpenseTypeValues(ExpenseTypeModel expenseTypeModel) {
 
-        expenseTypeModel.name = ExpenseTypeEnum.CLOTHES;
-        expenseTypeModel.description = ExpenseTypeEnum.CLOTHES.getDescription();
+        expenseTypeModel.setName(ExpenseTypeEnum.CLOTHES);
+        expenseTypeModel.setDescription(ExpenseTypeEnum.CLOTHES.getDescription());
 
         return expenseTypeModel;
     }
@@ -223,8 +223,8 @@ public class ExpenseTypeDaoImplTest {
     private void compareExpensesModels(ExpenseTypeModel expectedExpenseTypeModel,
                                        ExpenseTypeModel actualExpenseTypeModel) {
 
-        assertEquals(expectedExpenseTypeModel.name, actualExpenseTypeModel.name);
-        assertEquals(expectedExpenseTypeModel.description, actualExpenseTypeModel.description);
+        assertEquals(expectedExpenseTypeModel.getName(), actualExpenseTypeModel.getName());
+        assertEquals(expectedExpenseTypeModel.getDescription(), actualExpenseTypeModel.getDescription());
 
     }
 
@@ -236,8 +236,8 @@ public class ExpenseTypeDaoImplTest {
             ExpenseTypeEnum expectedName = ExpensesTypesContract.EXPENSES_TYPES[index];
             String expectedDescription = ExpensesTypesContract.EXPENSES_TYPES[index].getDescription();
 
-            assertEquals(expectedName, actualExpenseTypeModel.name);
-            assertEquals(expectedDescription, actualExpenseTypeModel.description);
+            assertEquals(expectedName, actualExpenseTypeModel.getName());
+            assertEquals(expectedDescription, actualExpenseTypeModel.getDescription());
 
         }
 

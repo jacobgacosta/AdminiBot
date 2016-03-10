@@ -70,8 +70,8 @@ public class CreatorModels {
     public static ExpenseTypeModel createExpenseTypeModel(ExpenseTypeEnum expenseTypeEnum, String description) {
 
         ExpenseTypeModel expenseTypeModel = new ExpenseTypeModel();
-        expenseTypeModel.name = expenseTypeEnum;
-        expenseTypeModel.description = description;
+        expenseTypeModel.setName(expenseTypeEnum);
+        expenseTypeModel.setDescription(description);
 
         return expenseTypeModel;
     }

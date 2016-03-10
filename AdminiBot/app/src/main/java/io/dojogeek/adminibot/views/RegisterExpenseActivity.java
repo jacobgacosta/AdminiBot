@@ -57,7 +57,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
         List<String> expensesTypes = new ArrayList<>();
 
         for (ExpenseTypeModel expenseTypeModel : expenseTypeModelList) {
-            expensesTypes.add(expenseTypeModel.name.getName());
+            expensesTypes.add(expenseTypeModel.getName().getName());
         }
 
         loadSpinnerData(expensesTypes);

@@ -117,9 +117,9 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
         String name = cursor.getString(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_NAME));
         String description = cursor.getString(cursor.getColumnIndex(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION));
 
-        expenseTypeModel.id = id;
-        expenseTypeModel.name = ExpenseTypeEnum.valueOf(name);
-        expenseTypeModel.description = description;
+        expenseTypeModel.setId(id);
+        expenseTypeModel.setName(ExpenseTypeEnum.valueOf(name));
+        expenseTypeModel.setDescription(description);
 
         return expenseTypeModel;
 
@@ -128,8 +128,8 @@ public class ExpenseTypeDaoImpl extends SQLiteGlobalDao implements ExpenseTypeDa
     private ContentValues createContentValues(ExpenseTypeModel expenseTypeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.name.name());
-        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.description);
+        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_NAME, expenseTypeModel.getName().name());
+        contentValues.put(ExpensesTypesContract.ExpenseType.COLUMN_DESCRIPTION, expenseTypeModel.getDescription());
 
         return contentValues;
     }
