@@ -150,11 +150,11 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.COLUMN_AMOUNT,
-                expenseOtherPaymentMethodModel.amount);
+                expenseOtherPaymentMethodModel.getAmount());
         contentValues.put(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.COLUMN_EXPENSE_ID,
-                expenseOtherPaymentMethodModel.expenseId);
+                expenseOtherPaymentMethodModel.getExpenseId());
         contentValues.put(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.COLUMN_PAYMENTH_METHOD_ID,
-                expenseOtherPaymentMethodModel.otherPaymentMethodId);
+                expenseOtherPaymentMethodModel.getOtherPaymentMethodId());
 
         return contentValues;
     }
@@ -171,10 +171,10 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
                 ExpenseOtherPaymentMethod._ID));
 
         ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel = new ExpenseOtherPaymentMethodModel();
-        expenseOtherPaymentMethodModel.otherPaymentMethodId = otherPaymentMethodId;
-        expenseOtherPaymentMethodModel.expenseId = expenseId;
-        expenseOtherPaymentMethodModel.amount = amount;
-        expenseOtherPaymentMethodModel.id = id;
+        expenseOtherPaymentMethodModel.setOtherPaymentMethodId(otherPaymentMethodId);
+        expenseOtherPaymentMethodModel.setExpenseId(expenseId);
+        expenseOtherPaymentMethodModel.setAmount(amount);
+        expenseOtherPaymentMethodModel.setId(id);
 
         return expenseOtherPaymentMethodModel;
     }

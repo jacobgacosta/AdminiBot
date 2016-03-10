@@ -287,9 +287,12 @@ public class ExpenseOtherPaymentMethodDaoTest {
             ExpenseOtherPaymentMethodModel actualExpenseOtherPaymentMethodModel = actualExpenseOtherPaymentMethodModelList.get(index);
             ExpenseOtherPaymentMethodModel expectedExpenseOtherPaymentMethodModel = expectedExpenseOtherPaymentMethodModelList.get(index);
 
-            assertThat(actualExpenseOtherPaymentMethodModel.amount, is(expectedExpenseOtherPaymentMethodModel.amount));
-            assertThat(actualExpenseOtherPaymentMethodModel.otherPaymentMethodId, is(expectedExpenseOtherPaymentMethodModel.otherPaymentMethodId));
-            assertThat(actualExpenseOtherPaymentMethodModel.expenseId, is(expectedExpenseOtherPaymentMethodModel.expenseId));
+            assertThat(actualExpenseOtherPaymentMethodModel.getAmount(),
+                    is(expectedExpenseOtherPaymentMethodModel.getAmount()));
+            assertThat(actualExpenseOtherPaymentMethodModel.getOtherPaymentMethodId(),
+                    is(expectedExpenseOtherPaymentMethodModel.getOtherPaymentMethodId()));
+            assertThat(actualExpenseOtherPaymentMethodModel.getExpenseId(),
+                    is(expectedExpenseOtherPaymentMethodModel.getExpenseId()));
 
         }
     }
@@ -297,9 +300,9 @@ public class ExpenseOtherPaymentMethodDaoTest {
     private ExpenseOtherPaymentMethodModel changeExpenseOtherPaymentMethodModelFields(ExpenseOtherPaymentMethodModel
                                                                                               expenseOtherPaymentMethodModel) {
 
-        expenseOtherPaymentMethodModel.amount = 94359.80;
-        expenseOtherPaymentMethodModel.expenseId = 4;
-        expenseOtherPaymentMethodModel.otherPaymentMethodId = 4;
+        expenseOtherPaymentMethodModel.setAmount(94359.80);
+        expenseOtherPaymentMethodModel.setExpenseId(4);
+        expenseOtherPaymentMethodModel.setOtherPaymentMethodId(4);
 
         return expenseOtherPaymentMethodModel;
     }
@@ -308,11 +311,11 @@ public class ExpenseOtherPaymentMethodDaoTest {
                                                            ExpenseOtherPaymentMethodModel actualExpenseOtherPaymentMethodModel) {
 
         assertThat(actualExpenseOtherPaymentMethodModel, is(notNullValue()));
-        assertThat(actualExpenseOtherPaymentMethodModel.amount,
-                is(expectedExpenseOtherPaymentMethodModel.amount));
-        assertThat(actualExpenseOtherPaymentMethodModel.expenseId,
-                is(expectedExpenseOtherPaymentMethodModel.expenseId));
-        assertThat(actualExpenseOtherPaymentMethodModel.otherPaymentMethodId,
-                is(expectedExpenseOtherPaymentMethodModel.otherPaymentMethodId));
+        assertThat(actualExpenseOtherPaymentMethodModel.getAmount(),
+                is(expectedExpenseOtherPaymentMethodModel.getAmount()));
+        assertThat(actualExpenseOtherPaymentMethodModel.getExpenseId(),
+                is(expectedExpenseOtherPaymentMethodModel.getExpenseId()));
+        assertThat(actualExpenseOtherPaymentMethodModel.getOtherPaymentMethodId(),
+                is(expectedExpenseOtherPaymentMethodModel.getOtherPaymentMethodId()));
     }
 }

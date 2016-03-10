@@ -260,9 +260,9 @@ public class CreatorModels {
                                                                                long otherPaymentMethodId) {
 
         ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel = new ExpenseOtherPaymentMethodModel();
-        expenseOtherPaymentMethodModel.amount = amount;
-        expenseOtherPaymentMethodModel.expenseId = expenseId;
-        expenseOtherPaymentMethodModel.otherPaymentMethodId = otherPaymentMethodId;
+        expenseOtherPaymentMethodModel.setAmount(amount);
+        expenseOtherPaymentMethodModel.setExpenseId(expenseId);
+        expenseOtherPaymentMethodModel.setOtherPaymentMethodId(otherPaymentMethodId);
 
         return expenseOtherPaymentMethodModel;
     }
