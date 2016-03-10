@@ -67,7 +67,7 @@ public class CardDetailDaoImplTest {
     public void testCreateCardDetail_withNullRequiredField_noInsertion() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
-        cardDetailModel.cuttoffDate = null;
+        cardDetailModel.setCuttoffDate(null);
 
         long insetedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
@@ -81,7 +81,8 @@ public class CardDetailDaoImplTest {
 
         mCardDetailDao.createCardDetail(expectedCardDetailModel);
 
-        CardDetailModel actualCardDetailModel = mCardDetailDao.getCardDetailByBankCardId(expectedCardDetailModel.bankCardId);
+        CardDetailModel actualCardDetailModel = mCardDetailDao.
+                getCardDetailByBankCardId(expectedCardDetailModel.getBankCardId());
 
         compareCardsDetails(expectedCardDetailModel, actualCardDetailModel);
 
@@ -111,7 +112,8 @@ public class CardDetailDaoImplTest {
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
 
-        CardDetailModel actualCardDetailModel = mCardDetailDao.getCardDetailByBankCardId(cardDetailModel.bankCardId);
+        CardDetailModel actualCardDetailModel =
+                mCardDetailDao.getCardDetailByBankCardId(cardDetailModel.getBankCardId());
 
         compareCardsDetails(expectedUpdatedCardDetail, actualCardDetailModel);
 
@@ -138,7 +140,7 @@ public class CardDetailDaoImplTest {
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
         CardDetailModel expectedUpdatedCardDetail = changeCardDetailValues(cardDetailModel);
-        expectedUpdatedCardDetail.cuttoffDate = null;
+        expectedUpdatedCardDetail.setCuttoffDate(null);
 
         String where = CardDetailContract.CardDetail._ID + "= " + insertedRecordId;
 
@@ -183,20 +185,20 @@ public class CardDetailDaoImplTest {
     private void compareCardsDetails(CardDetailModel expectedCardDetailModel, CardDetailModel actualCardDetailModel) {
 
         assertNotNull(actualCardDetailModel);
-        assertEquals(expectedCardDetailModel.bankCardId, actualCardDetailModel.bankCardId);
-        assertEquals(expectedCardDetailModel.creditLimit, actualCardDetailModel.creditLimit, 0);
-        assertEquals(expectedCardDetailModel.currentBalance, actualCardDetailModel.currentBalance, 0);
-        assertEquals(expectedCardDetailModel.cuttoffDate, actualCardDetailModel.cuttoffDate);
-        assertEquals(expectedCardDetailModel.payDayLimit, actualCardDetailModel.payDayLimit);
+        assertEquals(expectedCardDetailModel.getBankCardId(), actualCardDetailModel.getBankCardId());
+        assertEquals(expectedCardDetailModel.getCreditLimit(), actualCardDetailModel.getCreditLimit(), 0);
+        assertEquals(expectedCardDetailModel.getCurrentBalance(), actualCardDetailModel.getCurrentBalance(), 0);
+        assertEquals(expectedCardDetailModel.getCuttoffDate(), actualCardDetailModel.getCuttoffDate());
+        assertEquals(expectedCardDetailModel.getPayDayLimit(), actualCardDetailModel.getPayDayLimit());
     }
 
     private CardDetailModel changeCardDetailValues(CardDetailModel cardDetailModel) {
 
-        cardDetailModel.bankCardId = 4;
-        cardDetailModel.creditLimit = 25000.00;
-        cardDetailModel.payDayLimit = DateUtils.getCurrentData();
-        cardDetailModel.currentBalance = 24980.00;
-        cardDetailModel.cuttoffDate = DateUtils.getCurrentData();
+        cardDetailModel.setBankCardId(4);
+        cardDetailModel.setCreditLimit(25000.00);
+        cardDetailModel.setPayDayLimit(DateUtils.getCurrentData());
+        cardDetailModel.setCurrentBalance(24980.00);
+        cardDetailModel.setCuttoffDate(DateUtils.getCurrentData());
 
         return cardDetailModel;
     }

@@ -2,11 +2,58 @@ package io.dojogeek.adminibot.models;
 
 public class CardDetailModel {
 
-    public long id;
-    public double creditLimit;
-    public double currentBalance;
-    public String cuttoffDate;
-    public String payDayLimit;
-    public long bankCardId;
+    private long id;
+    private double creditLimit;
+    private double currentBalance;
+    private String cuttoffDate;
+    private String payDayLimit;
+    private long bankCardId;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public void setCreditLimit(double creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+
+    public double getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    public String getCuttoffDate() {
+        return cuttoffDate;
+    }
+
+    public void setCuttoffDate(String cuttoffDate) {
+        this.cuttoffDate = cuttoffDate;
+    }
+
+    public String getPayDayLimit() {
+        return payDayLimit;
+    }
+
+    public void setPayDayLimit(String payDayLimit) {
+        this.payDayLimit = payDayLimit;
+    }
+
+    public long getBankCardId() {
+        return bankCardId;
+    }
+
+    public void setBankCardId(long bankCardId) {
+        this.bankCardId = bankCardId;
+    }
 }

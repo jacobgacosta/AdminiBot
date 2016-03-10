@@ -86,11 +86,11 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
     private ContentValues createContentValues(CardDetailModel cardDetailModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CardDetailContract.CardDetail.COLUMN_CREDIT_LIMIT, cardDetailModel.creditLimit);
-        contentValues.put(CardDetailContract.CardDetail.COLUMN_CURRENT_BALANCE, cardDetailModel.currentBalance);
-        contentValues.put(CardDetailContract.CardDetail.COLUMN_CUTOFF_DATE, cardDetailModel.cuttoffDate);
-        contentValues.put(CardDetailContract.CardDetail.COLUMN_PAY_DAY_LIMIT, cardDetailModel.payDayLimit);
-        contentValues.put(CardDetailContract.CardDetail.COLUMN_BANK_CARD_ID, cardDetailModel.bankCardId);
+        contentValues.put(CardDetailContract.CardDetail.COLUMN_CREDIT_LIMIT, cardDetailModel.getCreditLimit());
+        contentValues.put(CardDetailContract.CardDetail.COLUMN_CURRENT_BALANCE, cardDetailModel.getCurrentBalance());
+        contentValues.put(CardDetailContract.CardDetail.COLUMN_CUTOFF_DATE, cardDetailModel.getCuttoffDate());
+        contentValues.put(CardDetailContract.CardDetail.COLUMN_PAY_DAY_LIMIT, cardDetailModel.getPayDayLimit());
+        contentValues.put(CardDetailContract.CardDetail.COLUMN_BANK_CARD_ID, cardDetailModel.getBankCardId());
 
         return contentValues;
     }
@@ -106,12 +106,12 @@ public class CardDetailDaoImpl extends SQLiteGlobalDao implements CardDetailDao 
         String payDayLimit = cursor.getString(cursor.getColumnIndex(CardDetailContract.CardDetail.COLUMN_PAY_DAY_LIMIT));
         long bankCardId = cursor.getLong(cursor.getColumnIndex(CardDetailContract.CardDetail.COLUMN_BANK_CARD_ID));
 
-        cardDetailModel.id = id;
-        cardDetailModel.creditLimit = creditLimit;
-        cardDetailModel.currentBalance = currentBalance;
-        cardDetailModel.cuttoffDate = cutoffDate;
-        cardDetailModel.payDayLimit = payDayLimit;
-        cardDetailModel.bankCardId = bankCardId;
+        cardDetailModel.setId(id);
+        cardDetailModel.setCreditLimit(creditLimit);
+        cardDetailModel.setCurrentBalance(currentBalance);
+        cardDetailModel.setCuttoffDate(cutoffDate);
+        cardDetailModel.setPayDayLimit(payDayLimit);
+        cardDetailModel.setBankCardId(bankCardId);
 
         return cardDetailModel;
     }

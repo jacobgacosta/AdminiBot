@@ -172,11 +172,11 @@ public class CreatorModels {
                                                         String cuttoffDate, String payDayLimit, long bankCardId) {
 
         CardDetailModel cardDetailModel = new CardDetailModel();
-        cardDetailModel.creditLimit = creditLimit;
-        cardDetailModel.currentBalance = currentBalance;
-        cardDetailModel.cuttoffDate = cuttoffDate;
-        cardDetailModel.payDayLimit = payDayLimit;
-        cardDetailModel.bankCardId = bankCardId;
+        cardDetailModel.setCreditLimit(creditLimit);
+        cardDetailModel.setCurrentBalance(currentBalance);
+        cardDetailModel.setCuttoffDate(cuttoffDate);
+        cardDetailModel.setPayDayLimit(payDayLimit);
+        cardDetailModel.setBankCardId(bankCardId);
 
         return cardDetailModel;
     }
