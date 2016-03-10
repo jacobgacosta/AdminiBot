@@ -129,11 +129,11 @@ public class CreatorModels {
                                                 long userId) {
 
         IncomeModel incomeModel = new IncomeModel();
-        incomeModel.description = description;
-        incomeModel.amount = amount;
-        incomeModel.date = date;
-        incomeModel.nextDate = nextDate;
-        incomeModel.userId = userId;
+        incomeModel.setDescription(description);
+        incomeModel.setAmount(amount);
+        incomeModel.setDate(date);
+        incomeModel.setNextDate(nextDate);
+        incomeModel.setUserId(userId);
 
         return incomeModel;
     }

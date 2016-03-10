@@ -112,11 +112,11 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     private ContentValues createContentValues(IncomeModel incomeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesContract.Incomes.COLUMN_DESCRIPTION, incomeModel.description);
-        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomeModel.amount);
-        contentValues.put(IncomesContract.Incomes.COLUMN_DATE, incomeModel.date);
-        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY, incomeModel.nextDate);
-        contentValues.put(IncomesContract.Incomes.COLUMN_USER_ID, incomeModel.userId);
+        contentValues.put(IncomesContract.Incomes.COLUMN_DESCRIPTION, incomeModel.getDescription());
+        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomeModel.getAmount());
+        contentValues.put(IncomesContract.Incomes.COLUMN_DATE, incomeModel.getDate());
+        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY, incomeModel.getNextDate());
+        contentValues.put(IncomesContract.Incomes.COLUMN_USER_ID, incomeModel.getUserId());
 
         return contentValues;
     }
@@ -130,11 +130,11 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
         long userId = cursor.getLong(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_USER_ID));
 
         IncomeModel incomeModel = new IncomeModel();
-        incomeModel.description = description;
-        incomeModel.amount = amount;
-        incomeModel.date = date;
-        incomeModel.nextDate = nextEntry;
-        incomeModel.userId = userId;
+        incomeModel.setDescription(description);
+        incomeModel.setAmount(amount);
+        incomeModel.setDate(date);
+        incomeModel.setNextDate(nextEntry);
+        incomeModel.setUserId(userId);
 
         return incomeModel;
     }

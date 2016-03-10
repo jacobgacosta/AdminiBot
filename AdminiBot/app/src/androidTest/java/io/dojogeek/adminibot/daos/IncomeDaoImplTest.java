@@ -73,7 +73,7 @@ public class IncomeDaoImplTest {
     public void testCreateIncome_withNullRequiredField_noInsertion() {
 
         IncomeModel incomeModel = CreatorModels.createIncomeModel();
-        incomeModel.description = null;
+        incomeModel.setDescription(null);
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
@@ -90,11 +90,11 @@ public class IncomeDaoImplTest {
         IncomeModel actualIncome = mIncomeDao.getIncomeById(insertedRecordId);
 
         assertNotNull(actualIncome);
-        assertEquals(expectedIncomeModel.description, actualIncome.description);
-        assertEquals(expectedIncomeModel.amount, actualIncome.amount, 0);
-        assertEquals(expectedIncomeModel.date, actualIncome.date);
-        assertEquals(expectedIncomeModel.nextDate, actualIncome.nextDate);
-        assertEquals(expectedIncomeModel.userId, actualIncome.userId);
+        assertEquals(expectedIncomeModel.getDescription(), actualIncome.getDescription());
+        assertEquals(expectedIncomeModel.getAmount(), actualIncome.getAmount(), 0);
+        assertEquals(expectedIncomeModel.getDate(), actualIncome.getDate());
+        assertEquals(expectedIncomeModel.getNextDate(), actualIncome.getNextDate());
+        assertEquals(expectedIncomeModel.getUserId(), actualIncome.getUserId());
     }
 
     @Test(expected = DataException.class)
@@ -177,7 +177,7 @@ public class IncomeDaoImplTest {
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
-        incomeModel.description = null;
+        incomeModel.setDescription(null);
 
         String where = IncomesContract.Incomes._ID + "= " +  insertedRecordId;
 
@@ -244,19 +244,19 @@ public class IncomeDaoImplTest {
 
     private void compareIncomes(IncomeModel expectedIncomeModel, IncomeModel actualIncomeModel) {
         assertNotNull(actualIncomeModel);
-        assertEquals(expectedIncomeModel.description, actualIncomeModel.description);
-        assertEquals(expectedIncomeModel.amount, actualIncomeModel.amount, 0);
-        assertEquals(expectedIncomeModel.date, actualIncomeModel.date);
-        assertEquals(expectedIncomeModel.nextDate, actualIncomeModel.nextDate);
-        assertEquals(expectedIncomeModel.userId, actualIncomeModel.userId);
+        assertEquals(expectedIncomeModel.getDescription(), actualIncomeModel.getDescription());
+        assertEquals(expectedIncomeModel.getAmount(), actualIncomeModel.getAmount(), 0);
+        assertEquals(expectedIncomeModel.getDate(), actualIncomeModel.getDate());
+        assertEquals(expectedIncomeModel.getNextDate(), actualIncomeModel.getNextDate());
+        assertEquals(expectedIncomeModel.getUserId(), actualIncomeModel.getUserId());
     }
 
     private IncomeModel changeIncomeModelValues(IncomeModel incomeModel) {
-        incomeModel.description = "updated description";
-        incomeModel.amount = 120.60;
-        incomeModel.date = DateUtils.getCurrentData();
-        incomeModel.nextDate = null;
-        incomeModel.userId = 1;
+        incomeModel.setDescription("updated description");
+        incomeModel.setAmount(120.60);
+        incomeModel.setDate(DateUtils.getCurrentData());
+        incomeModel.setNextDate(null);
+        incomeModel.setUserId(1);
 
         return incomeModel;
     }
