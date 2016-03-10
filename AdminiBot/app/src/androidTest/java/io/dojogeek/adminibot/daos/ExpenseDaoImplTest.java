@@ -70,7 +70,7 @@ public class ExpenseDaoImplTest {
     public void testCreateExpense_withNullRequieredField_noInsertion() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
-        expenseModel.description = null;
+        expenseModel.setDescription(null);
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -186,7 +186,7 @@ public class ExpenseDaoImplTest {
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
         ExpenseModel newExpenseModel = changeExpenseModelValues(expenseModel);
-        newExpenseModel.description = null;
+        newExpenseModel.setDescription(null);
 
         String where = ExpensesContract.Expense._ID + "= " + insertedRecordId;
 
@@ -242,9 +242,9 @@ public class ExpenseDaoImplTest {
 
     private ExpenseModel changeExpenseModelValues(ExpenseModel expenseModel) {
 
-        expenseModel.amount = 7357.90;
-        expenseModel.description = "Update description";
-        expenseModel.expenseTypeId = 3;
+        expenseModel.setAmount(7357.90);
+        expenseModel.setDescription("Update description");
+        expenseModel.setExpenseTypeId(3);
 
         return expenseModel;
     }
@@ -266,12 +266,12 @@ public class ExpenseDaoImplTest {
 
     private void compareExpenses(ExpenseModel expectedExpense, ExpenseModel actualExpense) {
         assertNotNull(actualExpense);
-        assertEquals(expectedExpense.expenseTypeId, actualExpense.expenseTypeId);
-        assertEquals(expectedExpense.userId, actualExpense.userId);
-        assertEquals(expectedExpense.nextExit, actualExpense.nextExit);
-        assertEquals(expectedExpense.dateExpediture, actualExpense.dateExpediture);
-        assertEquals(expectedExpense.amount, actualExpense.amount, 0);
-        assertEquals(expectedExpense.description, actualExpense.description);
+        assertEquals(expectedExpense.getExpenseTypeId(), actualExpense.getExpenseTypeId());
+        assertEquals(expectedExpense.getUserId(), actualExpense.getUserId());
+        assertEquals(expectedExpense.getNextExit(), actualExpense.getNextExit());
+        assertEquals(expectedExpense.getDateExpediture(), actualExpense.getDateExpediture());
+        assertEquals(expectedExpense.getAmount(), actualExpense.getAmount(), 0);
+        assertEquals(expectedExpense.getDescription(), actualExpense.getDescription());
     }
 
     private void compareExpensesList(List<ExpenseModel> expectedExpenses, List<ExpenseModel> actualExpenses) {
@@ -285,12 +285,12 @@ public class ExpenseDaoImplTest {
             ExpenseModel actualExpenseModel = actualExpenses.get(index);
             ExpenseModel expectedExpenseModel = expectedExpenses.get(index);
 
-            assertEquals(expectedExpenseModel.description, actualExpenseModel.description);
-            assertEquals(expectedExpenseModel.amount, actualExpenseModel.amount, 0);
-            assertEquals(expectedExpenseModel.nextExit, actualExpenseModel.nextExit);
-            assertEquals(expectedExpenseModel.dateExpediture, actualExpenseModel.dateExpediture);
-            assertEquals(expectedExpenseModel.expenseTypeId, actualExpenseModel.expenseTypeId);
-            assertEquals(expectedExpenseModel.userId, actualExpenseModel.userId);
+            assertEquals(expectedExpenseModel.getDescription(), actualExpenseModel.getDescription());
+            assertEquals(expectedExpenseModel.getAmount(), actualExpenseModel.getAmount(), 0);
+            assertEquals(expectedExpenseModel.getNextExit(), actualExpenseModel.getNextExit());
+            assertEquals(expectedExpenseModel.getDateExpediture(), actualExpenseModel.getDateExpediture());
+            assertEquals(expectedExpenseModel.getExpenseTypeId(), actualExpenseModel.getExpenseTypeId());
+            assertEquals(expectedExpenseModel.getUserId(), actualExpenseModel.getUserId());
 
         }
 

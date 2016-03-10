@@ -107,12 +107,12 @@ public class CreatorModels {
                                            String nextExit, long expenseTypeId, long userId) {
 
         ExpenseModel expenseModel = new ExpenseModel();
-        expenseModel.description = description;
-        expenseModel.amount = amount;
-        expenseModel.dateExpediture = dateExpediture;
-        expenseModel.nextExit = nextExit;
-        expenseModel.expenseTypeId = expenseTypeId;
-        expenseModel. userId = userId;
+        expenseModel.setDescription(description);
+        expenseModel.setAmount(amount);
+        expenseModel.setDateExpediture(dateExpediture);
+        expenseModel.setNextExit(nextExit);
+        expenseModel.setExpenseTypeId(expenseTypeId);
+        expenseModel.setUserId(userId);
 
         return expenseModel;
     }

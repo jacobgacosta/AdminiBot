@@ -44,7 +44,7 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
     public void addExpense(ExpenseModel expenseModel) {
 
         UserModel userModel = mUserDao.getUsers().get(INDEX_UNIQUE_USER);
-        expenseModel.userId = userModel.id;
+        expenseModel.setUserId(userModel.id);
 
         long isCreated = mExpenseDao.createExpense(expenseModel);
 

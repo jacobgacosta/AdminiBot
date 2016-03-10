@@ -138,12 +138,12 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     private ContentValues createContentValues(ExpenseModel expenseModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesContract.Expense.COLUMN_DESCRIPTION, expenseModel.description);
-        contentValues.put(ExpensesContract.Expense.COLUMN_AMOUNT, expenseModel.amount);
-        contentValues.put(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.dateExpediture);
-        contentValues.put(ExpensesContract.Expense.COLUMN_NEXT_EXIT, expenseModel.nextExit);
-        contentValues.put(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.expenseTypeId);
-        contentValues.put(ExpensesContract.Expense.COLUMN_USER_ID, expenseModel.userId);
+        contentValues.put(ExpensesContract.Expense.COLUMN_DESCRIPTION, expenseModel.getDescription());
+        contentValues.put(ExpensesContract.Expense.COLUMN_AMOUNT, expenseModel.getAmount());
+        contentValues.put(ExpensesContract.Expense.COLUMN_DATE_EXPEDITURE, expenseModel.getDateExpediture());
+        contentValues.put(ExpensesContract.Expense.COLUMN_NEXT_EXIT, expenseModel.getNextExit());
+        contentValues.put(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID, expenseModel.getExpenseTypeId());
+        contentValues.put(ExpensesContract.Expense.COLUMN_USER_ID, expenseModel.getUserId());
 
         return contentValues;
 
@@ -161,13 +161,13 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
         long expenseTypeId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_EXPENSES_TYPE_ID));
         long userId = cursor.getLong(cursor.getColumnIndex(ExpensesContract.Expense.COLUMN_USER_ID));
 
-        expenseModel.id = id;
-        expenseModel.description = description;
-        expenseModel.amount = amount;
-        expenseModel.dateExpediture = dateExpediture;
-        expenseModel.nextExit = nextExit;
-        expenseModel.expenseTypeId = expenseTypeId;
-        expenseModel.userId = userId;
+        expenseModel.setId(id);
+        expenseModel.setDescription(description);
+        expenseModel.setAmount(amount);
+        expenseModel.setDateExpediture(dateExpediture);
+        expenseModel.setNextExit(nextExit);
+        expenseModel.setExpenseTypeId(expenseTypeId);
+        expenseModel.setUserId(userId);
 
         return expenseModel;
 
