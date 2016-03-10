@@ -52,6 +52,7 @@ public class ExpenseDaoImplTest {
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
+        assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
 
     }
@@ -73,6 +74,7 @@ public class ExpenseDaoImplTest {
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
+        assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
 
     }
