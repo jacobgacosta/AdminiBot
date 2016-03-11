@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.models;
 
-import java.util.Date;
 import java.util.List;
 
 public class ExpenseModel {
@@ -13,6 +12,7 @@ public class ExpenseModel {
     private long expenseTypeId;
     private long userId;
     private List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels;
+    private List<ExpenseBankCardModel> expenseBankCardModels;
 
     public long getId() {
         return id;
@@ -76,5 +76,13 @@ public class ExpenseModel {
 
     public void setOtherPaymentMethodModels(List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels) {
         this.otherPaymentMethodModels = otherPaymentMethodModels;
+    }
+
+    public List<ExpenseBankCardModel> getExpenseBankCardModels() {
+        return expenseBankCardModels;
+    }
+
+    public void setExpenseBankCardModels(List<ExpenseBankCardModel> expenseBankCardModels) {
+        this.expenseBankCardModels = expenseBankCardModels;
     }
 }

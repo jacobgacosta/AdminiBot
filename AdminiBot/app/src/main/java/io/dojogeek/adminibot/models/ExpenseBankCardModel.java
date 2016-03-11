@@ -1,6 +1,6 @@
 package io.dojogeek.adminibot.models;
 
-public class MovementExpenseBankCardModel {
+public class ExpenseBankCardModel {
 
     private long id;
     private String description;

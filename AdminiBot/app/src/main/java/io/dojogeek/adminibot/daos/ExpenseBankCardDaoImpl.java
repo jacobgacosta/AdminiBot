@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.models.MovementExpenseBankCardModel;
+import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
 
 public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBankCardDao {
@@ -18,11 +18,11 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     }
 
     @Override
-    public long createMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel) {
+    public long createMovementExpenseBankCard(ExpenseBankCardModel expenseBankCardModel) {
 
         openConnection();
 
-        ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
+        ContentValues contentValues = createContentValues(expenseBankCardModel);
 
         long result = mDatabase.insert(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME,
                 ExpensesBankCardsContract.ExpensesBankCard.COLUMN_NAME_NULLABLE, contentValues);
@@ -31,7 +31,7 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     }
 
     @Override
-    public MovementExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) throws DataException {
+    public ExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) throws DataException {
 
         openConnection();
 
@@ -44,18 +44,18 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
             throw new DataException("no data!");
         }
 
-        MovementExpenseBankCardModel movementExpenseBankCardModel = fillMovementExpenseBankCardModel(cursor);
+        ExpenseBankCardModel expenseBankCardModel = fillMovementExpenseBankCardModel(cursor);
 
-        return movementExpenseBankCardModel;
+        return expenseBankCardModel;
 
     }
 
     @Override
-    public List<MovementExpenseBankCardModel> getMovementsExpensesBankCards() {
+    public List<ExpenseBankCardModel> getMovementsExpensesBankCards() {
 
         openConnection();
 
-        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
+        List<ExpenseBankCardModel> expenseBankCardModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME, null, null, null, null, null, null);
 
@@ -63,24 +63,24 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
             while (cursor.isAfterLast() == false) {
 
-                MovementExpenseBankCardModel movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                ExpenseBankCardModel expenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
 
-                movementExpenseBankCardModelList.add(movementExpenseBankCardModel);
+                expenseBankCardModelList.add(expenseBankCardModel);
 
                 cursor.moveToNext();
             }
         }
 
-        return movementExpenseBankCardModelList;
+        return expenseBankCardModelList;
 
     }
 
     @Override
-    public long updateMovementExpenseBankCard(MovementExpenseBankCardModel movementExpenseBankCardModel, String where) {
+    public long updateMovementExpenseBankCard(ExpenseBankCardModel expenseBankCardModel, String where) {
 
         openConnection();
 
-        ContentValues contentValues = createContentValues(movementExpenseBankCardModel);
+        ContentValues contentValues = createContentValues(expenseBankCardModel);
 
         long updatedRows = mDatabase.update(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME, contentValues, where, null);
 
@@ -102,7 +102,7 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     }
 
     @Override
-    public List<MovementExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) {
+    public List<ExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) {
 
         openConnection();
 
@@ -115,14 +115,14 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
             return new ArrayList<>();
         }
 
-        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
+        List<ExpenseBankCardModel> expenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
 
-        return movementExpenseBankCardModelList;
+        return expenseBankCardModelList;
 
     }
 
     @Override
-    public List<MovementExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) {
+    public List<ExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) {
 
         openConnection();
 
@@ -135,24 +135,24 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
             return new ArrayList<>();
         }
 
-        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
+        List<ExpenseBankCardModel> expenseBankCardModelList = fillMovementExpenseBankCardModelList(cursor);
 
-        return movementExpenseBankCardModelList;
+        return expenseBankCardModelList;
     }
 
-    private ContentValues createContentValues(MovementExpenseBankCardModel movementExpenseBankCardModel) {
+    private ContentValues createContentValues(ExpenseBankCardModel expenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, movementExpenseBankCardModel.getDescription());
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, movementExpenseBankCardModel.getAmount());
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, movementExpenseBankCardModel.getExpenseId());
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, movementExpenseBankCardModel.getBankCardId());
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, movementExpenseBankCardModel.getDate());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, expenseBankCardModel.getDescription());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, expenseBankCardModel.getAmount());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, expenseBankCardModel.getExpenseId());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, expenseBankCardModel.getBankCardId());
+        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, expenseBankCardModel.getDate());
 
         return contentValues;
     }
 
-    private MovementExpenseBankCardModel getMovementExpenseBankCardModelFromCursor(Cursor cursor) {
+    private ExpenseBankCardModel getMovementExpenseBankCardModelFromCursor(Cursor cursor) {
 
         String description = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION));
         double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT));
@@ -160,47 +160,47 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
         long bankCardId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID));
         String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE));
 
-        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
-        movementExpenseBankCardModel.setDescription(description);
-        movementExpenseBankCardModel.setAmount(amount);
-        movementExpenseBankCardModel.setExpenseId(expenseId);
-        movementExpenseBankCardModel.setBankCardId(bankCardId);
-        movementExpenseBankCardModel.setDate(date);
+        ExpenseBankCardModel expenseBankCardModel = new ExpenseBankCardModel();
+        expenseBankCardModel.setDescription(description);
+        expenseBankCardModel.setAmount(amount);
+        expenseBankCardModel.setExpenseId(expenseId);
+        expenseBankCardModel.setBankCardId(bankCardId);
+        expenseBankCardModel.setDate(date);
 
-        return movementExpenseBankCardModel;
+        return expenseBankCardModel;
     }
 
-    private MovementExpenseBankCardModel fillMovementExpenseBankCardModel(Cursor cursor) {
+    private ExpenseBankCardModel fillMovementExpenseBankCardModel(Cursor cursor) {
 
-        MovementExpenseBankCardModel movementExpenseBankCardModel = new MovementExpenseBankCardModel();
+        ExpenseBankCardModel expenseBankCardModel = new ExpenseBankCardModel();
 
         if (cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
 
-                movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                expenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
                 cursor.moveToNext();
             }
         }
 
-        return movementExpenseBankCardModel;
+        return expenseBankCardModel;
     }
 
-    private List<MovementExpenseBankCardModel> fillMovementExpenseBankCardModelList(Cursor cursor) {
+    private List<ExpenseBankCardModel> fillMovementExpenseBankCardModelList(Cursor cursor) {
 
-        List<MovementExpenseBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
+        List<ExpenseBankCardModel> expenseBankCardModelList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
 
-                MovementExpenseBankCardModel movementExpenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
-                movementExpenseBankCardModelList.add(movementExpenseBankCardModel);
+                ExpenseBankCardModel expenseBankCardModel = getMovementExpenseBankCardModelFromCursor(cursor);
+                expenseBankCardModelList.add(expenseBankCardModel);
                 cursor.moveToNext();
             }
         }
 
-        return movementExpenseBankCardModelList;
+        return expenseBankCardModelList;
     }
 
     private boolean isEmptyResult(Cursor cursor) {

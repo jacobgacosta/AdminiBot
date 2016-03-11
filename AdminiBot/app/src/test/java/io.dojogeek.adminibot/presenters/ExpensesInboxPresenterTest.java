@@ -113,13 +113,13 @@ public class ExpensesInboxPresenterTest {
                                             long userId) {
 
         ExpenseModel expenseModel = new ExpenseModel();
-        expenseModel.id = id;
-        expenseModel.description = description;
-        expenseModel.amount = amount;
-        expenseModel.dateExpediture = dateExpediture;
-        expenseModel.nextExit = nextExit;
-        expenseModel.expenseTypeId = expenseTypeId;
-        expenseModel.userId = userId;
+        expenseModel.setId(id);
+        expenseModel.setDescription(description);
+        expenseModel.setAmount(amount);
+        expenseModel.setDateExpediture(dateExpediture);
+        expenseModel.setNextExit(nextExit);
+        expenseModel.setExpenseTypeId(expenseTypeId);
+        expenseModel.setUserId(userId);
 
         return expenseModel;
     }
