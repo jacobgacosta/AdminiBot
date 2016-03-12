@@ -3,8 +3,6 @@ package io.dojogeek.adminibot.models;
 public class ExpenseBankCardModel {
 
     private long id;
-    private String description;
-    private String date;
     private double amount;
     private long expenseId;
     private long bankCardId;
@@ -15,22 +13,6 @@ public class ExpenseBankCardModel {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public double getAmount() {

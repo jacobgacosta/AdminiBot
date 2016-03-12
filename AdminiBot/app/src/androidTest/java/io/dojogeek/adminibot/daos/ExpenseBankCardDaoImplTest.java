@@ -65,17 +65,6 @@ public class ExpenseBankCardDaoImplTest {
     }
 
     @Test
-    public void testCreateMovementExpenseBankCard_withNullRequiredField_noInsertion() {
-
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
-        expenseBankCardModel.setDescription(null);
-
-        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
-
-        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
-    }
-
-    @Test
     public void testGetMovementExpenseBankCardById_successObtaining() throws DataException {
 
         ExpenseBankCardModel expectedExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
@@ -88,8 +77,6 @@ public class ExpenseBankCardDaoImplTest {
         assertThat(actualExpenseBankCardModel, notNullValue());
         assertThat(actualExpenseBankCardModel.getAmount(), is(expectedExpenseBankCardModel.getAmount()));
         assertThat(actualExpenseBankCardModel.getBankCardId(), is(expectedExpenseBankCardModel.getBankCardId()));
-        assertThat(actualExpenseBankCardModel.getDate(), is(expectedExpenseBankCardModel.getDate()));
-        assertThat(actualExpenseBankCardModel.getDescription(), is(expectedExpenseBankCardModel.getDescription()));
         assertThat(actualExpenseBankCardModel.getExpenseId(), is(expectedExpenseBankCardModel.getExpenseId()));
     }
 
@@ -196,21 +183,6 @@ public class ExpenseBankCardDaoImplTest {
         compareMovementExpenseBankCardModels(updatedExpenseBankCardModel, actualExpenseBankCardModel);
     }
 
-    @Test(expected = SQLiteConstraintException.class)
-    public void testUpdateMovementExpenseBankCard_withNullRequiredField_isException() {
-
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
-
-        long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
-
-        String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + insertedRecordId;
-
-        expenseBankCardModel.setDescription(null);
-
-        mExpenseBankCardDao.updateMovementExpenseBankCard(expenseBankCardModel, where);
-
-    }
-
     @Test
     public void testUpdateMovementExpenseBankCard_withNonExistentId_noUpdating() {
 
@@ -289,9 +261,7 @@ public class ExpenseBankCardDaoImplTest {
                                                       ExpenseBankCardModel actualExpenseBankCardModel) {
 
         assertNotNull(actualExpenseBankCardModel);
-        assertThat(expectedExpenseBankCardModel.getDescription(), is(actualExpenseBankCardModel.getDescription()));
         assertThat(expectedExpenseBankCardModel.getExpenseId(), is(actualExpenseBankCardModel.getExpenseId()));
-        assertThat(expectedExpenseBankCardModel.getDate(), is(actualExpenseBankCardModel.getDate()));
         assertThat(expectedExpenseBankCardModel.getBankCardId(), is(actualExpenseBankCardModel.getBankCardId()));
         assertThat(expectedExpenseBankCardModel.getAmount(), is(actualExpenseBankCardModel.getAmount()));
 
@@ -301,8 +271,6 @@ public class ExpenseBankCardDaoImplTest {
                                                                                   expenseBankCardModel) {
 
         expenseBankCardModel.setBankCardId(3);
-        expenseBankCardModel.setDate(DateUtils.getCurrentData());
-        expenseBankCardModel.setDescription("updated description");
         expenseBankCardModel.setExpenseId(2);
         expenseBankCardModel.setAmount(98743.90);
 

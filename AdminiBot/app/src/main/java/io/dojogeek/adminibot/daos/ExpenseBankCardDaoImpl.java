@@ -143,29 +143,23 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     private ContentValues createContentValues(ExpenseBankCardModel expenseBankCardModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION, expenseBankCardModel.getDescription());
         contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT, expenseBankCardModel.getAmount());
         contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID, expenseBankCardModel.getExpenseId());
         contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID, expenseBankCardModel.getBankCardId());
-        contentValues.put(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE, expenseBankCardModel.getDate());
 
         return contentValues;
     }
 
     private ExpenseBankCardModel getMovementExpenseBankCardModelFromCursor(Cursor cursor) {
 
-        String description = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DESCRIPTION));
         double amount = cursor.getDouble(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_AMOUNT));
         long expenseId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_EXPENSE_ID));
         long bankCardId = cursor.getLong(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_BANK_CARD_ID));
-        String date = cursor.getString(cursor.getColumnIndex(ExpensesBankCardsContract.ExpensesBankCard.COLUMN_DATE));
 
         ExpenseBankCardModel expenseBankCardModel = new ExpenseBankCardModel();
-        expenseBankCardModel.setDescription(description);
         expenseBankCardModel.setAmount(amount);
         expenseBankCardModel.setExpenseId(expenseId);
         expenseBankCardModel.setBankCardId(bankCardId);
-        expenseBankCardModel.setDate(date);
 
         return expenseBankCardModel;
     }

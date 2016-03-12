@@ -227,8 +227,6 @@ public class CreatorModels {
         ExpenseBankCardModel expenseBankCardModel = new ExpenseBankCardModel();
         expenseBankCardModel.setAmount(amount);
         expenseBankCardModel.setBankCardId(bankCardId);
-        expenseBankCardModel.setDate(date);
-        expenseBankCardModel.setDescription(description);
         expenseBankCardModel.setExpenseId(expenseId);
 
         return expenseBankCardModel;
