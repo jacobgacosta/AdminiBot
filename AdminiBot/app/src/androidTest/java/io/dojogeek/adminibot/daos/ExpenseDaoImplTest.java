@@ -256,7 +256,8 @@ public class ExpenseDaoImplTest {
 
         for (int index = 1; index <= numberOfDummyInsertions; index++) {
             ExpenseModel expenseModel = CreatorModels.createExpenseModel("Expense type test " + index,
-                    567.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), 2, 20 + index);
+                    567.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), 2, 20 + index,
+                    CreatorModels.createExpenseOtherPaymentMethodModelList(), CreatorModels.createExpenseBankCardModelList());
 
             mExpenseDao.createExpense(expenseModel);
             expenseModelList.add(expenseModel);
