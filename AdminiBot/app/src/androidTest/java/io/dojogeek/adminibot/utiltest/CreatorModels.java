@@ -15,7 +15,7 @@ import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.models.IncomeOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
-import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
+import io.dojogeek.adminibot.models.IncomeBankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
@@ -99,17 +99,18 @@ public class CreatorModels {
 
     public static ExpenseModel createExpenseModel() {
 
-        List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels = new ArrayList<>();
-        otherPaymentMethodModels.add(createExpenseOtherPaymentMethodModel());
-        otherPaymentMethodModels.add(createExpenseOtherPaymentMethodModel());
+        List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels = createExpenseOtherPaymentMethodModelList();
+
+        List<ExpenseBankCardModel> expenseBankCardModels = createExpenseBankCardModelList();
 
         return createExpenseModel("Expense type test", 567.90, DateUtils.getCurrentData(), DateUtils.getCurrentData(),
-                1, 20, otherPaymentMethodModels);
+                1, 20, otherPaymentMethodModels, expenseBankCardModels);
     }
 
     public static ExpenseModel createExpenseModel(String description, double amount, String dateExpediture,
                                            String nextExit, long expenseTypeId, long userId,
-                                                  List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels) {
+                                                  List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels,
+                                                  List<ExpenseBankCardModel> expenseBankCardModels) {
 
         ExpenseModel expenseModel = new ExpenseModel();
         expenseModel.setDescription(description);
@@ -119,6 +120,7 @@ public class CreatorModels {
         expenseModel.setExpenseTypeId(expenseTypeId);
         expenseModel.setUserId(userId);
         expenseModel.setOtherPaymentMethodModels(otherPaymentMethodModels);
+        expenseModel.setExpenseBankCardModels(expenseBankCardModels);
 
         return expenseModel;
     }
@@ -232,26 +234,26 @@ public class CreatorModels {
         return expenseBankCardModel;
     }
 
-    public static MovementIncomeBankCardModel createMovementIncomeBankCardModel(){
+    public static IncomeBankCardModel createMovementIncomeBankCardModel(){
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel =
+        IncomeBankCardModel incomeBankCardModel =
                 createMovementIncomeBankCardModel(3409.80, 2, DateUtils.getCurrentData(), "Test description", 2);
 
-        return movementIncomeBankCardModel;
+        return incomeBankCardModel;
     }
 
-    public static MovementIncomeBankCardModel createMovementIncomeBankCardModel(double amount, long bankCardId,
+    public static IncomeBankCardModel createMovementIncomeBankCardModel(double amount, long bankCardId,
                                                                                 String date, String description,
                                                                                 long incomeId) {
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
-        movementIncomeBankCardModel.setAmount(amount);
-        movementIncomeBankCardModel.setBankCardId(bankCardId);
-        movementIncomeBankCardModel.setDate(date);
-        movementIncomeBankCardModel.setDescription(description);
-        movementIncomeBankCardModel.setIncomeId(incomeId);
+        IncomeBankCardModel incomeBankCardModel = new IncomeBankCardModel();
+        incomeBankCardModel.setAmount(amount);
+        incomeBankCardModel.setBankCardId(bankCardId);
+        incomeBankCardModel.setDate(date);
+        incomeBankCardModel.setDescription(description);
+        incomeBankCardModel.setIncomeId(incomeId);
 
-        return movementIncomeBankCardModel;
+        return incomeBankCardModel;
     }
 
     public static ExpenseOtherPaymentMethodModel createExpenseOtherPaymentMethodModel() {
@@ -290,5 +292,23 @@ public class CreatorModels {
         incomeOtherPaymentMethodModel.setOtherPaymentMethodId(otherPaymentMethodId);
 
         return incomeOtherPaymentMethodModel;
+    }
+
+    public static List<ExpenseOtherPaymentMethodModel> createExpenseOtherPaymentMethodModelList() {
+
+        List<ExpenseOtherPaymentMethodModel> otherPaymentMethodModels = new ArrayList<>();
+        otherPaymentMethodModels.add(createExpenseOtherPaymentMethodModel());
+        otherPaymentMethodModels.add(createExpenseOtherPaymentMethodModel());
+
+        return otherPaymentMethodModels;
+    }
+
+    public static List<ExpenseBankCardModel> createExpenseBankCardModelList() {
+
+        List<ExpenseBankCardModel> expenseBankCardModels = new ArrayList<>();
+        expenseBankCardModels.add(createMovementExpenseBankCardModel());
+        expenseBankCardModels.add(createMovementExpenseBankCardModel());
+
+        return expenseBankCardModels;
     }
 }

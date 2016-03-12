@@ -10,7 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
+import io.dojogeek.adminibot.models.IncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.IncomesBankCardsContract;
 
 public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBankCardDao {
@@ -21,7 +21,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public long createMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCard) {
+    public long createMovementIncomeBankCard(IncomeBankCardModel movementIncomeBankCard) {
 
         openConnection();
 
@@ -34,7 +34,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public MovementIncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException {
+    public IncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException {
 
         openConnection();
 
@@ -47,17 +47,17 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
             throw new DataException("no data!");
         }
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel = fillMovementIncomeBankCardModel(cursor);
+        IncomeBankCardModel incomeBankCardModel = fillMovementIncomeBankCardModel(cursor);
 
-        return movementIncomeBankCardModel;
+        return incomeBankCardModel;
     }
 
     @Override
-    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCards() {
+    public List<IncomeBankCardModel> getMovementsIncomesBankCards() {
 
         openConnection();
 
-        List<MovementIncomeBankCardModel> movementIncomeBankCardModels = new ArrayList<>();
+        List<IncomeBankCardModel> incomeBankCardModels = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, null, null, null, null, null, null);
 
@@ -65,19 +65,19 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
             while (cursor.isAfterLast() == false) {
 
-                MovementIncomeBankCardModel movementIncomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                IncomeBankCardModel incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
 
-                movementIncomeBankCardModels.add(movementIncomeBankCardModel);
+                incomeBankCardModels.add(incomeBankCardModel);
 
                 cursor.moveToNext();
             }
         }
 
-        return movementIncomeBankCardModels;
+        return incomeBankCardModels;
     }
 
     @Override
-    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId) {
+    public List<IncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId) {
 
         openConnection();
 
@@ -90,13 +90,13 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
             return new ArrayList<>();
         }
 
-        List<MovementIncomeBankCardModel> movementExpenseBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
+        List<IncomeBankCardModel> movementExpenseBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
 
         return movementExpenseBankCardModelList;
     }
 
     @Override
-    public List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId) {
+    public List<IncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId) {
 
         openConnection();
 
@@ -109,18 +109,18 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
             return new ArrayList<>();
         }
 
-        List<MovementIncomeBankCardModel> movementIncomeBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
+        List<IncomeBankCardModel> incomeBankCardModelList = fillMovementIncomeBankCardModelList(cursor);
 
-        return movementIncomeBankCardModelList;
+        return incomeBankCardModelList;
     }
 
     @Override
-    public long updateMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCardModel,
+    public long updateMovementIncomeBankCard(IncomeBankCardModel incomeBankCardModel,
                                              String where) {
 
         openConnection();
 
-        ContentValues contentValues = createContentValues(movementIncomeBankCardModel);
+        ContentValues contentValues = createContentValues(incomeBankCardModel);
 
         long updatedRows = mDatabase.update(IncomesBankCardsContract.IncomesBankCards.TABLE_NAME, contentValues, where, null);
 
@@ -140,7 +140,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
         return deletedRows;
     }
 
-    private ContentValues createContentValues(MovementIncomeBankCardModel movementIncomeBankCard) {
+    private ContentValues createContentValues(IncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION, movementIncomeBankCard.getDescription());
@@ -161,23 +161,23 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
         return false;
     }
 
-    private MovementIncomeBankCardModel fillMovementIncomeBankCardModel(Cursor cursor) {
+    private IncomeBankCardModel fillMovementIncomeBankCardModel(Cursor cursor) {
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
+        IncomeBankCardModel incomeBankCardModel = new IncomeBankCardModel();
 
         if (cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
 
-                movementIncomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
                 cursor.moveToNext();
             }
         }
 
-        return movementIncomeBankCardModel;
+        return incomeBankCardModel;
     }
 
-    private MovementIncomeBankCardModel getMovementIncomeBankCardModelFromCursor(Cursor cursor) {
+    private IncomeBankCardModel getMovementIncomeBankCardModelFromCursor(Cursor cursor) {
 
         String description = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION));
         double amount = cursor.getDouble(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT));
@@ -185,26 +185,26 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
         long bankCardId = cursor.getLong(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID));
         String date = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE));
 
-        MovementIncomeBankCardModel movementIncomeBankCardModel = new MovementIncomeBankCardModel();
-        movementIncomeBankCardModel.setDescription(description);
-        movementIncomeBankCardModel.setAmount(amount);
-        movementIncomeBankCardModel.setIncomeId(incomeId);
-        movementIncomeBankCardModel.setBankCardId(bankCardId);
-        movementIncomeBankCardModel.setDate(date);
+        IncomeBankCardModel incomeBankCardModel = new IncomeBankCardModel();
+        incomeBankCardModel.setDescription(description);
+        incomeBankCardModel.setAmount(amount);
+        incomeBankCardModel.setIncomeId(incomeId);
+        incomeBankCardModel.setBankCardId(bankCardId);
+        incomeBankCardModel.setDate(date);
 
-        return movementIncomeBankCardModel;
+        return incomeBankCardModel;
     }
 
-    private List<MovementIncomeBankCardModel> fillMovementIncomeBankCardModelList(Cursor cursor) {
+    private List<IncomeBankCardModel> fillMovementIncomeBankCardModelList(Cursor cursor) {
 
-        List<MovementIncomeBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
+        List<IncomeBankCardModel> movementExpenseBankCardModelList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
 
             while (cursor.isAfterLast() == false) {
 
-                MovementIncomeBankCardModel movementIncomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
-                movementExpenseBankCardModelList.add(movementIncomeBankCardModel);
+                IncomeBankCardModel incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                movementExpenseBankCardModelList.add(incomeBankCardModel);
                 cursor.moveToNext();
             }
         }

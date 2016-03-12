@@ -3,21 +3,21 @@ package io.dojogeek.adminibot.daos;
 import java.util.List;
 
 import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.models.MovementIncomeBankCardModel;
+import io.dojogeek.adminibot.models.IncomeBankCardModel;
 
 public interface IncomeBankCardDao {
 
-    long createMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCard);
+    long createMovementIncomeBankCard(IncomeBankCardModel movementIncomeBankCard);
 
-    MovementIncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException;
+    IncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException;
 
-    List<MovementIncomeBankCardModel> getMovementsIncomesBankCards();
+    List<IncomeBankCardModel> getMovementsIncomesBankCards();
 
-    List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId);
+    List<IncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId);
 
-    List<MovementIncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId);
+    List<IncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId);
 
-    long updateMovementIncomeBankCard(MovementIncomeBankCardModel movementIncomeBankCardModel, String where);
+    long updateMovementIncomeBankCard(IncomeBankCardModel incomeBankCardModel, String where);
 
     long deleteMovementIncomeBankCard(long movementIncomeBankCardId);
 }
