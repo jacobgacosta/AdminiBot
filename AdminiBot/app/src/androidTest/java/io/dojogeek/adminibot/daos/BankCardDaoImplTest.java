@@ -131,11 +131,9 @@ public class BankCardDaoImplTest {
 
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
-        String where = BankCardsContract.BankCard._ID + "= " +  insertedRecordId;
-
         BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
 
-        long updatedRows = mBankCardDao.updateBankCard(expectedUpdatedBankCard, where);
+        long updatedRows = mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
 
@@ -152,11 +150,9 @@ public class BankCardDaoImplTest {
 
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
-        String where = BankCardsContract.BankCard._ID + "= " +  insertedRecordId;
-
         BankCardModel expectedUpdatedBankCard = null;
 
-        mBankCardDao.updateBankCard(expectedUpdatedBankCard, where);
+        mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
 
     }
 
@@ -167,12 +163,10 @@ public class BankCardDaoImplTest {
 
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
-        String where = BankCardsContract.BankCard._ID + "= " +  insertedRecordId;
-
         BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
         expectedUpdatedBankCard.setName(null);
 
-        mBankCardDao.updateBankCard(expectedUpdatedBankCard, where);
+        mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
 
     }
 
@@ -183,9 +177,7 @@ public class BankCardDaoImplTest {
 
         long nonExistentId = 4;
 
-        String where = BankCardsContract.BankCard._ID + "= " +  nonExistentId;
-
-        long updatedRows = mBankCardDao.updateBankCard(bankCardModel, where);
+        long updatedRows = mBankCardDao.updateBankCard(bankCardModel, nonExistentId);
 
         assertThat(updatedRows, is(NO_OPERATION));
 

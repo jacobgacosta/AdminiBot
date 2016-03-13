@@ -14,7 +14,7 @@ public interface BankCardDao {
 
     List<BankCardModel> getBankCards();
 
-    long updateBankCard(BankCardModel bankCardModel, String where);
+    long updateBankCard(BankCardModel bankCardModel, long id);
 
     long deleteBankCard(long bankCardId);
 
