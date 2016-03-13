@@ -88,11 +88,13 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     }
 
     @Override
-    public long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, String where) {
+    public long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, long id) {
 
         openConnection();
 
         ContentValues contentValues = createContentValues(otherPaymentMethodModel);
+
+        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + id;
 
         long updatedRows = mDatabase.update(PaymentMethodsContract.PaymentMethods.TABLE_NAME, contentValues, where, null);
 

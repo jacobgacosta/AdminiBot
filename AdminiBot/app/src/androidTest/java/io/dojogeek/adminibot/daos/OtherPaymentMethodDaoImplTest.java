@@ -163,9 +163,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         OtherPaymentMethodModel expectedUpdatedOtherPaymentMethodModel = changeOtherPaymentMethodValues(otherPaymentMethodModel);
 
-        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
-
-        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(expectedUpdatedOtherPaymentMethodModel, where);
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(expectedUpdatedOtherPaymentMethodModel, insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
 
@@ -182,9 +180,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
 
-        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
-
-        mOtherPaymentMethodDao.updateOtherPaymentMethod(null, where);
+        mOtherPaymentMethodDao.updateOtherPaymentMethod(null, insertedRecordId);
 
     }
 
@@ -197,9 +193,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         long nonExistentId = 5;
 
-        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + nonExistentId;
-
-        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, where);
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, nonExistentId);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
@@ -213,9 +207,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         otherPaymentMethodModel.setName(null);
 
-        String where = PaymentMethodsContract.PaymentMethods._ID + "= " + insertedRecordId;
-
-        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, where);
+        long updatedRows = mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModel, insertedRecordId);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }

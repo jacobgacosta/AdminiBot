@@ -14,7 +14,7 @@ public interface OtherPaymentMethodDao {
 
     List<OtherPaymentMethodModel> getOtherPaymentMethods();
 
-    long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, String where);
+    long updateOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel, long id);
 
     long deleteOtherPaymentMethod(long otherPaymentMethodId);
 
