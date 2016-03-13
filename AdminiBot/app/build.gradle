@@ -40,6 +40,8 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     // Optional -- UI testing with UI Automator
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+    // podam
+    testCompile 'uk.co.jemos.podam:podam:5.2.0.RELEASE'
 
     // dagger
     compile 'com.google.dagger:dagger:2.0'
