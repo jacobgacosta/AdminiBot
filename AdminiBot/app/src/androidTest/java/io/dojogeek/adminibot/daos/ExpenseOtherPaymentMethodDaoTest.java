@@ -33,6 +33,7 @@ public class ExpenseOtherPaymentMethodDaoTest {
         mContext = getTargetContext();
 
         mExpenseOtherPaymentMethodDao = new ExpenseOtherPaymentMethodDaoImpl(mContext);
+        ((ExpenseOtherPaymentMethodDaoImpl)mExpenseOtherPaymentMethodDao).openConnection();
     }
 
     @After

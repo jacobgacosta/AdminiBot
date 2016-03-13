@@ -37,6 +37,7 @@ public class BankCardDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mBankCardDao = new BankCardDaoImpl(mContext);
+        ((BankCardDaoImpl)mBankCardDao).openConnection();
     }
 
     @After
