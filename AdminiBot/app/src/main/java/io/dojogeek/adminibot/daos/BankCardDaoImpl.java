@@ -23,8 +23,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     @Override
     public long createBankCard(BankCardModel bankCardModel) {
 
-        openConnection();
-
         ContentValues contentValues = createContentValues(bankCardModel);
 
         long result = mDatabase.insert(BankCardsContract.BankCard.TABLE_NAME,
@@ -35,8 +33,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
 
     @Override
     public BankCardModel getBankCardById(long cardBankId) throws DataException {
-
-        openConnection();
 
         String [] args = {String.valueOf(cardBankId)};
 
@@ -64,8 +60,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     @Override
     public List<BankCardModel> getBankCards() {
 
-        openConnection();
-
         List<BankCardModel> bankCardModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(BankCardsContract.BankCard.TABLE_NAME, null, null, null, null, null, null);
@@ -88,8 +82,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     @Override
     public long updateBankCard(BankCardModel bankCardModel, long id) {
 
-        openConnection();
-
         ContentValues contentValues = createContentValues(bankCardModel);
 
         String where = BankCardsContract.BankCard._ID + "= " +  id;
@@ -103,8 +95,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     @Override
     public long deleteBankCard(long bankCardId) {
 
-        openConnection();
-
         String [] arg = {String.valueOf(bankCardId)};
 
         int deletedRows = mDatabase.delete(BankCardsContract.BankCard.TABLE_NAME,
@@ -115,8 +105,6 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
 
     @Override
     public List<BankCardModel> getBankCardByCartType(CardTypeEnum cardType) {
-
-        openConnection();
 
         String [] args = {cardType.name()};
 
