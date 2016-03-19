@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.daos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +26,18 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
         ContentValues contentValues = createContentValues(expenseModel);
 
-        long response = mDatabase.insert(ExpensesContract.Expense.TABLE_NAME, ExpensesContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
+        long response = mDatabase.insertOrThrow(ExpensesContract.Expense.TABLE_NAME, ExpensesContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
 
         return response;
 
     }
 
     @Override
-    public long updateExpense(ExpenseModel expenseModel, String where) {
+    public long updateExpense(ExpenseModel expenseModel, long expenseId) {
 
         ContentValues contentValues = createContentValues(expenseModel);
+
+        String where = ExpensesContract.Expense._ID + "= " +  expenseId;
 
         long updatedRows = mDatabase.update(ExpensesContract.Expense.TABLE_NAME, contentValues, where, null);
 

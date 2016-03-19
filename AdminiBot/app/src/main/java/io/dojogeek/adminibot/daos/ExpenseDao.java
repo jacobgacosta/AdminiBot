@@ -9,7 +9,7 @@ public interface ExpenseDao {
 
     long createExpense(ExpenseModel expenseModel);
 
-    long updateExpense(ExpenseModel expenseModel, String where);
+    long updateExpense(ExpenseModel expenseModel, long expenseId);
 
     List<ExpenseModel> getExpenses();
 
