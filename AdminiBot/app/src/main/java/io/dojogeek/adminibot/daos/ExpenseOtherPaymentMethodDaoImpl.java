@@ -10,6 +10,7 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.ExpensesOthersPaymentMethodsContract;
+import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 
 public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements ExpenseOtherPaymentMethodDao {
 
@@ -22,7 +23,7 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
 
         ContentValues contentValues = createContentValues(expenseOtherPaymentMethodModel);
 
-        long response = mDatabase.insert(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
+        long response = mDatabase.insertOrThrow(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
                 ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.COLUMN_NAME_NULLABLE, contentValues);
 
         return response;
@@ -111,9 +112,11 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
     }
 
     @Override
-    public long updateExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel, String where) {
+    public long updateExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel, long expenseId) {
 
         ContentValues contentValues = createContentValues(expenseOtherPaymentMethodModel);
+
+        String where = ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod._ID + "= " + expenseId;
 
         long updatedRows = mDatabase.update(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
                 contentValues, where, null);

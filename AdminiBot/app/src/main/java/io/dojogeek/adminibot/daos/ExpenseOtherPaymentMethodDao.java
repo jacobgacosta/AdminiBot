@@ -17,7 +17,7 @@ public interface ExpenseOtherPaymentMethodDao {
 
     List<ExpenseOtherPaymentMethodModel> getExpenseOtherPaymentMethodByPaymentMethod(long paymentMethod);
 
-    long updateExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel, String where);
+    long updateExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel, long expenseId);
 
     long deleteExpenseOtherPaymentMethod(long expenseOtherPaymentMethod);
 }
