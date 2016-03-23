@@ -21,6 +21,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
     @Override
     public long createExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(expenseOtherPaymentMethodModel);
 
         long response = mDatabase.insertOrThrow(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
@@ -31,6 +33,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
 
     @Override
     public ExpenseOtherPaymentMethodModel getExpenseOtherPaymentMethodById(long expenseOtherPaymentMethod) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(expenseOtherPaymentMethod)};
 
@@ -58,6 +62,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
     @Override
     public List<ExpenseOtherPaymentMethodModel> getExpensesOthersPaymentMethods() {
 
+        openConnection();
+
         List<ExpenseOtherPaymentMethodModel> expenseOtherPaymentMethodModelList = new ArrayList<>();
 
         Cursor cursor = mDatabase.query(ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME, null, null, null, null, null, null);
@@ -80,6 +86,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
     @Override
     public List<ExpenseOtherPaymentMethodModel> getExpenseOtherPaymentMethodByExpenseId(long expenseId) {
 
+        openConnection();
+
         String [] args = {String.valueOf(expenseId)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME +
@@ -96,6 +104,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
 
     @Override
     public List<ExpenseOtherPaymentMethodModel> getExpenseOtherPaymentMethodByPaymentMethod(long paymentMethod) {
+
+        openConnection();
 
         String [] args = {String.valueOf(paymentMethod)};
 
@@ -114,6 +124,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
     @Override
     public long updateExpenseOtherPaymentMethod(ExpenseOtherPaymentMethodModel expenseOtherPaymentMethodModel, long expenseId) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(expenseOtherPaymentMethodModel);
 
         String where = ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod._ID + "= " + expenseId;
@@ -126,6 +138,8 @@ public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements
 
     @Override
     public long deleteExpenseOtherPaymentMethod(long expenseOtherPaymentMethod) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(expenseOtherPaymentMethod)};
 

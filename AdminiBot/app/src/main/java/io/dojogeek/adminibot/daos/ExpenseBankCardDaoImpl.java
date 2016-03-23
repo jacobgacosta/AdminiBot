@@ -20,6 +20,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     @Override
     public long createMovementExpenseBankCard(ExpenseBankCardModel expenseBankCardModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(expenseBankCardModel);
 
         long result = mDatabase.insert(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME,
@@ -30,6 +32,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public ExpenseBankCardModel getMovementExpenseBankCardById(long movementExpenseBankCardModelId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(movementExpenseBankCardModelId)};
 
@@ -48,6 +52,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<ExpenseBankCardModel> getMovementsExpensesBankCards() {
+
+        openConnection();
 
         List<ExpenseBankCardModel> expenseBankCardModelList = new ArrayList<>();
 
@@ -72,6 +78,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
     @Override
     public long updateMovementExpenseBankCard(ExpenseBankCardModel expenseBankCardModel, String where) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(expenseBankCardModel);
 
         long updatedRows = mDatabase.update(ExpensesBankCardsContract.ExpensesBankCard.TABLE_NAME, contentValues, where, null);
@@ -81,6 +89,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public long deleteMovementExpenseBankCard(long movementExpenseBankCardModelId) {
+
+        openConnection();
 
         String [] arg = {String.valueOf(movementExpenseBankCardModelId)};
 
@@ -93,6 +103,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<ExpenseBankCardModel> getMovementsExpensesBankCardsByExpenseId(long expenseId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(expenseId)};
 
@@ -111,6 +123,8 @@ public class ExpenseBankCardDaoImpl extends SQLiteGlobalDao implements ExpenseBa
 
     @Override
     public List<ExpenseBankCardModel> getMovementExpenseBankCardByBankCardId(long bankCardId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(bankCardId)};
 

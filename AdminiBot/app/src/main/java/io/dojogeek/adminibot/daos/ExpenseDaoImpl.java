@@ -24,6 +24,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     @Override
     public long createExpense(ExpenseModel expenseModel) {
 
+        openConnection();
+
         ContentValues contentValues = createContentValues(expenseModel);
 
         long response = mDatabase.insertOrThrow(ExpensesContract.Expense.TABLE_NAME, ExpensesContract.Expense.COLUMN_NAME_NULLABLE, contentValues);
@@ -34,6 +36,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     @Override
     public long updateExpense(ExpenseModel expenseModel, long expenseId) {
+
+        openConnection();
 
         ContentValues contentValues = createContentValues(expenseModel);
 
@@ -46,6 +50,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     @Override
     public List<ExpenseModel> getExpenses() {
+
+        openConnection();
 
         List<ExpenseModel> expenseTypeModelList = new ArrayList<>();
 
@@ -68,6 +74,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     @Override
     public ExpenseModel getExpenseById(long expenseId) throws DataException {
+
+        openConnection();
 
         String [] args = {String.valueOf(expenseId)};
 
@@ -95,6 +103,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
     @Override
     public long deleteExpense(long expenseId) {
 
+        openConnection();
+
         String [] arg = {String.valueOf(expenseId)};
 
         int deletedRows = mDatabase.delete(ExpensesContract.Expense.TABLE_NAME,
@@ -105,6 +115,8 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
 
     @Override
     public List<ExpenseModel> getExpenseByExpenseTypeId(long expenseTypeId) {
+
+        openConnection();
 
         String [] args = {String.valueOf(expenseTypeId)};
 
