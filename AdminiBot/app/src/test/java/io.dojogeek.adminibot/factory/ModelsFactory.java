@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.factory;
 
+import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
@@ -40,4 +41,12 @@ public class ModelsFactory {
 
         return otherPaymentMethodModel;
     }
+
+    public static BankCardModel createBankCardModel() {
+
+        BankCardModel bankCardModel = factory.manufacturePojo(BankCardModel.class);
+
+        return bankCardModel;
+    }
+
 }
