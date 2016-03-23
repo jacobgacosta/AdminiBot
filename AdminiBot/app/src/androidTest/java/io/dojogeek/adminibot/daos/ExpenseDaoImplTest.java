@@ -67,8 +67,8 @@ public class ExpenseDaoImplTest {
 
     }
 
-    @Test
-    public void testCreateExpense_withNullRequieredField_noInsertion() {
+    @Test(expected = SQLiteConstraintException.class)
+    public void testCreateExpense_withNullRequieredField_isException() {
 
         ExpenseModel expenseModel = CreatorModels.createExpenseModel();
         expenseModel.setDescription(null);
@@ -136,9 +136,7 @@ public class ExpenseDaoImplTest {
 
         ExpenseModel newExpenseModel = changeExpenseModelValues(expenseModel);
 
-        String where = ExpensesContract.Expense._ID + "= " + insertedRecordId;
-
-        long updatedRows = mExpenseDao.updateExpense(newExpenseModel, where);
+        long updatedRows = mExpenseDao.updateExpense(newExpenseModel, insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
 
@@ -155,9 +153,7 @@ public class ExpenseDaoImplTest {
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
-        String where = ExpensesContract.Expense._ID + "= " + insertedRecordId;
-
-        mExpenseDao.updateExpense(null, where);
+        mExpenseDao.updateExpense(null, insertedRecordId);
 
     }
 
@@ -172,9 +168,7 @@ public class ExpenseDaoImplTest {
 
         long nonExistentId = 5;
 
-        String where = ExpensesContract.Expense._ID + "= " + nonExistentId;
-
-        long updatedRows = mExpenseDao.updateExpense(newExpenseModel, where);
+        long updatedRows = mExpenseDao.updateExpense(newExpenseModel, nonExistentId);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
@@ -189,9 +183,7 @@ public class ExpenseDaoImplTest {
         ExpenseModel newExpenseModel = changeExpenseModelValues(expenseModel);
         newExpenseModel.setDescription(null);
 
-        String where = ExpensesContract.Expense._ID + "= " + insertedRecordId;
-
-        mExpenseDao.updateExpense(newExpenseModel, where);
+        mExpenseDao.updateExpense(newExpenseModel, insertedRecordId);
 
     }
 

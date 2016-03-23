@@ -186,10 +186,8 @@ public class ExpenseOtherPaymentMethodDaoTest {
         ExpenseOtherPaymentMethodModel updatedExpenseOtherPaymentMethodModel =
                 changeExpenseOtherPaymentMethodModelFields(expenseOtherPaymentMethodModel);
 
-        String where = ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod._ID + "= "+ insertedRecordId;
-
         long updatedRows = mExpenseOtherPaymentMethodDao.
-                updateExpenseOtherPaymentMethod(updatedExpenseOtherPaymentMethodModel, where);
+                updateExpenseOtherPaymentMethod(updatedExpenseOtherPaymentMethodModel, insertedRecordId);
 
         assertThat(updatedRows, is(SUCCESS_OPERATION));
 
@@ -208,9 +206,7 @@ public class ExpenseOtherPaymentMethodDaoTest {
         long insertedRecordId =
                 mExpenseOtherPaymentMethodDao.createExpenseOtherPaymentMethod(expenseOtherPaymentMethodModel);
 
-        String where = ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod._ID + "= "+ insertedRecordId;
-
-        mExpenseOtherPaymentMethodDao.updateExpenseOtherPaymentMethod(null, where);
+        mExpenseOtherPaymentMethodDao.updateExpenseOtherPaymentMethod(null, insertedRecordId);
 
     }
 
@@ -227,10 +223,8 @@ public class ExpenseOtherPaymentMethodDaoTest {
 
         long nonExistentId = 7;
 
-        String where = ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod._ID + "= "+ nonExistentId;
-
         long updatedRows = mExpenseOtherPaymentMethodDao.
-                updateExpenseOtherPaymentMethod(updatedExpenseOtherPaymentMethodModel, where);
+                updateExpenseOtherPaymentMethod(updatedExpenseOtherPaymentMethodModel, nonExistentId);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
