@@ -38,7 +38,7 @@ public class OtherPaymentMethodDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mOtherPaymentMethodDao = new OtherPaymentMethodDaoImpl(mContext);
-        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).openConnection();
+//        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).openConnection();
     }
 
     @After

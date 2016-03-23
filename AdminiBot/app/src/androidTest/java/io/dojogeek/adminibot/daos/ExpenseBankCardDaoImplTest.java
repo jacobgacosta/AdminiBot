@@ -38,7 +38,7 @@ public class ExpenseBankCardDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mExpenseBankCardDao = new ExpenseBankCardDaoImpl(mContext);
-        ((ExpenseBankCardDaoImpl)mExpenseBankCardDao).openConnection();
+//        ((ExpenseBankCardDaoImpl)mExpenseBankCardDao).openConnection();
     }
 
     @After

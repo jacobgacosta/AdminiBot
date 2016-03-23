@@ -37,7 +37,7 @@ public class ExpenseDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mExpenseDao = new ExpenseDaoImpl(mContext);
-        ((ExpenseDaoImpl)mExpenseDao).openConnection();
+//        ((ExpenseDaoImpl)mExpenseDao).openConnection();
     }
 
     @After
