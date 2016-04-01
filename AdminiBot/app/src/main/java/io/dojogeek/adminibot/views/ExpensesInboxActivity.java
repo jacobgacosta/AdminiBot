@@ -22,7 +22,18 @@ public class ExpensesInboxActivity extends AppCompatActivity implements Expenses
     }
 
     @Override
-    public void showNotification(int stringResourceId) {
+    public void successfulDeletion() {
 
     }
+
+    @Override
+    public void errorDeletion() {
+
+    }
+
+    @Override
+    public void showExpenseDetail() {
+
+    }
+
 }

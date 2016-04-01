@@ -8,5 +8,9 @@ public interface ExpensesInbox {
 
     void listExpenses(List<ExpenseModel> expenseModelList);
 
-    void showNotification(int stringResourceId);
+    void successfulDeletion();
+
+    void errorDeletion();
+
+    void showExpenseDetail();
 }
