@@ -10,7 +10,4 @@ public interface ExpenseCreationPresenter {
 
     void createExpense(ExpenseModel expenseModel);
 
-    void loadPaymentMethods();
-
-    void getPaymentMethodsByType(TypePaymentMethodEnum typePaymentMethod);
 }

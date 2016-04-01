@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.List;
 
@@ -11,22 +12,12 @@ import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 
-public class ExpenseCreationActivity extends AppCompatActivity implements ExpenseCreation{
+public class ExpenseCreationActivity extends AppCompatActivity implements ExpenseCreation, View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_creation);
-    }
-
-    @Override
-    public void showTypesPaymentMethods(List<TypePaymentMethodEnum> paymentMethods) {
-
-    }
-
-    @Override
-    public void showOtherPaymentMethods(List<OtherPaymentMethodModel> otherPaymentMethodModelList) {
-
     }
 
     @Override
@@ -40,7 +31,7 @@ public class ExpenseCreationActivity extends AppCompatActivity implements Expens
     }
 
     @Override
-    public void showBankCards(List<BankCardModel> bankCardModels) {
+    public void onClick(View view) {
 
     }
 }
