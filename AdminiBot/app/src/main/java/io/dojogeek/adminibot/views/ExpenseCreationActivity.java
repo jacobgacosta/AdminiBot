@@ -20,27 +20,27 @@ public class ExpenseCreationActivity extends AppCompatActivity implements Expens
     }
 
     @Override
-    public void showNotification(int stringResource) {
+    public void showTypesPaymentMethods(List<TypePaymentMethodEnum> paymentMethods) {
 
     }
 
     @Override
-    public void selectCard(List<BankCardModel> bankCardModelList) {
+    public void showOtherPaymentMethods(List<OtherPaymentMethodModel> otherPaymentMethodModelList) {
 
     }
 
     @Override
-    public void registerBankCard(CardTypeEnum cardTypeEnum) {
+    public void successfulExpenseCreation() {
 
     }
 
     @Override
-    public void selectOtherPaymentMethod(List<OtherPaymentMethodModel> otherPaymentMethodModelList) {
+    public void errorExpenseCreation() {
 
     }
 
     @Override
-    public void registerOtherPaymentMethod(TypePaymentMethodEnum typePaymentMethodEnum) {
+    public void showBankCards(List<BankCardModel> bankCardModels) {
 
     }
 }

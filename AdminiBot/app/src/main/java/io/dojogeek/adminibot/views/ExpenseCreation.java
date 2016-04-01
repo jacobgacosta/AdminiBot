@@ -9,14 +9,13 @@ import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 
 public interface ExpenseCreation {
 
-    void showNotification(int stringResource);
+    void showTypesPaymentMethods(List<TypePaymentMethodEnum> paymentMethods);
 
-    void selectCard(List<BankCardModel> bankCardModelList);
+    void showOtherPaymentMethods(List<OtherPaymentMethodModel> otherPaymentMethodModelList);
 
-    void registerBankCard(CardTypeEnum cardTypeEnum);
+    void successfulExpenseCreation();
 
-    void selectOtherPaymentMethod(List<OtherPaymentMethodModel> otherPaymentMethodModelList);
+    void errorExpenseCreation();
 
-    void registerOtherPaymentMethod(TypePaymentMethodEnum typePaymentMethodEnum);
-
+    void showBankCards(List<BankCardModel> bankCardModels);
 }
