@@ -94,15 +94,6 @@ import static org.mockito.Mockito.*;
 
     }
 
-    @Test
-    public void testShowExpenseDetail_successDetail() {
-
-        int expenseId = 1;
-
-        mExpensesInboxPresenter.getExpenseDetail(expenseId);
-
-    }
-
     private List<ExpenseModel> getExpensesList() {
 
         ExpenseModel expenseModel = createExpenseModel(1, "Payment camera", 7800,
