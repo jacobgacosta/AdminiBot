@@ -1,89 +1,290 @@
 package io.dojogeek.adminibot.presenters;
 
+import android.annotation.SuppressLint;
+import android.database.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.daos.BankCardDao;
+import io.dojogeek.adminibot.daos.BankCardDaoImpl;
+import io.dojogeek.adminibot.daos.ExpenseBankCardDao;
+import io.dojogeek.adminibot.daos.ExpenseBankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDao;
+import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
+import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
-import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
+import io.dojogeek.adminibot.daos.SQLiteGlobalDao;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
+import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
+import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.ExpenseCreation;
 
 public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
-    private static final long OPERATIONAL_ERROR = -1;
     private ExpenseCreation mExpenseCreation;
     private ExpenseDao mExpenseDao;
+    private ExpenseOtherPaymentMethodDao mExpenseOtherPaymentMethodDao;
     private OtherPaymentMethodDao mOtherPaymentMethodDao;
     private BankCardDao mBankCardDao;
+    private ExpenseBankCardDao mExpenseBankCardDao;
+    private List<OtherPaymentMethodModel> mOtherPaymentMethodModels;
+    private List<BankCardModel> mBankCardModels;
 
     public ExpenseCreationPresenterImpl(ExpenseCreation expenseCreation, ExpenseDao expenseDao,
-                                        OtherPaymentMethodDao otherPaymentMethodDao, BankCardDao bankCardDao) {
+                                        OtherPaymentMethodDao otherPaymentMethodDao, BankCardDao bankCardDao,
+                                        ExpenseOtherPaymentMethodDao expenseOtherPaymentMethodDao,
+                                        ExpenseBankCardDao expenseBankCardDao) {
+
         mExpenseCreation = expenseCreation;
         mExpenseDao = expenseDao;
         mOtherPaymentMethodDao = otherPaymentMethodDao;
         mBankCardDao = bankCardDao;
+        mExpenseOtherPaymentMethodDao = expenseOtherPaymentMethodDao;
+        mExpenseBankCardDao = expenseBankCardDao;
     }
 
     @Override
     public void createExpense(ExpenseModel expenseModel) {
 
-        long insertedRecordId = mExpenseDao.createExpense(expenseModel);
+        try {
+            beginTransactions();
 
-        boolean isError = isCreationError(insertedRecordId);
+            long insertedExpenseId = mExpenseDao.createExpense(expenseModel);
 
-        if (isError) {
-            showMessage(R.string.expenses_error_creation);
-        } else {
-            showMessage(R.string.expenses_success_creation);
+            registerOtherPaymentMethodsUsedForExpense(insertedExpenseId,
+                    expenseModel.getOtherPaymentMethodModels());
+
+            searchOtherPaymentMethodsAndUpdateAmountsSpent(expenseModel.getOtherPaymentMethodModels());
+
+            registerBankCardsUsedForExpense(insertedExpenseId, expenseModel.getExpenseBankCardModels());
+
+            searchBankCardsAndUpdateAmountsSpent(expenseModel.getExpenseBankCardModels());
+
+            setTransactionsSuccessful();
+
+            mExpenseCreation.successfulExpenseCreation();
+
+        } catch (SQLException exception) {
+
+            exception.printStackTrace();
+
+            mExpenseCreation.errorExpenseCreation();
+
+        } finally {
+            endTransactions();
         }
     }
 
     @Override
-    public void loadOrCreateBankCardsByCardType(CardTypeEnum cardTypeEnum) {
+    public void loadPaymentMethods() {
 
-        List<BankCardModel> bankCardModelList = mBankCardDao.getBankCardByCartType(cardTypeEnum);
+        List<TypePaymentMethodEnum> paymentMethods = getTypesPaymentMethods();
 
-        if (bankCardModelList.isEmpty()) {
-
-            mExpenseCreation.registerBankCard(cardTypeEnum);
-
-        } else {
-
-            mExpenseCreation.selectCard(bankCardModelList);
-        }
+        mExpenseCreation.showTypesPaymentMethods(paymentMethods);
     }
 
     @Override
-    public void loadOrCreateOtherPaymentMethodByType(TypePaymentMethodEnum typePaymentMethodEnum) {
+    public void getPaymentMethodsByType(TypePaymentMethodEnum typePaymentMethod) {
 
-        List<OtherPaymentMethodModel> otherPaymentMethodModelList =
-                mOtherPaymentMethodDao.getOtherPaymentMethodByType(typePaymentMethodEnum);
-
-        if (otherPaymentMethodModelList.isEmpty()) {
-            mExpenseCreation.registerOtherPaymentMethod(typePaymentMethodEnum);
+        if (typePaymentMethod.equals(TypePaymentMethodEnum.CARD)) {
+            listCards();
         } else {
-            mExpenseCreation.selectOtherPaymentMethod(otherPaymentMethodModelList);
+            listOtherPaymentMethodsByType(typePaymentMethod);
         }
 
     }
 
-    private boolean isCreationError(long creationCode) {
+    private void registerOtherPaymentMethodsUsedForExpense(long expenseId,
+                                                           List<ExpenseOtherPaymentMethodModel> paymentMethodModels) {
 
-        if (creationCode == OPERATIONAL_ERROR) {
-            return true;
+        for (ExpenseOtherPaymentMethodModel otherPaymentMethodModel: paymentMethodModels) {
+
+            otherPaymentMethodModel.setExpenseId(expenseId);
+
+            mExpenseOtherPaymentMethodDao.createExpenseOtherPaymentMethod(otherPaymentMethodModel);
+
+        }
+    }
+
+    private void searchOtherPaymentMethodsAndUpdateAmountsSpent(List<ExpenseOtherPaymentMethodModel> paymentMethodModels) {
+
+        for (ExpenseOtherPaymentMethodModel otherPaymentMethodModel: paymentMethodModels) {
+
+            OtherPaymentMethodModel otherPaymentMethodModelToUpdate = getOtherPaymentMethodById(otherPaymentMethodModel.getId());
+
+            otherPaymentMethodModelToUpdate =
+                    updateAmountForOtherPaymentMethodModel(otherPaymentMethodModelToUpdate, otherPaymentMethodModel.getAmount());
+
+            mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModelToUpdate, otherPaymentMethodModelToUpdate.getId());
+        }
+    }
+
+    private OtherPaymentMethodModel getOtherPaymentMethodById(long id) {
+
+        OtherPaymentMethodModel otherPaymentMethodModelToUpdate = null;
+
+        try {
+            otherPaymentMethodModelToUpdate = mOtherPaymentMethodDao.getOtherPaymentMethodById(id);
+
+        } catch (DataException e) {
+            e.printStackTrace();
         }
 
-        return false;
+        return otherPaymentMethodModelToUpdate;
     }
 
-    private void showMessage(int stringResource) {
-        mExpenseCreation.showNotification(stringResource);
+    private OtherPaymentMethodModel updateAmountForOtherPaymentMethodModel(OtherPaymentMethodModel otherPaymentMethodModel,
+                                                                           double amount) {
+
+        double totalAmount = otherPaymentMethodModel.getAvailableCredit() - amount;
+        otherPaymentMethodModel.setAvailableCredit(totalAmount);
+
+        return otherPaymentMethodModel;
     }
 
+    private void registerBankCardsUsedForExpense(long expenseId,
+                                                 List<ExpenseBankCardModel> expenseBankCardModels) {
+
+        for (ExpenseBankCardModel expenseBankCardModel : expenseBankCardModels) {
+
+            expenseBankCardModel.setExpenseId(expenseId);
+
+            mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
+        }
+    }
+
+    private void searchBankCardsAndUpdateAmountsSpent(List<ExpenseBankCardModel> expenseBankCardModels) {
+
+        for (ExpenseBankCardModel expenseBankCardModel : expenseBankCardModels) {
+
+            BankCardModel bankCardModelToUpdate = getBankCardModelById(expenseBankCardModel.getBankCardId());
+
+            bankCardModelToUpdate = updateAmountForBankCardModel(bankCardModelToUpdate, expenseBankCardModel.getAmount());
+
+            mBankCardDao.updateBankCard(bankCardModelToUpdate, bankCardModelToUpdate.getId());
+        }
+    }
+
+    private BankCardModel getBankCardModelById(long id) {
+
+        BankCardModel responseBankCardModel = null;
+
+        try {
+            responseBankCardModel =
+                    mBankCardDao.getBankCardById(id);
+
+        } catch (DataException e) {
+            e.printStackTrace();
+        }
+
+        return responseBankCardModel;
+    }
+
+    private BankCardModel updateAmountForBankCardModel(BankCardModel bankCardModel, double amount) {
+
+        double availableCredit = bankCardModel.getAvailableCredit();
+
+        bankCardModel.setAvailableCredit(availableCredit + amount);
+
+        return bankCardModel;
+    }
+
+    private void beginTransactions() {
+
+        beginTransaction((ExpenseDaoImpl) mExpenseDao);
+        beginTransaction((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
+        beginTransaction((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        beginTransaction((BankCardDaoImpl) mBankCardDao);
+        beginTransaction((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
+
+    }
+
+    private void setTransactionsSuccessful() {
+        setTransactionSuccessful((ExpenseDaoImpl) mExpenseDao);
+        setTransactionSuccessful((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
+        setTransactionSuccessful((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        setTransactionSuccessful((BankCardDaoImpl) mBankCardDao);
+        setTransactionSuccessful((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
+    }
+
+    private void endTransactions() {
+
+        endTransaction((ExpenseDaoImpl) mExpenseDao);
+        endTransaction((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
+        endTransaction((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        endTransaction((BankCardDaoImpl) mBankCardDao);
+        endTransaction((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
+
+    }
+
+    private void beginTransaction(SQLiteGlobalDao sqLiteGlobalDao) {
+        sqLiteGlobalDao.beginTransaction();
+    }
+
+    private void endTransaction(SQLiteGlobalDao sqLiteGlobalDao) {
+        sqLiteGlobalDao.endTransaction();
+    }
+
+    private void setTransactionSuccessful(SQLiteGlobalDao sqLiteGlobalDao) {
+        sqLiteGlobalDao.setTransactionSuccessful();
+    }
+
+    private List<TypePaymentMethodEnum> getTypesPaymentMethods() {
+
+        List<TypePaymentMethodEnum> paymentMethods = new ArrayList<>();
+
+        mOtherPaymentMethodModels = mOtherPaymentMethodDao.getOtherPaymentMethods();
+
+        mBankCardModels = mBankCardDao.getBankCards();
+
+        if (!mBankCardModels.isEmpty()) {
+            paymentMethods.add(TypePaymentMethodEnum.CARD);
+        }
+
+        for (OtherPaymentMethodModel otherPaymentMethodModel : mOtherPaymentMethodModels) {
+            addTypePaymentMethodIfNonExistToList(paymentMethods, otherPaymentMethodModel);
+        }
+
+        return paymentMethods;
+    }
+
+    private void addTypePaymentMethodIfNonExistToList(List<TypePaymentMethodEnum> paymentMethods,
+                                        OtherPaymentMethodModel otherPaymentMethodModel) {
+
+        TypePaymentMethodEnum typePaymentMethod = otherPaymentMethodModel.getTypePaymentMethod();
+
+        if (!paymentMethods.contains(typePaymentMethod)) {
+            paymentMethods.add(typePaymentMethod);
+        }
+
+    }
+
+    private void listCards() {
+
+        List<BankCardModel> bankCardModels = new ArrayList<>();
+        bankCardModels.addAll(mBankCardModels);
+
+        mExpenseCreation.showBankCards(bankCardModels);
+    }
+
+    private void listOtherPaymentMethodsByType(TypePaymentMethodEnum typePaymentMethod) {
+
+        List<OtherPaymentMethodModel> otherPaymentMethodModels = new ArrayList<>();
+
+        for (OtherPaymentMethodModel otherPaymentMethodModel : mOtherPaymentMethodModels) {
+            if (otherPaymentMethodModel.getTypePaymentMethod().equals(typePaymentMethod)) {
+                otherPaymentMethodModels.add(otherPaymentMethodModel);
+            }
+        }
+
+        mExpenseCreation.showOtherPaymentMethods(otherPaymentMethodModels);
+
+    }
 }
