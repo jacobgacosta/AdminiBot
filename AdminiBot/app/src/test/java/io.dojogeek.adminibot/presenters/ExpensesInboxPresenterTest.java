@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ExpensesInboxPresenterTest {
+    public class ExpensesInboxPresenterTest {
 
     @Mock
     private ExpensesInbox mExpensesInboxActivity;
@@ -68,11 +68,11 @@ public class ExpensesInboxPresenterTest {
         mExpensesInboxPresenter.deleteExpense(expenseId);
 
         verify(mExpenseDao).deleteExpense(anyLong());
-        verify(mExpensesInboxActivity).showNotification(R.string.success_deletion);
+        verify(mExpensesInboxActivity).successfulDeletion();
     }
 
     @Test
-    public void testDeleteExpens_deletionError() {
+    public void testDeleteExpense_deletionError() {
 
         long deletedRows = 0;
         long expenseId = 1;
@@ -82,7 +82,7 @@ public class ExpensesInboxPresenterTest {
         mExpensesInboxPresenter.deleteExpense(expenseId);
 
         verify(mExpenseDao).deleteExpense(anyLong());
-        verify(mExpensesInboxActivity).showNotification(R.string.error_deletion);
+        verify(mExpensesInboxActivity).errorDeletion();
     }
 
     @Test
@@ -91,6 +91,15 @@ public class ExpensesInboxPresenterTest {
         mExpensesInboxPresenter.unusedView();
 
         verify(mExpenseDao).closeConnection();
+
+    }
+
+    @Test
+    public void testShowExpenseDetail_successDetail() {
+
+        int expenseId = 1;
+
+        mExpensesInboxPresenter.getExpenseDetail(expenseId);
 
     }
 
