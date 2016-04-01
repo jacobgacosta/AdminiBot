@@ -1,5 +1,9 @@
 package io.dojogeek.adminibot.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
@@ -49,4 +53,13 @@ public class ModelsFactory {
         return bankCardModel;
     }
 
+    public static List<TypePaymentMethodEnum> createTypePaymentMethodEnumList() {
+
+        List<TypePaymentMethodEnum> typePaymentMethodEnumList = new ArrayList<>();
+        typePaymentMethodEnumList.add(TypePaymentMethodEnum.CARD);
+        typePaymentMethodEnumList.add(TypePaymentMethodEnum.CASH);
+        typePaymentMethodEnumList.add(TypePaymentMethodEnum.FOOD_COUPONS);
+
+        return typePaymentMethodEnumList;
+    }
 }
