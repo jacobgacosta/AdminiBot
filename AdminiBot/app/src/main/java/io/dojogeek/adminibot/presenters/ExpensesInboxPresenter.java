@@ -11,4 +11,6 @@ public interface ExpensesInboxPresenter {
     void unusedView();
 
     void deleteExpense(long expenseId);
+
+    void getExpenseDetail(int idExpense);
 }

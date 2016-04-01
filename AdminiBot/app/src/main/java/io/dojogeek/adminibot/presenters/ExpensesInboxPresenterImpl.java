@@ -34,10 +34,15 @@ public class ExpensesInboxPresenterImpl implements ExpensesInboxPresenter {
         long deletedRows = mExpenseDao.deleteExpense(expenseId);
 
         if (deletedRows == SINGLE_OPERATION) {
-            mExpensesInbox.showNotification(R.string.success_deletion);
+            mExpensesInbox.successfulDeletion();
         } else {
-            mExpensesInbox.showNotification(R.string.error_deletion);
+            mExpensesInbox.errorDeletion();
         }
+    }
+
+    @Override
+    public void getExpenseDetail(int idExpense) {
+
     }
 
     @Override
