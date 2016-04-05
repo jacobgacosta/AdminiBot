@@ -1,5 +1,6 @@
 package dagger;
 
+import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
 import io.dojogeek.adminibot.views.LoginActivity;
 import io.dojogeek.adminibot.views.InboxFragment;
@@ -17,4 +18,5 @@ public interface AdminiBotComponent {
 
     void inject(RegisterExpenseActivity activity);
 
+    void inject(PaymentMethodsActivity activity);
 }

@@ -2,10 +2,16 @@ package dagger;
 
 import android.content.Context;
 
+import io.dojogeek.adminibot.daos.BankCardDao;
+import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
+import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
+import io.dojogeek.adminibot.presenters.PaymentMethodsPresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenterImpl;
 import io.dojogeek.adminibot.presenters.LoginPresenter;
@@ -14,6 +20,8 @@ import io.dojogeek.adminibot.presenters.NewPurchasePresenter;
 import io.dojogeek.adminibot.presenters.NewPurchasePresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenter;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenterImpl;
+import io.dojogeek.adminibot.views.PaymentMethods;
+import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
 import io.dojogeek.adminibot.views.Login;
@@ -31,6 +39,7 @@ public class AdminiBotModule {
     private Inbox mInbox;
     private Context mContext;
     private RegisterExpense mRegisterExpense;
+    private PaymentMethods mPaymentMethods;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -50,6 +59,11 @@ public class AdminiBotModule {
     public AdminiBotModule(RegisterExpense registerExpense) {
         mRegisterExpense = registerExpense;
         mContext = ((RegisterExpenseActivity) registerExpense);
+    }
+
+    public AdminiBotModule(PaymentMethods paymentMethods) {
+        mPaymentMethods = paymentMethods;
+        mContext = ((PaymentMethodsActivity) paymentMethods);
     }
 
     @Provides
@@ -80,6 +94,14 @@ public class AdminiBotModule {
 
         return new RegisterExpensePresenterImpl(mRegisterExpense, expenseTypeDaoImpl, expenseDaoImpl,
                 userDaoImpl, typesPaymentMethodsDaoImpl);
+    }
+
+    @Provides
+    @AdminBotScope
+    PaymentMethodsPresenter providePaymentMethodsPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao,
+                                                           BankCardDaoImpl bankCardDao) {
+
+        return new PaymentMethodsPresenterImpl(mPaymentMethods, otherPaymentMethodDao, bankCardDao) ;
     }
 
     @Provides
