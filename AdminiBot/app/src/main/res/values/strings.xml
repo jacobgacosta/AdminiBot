@@ -108,5 +108,11 @@
     <string name="error_deletion">Error al intentar borrar registro, intente más tarde</string>
     <string name="expenses_success_creation">Gasto agregado</string>
     <string name="expenses_error_creation">Se produjo un error al agregar gasto, intente más tarde</string>
+    
+    <!-- payment methods -->
+    <string name="card">Tarjeta</string>
+    <string name="cash">Efectivo</string>
+    <string name="cheque">Cheque</string>
+    <string name="cupons">Vales de despensa</string>
 
 </resources>
