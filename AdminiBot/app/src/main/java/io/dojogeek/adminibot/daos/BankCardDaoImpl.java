@@ -16,6 +16,7 @@ import io.dojogeek.adminibot.sqlite.BankCardsContract;
 
 public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
 
+    @Inject
     public BankCardDaoImpl(Context context) {
         super(context);
     }
