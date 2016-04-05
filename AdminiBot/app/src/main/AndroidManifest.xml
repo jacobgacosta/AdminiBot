@@ -42,6 +42,13 @@
         </activity>
         <activity android:name=".views.ExpenseCreationActivity" >
         </activity>
+        <activity android:name=".views.PaymentMethodsActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
