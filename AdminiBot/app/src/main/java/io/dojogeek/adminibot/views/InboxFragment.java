@@ -49,7 +49,7 @@ public class InboxFragment extends BaseFragment implements Inbox, View.OnClickLi
 
         switch (idView) {
             case R.id.add_cost:
-                LaunchIntents.launchIntentClearTop(getActivity(), RegisterExpenseActivity.class);
+                LaunchIntents.launchIntentClearTop(getActivity(), PaymentMethodsActivity.class);
                 break;
             default:
                 Log.v(TAG, "no events!");
