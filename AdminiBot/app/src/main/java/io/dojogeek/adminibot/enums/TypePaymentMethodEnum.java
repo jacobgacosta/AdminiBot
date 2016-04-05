@@ -2,7 +2,7 @@ package io.dojogeek.adminibot.enums;
 
 public enum TypePaymentMethodEnum {
 
-    FOOD_COUPONS("coupons", "food coupons"), CHEQUE("cheque", "accounting document"),
+    FOOD_COUPONS("ic_food_coupon", "food coupons"), CHEQUE("cheque", "accounting document"),
     CASH("cash", "cash"), CARD("card", "card");
 
     String mName;
