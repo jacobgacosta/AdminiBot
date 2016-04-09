@@ -31,6 +31,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadDataView();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        closeConnections();
+    }
+
     private void prepareViewComponentsAndListeners() {
 
         loadViews();
@@ -47,4 +54,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void loadDataView();
 
     protected abstract int getLayoutActivity();
+
+    protected abstract void closeConnections();
 }
