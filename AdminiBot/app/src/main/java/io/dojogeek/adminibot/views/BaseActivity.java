@@ -18,14 +18,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         setupComponent(App.get(this).component());
 
+        int idLayoutActivity = getLayoutActivity();
+        super.setContentView(idLayoutActivity);
+
+        prepareViewComponentsAndListeners();
     }
 
-    public BaseActivity setContentViewResource(int contentView) {
-        super.setContentView(contentView);
-        return this;
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadDataView();
     }
 
-    public void prepareViewComponentsAndListeners() {
+    private void prepareViewComponentsAndListeners() {
 
         loadViews();
 
@@ -38,5 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void addListenersToViews();
 
+    protected abstract void loadDataView();
 
+    protected abstract int getLayoutActivity();
 }
