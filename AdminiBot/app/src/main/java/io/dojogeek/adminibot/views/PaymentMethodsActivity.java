@@ -103,6 +103,11 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         return R.layout.activity_payment_methods;
     }
 
+    @Override
+    protected void closeConnections() {
+        paymentMethodsPresenter.unnusedView();
+    }
+
     private void showAddPaymentMethodOption() {
         setTitle(R.string.title_activity_add_payment_method);
         mAddPaymentMethodOption.setVisibility(View.VISIBLE);

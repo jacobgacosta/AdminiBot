@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
+import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.matchers.IsAList;
@@ -27,10 +29,10 @@ public class PaymentMethodsPresenterTest {
     private PaymentMethods mPaymentMethodsActivity;
 
     @Mock
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
 
     @Mock
-    private BankCardDao mBankCardDao;
+    private BankCardDaoImpl mBankCardDao;
 
     @InjectMocks
     private PaymentMethodsPresenter mPaymentMethodsPresenter =
@@ -79,6 +81,16 @@ public class PaymentMethodsPresenterTest {
         verify(mBankCardDao).getBankCards();
         verify(mPaymentMethodsActivity).
                 showTypesPaymentMethods(argThat(new IsAList<TypePaymentMethodEnum>().size(0)));
+    }
+
+    @Test
+    public void testUnnusedView_closeConnections() {
+
+        mPaymentMethodsPresenter.unnusedView();
+
+        verify(mOtherPaymentMethodDao).closeConnection();
+        verify(mBankCardDao).closeConnection();
+
     }
 
 }

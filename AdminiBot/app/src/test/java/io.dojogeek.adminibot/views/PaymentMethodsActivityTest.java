@@ -60,9 +60,6 @@ public class PaymentMethodsActivityTest {
     private ListView mPaymentMethods;
 
     @Mock
-    private LinearLayout mAddPaymentMethod;
-
-    @Mock
     private PaymentMethodsPresenter mPaymentMethodsPresenter;
 
     @Mock
@@ -70,12 +67,6 @@ public class PaymentMethodsActivityTest {
 
     @Mock
     private Button mAddPaymentMethodButton;
-
-    @Mock
-    private Intent mIntent;
-
-    @Mock
-    private Context mContext;
 
     @Mock
     private AppComponent mAppComponent;
@@ -233,5 +224,13 @@ public class PaymentMethodsActivityTest {
         LaunchIntents.launchIntentWithExtraValues(mPaymentMethodsActivity, MyPaymentMethodsActivity.class, flags);
 
         verify(mView).getTag();
+    }
+
+    @Test
+    public void testCloseConnections() {
+
+        mPaymentMethodsActivity.closeConnections();
+
+        verify(mPaymentMethodsPresenter).unnusedView();
     }
 }

@@ -87,6 +87,11 @@ public class MainActivity extends BaseActivity {
         return R.layout.main;
     }
 
+    @Override
+    protected void closeConnections() {
+
+    }
+
     private void showInboxContent() {
 
         InboxFragment inboxFragment = new InboxFragment();

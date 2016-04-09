@@ -82,6 +82,11 @@ public class LoginActivity extends BaseActivity implements Login, View.OnClickLi
 
     }
 
+    @Override
+    protected void closeConnections() {
+
+    }
+
     private void processInputData() {
 
         loadViews();

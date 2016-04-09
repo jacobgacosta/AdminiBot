@@ -137,6 +137,11 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
 
     }
 
+    @Override
+    protected void closeConnections() {
+
+    }
+
     private void loadSpinnerData(List<String> expensesTypes) {
         mExpensesTypes.setItems(expensesTypes);
         mExpensesTypes.setHint(DEFAULT_VALUE_SPINNER_EXPENSES_TYPES);

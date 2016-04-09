@@ -97,6 +97,11 @@ public class RegisterUserActivity extends BaseActivity implements RegisterUser, 
         return R.layout.register;
     }
 
+    @Override
+    protected void closeConnections() {
+
+    }
+
     private void processInputData() {
 
         UserValidator userValidator = getUserValidator();
