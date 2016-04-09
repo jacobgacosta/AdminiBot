@@ -56,4 +56,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutActivity();
 
     protected abstract void closeConnections();
+
 }

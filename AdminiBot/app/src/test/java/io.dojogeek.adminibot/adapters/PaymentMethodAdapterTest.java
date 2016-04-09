@@ -84,16 +84,16 @@ public class PaymentMethodAdapterTest {
         when(mLayoutPaymentMethod.findViewById(R.id.img_payment_method)).thenReturn(mImagePaymentMethod);
         when(mLayoutPaymentMethod.findViewById(R.id.payment_method_description)).thenReturn(mDescriptionPaymentMethod);
         when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getIdentifier("cash", "string", mContext.getPackageName())).thenReturn(rosourceId);
+        when(mResources.getIdentifier("ic_cash", "string", mContext.getPackageName())).thenReturn(rosourceId);
         when(mResources.getString(rosourceId)).thenReturn(stringResource);
-        when(mResources.getIdentifier("cash", "drawable", mContext.getPackageName())).thenReturn(rosourceId);
+        when(mResources.getIdentifier("ic_cash", "drawable", mContext.getPackageName())).thenReturn(rosourceId);
 
         View actualView =
                 typePaymentMethodEnumArrayAdapter.getView(position, mConvertView, mParent);
 
         assertNotNull(actualView);
         assertThat(actualView, is(mLayoutPaymentMethod));
-        verify(mTypePaymentMethodEnumList, times(2)).get(position);
+        verify(mTypePaymentMethodEnumList, times(3)).get(position);
         verify(mContext).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         verify(mLayoutInflater).inflate(R.layout.item_payment_method, mParent, false);
         verify(mLayoutPaymentMethod).findViewById(R.id.img_payment_method);

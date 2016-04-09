@@ -59,6 +59,7 @@ public class PaymentMethodsActivityTest {
     @Mock
     private ListView mPaymentMethods;
 
+
     @Mock
     private PaymentMethodsPresenter mPaymentMethodsPresenter;
 
