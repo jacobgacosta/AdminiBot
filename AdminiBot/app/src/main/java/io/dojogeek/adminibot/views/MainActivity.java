@@ -44,8 +44,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentViewResource(R.layout.main).prepareViewComponentsAndListeners();
-
         showInboxContent();
 
     }
@@ -77,6 +75,16 @@ public class MainActivity extends BaseActivity {
 
         actionBarDrawerToggleListener.syncState();
 
+    }
+
+    @Override
+    protected void loadDataView() {
+
+    }
+
+    @Override
+    protected int getLayoutActivity() {
+        return R.layout.main;
     }
 
     private void showInboxContent() {

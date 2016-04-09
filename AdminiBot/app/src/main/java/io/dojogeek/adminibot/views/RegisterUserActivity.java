@@ -57,11 +57,7 @@ public class RegisterUserActivity extends BaseActivity implements RegisterUser, 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        setContentViewResource(R.layout.register).prepareViewComponentsAndListeners();
-
     }
 
     @Override
@@ -89,6 +85,16 @@ public class RegisterUserActivity extends BaseActivity implements RegisterUser, 
     protected void addListenersToViews() {
         findViewById(R.id.about).setOnClickListener(this);
         findViewById(R.id.ok).setOnClickListener(this);
+    }
+
+    @Override
+    protected void loadDataView() {
+
+    }
+
+    @Override
+    protected int getLayoutActivity() {
+        return R.layout.register;
     }
 
     private void processInputData() {

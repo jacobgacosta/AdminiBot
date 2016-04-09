@@ -97,8 +97,6 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
 
         super.onCreate(savedInstanceState);
 
-        setContentViewResource(R.layout.register_expense).prepareViewComponentsAndListeners();
-
         loadInitData();
 
     }
@@ -125,6 +123,18 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     @Override
     protected void addListenersToViews() {
         mOk.setOnClickListener(this);
+    }
+
+    @Override
+    protected void loadDataView() {
+
+    }
+
+    @Override
+    protected int getLayoutActivity() {
+
+        return R.layout.register_expense;
+
     }
 
     private void loadSpinnerData(List<String> expensesTypes) {
@@ -171,8 +181,8 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
     }
 
     private void loadInitData() {
-        registerExpensePresenter.getExpensesTypes();
-        registerExpensePresenter.getPaymentMethods();
+        //registerExpensePresenter.getExpensesTypes();
+        //registerExpensePresenter.getPaymentMethods();
     }
 
 }
