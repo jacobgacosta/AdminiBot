@@ -46,11 +46,7 @@ public class LoginActivity extends BaseActivity implements Login, View.OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        setContentViewResource(R.layout.login).prepareViewComponentsAndListeners();
-
     }
 
     @Override
@@ -72,6 +68,18 @@ public class LoginActivity extends BaseActivity implements Login, View.OnClickLi
     protected void addListenersToViews() {
         mLink.setOnClickListener(this);
         mButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void loadDataView() {
+
+    }
+
+    @Override
+    protected int getLayoutActivity() {
+
+        return R.layout.login;
+
     }
 
     private void processInputData() {
