@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
+import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
@@ -33,6 +35,12 @@ public class PaymentMethodsPresenterImpl implements PaymentMethodsPresenter {
 
         mPaymentMethods.showTypesPaymentMethods(typePaymentMethodEnumList);
 
+    }
+
+    @Override
+    public void unnusedView() {
+        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
+        ((BankCardDaoImpl) mBankCardDao).closeConnection();
     }
 
     private List<TypePaymentMethodEnum> getTypesPaymentMethods() {
