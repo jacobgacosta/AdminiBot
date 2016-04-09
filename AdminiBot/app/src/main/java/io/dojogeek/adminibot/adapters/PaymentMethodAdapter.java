@@ -41,6 +41,8 @@ public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
         ImageView imgPaymentMethod = (ImageView) rootView.findViewById(R.id.img_payment_method);
         imgPaymentMethod.setImageDrawable(getDrawableFromName(mTypePaymentMethodEnumList.get(position).getName()));
 
+        rootView.setTag(mTypePaymentMethodEnumList.get(position));
+
         return rootView;
     }
 
