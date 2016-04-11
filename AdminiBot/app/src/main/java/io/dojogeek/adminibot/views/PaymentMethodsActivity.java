@@ -58,7 +58,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         switch (id) {
             case R.id.add_payment_method:
-                LaunchIntents.launchIntentClearTop(this, PaymentMethodsActivity.class);
+                LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
                 break;
             default:
                 Log.v(TAG, "No events for this view");
