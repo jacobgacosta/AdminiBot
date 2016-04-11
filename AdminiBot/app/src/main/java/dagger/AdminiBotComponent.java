@@ -1,5 +1,6 @@
 package dagger;
 
+import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
 import io.dojogeek.adminibot.views.LoginActivity;
@@ -19,4 +20,6 @@ public interface AdminiBotComponent {
     void inject(RegisterExpenseActivity activity);
 
     void inject(PaymentMethodsActivity activity);
+
+    void inject(AddPaymentMethodActivity activity);
 }

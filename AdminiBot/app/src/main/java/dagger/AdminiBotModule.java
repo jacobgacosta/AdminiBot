@@ -20,6 +20,8 @@ import io.dojogeek.adminibot.presenters.NewPurchasePresenter;
 import io.dojogeek.adminibot.presenters.NewPurchasePresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenter;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenterImpl;
+import io.dojogeek.adminibot.views.AddPaymentMethod;
+import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -40,6 +42,7 @@ public class AdminiBotModule {
     private Context mContext;
     private RegisterExpense mRegisterExpense;
     private PaymentMethods mPaymentMethods;
+    private AddPaymentMethod mAddPaymentMethod;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -64,6 +67,11 @@ public class AdminiBotModule {
     public AdminiBotModule(PaymentMethods paymentMethods) {
         mPaymentMethods = paymentMethods;
         mContext = ((PaymentMethodsActivity) paymentMethods);
+    }
+
+    public AdminiBotModule(AddPaymentMethod addPaymentMethod) {
+        mAddPaymentMethod = addPaymentMethod;
+        mContext = ((AddPaymentMethodActivity) addPaymentMethod);
     }
 
     @Provides
