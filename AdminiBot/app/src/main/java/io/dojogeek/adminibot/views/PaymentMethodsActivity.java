@@ -21,6 +21,7 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.ArgumentException;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
@@ -130,7 +131,11 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         Map<String, Serializable> flags = new HashMap<>();
         flags.put("EXTRA_SESSION_ID", (TypePaymentMethodEnum) view.getTag());
 
-        LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
+        try {
+            LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
+        } catch (ArgumentException e) {
+            e.printStackTrace();
+        }
 
     }
 }
