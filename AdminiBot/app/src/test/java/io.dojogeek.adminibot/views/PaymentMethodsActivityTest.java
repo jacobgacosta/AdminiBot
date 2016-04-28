@@ -33,6 +33,7 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.ArgumentException;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
@@ -58,7 +59,6 @@ public class PaymentMethodsActivityTest {
 
     @Mock
     private ListView mPaymentMethods;
-
 
     @Mock
     private PaymentMethodsPresenter mPaymentMethodsPresenter;
@@ -203,7 +203,7 @@ public class PaymentMethodsActivityTest {
     }
 
     @Test
-    public void testOnItemClick_launchPaymentMethodsByType() {
+    public void testOnItemClick_launchPaymentMethodsByType() throws ArgumentException {
 
         AdapterView adapterView = Mockito.mock(AdapterView.class);
 
