@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.views;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import dagger.AdminiBotComponent;
@@ -16,6 +19,9 @@ import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.exceptions.ArgumentException;
+import io.dojogeek.adminibot.utils.LaunchIntents;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -24,20 +30,24 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
+@PrepareForTest({LaunchIntents.class,  View.OnClickListener.class})
 public class AddPaymentMethodActivityTest {
 
     @Mock
     private ListView mPaymentMethodsList;
 
     @Mock
-    private LinearLayout mContainerPaymentMethods;
+    private LinearLayout mAddPaymentMethod;
 
     @Mock
-    private LinearLayout mAddPaymentMethodOption;
+    private View mView;
 
     @InjectMocks
     @Spy
@@ -62,7 +72,7 @@ public class AddPaymentMethodActivityTest {
     public void testLoadViews_setViews() {
 
         doReturn(mPaymentMethodsList).when(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
-        doReturn(mAddPaymentMethodOption).when(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
+        doReturn(mAddPaymentMethod).when(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
 
         mAddPaymentMethodActivity.loadViews();
 
@@ -73,14 +83,11 @@ public class AddPaymentMethodActivityTest {
     @Test
     public void testLoadDataView_listPaymentMethods() {
 
-        doReturn(mContainerPaymentMethods).when(mAddPaymentMethodActivity).findViewById(R.id.container_payment_methods);
-        doReturn(mAddPaymentMethodOption).when(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
-
         mAddPaymentMethodActivity.loadDataView();
 
         verify(mPaymentMethodsList).setAdapter((PaymentMethodAdapter) notNull());
         verify(mPaymentMethodsList).setVisibility(View.VISIBLE);
-        verify(mAddPaymentMethodOption).setVisibility(View.GONE);
+        verify(mAddPaymentMethod).setVisibility(View.GONE);
     }
 
     @Test
@@ -91,5 +98,34 @@ public class AddPaymentMethodActivityTest {
         assertThat(actualLayout, is(not(0)));
         assertThat(actualLayout, is(R.layout.activity_payment_methods));
     }
+
+    @Test
+    public void testOnItemClick_launchPaymentMethodsByType() throws ArgumentException {
+
+        AdapterView adapterView = mock(AdapterView.class);
+
+        mockStatic(LaunchIntents.class);
+
+        PowerMockito.doNothing().when(LaunchIntents.class);
+
+        LaunchIntents.launchIntentClearTop(mAddPaymentMethodActivity, Class.class);
+
+
+        for (TypePaymentMethodEnum typePaymentMethodEnum : TypePaymentMethodEnum.values()) {
+
+            when(mView.getTag()).thenReturn(typePaymentMethodEnum);
+
+            mAddPaymentMethodActivity.onItemClick(adapterView, mView, 0, 0);
+
+        }
+
+        verifyStatic(times(TypePaymentMethodEnum.values().length));
+
+        LaunchIntents.launchIntentClearTop(mAddPaymentMethodActivity, CardCreationActivity.class);
+
+        verify(mView, times(TypePaymentMethodEnum.values().length)).getTag();
+
+    }
+
 
 }
