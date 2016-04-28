@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
+import io.dojogeek.adminibot.exceptions.ArgumentException;
+
 public class LaunchIntents {
 
     public static void launchIntentClearTop(Context context, Class className) {
@@ -16,7 +18,10 @@ public class LaunchIntents {
     }
 
     public static void launchIntentWithExtraValues(Context context, Class className,
-                                                   Map<String, Serializable> flagValues) {
+                                                   Map<String, Serializable> flagValues) throws ArgumentException {
+
+        checkRequiredValue(context, "context");
+        checkRequiredValue(flagValues, "flagValues");
 
         Intent intent = new Intent(context, className);
 
@@ -32,4 +37,13 @@ public class LaunchIntents {
 
         context.startActivity(intent);
     }
+
+    private static void checkRequiredValue(Object object, String fieldName) throws ArgumentException {
+
+        if (object == null) {
+            throw new ArgumentException("The " + fieldName + "is required.");
+        }
+
+    }
+
 }
