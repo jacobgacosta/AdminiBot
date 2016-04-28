@@ -127,5 +127,12 @@ public class AddPaymentMethodActivityTest {
 
     }
 
+    @Test
+    public void testAddListenerToView() {
+
+        mAddPaymentMethodActivity.addListenersToViews();
+
+        verify(mPaymentMethodsList).setOnItemClickListener(mAddPaymentMethodActivity);
+    }
 
 }
