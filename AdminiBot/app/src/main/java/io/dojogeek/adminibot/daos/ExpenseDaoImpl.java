@@ -69,6 +69,7 @@ public class ExpenseDaoImpl extends SQLiteGlobalDao implements ExpenseDao {
             }
         }
 
+        cursor.close();
         return expenseTypeModelList;
     }
 
