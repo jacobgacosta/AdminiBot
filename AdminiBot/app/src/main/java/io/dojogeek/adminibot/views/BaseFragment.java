@@ -31,6 +31,13 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        closeConnections();
+    }
+
+    @Override
     public View getView() {
         return mView;
     }
@@ -40,5 +47,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void loadViews(View fragmentView);
 
     protected abstract void addListenersToViews();
+
+    protected abstract void closeConnections();
 
 }

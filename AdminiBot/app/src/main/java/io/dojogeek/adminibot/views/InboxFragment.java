@@ -80,6 +80,11 @@ public class InboxFragment extends BaseFragment implements Inbox, View.OnClickLi
         mAddCostButton.setOnClickListener(this);
     }
 
+    @Override
+    protected void closeConnections() {
+        newPurchasePresenter.unnusedView();
+    }
+
     private void loadInitData() {
         newPurchasePresenter.loadExpenses();
     }
