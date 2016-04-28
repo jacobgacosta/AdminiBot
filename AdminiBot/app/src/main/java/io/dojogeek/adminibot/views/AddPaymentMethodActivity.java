@@ -1,12 +1,11 @@
 package io.dojogeek.adminibot.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,8 +15,9 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class AddPaymentMethodActivity extends BaseActivity implements AddPaymentMethod {
+public class AddPaymentMethodActivity extends BaseActivity implements AddPaymentMethod, AdapterView.OnItemClickListener {
 
     private ListView mPaymentMethods;
 
@@ -42,7 +42,7 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     @Override
     protected void addListenersToViews() {
-
+        mPaymentMethods.setOnItemClickListener(this);
     }
 
     @Override
@@ -65,6 +65,28 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     @Override
     protected void closeConnections() {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
+
+        switch (typePaymentMethodEnum.name()) {
+            case "CARD":
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+            case "CASH":
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+            case "CHEQUE":
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+            case "FOOD_COUPONS":
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+        }
 
     }
 }
