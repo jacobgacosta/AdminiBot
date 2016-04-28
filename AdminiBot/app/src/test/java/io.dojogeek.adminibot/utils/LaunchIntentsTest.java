@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.dojogeek.adminibot.exceptions.ArgumentException;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
@@ -60,5 +62,13 @@ public class LaunchIntentsTest {
         verify(intent, times(flags.size())).putExtra(anyString(), (Serializable) notNull());
         verify(mContext).startActivity(intent);
     }
+
+    @Test(expected = ArgumentException.class)
+    public void testLaunchIntentWithExtraValues_nullValuesMap() throws ArgumentException {
+
+        LaunchIntents.launchIntentWithExtraValues(mContext, Class.class, null);
+
+    }
+
 
 }
