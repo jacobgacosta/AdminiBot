@@ -2,11 +2,9 @@ package dagger;
 
 import android.content.Context;
 
-import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
@@ -22,6 +20,7 @@ import io.dojogeek.adminibot.presenters.RegisterUserPresenter;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenterImpl;
 import io.dojogeek.adminibot.views.AddPaymentMethod;
 import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
+import io.dojogeek.adminibot.views.CardCreationActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -43,6 +42,7 @@ public class AdminiBotModule {
     private RegisterExpense mRegisterExpense;
     private PaymentMethods mPaymentMethods;
     private AddPaymentMethod mAddPaymentMethod;
+    private CardCreationActivity mCardCreation;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -72,6 +72,11 @@ public class AdminiBotModule {
     public AdminiBotModule(AddPaymentMethod addPaymentMethod) {
         mAddPaymentMethod = addPaymentMethod;
         mContext = ((AddPaymentMethodActivity) addPaymentMethod);
+    }
+
+    public AdminiBotModule(CardCreationActivity cardCreation) {
+        mCardCreation = cardCreation;
+        mContext = (CardCreationActivity) cardCreation;
     }
 
     @Provides
