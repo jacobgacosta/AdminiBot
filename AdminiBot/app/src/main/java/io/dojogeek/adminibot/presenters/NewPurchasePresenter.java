@@ -4,4 +4,5 @@ public interface NewPurchasePresenter {
 
     void loadExpenses();
 
+    void unnusedView();
 }
