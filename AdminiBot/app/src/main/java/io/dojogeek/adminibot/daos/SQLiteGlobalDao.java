@@ -16,9 +16,7 @@ public class SQLiteGlobalDao {
     }
 
     public void openConnection() {
-        if (mDatabase == null) {
-            mDatabase = mHelper.getWritableDatabase();
-        }
+        mDatabase = mHelper.getWritableDatabase();
     }
 
     public void beginTransaction() {
