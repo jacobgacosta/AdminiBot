@@ -94,9 +94,9 @@
     <string name="payment_methods_cheque_description">Documento de pago</string>
 
     <!-- Card types -->
-    <string name="card_types_credit">Crédito</string>
-    <string name="card_types_debit">Débito</string>
-    <string name="card_types_prepaid">Prepago</string>
+    <string name="credit_card">Crédito</string>
+    <string name="debit_card">Débito</string>
+    <string name="prepaid_card">Prepago</string>
 
     <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
     <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
