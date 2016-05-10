@@ -117,7 +117,7 @@
 
     <!-- Add payment method -->
     <string name="add_pm_no_payment_methods_label">No hay métodos de pago registrados</string>
-    <string name="add_pm_button">Agregar un método de pago \u0020 \u0020+</string>
+    <string name="add_pm_button">Agregar \u0020+</string>
     <string name="title_activity_add_payment_method">Agregar método de pago</string>
     <string name="title_activity_choice_payment_method">Realizar gasto con: </string>
 
