@@ -72,11 +72,11 @@ public class PaymentMethodAdapterTest {
     public void testGetView_mappingData() {
 
         int position = 0;
-        int rosourceId = 546785498;
+        int resourceId = 546785498;
         String stringResource = "Efectivo";
 
         PowerMockito.mockStatic(ResourcesCompat.class);
-        BDDMockito.given(ResourcesCompat.getDrawable(mResources, rosourceId, null)).willReturn(mDrawable);
+        BDDMockito.given(ResourcesCompat.getDrawable(mResources, resourceId, null)).willReturn(mDrawable);
 
         when(mTypePaymentMethodEnumList.get(position)).thenReturn(TypePaymentMethodEnum.CASH);
         when(mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(mLayoutInflater);
@@ -84,9 +84,9 @@ public class PaymentMethodAdapterTest {
         when(mLayoutPaymentMethod.findViewById(R.id.img_payment_method)).thenReturn(mImagePaymentMethod);
         when(mLayoutPaymentMethod.findViewById(R.id.payment_method_description)).thenReturn(mDescriptionPaymentMethod);
         when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getIdentifier("ic_cash", "string", mContext.getPackageName())).thenReturn(rosourceId);
-        when(mResources.getString(rosourceId)).thenReturn(stringResource);
-        when(mResources.getIdentifier("ic_cash", "drawable", mContext.getPackageName())).thenReturn(rosourceId);
+        when(mResources.getIdentifier("ic_cash", "string", mContext.getPackageName())).thenReturn(resourceId);
+        when(mResources.getString(resourceId)).thenReturn(stringResource);
+        when(mResources.getIdentifier("ic_cash", "drawable", mContext.getPackageName())).thenReturn(resourceId);
 
         View actualView =
                 typePaymentMethodEnumArrayAdapter.getView(position, mConvertView, mParent);
@@ -101,7 +101,7 @@ public class PaymentMethodAdapterTest {
 
         verify(mContext, times(2)).getResources();
         verify(mResources).getIdentifier(mTypePaymentMethodEnumList.get(position).getName(), "string", mContext.getPackageName());
-        verify(mResources).getString(rosourceId);
+        verify(mResources).getString(resourceId);
         verify(mResources).getIdentifier(mTypePaymentMethodEnumList.get(position).getName(), "drawable", mContext.getPackageName());
 
         verify(mImagePaymentMethod).setImageDrawable(mDrawable);
