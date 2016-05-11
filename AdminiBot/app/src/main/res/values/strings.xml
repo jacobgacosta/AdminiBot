@@ -36,6 +36,7 @@
     <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
+
     <!-- navigation menu -->
     <string name="navigation_home_option">Bandeja de entrada</string>
     <string name="navigation_my_cards_option">Mis tarjetas</string>
@@ -83,7 +84,7 @@
     <string name="inbox_expense_payment_method">Tipo de pago:</string>
     <string name="inbox_expense_date">Pago realizado el:</string>
 
-    <!-- types payment methods -->
+    <!-- payment methods types -->
     <string name="payment_methods_spinner_default_value">Selecciona un tipo de pago</string>
     <string name="payment_methods_cheque">cheque</string>
     <string name="payment_methods_food_coupons">Vales de despensa</string>
@@ -97,6 +98,7 @@
     <string name="credit_card">Crédito</string>
     <string name="debit_card">Débito</string>
     <string name="prepaid_card">Prepago</string>
+    <string name="title_activity_card_types">Ecoge el tipo de tarjeta</string>
 
     <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
     <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
@@ -108,12 +110,13 @@
     <string name="error_deletion">Error al intentar borrar registro, intente más tarde</string>
     <string name="expenses_success_creation">Gasto agregado</string>
     <string name="expenses_error_creation">Se produjo un error al agregar gasto, intente más tarde</string>
-    
+
     <!-- payment methods -->
     <string name="ic_card">Tarjeta</string>
     <string name="ic_cash">Efectivo</string>
     <string name="ic_cheque">Cheque</string>
     <string name="ic_food_coupon">Vales de despensa</string>
+    <string name="title_payment_methods">Elige el método de pago</string>
 
     <!-- Add payment method -->
     <string name="add_pm_no_payment_methods_label">No hay métodos de pago registrados</string>
