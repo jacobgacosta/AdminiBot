@@ -48,6 +48,8 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     @Override
     protected void loadDataView() {
 
+        setTitle(R.string.title_payment_methods);
+
         mAddPaymentMethod.setVisibility(View.GONE);
         mPaymentMethods.setVisibility(View.VISIBLE);
 
@@ -73,17 +75,17 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
         TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
 
-        switch (typePaymentMethodEnum.name()) {
-            case "CARD":
+        switch (typePaymentMethodEnum) {
+            case CARD:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
-            case "CASH":
+            case CASH:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
-            case "CHEQUE":
+            case CHEQUE:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
-            case "FOOD_COUPONS":
+            case FOOD_COUPONS:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
         }
