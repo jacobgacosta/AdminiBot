@@ -36,6 +36,8 @@ public class CardTypeAdapter extends ArrayAdapter<CardTypeEnum> {
         TextView cardName = (TextView) rootView.findViewById(R.id.card_name);
         cardName.setText(getResouceStringFromSimpleString(mCardTypeEnumList.get(position).getCardType()));
 
+        rootView.setTag(mCardTypeEnumList.get(position));
+
         return rootView;
     }
 
