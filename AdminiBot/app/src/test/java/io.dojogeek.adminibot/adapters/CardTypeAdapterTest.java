@@ -88,6 +88,7 @@ public class CardTypeAdapterTest {
         verify(mResources).getIdentifier("credit_card", "string", mContext.getPackageName());
         verify(mContext).getResources();
         verify(mResources).getString(resourceId);
+        verify(mRootView).setTag(mCardTypeEnumList.get(position));
     }
 
 }

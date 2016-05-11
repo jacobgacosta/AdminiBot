@@ -106,6 +106,7 @@ public class PaymentMethodAdapterTest {
 
         verify(mImagePaymentMethod).setImageDrawable(mDrawable);
         verify(mDescriptionPaymentMethod).setText(stringResource);
+        verify(mLayoutPaymentMethod).setTag(mTypePaymentMethodEnumList.get(position));
     }
 
 }
