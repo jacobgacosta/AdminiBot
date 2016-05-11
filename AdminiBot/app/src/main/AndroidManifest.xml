@@ -11,7 +11,7 @@
         android:theme="@style/CustomActionBarTheme">
         <activity
             android:name=".views.RegisterUserActivity"
-            android:label="@string/title_activity_register"></activity>
+            android:label="@string/title_activity_register" />
         <activity
             android:name=".views.LoginActivity"
             android:label="@string/app_name">
@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".views.MainActivity"
-            android:label="@string/title_activity_home_activity"></activity>
+            android:label="@string/title_activity_home_activity" />
         <activity
             android:name=".views.RegisterExpenseActivity"
             android:label="@string/title_activity_expense_registration"
@@ -36,8 +36,8 @@
         <activity
             android:name=".views.ExpensesInboxActivity"
             android:label="@string/title_activity_expenses_inbox"
-            android:theme="@style/CustomActionBarTheme"></activity>
-        <activity android:name=".views.ExpenseCreationActivity"></activity>
+            android:theme="@style/CustomActionBarTheme" />
+        <activity android:name=".views.ExpenseCreationActivity" />
         <activity
             android:name=".views.PaymentMethodsActivity"
             android:parentActivityName=".views.MainActivity"
@@ -46,14 +46,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.MainActivity" />
         </activity>
-        <activity android:name=".views.MyPaymentMethodsActivity"></activity>
+        <activity android:name=".views.MyPaymentMethodsActivity" />
         <activity
             android:name=".views.AddPaymentMethodActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".views.CardCreationActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".views.CardCreationActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".views.CreditCardActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme"
+            ></activity>
     </application>
 
 </manifest>
