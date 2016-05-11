@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.views;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -78,16 +80,20 @@ public class AddPaymentMethodActivityTest {
 
         verify(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
         verify(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
+
     }
 
     @Test
     public void testLoadDataView_listPaymentMethods() {
+
+        doNothing().when(mAddPaymentMethodActivity).setTitle(R.string.title_payment_methods);
 
         mAddPaymentMethodActivity.loadDataView();
 
         verify(mPaymentMethodsList).setAdapter((PaymentMethodAdapter) notNull());
         verify(mPaymentMethodsList).setVisibility(View.VISIBLE);
         verify(mAddPaymentMethod).setVisibility(View.GONE);
+        verify(mAddPaymentMethodActivity).setTitle(R.string.title_payment_methods);
     }
 
     @Test
