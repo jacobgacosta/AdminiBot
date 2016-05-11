@@ -46,4 +46,26 @@ public class CardCreationActivity extends BaseActivity implements CardCreation {
     protected void closeConnections() {
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        CardTypeEnum cardTypeEnum = (CardTypeEnum) view.getTag();
+
+        switch (cardTypeEnum) {
+
+            case CREDIT_CARD:
+                LaunchIntents.launchIntentClearTop(this, CreditCardActivity.class);
+                break;
+            case DEBIT_CARD:
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+            case PREPAID_CARD:
+                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                break;
+            default:
+                Log.v(this.getLocalClassName(), "No operations for this selection.");
+
+        }
+    }
 }
