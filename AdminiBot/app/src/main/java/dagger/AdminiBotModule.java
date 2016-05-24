@@ -20,7 +20,10 @@ import io.dojogeek.adminibot.presenters.RegisterUserPresenter;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenterImpl;
 import io.dojogeek.adminibot.views.AddPaymentMethod;
 import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
+import io.dojogeek.adminibot.views.CardCreation;
 import io.dojogeek.adminibot.views.CardCreationActivity;
+import io.dojogeek.adminibot.views.CreditCard;
+import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -42,7 +45,8 @@ public class AdminiBotModule {
     private RegisterExpense mRegisterExpense;
     private PaymentMethods mPaymentMethods;
     private AddPaymentMethod mAddPaymentMethod;
-    private CardCreationActivity mCardCreation;
+    private CardCreation mCardCreation;
+    private CreditCard mCreditCard;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -74,9 +78,14 @@ public class AdminiBotModule {
         mContext = ((AddPaymentMethodActivity) addPaymentMethod);
     }
 
-    public AdminiBotModule(CardCreationActivity cardCreation) {
+    public AdminiBotModule(CardCreation cardCreation) {
         mCardCreation = cardCreation;
         mContext = (CardCreationActivity) cardCreation;
+    }
+
+    public AdminiBotModule(CreditCard creditCard) {
+        mCreditCard = creditCard;
+        mContext = (CreditCardActivity) creditCard;
     }
 
     @Provides
