@@ -126,7 +126,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
     private void insertTrademarks(SQLiteDatabase db) {
 
         db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
-        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
-        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_2);
+        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_3);
     }
 }
