@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({AdminiBotSQLiteOpenHelperTest.class, ExpensesTypesSQLiteOpenHelperInsertionTest.class,
-        /*TypesPaymentMethodsSQLiteOpenHelperInsertionTest.class, CardTypesSQLiteOpenHelperInsertionTest.class*/})
+        BanksSQLiteOpenHelperInsertionTest.class})
 public class AdminiBotSQLiteOpenHelperSuite {
 }
