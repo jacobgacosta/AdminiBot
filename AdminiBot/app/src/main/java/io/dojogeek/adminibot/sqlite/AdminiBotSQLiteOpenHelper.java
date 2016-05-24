@@ -56,6 +56,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
         db.execSQL(CardDetailContract.SQL_CREATE_TABLE);
         db.execSQL(BanksContract.SQL_CREATE_TABLE);
+        db.execSQL(TrademarkContract.SQL_CREATE_TABLE);
     }
 
     private void deleteTables(SQLiteDatabase db) {
@@ -72,6 +73,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesBankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(CardTypeContract.SQL_DELETE_ENTRIES);
         db.execSQL(BanksContract.SQL_DELETE_ENTRIES);
+        db.execSQL(TrademarkContract.SQL_DELETE_ENTRIES);
         //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
     }
 
@@ -79,6 +81,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
 
         insertExpensesTypes(db);
         insertBanks(db);
+        insertTrademarks(db);
         //insertPaymentMethods(db);
         //insertCardTypes(db);
     }
@@ -120,4 +123,10 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    private void insertTrademarks(SQLiteDatabase db) {
+
+        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
+    }
 }
