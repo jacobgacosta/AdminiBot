@@ -55,6 +55,7 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesBankCardsContract.SQL_CREATE_TABLE);
         //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
         db.execSQL(CardDetailContract.SQL_CREATE_TABLE);
+        db.execSQL(BanksContract.SQL_CREATE_TABLE);
     }
 
     private void deleteTables(SQLiteDatabase db) {
@@ -70,12 +71,14 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(IncomesBankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesBankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(CardTypeContract.SQL_DELETE_ENTRIES);
+        db.execSQL(BanksContract.SQL_DELETE_ENTRIES);
         //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
     }
 
     private void insertInitialValues(SQLiteDatabase db) {
 
         insertExpensesTypes(db);
+        insertBanks(db);
         //insertPaymentMethods(db);
         //insertCardTypes(db);
     }
@@ -98,6 +101,23 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_1);
         db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_2);
         db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_3);
+    }
+
+    private void insertBanks(SQLiteDatabase db) {
+
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_2);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_3);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_4);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_5);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_6);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_7);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_8);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_9);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_10);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_11);
+        db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_12);
+
     }
 
 }
