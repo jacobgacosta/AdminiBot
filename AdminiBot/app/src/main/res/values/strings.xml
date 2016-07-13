@@ -124,4 +124,21 @@
     <string name="title_activity_add_payment_method">Agregar método de pago</string>
     <string name="title_activity_choice_payment_method">Realizar gasto con: </string>
 
+    <!-- add card -->
+    <string name="add_card_banks_hint">Elige el banco</string>
+
+    <!-- banks -->
+    <string name="banks_bancomer">Bancomer</string>
+    <string name="banks_banamex">Banamex</string>
+    <string name="banks_banorte">Bancomer</string>
+    <string name="banks_santander">Santander</string>
+    <string name="banks_hsbc">HSBC</string>
+    <string name="banks_wallmart">Wallmart</string>
+    <string name="banks_scotiabank">Scotia bank</string>
+    <string name="banks_amex">American Express</string>
+    <string name="banks_bnk_azteca">Banco Azteca</string>
+    <string name="banks_banregio">Banregio</string>
+    <string name="banks_bancoopel">Bancoopel</string>
+    <string name="banks_famsa">Banco ahorro famsa</string>
+
 </resources>
