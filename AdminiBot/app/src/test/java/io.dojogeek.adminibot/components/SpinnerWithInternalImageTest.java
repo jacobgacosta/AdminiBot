@@ -34,6 +34,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -55,10 +56,10 @@ public class SpinnerWithInternalImageTest {
     private SpinnerWithInternalImage mSpinner = new SpinnerWithInternalImage(mContext);
 
     @Test
-    public void testCreateSpinnet_fullCreation() throws Exception {
+    public void testCreateSpinner_fullCreation() throws Exception {
 
         ArrayList<String> resourcesNames = mock(ArrayList.class);
-        ArrayList<String> textItems = mock(ArrayList.class);
+        ArrayList<Integer> textItems = mock(ArrayList.class);
 
         Map<String, Integer> mapOfSpinnerItems =  createItemsMapFromBankEnum(BankEnum.values());
 
@@ -67,8 +68,8 @@ public class SpinnerWithInternalImageTest {
         int resourceId = 0;
 
         whenNew(ArrayList.class).withNoArguments().thenReturn(textItems).thenReturn(resourcesNames);
-        when(mContext.getResources()).thenReturn(resourcesMock);
-        when(resourcesMock.getIdentifier(anyString(), anyString(), anyString())).thenReturn(resourceId);
+//        when(mContext.getResources()).thenReturn(resourcesMock);
+//        when(resourcesMock.getIdentifier(anyString(), anyString(), anyString())).thenReturn(resourceId);
 
         SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
 
@@ -81,6 +82,28 @@ public class SpinnerWithInternalImageTest {
         verify(textItems, times(NUMBER_OF_HINT_ADDED)).add(HINT_TEST);
         verify(mSpinner).setAdapter(spinnerBankAdapter);
         verify(resourcesNames, times(mapOfSpinnerItems.size())).add(anyString());
+
+    }
+
+    @Test
+    public void testCreateSpinner_withNoHint() throws Exception {
+
+        ArrayList<String> resourcesNames = mock(ArrayList.class);
+        ArrayList<Integer> textItems = mock(ArrayList.class);
+
+        whenNew(ArrayList.class).withNoArguments().thenReturn(textItems).thenReturn(resourcesNames);
+
+        SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
+
+        doNothing().when(mSpinner).setAdapter(spinnerBankAdapter);
+
+        whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
+
+        mSpinner.createSpinner(0, new HashMap<String, Integer>());
+
+        verify(textItems, never()).add(0);
+        verify(mSpinner).setAdapter(spinnerBankAdapter);
+        verify(resourcesNames, never()).add(anyString());
 
     }
 
