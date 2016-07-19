@@ -43,9 +43,6 @@ public class SpinnerWithInternalImage extends Spinner {
 
         List<Integer> textItems = new ArrayList<>();
 
-        if (resourceIdHint != NO_RESOURCE) {
-            textItems.add(resourceIdHint);
-        }
 
         List<String> resourcesImages = new ArrayList<>();
 
@@ -54,8 +51,13 @@ public class SpinnerWithInternalImage extends Spinner {
             textItems.add(entry.getValue());
         }
 
+        if (resourceIdHint != NO_RESOURCE) {
+            textItems.add(resourceIdHint);
+        }
+
         SpinnerBankAdapter adapter = new SpinnerBankAdapter(mContext, resourcesImages, textItems);
         setAdapter(adapter);
+        setSelection(adapter.getCount());
     }
 
     private void getAttributes(Context context, AttributeSet attrs) {
