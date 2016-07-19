@@ -66,6 +66,7 @@ public class SpinnerWithInternalImageTest {
         Resources resourcesMock = mock(Resources.class);
 
         int resourceId = 0;
+        int count = 5;
 
         whenNew(ArrayList.class).withNoArguments().thenReturn(textItems).thenReturn(resourcesNames);
 //        when(mContext.getResources()).thenReturn(resourcesMock);
@@ -74,14 +75,17 @@ public class SpinnerWithInternalImageTest {
         SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
 
         doNothing().when(mSpinner).setAdapter(spinnerBankAdapter);
+        doNothing().when(mSpinner).setSelection(count);
 
         whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
+        when(spinnerBankAdapter.getCount()).thenReturn(count);
 
         mSpinner.createSpinner(HINT_TEST, mapOfSpinnerItems);
 
         verify(textItems, times(NUMBER_OF_HINT_ADDED)).add(HINT_TEST);
-        verify(mSpinner).setAdapter(spinnerBankAdapter);
         verify(resourcesNames, times(mapOfSpinnerItems.size())).add(anyString());
+        verify(mSpinner).setAdapter(spinnerBankAdapter);
+        verify(mSpinner).setSelection(count);
 
     }
 
@@ -96,6 +100,7 @@ public class SpinnerWithInternalImageTest {
         SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
 
         doNothing().when(mSpinner).setAdapter(spinnerBankAdapter);
+        doNothing().when(mSpinner).setSelection(0);
 
         whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
 
