@@ -98,7 +98,7 @@
     <string name="credit_card">Crédito</string>
     <string name="debit_card">Débito</string>
     <string name="prepaid_card">Prepago</string>
-    <string name="title_activity_card_types">Ecoge el tipo de tarjeta</string>
+    <string name="title_activity_card_types">Escoge el tipo de tarjeta</string>
 
     <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
     <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
@@ -126,6 +126,7 @@
 
     <!-- add card -->
     <string name="add_card_banks_hint">Elige el banco</string>
+    <string name="title_activity_add_card">Agrega una nueva tarjeta</string>
 
     <!-- banks -->
     <string name="banks_bancomer">Bancomer</string>
