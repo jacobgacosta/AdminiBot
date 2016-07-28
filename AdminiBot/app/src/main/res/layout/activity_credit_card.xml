@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="io.dojogeek.adminibot.views.CreditCardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <EditText
+            android:id="@+id/card_name"
+            android:hint="Nombre de la tarjeta"
+            android:inputType="text"
+            style="@style/inputTheme" />
+
+        <LinearLayout
+            android:id="@+id/credit_card_type"
+            android:layout_below="@+id/card_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/card_number"
+                android:hint="No. de tarjeta"
+                android:inputType="number"
+                style="@style/inputTheme"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/cards_brands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/visa"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_visa"/>
+
+                <ImageView
+                    android:id="@+id/mastercard"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_mastercard"/>
+
+                <ImageView
+                    android:id="@+id/amex"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_amex"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <io.dojogeek.adminibot.components.SpinnerWithInternalImage
+            android:id="@+id/banks"
+            style="@style/spinnerTheme"
+            android:layout_below="@+id/credit_card_type"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <EditText
+            android:id="@+id/credit_limit"
+            android:inputType="numberDecimal"
+            android:hint="Limite de crédito"
+            android:layout_below="@+id/banks"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/current_balance"
+            android:inputType="numberDecimal"
+            android:hint="Saldo actual"
+            android:layout_below="@+id/credit_limit"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/cuttoff_date"
+            android:focusable="false"
+            android:hint="Fecha de corte"
+            android:layout_below="@+id/current_balance"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/pay_day_limit"
+            android:focusable="false"
+            android:hint="Fecha limite de pago"
+            android:layout_below="@+id/cuttoff_date"
+            style="@style/inputTheme" />
+
+        <Button
+            android:id="@+id/create_credit_card"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pay_day_limit"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:text="Agregar tarjeta"
+            android:textSize="18sp"
+            android:textColor="@color/primary_background"
+            android:background="@drawable/rounded_button_selector"
+            android:stateListAnimator="@null"/>
+    </RelativeLayout>
+
+</ScrollView>
