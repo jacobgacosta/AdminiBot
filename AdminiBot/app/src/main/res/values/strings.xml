@@ -128,6 +128,9 @@
     <string name="add_card_banks_hint">Elige el banco</string>
     <string name="title_activity_add_card">Agrega una nueva tarjeta</string>
 
+    <!-- add cash -->
+    <string name="title_activity_add_cash">Agregar concepto de efectivo</string>
+
     <!-- banks -->
     <string name="banks_bancomer">Bancomer</string>
     <string name="banks_banamex">Banamex</string>
