@@ -59,7 +59,9 @@
             android:name=".views.CreditCardActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".views.CashActivity"></activity>
+        <activity android:name=".views.CashActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
