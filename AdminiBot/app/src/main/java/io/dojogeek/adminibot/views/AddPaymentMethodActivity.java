@@ -80,7 +80,7 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
             case CASH:
-                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+                LaunchIntents.launchIntentClearTop(this, CashActivity.class);
                 break;
             case CHEQUE:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
