@@ -2,6 +2,7 @@ package dagger;
 
 import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.CardCreationActivity;
+import io.dojogeek.adminibot.views.CashActivity;
 import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
@@ -28,4 +29,6 @@ public interface AdminiBotComponent {
     void inject(CardCreationActivity activity);
 
     void inject(CreditCardActivity activity);
+
+    void inject(CashActivity activity);
 }
