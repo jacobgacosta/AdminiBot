@@ -125,10 +125,12 @@ public class AddPaymentMethodActivityTest {
 
         }
 
-        verifyStatic(times(3));
+        verifyStatic(times(2));
         LaunchIntents.launchIntentClearTop(mAddPaymentMethodActivity, CardCreationActivity.class);
         verifyStatic(times(1));
         LaunchIntents.launchIntentClearTop(mAddPaymentMethodActivity, CashActivity.class);
+        verifyStatic(times(1));
+        LaunchIntents.launchIntentClearTop(mAddPaymentMethodActivity, CheckActivity.class);
 
         verify(mView, times(TypePaymentMethodEnum.values().length)).getTag();
 
