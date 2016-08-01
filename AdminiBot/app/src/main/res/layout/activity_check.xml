@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="io.dojogeek.adminibot.views.CheckActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <EditText
+            android:id="@+id/current_account"
+            android:inputType="numberDecimal"
+            android:hint="Cuenta corriente"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/check_number"
+            android:inputType="numberDecimal"
+            android:hint="Serie y número de cheque"
+            android:layout_below="@id/current_account"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/place_and_date_of_issue"
+            android:inputType="numberDecimal"
+            android:hint="Lugar y fecha de expedición"
+            android:layout_below="@id/check_number"
+            style="@style/inputTheme" />
+
+        <EditText
+            android:id="@+id/amount"
+            android:inputType="numberDecimal"
+            android:hint="Valor del cheque"
+            android:layout_below="@id/place_and_date_of_issue"
+            style="@style/inputTheme" />
+
+        <io.dojogeek.adminibot.components.SpinnerWithInternalImage
+            android:id="@+id/bank"
+            style="@style/spinnerTheme"
+            android:layout_below="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <EditText
+            android:id="@+id/issuance_code"
+            android:inputType="numberDecimal"
+            android:hint="Código de emisión del cheque"
+            android:layout_below="@id/bank"
+            style="@style/inputTheme" />
+
+        <Button
+            android:id="@+id/create_credit_card"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/issuance_code"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:text="Agregar cheque"
+            android:textSize="18sp"
+            android:textColor="@color/primary_background"
+            android:background="@drawable/rounded_button_selector"
+            android:stateListAnimator="@null"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>
