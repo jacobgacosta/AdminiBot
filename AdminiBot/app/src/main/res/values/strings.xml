@@ -131,6 +131,9 @@
     <!-- add cash -->
     <string name="title_activity_add_cash">Agregar concepto de efectivo</string>
 
+    <!-- add check -->
+    <string name="title_activity_add_check">Agregar cheque</string>
+
     <!-- banks -->
     <string name="banks_bancomer">Bancomer</string>
     <string name="banks_banamex">Banamex</string>
