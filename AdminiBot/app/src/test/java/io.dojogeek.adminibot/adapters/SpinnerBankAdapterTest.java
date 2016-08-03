@@ -91,6 +91,7 @@ public class SpinnerBankAdapterTest {
         verify(mockViewcontainer).findViewById(R.id.imageView);
         verify(mResourcesImagesNames).size();
         verify(mockImageView).setImageDrawable(mockDrawable);
+        verify(mockImageView).setVisibility(View.VISIBLE);
         verify(mockViewcontainer).findViewById(R.id.textView);
         verify(mockTextView).setText(stringResource);
         verify(mResourcesImagesNames).get(position);
