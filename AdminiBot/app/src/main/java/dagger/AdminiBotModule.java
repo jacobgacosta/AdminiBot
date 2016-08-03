@@ -28,6 +28,8 @@ import io.dojogeek.adminibot.views.Check;
 import io.dojogeek.adminibot.views.CheckActivity;
 import io.dojogeek.adminibot.views.CreditCard;
 import io.dojogeek.adminibot.views.CreditCardActivity;
+import io.dojogeek.adminibot.views.FoodCoupons;
+import io.dojogeek.adminibot.views.FoodCouponsActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -53,6 +55,7 @@ public class AdminiBotModule {
     private CreditCard mCreditCard;
     private Cash mCash;
     private Check mCheck;
+    private FoodCoupons mFoodCoupons;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -102,6 +105,11 @@ public class AdminiBotModule {
     public AdminiBotModule(Check check) {
         mCheck = check;
         mContext = (CheckActivity) check;
+    }
+
+    public AdminiBotModule(FoodCoupons foodCoupons) {
+        mFoodCoupons = foodCoupons;
+        mContext = (FoodCouponsActivity) foodCoupons;
     }
 
     @Provides
