@@ -59,6 +59,7 @@ public class SpinnerBankAdapter extends BaseAdapter {
 
         if (position < mResourcesImagesNames.size()) {
             image.setImageDrawable(getDrawableFromName(mResourcesImagesNames.get(position)));
+            image.setVisibility(View.VISIBLE);
         }
 
         TextView text = (TextView) rootView.findViewById(R.id.textView);
