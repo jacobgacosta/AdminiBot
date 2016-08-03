@@ -134,6 +134,9 @@
     <!-- add check -->
     <string name="title_activity_add_check">Agregar cheque</string>
 
+    <!-- add food coupon -->
+    <string name="title_activity_add_food_coupon">Agregar vale de despensa</string>
+
     <!-- banks -->
     <string name="banks_bancomer">Bancomer</string>
     <string name="banks_banamex">Banamex</string>
