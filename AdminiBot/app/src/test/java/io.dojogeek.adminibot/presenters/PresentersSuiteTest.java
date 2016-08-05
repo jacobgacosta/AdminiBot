@@ -14,6 +14,6 @@ import io.dojogeek.adminibot.validators.ValidatorTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({PaymentMethodsPresenterTest.class, ExpensesInboxPresenterTest.class,
-        ExpenseCreationPresenterTest.class})
+        ExpenseCreationPresenterTest.class, CashPresenterTest.class})
 public class PresentersSuiteTest {
 }
