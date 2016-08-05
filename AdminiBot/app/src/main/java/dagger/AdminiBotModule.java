@@ -3,11 +3,14 @@ package dagger;
 import android.content.Context;
 
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
+import io.dojogeek.adminibot.daos.CashDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
+import io.dojogeek.adminibot.presenters.CashPresenter;
+import io.dojogeek.adminibot.presenters.CashPresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
@@ -148,6 +151,13 @@ public class AdminiBotModule {
                                                            BankCardDaoImpl bankCardDao) {
 
         return new PaymentMethodsPresenterImpl(mPaymentMethods, otherPaymentMethodDao, bankCardDao) ;
+    }
+
+    @Provides
+    @AdminBotScope
+    CashPresenter provideCashPresenter(CashDaoImpl cashDao) {
+
+        return  new CashPresenterImpl(mCash, cashDao);
     }
 
     @Provides
