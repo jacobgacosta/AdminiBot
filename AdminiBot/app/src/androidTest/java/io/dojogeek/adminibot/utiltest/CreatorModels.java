@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.utiltest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
+import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
@@ -308,5 +310,14 @@ public class CreatorModels {
         expenseBankCardModels.add(createMovementExpenseBankCardModel());
 
         return expenseBankCardModels;
+    }
+
+    public static CashModel createCashModel() {
+
+        CashModel cashModel = new CashModel();
+        cashModel.setAlias("this a test alias");
+        cashModel.setAmount(new BigDecimal(98723.89));
+
+        return cashModel;
     }
 }
