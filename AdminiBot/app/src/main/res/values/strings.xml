@@ -34,6 +34,7 @@
     <string name="error_wrong_lenght_password">El password es demasiado largo</string>
     <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
     <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
+    <string name="error_wrong_lenght_concept">El concepto es demasiado largo</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
 
@@ -130,6 +131,8 @@
 
     <!-- add cash -->
     <string name="title_activity_add_cash">Agregar concepto de efectivo</string>
+    <string name="success_insertion_cash">Se agregó el efectivo correctamente</string>
+    <string name="error_insertion_cash">Se produjo un error al agregar el efectivo</string>
 
     <!-- add check -->
     <string name="title_activity_add_check">Agregar cheque</string>
