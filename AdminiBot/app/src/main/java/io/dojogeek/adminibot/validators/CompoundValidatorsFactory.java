@@ -46,4 +46,13 @@ public class CompoundValidatorsFactory {
         return  compoundValidator;
     }
 
+    public static CompoundValidator cashConceptValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.CASH_CONCEPT_LENGHT).withErroMessage(R.string.error_wrong_lenght_concept));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
+
 }
