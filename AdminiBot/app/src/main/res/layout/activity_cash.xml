@@ -24,7 +24,7 @@
         style="@style/inputTheme" />
 
     <Button
-        android:id="@+id/create_credit_card"
+        android:id="@+id/add_cash"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/cash_amount"
         android:padding="10dp"
