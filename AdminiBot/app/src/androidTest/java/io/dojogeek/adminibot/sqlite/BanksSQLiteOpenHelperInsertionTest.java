@@ -72,12 +72,11 @@ public class BanksSQLiteOpenHelperInsertionTest {
 
     private void compareResultQueryFields(Cursor currentPosition) {
 
-
         long id = currentPosition.getInt(currentPosition.getColumnIndex(BanksContract.Bank._ID));
         String name = currentPosition.getString(currentPosition.getColumnIndex(BanksContract.Bank.COLUMN_NAME));
         String description = currentPosition.getString(currentPosition.getColumnIndex(BanksContract.Bank.COLUMN_IMAGE_NAME));
 
-        String expectedName = BanksContract.BANKS[((int) id - 1)].getName();
+        int expectedName = BanksContract.BANKS[((int) id - 1)].getName();
         String expectedImageName = BanksContract.BANKS[((int) id - 1)].getImageName();
 
         assertEquals(expectedName, name);
