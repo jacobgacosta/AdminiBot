@@ -21,7 +21,7 @@ public class BanksContract {
 
     public static final String SQL_CREATE_TABLE = "CREATE TABLE " + Bank.TABLE_NAME +
             "(" + Bank._ID + " INTEGER PRIMARY KEY, " +
-            Bank.COLUMN_NAME + " TEXT NOT NULL, " +
+            Bank.COLUMN_NAME + " INTEGER NOT NULL, " +
             Bank.COLUMN_IMAGE_NAME + " INTEGER NOT NULL)";
 
     public static final String SQL_INSERT_INITIAL_VALUES_1 = "INSERT INTO " + Bank.TABLE_NAME +
