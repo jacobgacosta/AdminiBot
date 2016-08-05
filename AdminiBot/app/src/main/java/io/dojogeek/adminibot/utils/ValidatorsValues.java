@@ -9,5 +9,6 @@ public interface ValidatorsValues {
     int NAME_MAX_LENGHT = 15;
     int LAST_NAME_MAX_LENGHT = 30;
     int PASSWORD_MAX_LENGHT = 30;
+    int CASH_CONCEPT_LENGHT = 50;
 
 }
