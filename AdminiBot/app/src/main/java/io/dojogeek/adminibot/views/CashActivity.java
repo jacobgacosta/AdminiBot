@@ -160,7 +160,7 @@ public class CashActivity extends BaseActivity implements Cash, View.OnClickList
     @Override
     public void returnToMyPaymentsMethods() {
 
-        LaunchIntents.launchIntentClearTop(this, PaymentMethodsActivity.class);
+        LaunchIntents.launchIntentClearTop(this, MainActivity.class);
 
     }
 
