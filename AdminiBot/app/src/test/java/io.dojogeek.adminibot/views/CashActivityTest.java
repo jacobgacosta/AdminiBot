@@ -291,7 +291,7 @@ public class CashActivityTest {
 
         verifyStatic(times(1));
 
-        LaunchIntents.launchIntentClearTop(mCashActivity, PaymentMethodsActivity.class);
+        LaunchIntents.launchIntentClearTop(mCashActivity, MainActivity.class);
     }
 
 }
