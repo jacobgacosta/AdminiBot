@@ -10,5 +10,9 @@ public interface ValidatorsValues {
     int LAST_NAME_MAX_LENGHT = 30;
     int PASSWORD_MAX_LENGHT = 30;
     int CASH_CONCEPT_LENGHT = 50;
+    int ACCOUNT_LENGHT = 18;
+    int DATE_LENGHT = 10;
+    int AMOUNT_LENGHT = 10;
+    int ISSUANCE_CODE_LENGHT = 18;
 
 }
