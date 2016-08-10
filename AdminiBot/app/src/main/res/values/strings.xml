@@ -35,6 +35,11 @@
     <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
     <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
     <string name="error_wrong_lenght_concept">El concepto es demasiado largo</string>
+    <string name="error_wrong_lenght_account">El número de cuenta es incorrecto</string>
+    <string name="error_wrong_lenght_check_number">El número de cheque no cumple la longitud</string>
+    <string name="error_wrong_lenght_date">La longitud de la fecha es incorrecta</string>
+    <string name="error_wrong_lenght_amount">La longitud del monto es incorrecta</string>
+    <string name="error_wrong_lenght_issuance_code">La longitud del código de emisión es incorrecta</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
 
