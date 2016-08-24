@@ -1,237 +1,1 @@
-package io.dojogeek.adminibot.validators;
-
-import org.junit.Test;
-
-import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-public class CompoundValidatorsFactoryTest {
-
-    private static final String EMTPY_VALUE = "";
-    private static final String SPACE_VALUE = "  ";
-    private static final int NO_ERRORS = 0;
-
-    @Test
-    public void compoundValidators_correctEmail_noErrors() {
-
-        final String email = "jgacosta@dojogeek.io";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
-        compoundValidator.isValid(email);
-
-        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
-    }
-
-    @Test
-    public void compoundValidators_exceededLengthEmail_isError() {
-
-        final String email = "jgacostadg880224n62guaj272016hck@dojogeek.io";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
-        compoundValidator.isValid(email);
-
-        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_length_email);
-    }
-
-    @Test
-    public void compoundValidators_emptyEmail_isError() {
-
-        final String [] emptyEmail = {EMTPY_VALUE, SPACE_VALUE};
-
-        for (String value : emptyEmail) {
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
-            compoundValidator.isValid(value);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
-        }
-
-    }
-
-    @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_nullEmail_isException() {
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
-        compoundValidator.isValid(null);
-
-    }
-
-    @Test
-    public void compoundValidators_malformedEmail_isError() {
-
-        final String [] invalidEmails = {"jgacosta", "jgacosta@", "jgacosta@dojogeek", "jgacosta@dojogeek.",
-        "jgacosta@dojogeek.oi.", "jgacosta@dojogeek#io", "@dojogeek.com", "jgacosta.io", "jgacosta$dojogeek.io",
-        "jgacosta@@.io", "jgacosta@&.io"};
-
-        for (String values : invalidEmails) {
-
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();
-            compoundValidator.isValid(values);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_email);
-        }
-
-    }
-
-    @Test
-    public void compoundValidators_correctName_noErrors() {
-
-        final String name = "Jacob";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
-        compoundValidator.isValid(name);
-
-        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
-    }
-
-    @Test
-    public void compoundValidators_nameWithNoLetters_isError() {
-
-        final String [] invalidNames = {"J4c0b", "Jaco&", "J_a_c_o_b", "J.a.c.o.b", "J>cob", "74508"};
-
-        for (String values : invalidNames) {
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
-            compoundValidator.isValid(values);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_name);
-        }
-    }
-
-    @Test
-    public void compoundValidators_withEmptyName_isError() {
-
-        final String [] emptyValues = {SPACE_VALUE, EMTPY_VALUE};
-
-        for (String values : emptyValues) {
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
-            compoundValidator.isValid(values);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
-        }
-    }
-
-    @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_withNullName_isException() {
-
-        final String name = null;
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
-        compoundValidator.isValid(name);
-
-    }
-
-    @Test
-    public void compoundValidators_exceededLengthName_isError() {
-
-        final String name = "Jacob Dojogek Knowledge";
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();
-        compoundValidator.isValid(name);
-
-        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_name);
-
-    }
-
-    @Test
-    public void compoundValidators_correctLastName_noErrors() {
-
-        final String lastName = "Guzman A";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
-        compoundValidator.isValid(lastName);
-
-        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
-    }
-
-    @Test
-    public void compoundValidators_exceededLengthLastName_isError() {
-
-        final String lastName = "Guzman Knowledge Android Code Dojogeek";
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
-        compoundValidator.isValid(lastName);
-
-        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_last_name);
-    }
-
-    @Test
-    public void compoundValidators_lastNameWithNoLetters_isError() {
-
-        final String lastName = "Guzm4an";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
-        compoundValidator.isValid(lastName);
-
-        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_last_name);
-    }
-
-    @Test
-    public void compoundValidators_withEmptyLastName_isError() {
-
-        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
-
-        for (String values : emptyValues) {
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
-            compoundValidator.isValid(values);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
-        }
-
-    }
-
-    @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_withNullLastName_isException() {
-
-        final String lastName = null;
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();
-        compoundValidator.isValid(lastName);
-        
-    }
-
-    @Test
-    public void compoundValidators_correctPassword_noErrors() {
-
-        final String password = "fuDg3490%&$22_1";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
-        compoundValidator.isValid(password);
-
-        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);
-    }
-
-    @Test
-    public void compoundValidators_exceededLengthPassword_isError() {
-
-        final String password = "fu2345_$%&0df%&678DGK_lla12?¿=0@";
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
-        compoundValidator.isValid(password);
-
-        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_password);
-    }
-
-    @Test
-    public void compoundValidators_withEmptyPassword_isError() {
-
-        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};
-
-        for (String values : emptyValues) {
-            CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
-            compoundValidator.isValid(values);
-
-            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);
-        }
-    }
-
-    @Test(expected= ValidatorNullValueException.class)
-    public void compoundValidators_withNullPassword_isException() {
-
-        final String password = null;
-
-        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();
-        compoundValidator.isValid(password);
-
-    }
-}
+package io.dojogeek.adminibot.validators;import org.junit.Ignore;import org.junit.Test;import io.dojogeek.adminibot.R;import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;import static org.junit.Assert.assertEquals;import static org.junit.Assert.assertFalse;import static org.junit.Assert.assertThat;import static org.junit.Assert.assertTrue;public class CompoundValidatorsFactoryTest {    private static final String EMTPY_VALUE = "";    private static final String SPACE_VALUE = "  ";    private static final int NO_ERRORS = 0;    @Test    public void compoundValidators_correctEmail_noErrors() {        final String email = "jgacosta@dojogeek.io";        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();        compoundValidator.isValid(email);        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);    }    @Test    public void compoundValidators_exceededLengthEmail_isError() {        final String email = "jgacostadg880224n62guaj272016hck@dojogeek.io";        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();        compoundValidator.isValid(email);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_length_email);    }    @Test    public void compoundValidators_emptyEmail_isError() {        final String [] emptyEmail = {EMTPY_VALUE, SPACE_VALUE};        for (String value : emptyEmail) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();            compoundValidator.isValid(value);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);        }    }    @Test(expected= ValidatorNullValueException.class)    public void compoundValidators_nullEmail_isException() {        CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();        compoundValidator.isValid(null);    }    @Test    public void compoundValidators_malformedEmail_isError() {        final String [] invalidEmails = {"jgacosta", "jgacosta@", "jgacosta@dojogeek", "jgacosta@dojogeek.",        "jgacosta@dojogeek.oi.", "jgacosta@dojogeek#io", "@dojogeek.com", "jgacosta.io", "jgacosta$dojogeek.io",        "jgacosta@@.io", "jgacosta@&.io"};        for (String values : invalidEmails) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.emailValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_email);        }    }    @Test    public void compoundValidators_correctName_noErrors() {        final String name = "Jacob";        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();        compoundValidator.isValid(name);        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);    }    @Test    public void compoundValidators_nameWithNoLetters_isError() {        final String [] invalidNames = {"J4c0b", "Jaco&", "J_a_c_o_b", "J.a.c.o.b", "J>cob", "74508"};        for (String values : invalidNames) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_name);        }    }    @Test    public void compoundValidators_withEmptyName_isError() {        final String [] emptyValues = {SPACE_VALUE, EMTPY_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);        }    }    @Test(expected= ValidatorNullValueException.class)    public void compoundValidators_withNullName_isException() {        final String name = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();        compoundValidator.isValid(name);    }    @Test    public void compoundValidators_exceededLengthName_isError() {        final String name = "Jacob Dojogek Knowledge";        CompoundValidator compoundValidator = CompoundValidatorsFactory.nameValidator();        compoundValidator.isValid(name);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_name);    }    @Test    public void compoundValidators_correctLastName_noErrors() {        final String lastName = "Guzman A";        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();        compoundValidator.isValid(lastName);        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);    }    @Test    public void compoundValidators_exceededLengthLastName_isError() {        final String lastName = "Guzman Knowledge Android Code Dojogeek";        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();        compoundValidator.isValid(lastName);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_last_name);    }    @Test    public void compoundValidators_lastNameWithNoLetters_isError() {        final String lastName = "Guzm4an";        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();        compoundValidator.isValid(lastName);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_format_last_name);    }    @Test    public void compoundValidators_withEmptyLastName_isError() {        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);        }    }    @Test(expected= ValidatorNullValueException.class)    public void compoundValidators_withNullLastName_isException() {        final String lastName = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.lastNameValidator();        compoundValidator.isValid(lastName);            }    @Test    public void compoundValidators_correctPassword_noErrors() {        final String password = "fuDg3490%&$22_1";        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();        compoundValidator.isValid(password);        assertEquals(compoundValidator.getErrorMsg(), NO_ERRORS);    }    @Test    public void compoundValidators_exceededLengthPassword_isError() {        final String password = "fu2345_$%&0df%&678DGK_lla12?¿=0@";        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();        compoundValidator.isValid(password);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_password);    }    @Test    public void compoundValidators_withEmptyPassword_isError() {        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);        }    }    @Test(expected= ValidatorNullValueException.class)    public void compoundValidators_withNullPassword_isException() {        final String password = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.passwordValidator();        compoundValidator.isValid(password);    }    @Test    public void testCompoundValidatorCash_withConceptTooLong() {        String concept = "This concepto is very very long and will produce a error";        CompoundValidator compoundValidator = CompoundValidatorsFactory.cashConceptValidator();        compoundValidator.isValid(concept);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_field);    }    @Test    public void testCompoundValidatorCash_withCorrectConcept() {        String concept = "this a correct concept";        CompoundValidator compoundValidator = CompoundValidatorsFactory.cashConceptValidator();        boolean isValidConcept = compoundValidator.isValid(concept);        assertTrue(isValidConcept);    }    @Test(expected= ValidatorNullValueException.class)    public void testCompoundValidatorCash_whitNullConcept() {        String concept = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.cashConceptValidator();        compoundValidator.isValid(concept);    }    @Test    public void testCompoundValidatorCash_whitEmptyConcept() {        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.cashConceptValidator();            compoundValidator.isValid(values);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_empty_value);        }    }    @Test    public void testCompoundValidatorCheck_withCorrectAccount() {        String [] currentAccounts = {"123456789012345678", "1234", "123456789"};        for (String currentAccount : currentAccounts) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkCurrentAccountValidator();            boolean isValid = compoundValidator.isValid(currentAccount);            assertTrue(isValid);        }    }    @Test    public void testCompoundValidatorCheck_withIncorrectAccount() {        String [] currentAccounts = {"123", "", null, "1234567890123456789", "12345.98",                "%·90890823", "$98987323", "@908390823", ".897389743", "_"};        for (String currentAccount : currentAccounts) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkCurrentAccountValidator();            boolean isValid = compoundValidator.isValid(currentAccount);            assertFalse(isValid);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_account);        }    }    @Test    public void testCompoundValidatorCheck_withCorrectCheckNumber() {        String [] checkNumbers = {"123456789012345678", "1234"};        for (String checkNumber : checkNumbers) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkNumberValidator();            boolean isValid = compoundValidator.isValid(checkNumber);            assertTrue(isValid);        }    }    @Test    public void testCompoundValidatorCheck_withIncorrectCheckNumber() {        String [] checkNumbers = {"123", "·$%$=?%", "98349874.9", ".", "87633!", "", null,                "12345678901234567890", "9890O"};        for (String checkNumber : checkNumbers) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkNumberValidator();            boolean isValid = compoundValidator.isValid(checkNumber);            assertFalse(isValid);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_check_number);        }    }    @Test    public void testCompoundValidatorCheck_withNullDate() {        String date = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkDateOfIssueValidator();        boolean isValidDate = compoundValidator.isValid(date);        assertFalse(isValidDate);    }    @Test    public void testCompoundValidatorCheck_whitEmptyDate() {        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkDateOfIssueValidator();            boolean isValid = compoundValidator.isValid(values);            assertFalse(isValid);        }    }    @Test    public void testCompoundValidatorCheck_withCorrectDate() {        String checkNumber = "24/02/1988";        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkDateOfIssueValidator();        boolean isValid = compoundValidator.isValid(checkNumber);        assertTrue(isValid);    }    @Test    public void testCompoundValidatorCheck_withIncorrectAmount() {        String [] incorrectAmounts = {"78687364.", "83987489343..0", "8743747834.12345",                ".", ".8983"};        for (String amount : incorrectAmounts) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkAmountValidator();            boolean isValid = compoundValidator.isValid(amount);            assertFalse(isValid);            assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_incorrect_amount);        }    }    @Test    public void testCompoundValidatorCheck_correctAmount() {        String amount = "123456.90";        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkAmountValidator();        boolean isValid = compoundValidator.isValid(amount);        assertTrue(isValid);    }    @Test(expected= ValidatorNullValueException.class)    public void testCompoundValidatorCheck_withNullIssuanceCode() {        String amount = null;        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkIssuanceCodeValidator();        compoundValidator.isValid(amount);    }    @Test    public void testCompoundValidatorCheck_withEmptyIssuanceCode() {        final String [] emptyValues = {EMTPY_VALUE, SPACE_VALUE};        for (String values : emptyValues) {            CompoundValidator compoundValidator = CompoundValidatorsFactory.checkIssuanceCodeValidator();            boolean isValid = compoundValidator.isValid(values);            assertFalse(isValid);        }    }    @Test    public void testCompoundValidatorCheck_withTooLongIssuanceCode() {        String amount = "12345643434909089767";        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkIssuanceCodeValidator();        compoundValidator.isValid(amount);        assertEquals(compoundValidator.getErrorMsg(), R.string.error_wrong_lenght_issuance_code);    }    @Test    public void testCompoundValidatorCheck_correctIssuanceCode() {        String amount = "123459012345678909";        CompoundValidator compoundValidator = CompoundValidatorsFactory.checkIssuanceCodeValidator();        boolean isValid = compoundValidator.isValid(amount);        assertTrue(isValid);    }}
