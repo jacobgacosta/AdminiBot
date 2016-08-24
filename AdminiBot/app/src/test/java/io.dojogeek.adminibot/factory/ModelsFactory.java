@@ -63,10 +63,4 @@ public class ModelsFactory {
 
         return typePaymentMethodEnumList;
     }
-
-    public static CashModel createCashModel() {
-        CashModel cashModel = factory.manufacturePojo(CashModel.class);
-
-        return cashModel;
-    }
 }
