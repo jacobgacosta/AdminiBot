@@ -193,13 +193,13 @@ public class CreatorModels {
 
     public static OtherPaymentMethodModel createOtherPaymentMethodModel() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = createOtherPaymentMethodModel(24000.00,
+        OtherPaymentMethodModel otherPaymentMethodModel = createOtherPaymentMethodModel(new BigDecimal(24000.00),
                 "test other payment method", "4567AKI90843", TypePaymentMethodEnum.FOOD_COUPONS, 1);
 
         return otherPaymentMethodModel;
     }
 
-    public static OtherPaymentMethodModel createOtherPaymentMethodModel(double availableCredit, String name,
+    public static OtherPaymentMethodModel createOtherPaymentMethodModel(BigDecimal availableCredit, String name,
                                                                         String referenceNumber,
                                                                         TypePaymentMethodEnum typePaymentMethod,
                                                                         long userId) {
