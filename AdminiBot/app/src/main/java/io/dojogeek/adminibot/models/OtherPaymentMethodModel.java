@@ -1,5 +1,7 @@
 package io.dojogeek.adminibot.models;
 
+import java.math.BigDecimal;
+
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
 public class OtherPaymentMethodModel {
@@ -8,7 +10,7 @@ public class OtherPaymentMethodModel {
     private String name;
     private String referenceNumber;
     private TypePaymentMethodEnum typePaymentMethod;
-    private double availableCredit;
+    private BigDecimal availableCredit;
     private long userId;
 
     public long getId() {
@@ -43,11 +45,11 @@ public class OtherPaymentMethodModel {
         this.typePaymentMethod = typePaymentMethod;
     }
 
-    public double getAvailableCredit() {
+    public BigDecimal getAvailableCredit() {
         return availableCredit;
     }
 
-    public void setAvailableCredit(double availableCredit) {
+    public void setAvailableCredit(BigDecimal availableCredit) {
         this.availableCredit = availableCredit;
     }
 
