@@ -67,7 +67,11 @@
             android:name=".views.CheckActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".views.FoodCouponsActivity"
+        <activity
+            android:name=".views.FoodCouponsActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".views.AddNewPaymentMethodActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme" />
     </application>
