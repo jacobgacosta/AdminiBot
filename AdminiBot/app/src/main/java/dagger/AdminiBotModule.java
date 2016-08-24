@@ -6,11 +6,14 @@ import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.CashDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
 import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.presenters.CashPresenterImpl;
+import io.dojogeek.adminibot.presenters.CheckPresenter;
+import io.dojogeek.adminibot.presenters.CheckPresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
@@ -163,9 +166,16 @@ public class AdminiBotModule {
 
     @Provides
     @AdminBotScope
-    CashPresenter provideCashPresenter(CashDaoImpl cashDao) {
+    CashPresenter provideCashPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
 
-        return  new CashPresenterImpl(mCash, cashDao);
+        return new CashPresenterImpl(mCash, otherPaymentMethodDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    CheckPresenter provideCheckPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
+
+        return new CheckPresenterImpl(mCheck, otherPaymentMethodDao);
     }
 
     @Provides
