@@ -35,11 +35,13 @@
     <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
     <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
     <string name="error_wrong_lenght_concept">El concepto es demasiado largo</string>
-    <string name="error_wrong_lenght_account">El número de cuenta es incorrecto</string>
-    <string name="error_wrong_lenght_check_number">El número de cheque no cumple la longitud</string>
+    <string name="error_wrong_account">El número de cuenta es incorrecto</string>
+    <string name="error_wrong_lenght_check_number">El número de cheque es numérico con un máximo de 18 digitos</string>
     <string name="error_wrong_lenght_date">La longitud de la fecha es incorrecta</string>
     <string name="error_wrong_lenght_amount">La longitud del monto es incorrecta</string>
     <string name="error_wrong_lenght_issuance_code">La longitud del código de emisión es incorrecta</string>
+    <string name="error_wrong_incorrect_amount">El monto debe estar compuesto de 10 enteros y 2 decimales como máximo</string>
+    <string name="error_wrong_lenght_field">El campo es demasiado largo</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
 
@@ -127,6 +129,7 @@
     <!-- Add payment method -->
     <string name="add_pm_no_payment_methods_label">No hay métodos de pago registrados</string>
     <string name="add_pm_button">Agregar \u0020+</string>
+    <string name="add_more_pm_button">Agregar más...</string>
     <string name="title_activity_add_payment_method">Agregar método de pago</string>
     <string name="title_activity_choice_payment_method">Realizar gasto con: </string>
 
@@ -141,6 +144,8 @@
 
     <!-- add check -->
     <string name="title_activity_add_check">Agregar cheque</string>
+    <string name="success_insertion_check">Se agregó el cheque correctamente</string>
+    <string name="error_insertion_check">Se produjo un error al agregar el cheque</string>
 
     <!-- add food coupon -->
     <string name="title_activity_add_food_coupon">Agregar vale de despensa</string>
