@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utiltest.CreatorModels;
 
@@ -40,9 +41,9 @@ public class CashDaoImplTest {
     @Test
     public void testCreateCash_successfulCreation() {
 
-        CashModel cashModel = CreatorModels.createCashModel();
+        OtherPaymentMethodModel otherPaymentMethodModelcashModel = CreatorModels.createOtherPaymentMethodModel();
 
-        long insertedRecordId = mCashDao.createCash(cashModel);
+        long insertedRecordId = mCashDao.createCash(otherPaymentMethodModelcashModel);
 
         assertNotEquals(NO_OPERATION, insertedRecordId);
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
