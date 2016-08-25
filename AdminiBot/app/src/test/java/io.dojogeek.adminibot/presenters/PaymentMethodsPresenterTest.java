@@ -66,7 +66,7 @@ public class PaymentMethodsPresenterTest {
         verify(mOtherPaymentMethodDao).getOtherPaymentMethods();
         verify(mBankCardDao).getBankCards();
         verify(mPaymentMethodsActivity).
-                showTypesPaymentMethods(argThat(new IsAList<TypePaymentMethodEnum>().size(3)));
+                prepareView(argThat(new IsAList<TypePaymentMethodEnum>().size(3)));
 
     }
 
@@ -81,7 +81,7 @@ public class PaymentMethodsPresenterTest {
         verify(mOtherPaymentMethodDao).getOtherPaymentMethods();
         verify(mBankCardDao).getBankCards();
         verify(mPaymentMethodsActivity).
-                showTypesPaymentMethods(argThat(new IsAList<TypePaymentMethodEnum>().size(0)));
+                prepareView(argThat(new IsAList<TypePaymentMethodEnum>().size(0)));
     }
 
     @Test
