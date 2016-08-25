@@ -21,8 +21,6 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     private ListView mPaymentMethods;
 
-    private LinearLayout mAddPaymentMethod;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,6 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     @Override
     protected void loadViews() {
         mPaymentMethods = (ListView) findViewById(R.id.payment_methods);
-        mAddPaymentMethod = (LinearLayout) findViewById(R.id.add_payment_method_container);
     }
 
     @Override
@@ -49,9 +46,6 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     protected void loadDataView() {
 
         setTitle(R.string.title_payment_methods);
-
-        mAddPaymentMethod.setVisibility(View.GONE);
-        mPaymentMethods.setVisibility(View.VISIBLE);
 
         List<TypePaymentMethodEnum> paymentMethodEnumList = Arrays.asList(TypePaymentMethodEnum.values());
 
