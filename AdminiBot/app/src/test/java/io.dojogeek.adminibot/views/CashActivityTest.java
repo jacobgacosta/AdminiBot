@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.views;
 
+import android.os.Build;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,9 @@ import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CashValidator;
@@ -30,10 +33,12 @@ import io.dojogeek.adminibot.validators.CashValidator;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -130,9 +135,15 @@ public class CashActivityTest {
 
         when(mockAmountEditable.toString()).thenReturn(amount);
 
-        CashModel mockCashModel = mock(CashModel.class);
+        CashValidator cashValidatorMock = mock(CashValidator.class);
 
-        whenNew(CashModel.class).withNoArguments().thenReturn(mockCashModel);
+        whenNew(CashValidator.class).withNoArguments().thenReturn(cashValidatorMock);
+
+        when(cashValidatorMock.validate()).thenReturn(true);
+
+        OtherPaymentMethodModel mockOtherPaymentMethodModel = mock(OtherPaymentMethodModel.class);
+
+        whenNew(OtherPaymentMethodModel.class).withNoArguments().thenReturn(mockOtherPaymentMethodModel);
 
         BigDecimal mockBigDecimal = mock(BigDecimal.class);
 
@@ -140,40 +151,44 @@ public class CashActivityTest {
 
         mCashActivity.onClick(mAddCash);
 
-        verify(mockCashModel).setAlias(alias);
-        verify(mockCashModel).setAmount(mockBigDecimal);
-        verify(mCashPresenter).createCash(mockCashModel);
+        verify(mCashAlias, times(2)).getText();
+        verify(mCashAmount, times(2)).getText();
+        verify(cashValidatorMock).setAmount(amount);
+        verify(cashValidatorMock).setConcept(alias);
+        verify(cashValidatorMock).validate();
+        verify(mockOtherPaymentMethodModel).setName(alias);
+        verify(mockOtherPaymentMethodModel).setAvailableCredit(mockBigDecimal);
+        verify(mockOtherPaymentMethodModel).setTypePaymentMethod(TypePaymentMethodEnum.CASH);
+        verify(mockOtherPaymentMethodModel).setReferenceNumber("N/A");
+        verify(mCashPresenter).createCash(mockOtherPaymentMethodModel);
 
     }
 
     @Test
-    public void testSubmitCash_emptyAliasField() throws Exception {
+    public void testSubmitCash_showMessageErrorAliasField() throws Exception {
 
         when(mAddCash.getId()).thenReturn(R.id.add_cash);
 
-        CashValidator mockCashValidator = mock(CashValidator.class);
-
-        whenNew(CashValidator.class).withNoArguments().thenReturn(mockCashValidator);
-
         Editable mockAliasEditable = mock(Editable.class);
         String concept = "";
-
         when(mCashAlias.getText()).thenReturn(mockAliasEditable);
         when(mockAliasEditable.toString()).thenReturn(concept);
 
         Editable mockAmountEditable = mock(Editable.class);
         String amount = "124567.89";
-
         when(mCashAmount.getText()).thenReturn(mockAmountEditable);
         when(mockAmountEditable.toString()).thenReturn(amount);
+
+        CashValidator cashValidatorMock = mock(CashValidator.class);
+        whenNew(CashValidator.class).withNoArguments().thenReturn(cashValidatorMock);
 
         boolean isValid = true;
         boolean isNotValid = false;
 
-        when(mockCashValidator.validate()).thenReturn(isNotValid);
-        when(mockCashValidator.isValidConcept()).thenReturn(isNotValid);
-        when(mockCashValidator.getErrorMessageConcept()).thenReturn(R.string.error_empty_value);
-        when(mockCashValidator.isValidAmount()).thenReturn(isValid);
+        when(cashValidatorMock.validate()).thenReturn(isNotValid);
+        when(cashValidatorMock.isValidConcept()).thenReturn(isNotValid);
+        when(cashValidatorMock.getErrorMessageConcept()).thenReturn(R.string.error_empty_value);
+        when(cashValidatorMock.isValidAmount()).thenReturn(isValid);
 
         String errorMessage = "El campo es requerido";
 
@@ -182,44 +197,43 @@ public class CashActivityTest {
         mCashActivity.onClick(mAddCash);
 
         verify(mAddCash).getId();
-        verify(mockCashValidator).setConcept(concept);
-        verify(mockCashValidator).setAmount(amount);
-        verify(mockCashValidator).validate();
-        verify(mockCashValidator).isValidConcept();
+        verify(mCashAlias).getText();
+        verify(mCashAmount).getText();
+        verify(cashValidatorMock).setConcept(concept);
+        verify(cashValidatorMock).setAmount(amount);
+        verify(cashValidatorMock).validate();
+        verify(cashValidatorMock).isValidConcept();
+        verify(cashValidatorMock, never()).isValidAmount();
+        verify(cashValidatorMock).getErrorMessageConcept();
         verify(mCashAlias).setError(errorMessage);
         verify(mCashAlias).requestFocus();
-
-
     }
 
     @Test
-    public void testSubmitCash_emptyAmountField() throws Exception {
+    public void testSubmitCash_showMessageErrorAmountField() throws Exception {
 
         when(mAddCash.getId()).thenReturn(R.id.add_cash);
 
-        CashValidator mockCashValidator = mock(CashValidator.class);
-
-        whenNew(CashValidator.class).withNoArguments().thenReturn(mockCashValidator);
-
         Editable mockAliasEditable = mock(Editable.class);
         String concept = "this a test concept";
-
         when(mCashAlias.getText()).thenReturn(mockAliasEditable);
         when(mockAliasEditable.toString()).thenReturn(concept);
 
         Editable mockAmountEditable = mock(Editable.class);
         String amount = "";
-
         when(mCashAmount.getText()).thenReturn(mockAmountEditable);
         when(mockAmountEditable.toString()).thenReturn(amount);
+
+        CashValidator cashValidatorMock = mock(CashValidator.class);
+        whenNew(CashValidator.class).withNoArguments().thenReturn(cashValidatorMock);
 
         boolean isValid = true;
         boolean isNotValid = false;
 
-        when(mockCashValidator.validate()).thenReturn(isNotValid);
-        when(mockCashValidator.isValidConcept()).thenReturn(isValid);
-        when(mockCashValidator.isValidAmount()).thenReturn(isNotValid);
-        when(mockCashValidator.getErrorMessageAmount()).thenReturn(R.string.error_empty_value);
+        when(cashValidatorMock.validate()).thenReturn(isNotValid);
+        when(cashValidatorMock.isValidConcept()).thenReturn(isValid);
+        when(cashValidatorMock.isValidAmount()).thenReturn(isNotValid);
+        when(cashValidatorMock.getErrorMessageAmount()).thenReturn(R.string.error_empty_value);
 
         String errorMessage = "El campo es requerido";
 
@@ -228,10 +242,14 @@ public class CashActivityTest {
         mCashActivity.onClick(mAddCash);
 
         verify(mAddCash).getId();
-        verify(mockCashValidator).setConcept(concept);
-        verify(mockCashValidator).setAmount(amount);
-        verify(mockCashValidator).validate();
-        verify(mockCashValidator).isValidAmount();
+        verify(mCashAlias).getText();
+        verify(mCashAmount).getText();
+        verify(cashValidatorMock).setConcept(concept);
+        verify(cashValidatorMock).setAmount(amount);
+        verify(cashValidatorMock).validate();
+        verify(cashValidatorMock).isValidConcept();
+        verify(cashValidatorMock).isValidAmount();
+        verify(cashValidatorMock).getErrorMessageAmount();
         verify(mCashAmount).setError(errorMessage);
         verify(mCashAmount).requestFocus();
     }
