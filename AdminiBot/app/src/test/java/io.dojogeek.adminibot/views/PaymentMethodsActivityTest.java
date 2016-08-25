@@ -1,13 +1,14 @@
 package io.dojogeek.adminibot.views;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,14 +67,16 @@ public class PaymentMethodsActivityTest {
     @Mock
     private View mView;
 
-    @Mock
-    private Button mAddPaymentMethodButton;
+    private Button mAddMore = mock(Button.class);
 
     @Mock
     private AppComponent mAppComponent;
 
     @Mock
     private AdminiBotComponent mAdminiBotComponent;
+
+    @Mock
+    private TextView mLabel;
 
     @InjectMocks
     @Spy
@@ -96,16 +99,13 @@ public class PaymentMethodsActivityTest {
     @Test
     public void testLoadViews_setViews() {
 
-        Mockito.doReturn(mContainerPaymentMethods).when(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
-        Mockito.doReturn(mAddPaymentMethodOption).when(mContainerPaymentMethods).findViewById(R.id.add_payment_method_container);
-        Mockito.doReturn(mPaymentMethods).when(mContainerPaymentMethods).findViewById(R.id.payment_methods);
+        doReturn(mContainerPaymentMethods).when(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
+        doReturn(mPaymentMethods).when(mContainerPaymentMethods).findViewById(R.id.payment_methods);
 
         mPaymentMethodsActivity.loadViews();
 
         verify(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
-        verify(mContainerPaymentMethods).findViewById(R.id.add_payment_method_container);
         verify(mContainerPaymentMethods).findViewById(R.id.payment_methods);
-        verify(mContainerPaymentMethods).findViewById(R.id.add_payment_method);
     }
 
     @Test
@@ -126,44 +126,48 @@ public class PaymentMethodsActivityTest {
         List<TypePaymentMethodEnum> typePaymentMethodEnumList = ModelsFactory.createTypePaymentMethodEnumList();
         Mockito.doNothing().when(mPaymentMethodsActivity).setTitle(R.string.title_activity_choice_payment_method);
 
-        mPaymentMethodsActivity.showTypesPaymentMethods(typePaymentMethodEnumList);
+        LayoutInflater layoutInflaterMock = mock(LayoutInflater.class);
+        doReturn(layoutInflaterMock).when(mPaymentMethodsActivity).getLayoutInflater();
 
-        verify(mPaymentMethods).setVisibility(View.VISIBLE);
-        verify(mAddPaymentMethodOption).setVisibility(View.GONE);
+        ViewGroup viewGroupMock = mock(ViewGroup.class);
+        when(layoutInflaterMock.inflate(R.layout.activity_add_new_payment_method,
+                mPaymentMethods, false)).thenReturn(viewGroupMock);
+
+        TextView textViewMock = mock(TextView.class);
+        when(viewGroupMock.findViewById(R.id.notification_label)).thenReturn(textViewMock);
+
+        Button buttonMock = mock(Button.class);
+        when(viewGroupMock.findViewById(R.id.add_payment_method)).thenReturn(buttonMock);
+
+        mPaymentMethodsActivity.prepareView(typePaymentMethodEnumList);
+
+        verify(viewGroupMock).findViewById(R.id.notification_label);
+        verify(viewGroupMock).findViewById(R.id.add_payment_method);
+        verify(buttonMock).setOnClickListener(mPaymentMethodsActivity);
+        verify(textViewMock).setVisibility(View.GONE);
+        verify(layoutInflaterMock).inflate(R.layout.activity_add_new_payment_method,
+                mPaymentMethods, false);
+        verify(mPaymentMethods).addFooterView(viewGroupMock, null, false);
         verify(mPaymentMethods).setAdapter((PaymentMethodAdapter) anyObject());
         verify(mPaymentMethodsActivity).setTitle(R.string.title_activity_choice_payment_method);
     }
 
+
     @Test
     public void testShowTypesPaymentMethods_emptyListPaymentMethods() {
-
-        List<TypePaymentMethodEnum> typePaymentMethodEnumList = new ArrayList<>();
-        Mockito.doNothing().when(mPaymentMethodsActivity).setTitle(R.string.title_activity_add_payment_method);
-
-        mPaymentMethodsActivity.showTypesPaymentMethods(typePaymentMethodEnumList);
-
-        verify(mAddPaymentMethodOption).setVisibility(View.VISIBLE);
-        verify(mPaymentMethods).setVisibility(View.GONE);
-        verify(mPaymentMethodsActivity).setTitle(R.string.title_activity_add_payment_method);
-
-    }
-
-    @Test
-    public void testOnclickListener_newPaymentMethod() throws Exception {
 
         mockStatic(LaunchIntents.class);
         PowerMockito.doNothing().when(LaunchIntents.class);
 
-        LaunchIntents.launchIntentClearTop(eq(mPaymentMethodsActivity), any(Class.class));
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, Class.class);
 
-        when(mView.getId()).thenReturn(R.id.add_payment_method);
+        List<TypePaymentMethodEnum> emptyTypePaymentMethodEnumList = new ArrayList<>();
 
-        mPaymentMethodsActivity.onClick(mView);
+        mPaymentMethodsActivity.prepareView(emptyTypePaymentMethodEnumList);
 
-        verify(mView).getId();
         verifyStatic(times(1));
-
-        LaunchIntents.launchIntentClearTop(eq(mPaymentMethodsActivity), any(Class.class));
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity,
+                AddPaymentMethodActivity.class);
 
     }
 
@@ -198,7 +202,6 @@ public class PaymentMethodsActivityTest {
 
         mPaymentMethodsActivity.addListenersToViews();
 
-        verify(mAddPaymentMethodButton).setOnClickListener(mPaymentMethodsActivity);
         verify(mPaymentMethods).setOnItemClickListener(mPaymentMethodsActivity);
     }
 
@@ -233,5 +236,25 @@ public class PaymentMethodsActivityTest {
         mPaymentMethodsActivity.closeConnections();
 
         verify(mPaymentMethodsPresenter).unnusedView();
+    }
+
+    @Test
+    public void testOnclickListener_addMore() throws Exception {
+
+        mockStatic(LaunchIntents.class);
+        PowerMockito.doNothing().when(LaunchIntents.class);
+
+        LaunchIntents.launchIntentClearTop(eq(mPaymentMethodsActivity), any(Class.class));
+
+        when(mView.getId()).thenReturn(R.id.add_payment_method);
+
+        mPaymentMethodsActivity.onClick(mView);
+
+        verify(mView).getId();
+        verifyStatic(times(1));
+
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity,
+                AddPaymentMethodActivity.class);
+
     }
 }
