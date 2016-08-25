@@ -10,8 +10,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.dojogeek.adminibot.daos.CashDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.Cash;
 
 import static org.mockito.Mockito.never;
@@ -27,21 +29,21 @@ public class CashPresenterTest {
     private Cash mCashActivity;
 
     @Mock
-    private CashDao mCashDao;
+    private OtherPaymentMethodDao mOtherPaymentMethodDao;
 
     @InjectMocks
-    private CashPresenter cashPresenter = new CashPresenterImpl(mCashActivity, mCashDao);
+    private CashPresenter cashPresenter = new CashPresenterImpl(mCashActivity, mOtherPaymentMethodDao);
 
     @Test
     public void testCreateCash_successfulCreation() {
 
-        CashModel cashModel = ModelsFactory.createCashModel();
+        OtherPaymentMethodModel otherPaymentMethodModel= ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mCashDao.createCash(cashModel)).thenReturn(SUCCESS_INSERTION);
+        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenReturn(SUCCESS_INSERTION);
 
-        cashPresenter.createCash(cashModel);
+        cashPresenter.createCash(otherPaymentMethodModel);
 
-        verify(mCashDao).createCash(cashModel);
+        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCashActivity).notifySuccessfulInsertion();
         verify(mCashActivity).returnToMyPaymentsMethods();
         verify(mCashActivity, never()).notifyErrorInsertion();
@@ -50,13 +52,13 @@ public class CashPresenterTest {
     @Test
     public void testCreateCash_errorInsertion_withSQLException() {
 
-        CashModel cashModel = ModelsFactory.createCashModel();
+        OtherPaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mCashDao.createCash(cashModel)).thenThrow(new SQLException());
+        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenThrow(new SQLException());
 
-        cashPresenter.createCash(cashModel);
+        cashPresenter.createCash(otherPaymentMethodModel);
 
-        verify(mCashDao).createCash(cashModel);
+        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCashActivity, never()).notifySuccessfulInsertion();
         verify(mCashActivity, never()).returnToMyPaymentsMethods();
         verify(mCashActivity).notifyErrorInsertion();
