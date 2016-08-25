@@ -38,6 +38,10 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private ListView mPaymentMethods;
 
+    private View mAddNewPaymentMethodView;
+
+    private Button mAddNewPaymentMethod;
+
     public static final String TAG = "PaymentMethodsActivity";
 
     @Override
@@ -60,7 +64,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         switch (id) {
             case R.id.add_payment_method:
-                launchAddPaymentMethodOption();
+                LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
                 break;
             default:
                 Log.v(TAG, "No events for this view");
@@ -97,11 +101,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     protected void loadViews() {
         mContainerPaymentMethods = (LinearLayout) findViewById(R.id.container_payment_methods);
         mPaymentMethods = (ListView) mContainerPaymentMethods.findViewById(R.id.payment_methods);
+        mAddNewPaymentMethodView = mContainerPaymentMethods.findViewById(R.id.add_new_payment_method_option);
+        mAddNewPaymentMethod = (Button) mAddNewPaymentMethodView.findViewById(R.id.add_payment_method);
     }
 
     @Override
     protected void addListenersToViews() {
         mPaymentMethods.setOnItemClickListener(this);
+        mAddNewPaymentMethod.setOnClickListener(this);
     }
 
     @Override
@@ -123,7 +130,8 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private void launchAddPaymentMethodOption() {
 
-        LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
+        mPaymentMethods.setVisibility(View.GONE);
+        mAddNewPaymentMethodView.setVisibility(View.VISIBLE);
     }
 
     private void preparePaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
