@@ -41,6 +41,7 @@ public class FoodCouponsActivityTest {
     private EditText mAmount = mock(EditText.class);
     private EditText mExpirationDate = mock(EditText.class);
 
+    @Mock
     private Button mAddFoodCoupon;
 
     @InjectMocks
@@ -131,5 +132,6 @@ public class FoodCouponsActivityTest {
         mFoodCouponsActivity.addListenersToViews();
 
         verify(mExpirationDate).setOnClickListener(mFoodCouponsActivity);
+        verify(mAddFoodCoupon).setOnClickListener(mFoodCouponsActivity);
     }
 }
