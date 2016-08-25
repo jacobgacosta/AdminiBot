@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.presenters;
 import android.annotation.SuppressLint;
 import android.database.SQLException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,8 +123,8 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
     private OtherPaymentMethodModel updateAmountForOtherPaymentMethodModel(OtherPaymentMethodModel otherPaymentMethodModel,
                                                                            double amount) {
 
-        double totalAmount = otherPaymentMethodModel.getAvailableCredit() - amount;
-        otherPaymentMethodModel.setAvailableCredit(totalAmount);
+        double totalAmount = otherPaymentMethodModel.getAvailableCredit().doubleValue() - amount;
+        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(totalAmount));
 
         return otherPaymentMethodModel;
     }
