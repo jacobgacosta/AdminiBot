@@ -16,7 +16,7 @@ public class CashValidatorTest {
     private static String CORRECT_AMOUNT = "67899.90";
 
     @Test
-    public void testCash_cashModel_isValid() {
+    public void testCashModel_isValid() {
 
         CashValidator cashValidator = createCashValidator(CORRECT_CONCEPT, CORRECT_AMOUNT);
 
@@ -26,7 +26,7 @@ public class CashValidatorTest {
     }
 
     @Test
-    public void testCash_emptyConcept_isNotValid() {
+    public void testCashModel_emptyConcept_isNotValid() {
 
         String emptyConcept = "";
 
@@ -39,7 +39,7 @@ public class CashValidatorTest {
     }
 
     @Test
-    public void testCash_emptyAmount_isNotValid() {
+    public void testCashModel_emptyAmount_isNotValid() {
 
         String emptyAmount = "";
 
@@ -52,7 +52,7 @@ public class CashValidatorTest {
     }
 
     @Test
-    public void testCash_conceptTooLong_isNotValid() {
+    public void testCashModel_conceptTooLong_isNotValid() {
 
         String tooLongConcept = "this a test concept description too long 1234567890";
 
