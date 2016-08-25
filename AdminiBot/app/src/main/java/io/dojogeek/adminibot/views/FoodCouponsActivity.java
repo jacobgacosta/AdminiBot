@@ -47,6 +47,7 @@ public class FoodCouponsActivity extends BaseActivity implements FoodCoupons , V
     @Override
     protected void addListenersToViews() {
         mExpirationDate.setOnClickListener(this);
+        mAddFoodCoupon.setOnClickListener(this);
     }
 
     @Override
