@@ -22,13 +22,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.setContentView(idLayoutActivity);
 
         prepareViewComponentsAndListeners();
+
+        loadDataView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        loadDataView();
     }
 
     @Override
