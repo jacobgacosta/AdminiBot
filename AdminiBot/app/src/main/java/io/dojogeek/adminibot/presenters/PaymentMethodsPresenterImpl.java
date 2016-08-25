@@ -34,7 +34,7 @@ public class PaymentMethodsPresenterImpl implements PaymentMethodsPresenter {
 
         List<TypePaymentMethodEnum> typePaymentMethodEnumList = getTypesPaymentMethods();
 
-        mPaymentMethods.showTypesPaymentMethods(typePaymentMethodEnumList);
+        mPaymentMethods.prepareView(typePaymentMethodEnumList);
 
     }
 
