@@ -12,7 +12,8 @@ public interface ValidatorsValues {
     int CASH_CONCEPT_LENGHT = 50;
     int ACCOUNT_LENGHT = 18;
     int DATE_LENGHT = 10;
-    int AMOUNT_LENGHT = 10;
     int ISSUANCE_CODE_LENGHT = 18;
+    String AMOUNT_REGEX = "\\d[0-9]{0,10}(\\.{1}[0-9]{1,2})";
+    String ACCOUNT_REGEX = "\\d[0-9]{3,17}";
 
 }
