@@ -16,7 +16,9 @@ import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CashValidator;
@@ -25,6 +27,7 @@ public class CashActivity extends BaseActivity implements Cash, View.OnClickList
 
     public static final int SUCCESS_INSERTION_CASH = R.string.success_insertion_cash;
     public static final int ERROR_INSERTION_CASH = R.string.error_insertion_cash;
+    private static final String REFERENCE_NUMBER = "N/A";
 
     private EditText mCashAlias;
     private EditText mCashAmount;
@@ -129,23 +132,24 @@ public class CashActivity extends BaseActivity implements Cash, View.OnClickList
 
     private void processValidCash() {
 
-        CashModel cashModel = new CashModel();
+        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
 
         BigDecimal amount = new BigDecimal(mCashAmount.getText().toString());
 
-        cashModel.setAmount(amount);
-        cashModel.setAlias(mCashAlias.getText().toString());
+        otherPaymentMethodModel.setAvailableCredit(amount);
+        otherPaymentMethodModel.setName(mCashAlias.getText().toString());
+        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
+        otherPaymentMethodModel.setReferenceNumber(REFERENCE_NUMBER);
 
-        submitCash(cashModel);
-
-    }
-
-    private void submitCash(CashModel cashModel) {
-
-        mCashPresenter.createCash(cashModel);
+        submitCash(otherPaymentMethodModel);
 
     }
 
+    private void submitCash(OtherPaymentMethodModel otherPaymentMethodModel) {
+
+        mCashPresenter.createCash(otherPaymentMethodModel);
+
+    }
 
     @Override
     public void notifySuccessfulInsertion() {
