@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,15 +69,15 @@ public class OtherPaymentMethodDaoImplTest {
 
     }
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testCreateOtherPaymentMethod_withNullRequieredField_noInsertion() {
 
         OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.createOtherPaymentMethodModel();
         otherPaymentMethodModel.setName(null);
 
-        long insertedRecordId = mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+        mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
 
-        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+//        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
     }
 
     @Test
@@ -90,7 +92,7 @@ public class OtherPaymentMethodDaoImplTest {
 
         assertNotNull(actualoOtherPaymentMethodModel);
         assertEquals(expectedOtherPaymentMethodModel.getName(), actualoOtherPaymentMethodModel.getName());
-        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualoOtherPaymentMethodModel.getAvailableCredit(), 0);
+        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualoOtherPaymentMethodModel.getAvailableCredit());
         assertEquals(expectedOtherPaymentMethodModel.getReferenceNumber(), actualoOtherPaymentMethodModel.getReferenceNumber());
         assertEquals(expectedOtherPaymentMethodModel.getTypePaymentMethod(), actualoOtherPaymentMethodModel.getTypePaymentMethod());
         assertEquals(expectedOtherPaymentMethodModel.getUserId(), actualoOtherPaymentMethodModel.getUserId());
@@ -246,8 +248,10 @@ public class OtherPaymentMethodDaoImplTest {
 
         for (int index = 1; index <= numberOfInsertions;index++) {
 
+            double availableCredit = 24000.00 + index;
+
             OtherPaymentMethodModel otherPaymentMethodModel = CreatorModels.
-                    createOtherPaymentMethodModel(24000.00 + index,
+                    createOtherPaymentMethodModel(new BigDecimal(availableCredit),
                             "test other payment method " + index, "4567AKI9084" + index, TypePaymentMethodEnum.FOOD_COUPONS, 1);
 
             mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
@@ -281,7 +285,7 @@ public class OtherPaymentMethodDaoImplTest {
         assertEquals(expectedOtherPaymentMethodModel.getUserId(), actualOtherPaymentMethodModel.getUserId());
         assertEquals(expectedOtherPaymentMethodModel.getReferenceNumber(), actualOtherPaymentMethodModel.getReferenceNumber());
         assertEquals(expectedOtherPaymentMethodModel.getTypePaymentMethod(), actualOtherPaymentMethodModel.getTypePaymentMethod());
-        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualOtherPaymentMethodModel.getAvailableCredit(), 0);
+        assertEquals(expectedOtherPaymentMethodModel.getAvailableCredit(), actualOtherPaymentMethodModel.getAvailableCredit());
         assertEquals(expectedOtherPaymentMethodModel.getName(), actualOtherPaymentMethodModel.getName());
 
     }
@@ -289,7 +293,7 @@ public class OtherPaymentMethodDaoImplTest {
     private OtherPaymentMethodModel changeOtherPaymentMethodValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         otherPaymentMethodModel.setUserId(2);
-        otherPaymentMethodModel.setAvailableCredit(32000);
+        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(32000398.98));
         otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
         otherPaymentMethodModel.setReferenceNumber("65787439KDUFI");
         otherPaymentMethodModel.setName("Other payment method test");
