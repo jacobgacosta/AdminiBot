@@ -6,6 +6,12 @@
     android:orientation="vertical"
     tools:context="io.dojogeek.adminibot.views.PaymentMethodsActivity">
 
+    <include android:id="@+id/add_new_payment_method_option"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        layout="@layout/activity_add_new_payment_method"/>
+
     <ListView
         android:id="@+id/payment_methods"
         android:layout_width="match_parent"
