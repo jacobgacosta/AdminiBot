@@ -49,10 +49,55 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator cashConceptValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.CASH_CONCEPT_LENGHT).withErroMessage(R.string.error_wrong_lenght_concept));
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.CASH_CONCEPT_LENGHT).
+                withErroMessage(R.string.error_wrong_lenght_field));
         compoundValidator.addValidator(requiredValueValidator);
 
         return compoundValidator;
     }
 
+    public static CompoundValidator checkCurrentAccountValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ACCOUNT_REGEX).
+                withErroMessage(R.string.error_wrong_account));
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator checkNumberValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ACCOUNT_REGEX).
+                withErroMessage(R.string.error_wrong_lenght_check_number));
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator checkDateOfIssueValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator checkAmountValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.AMOUNT_REGEX).
+                withErroMessage(R.string.error_wrong_incorrect_amount));
+
+        return compoundValidator;
+    }
+
+    public static CompoundValidator checkIssuanceCodeValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.ISSUANCE_CODE_LENGHT).
+                withErroMessage(R.string.error_wrong_lenght_issuance_code));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
 }
