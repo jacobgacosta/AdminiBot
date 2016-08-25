@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
@@ -18,11 +19,11 @@ public class CashDaoImpl extends SQLiteGlobalDao implements CashDao {
     }
 
     @Override
-    public long createCash(CashModel cashModel) {
+    public long createCash(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         openConnection();
 
-        ContentValues contentValues = createContentValues(cashModel);
+        ContentValues contentValues = createContentValues(otherPaymentMethodModel);
 
         long result = mDatabase.insertOrThrow(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.COLUMN_NAME_NULLABLE, contentValues);
@@ -30,15 +31,17 @@ public class CashDaoImpl extends SQLiteGlobalDao implements CashDao {
         return result;
     }
 
-    private ContentValues createContentValues(CashModel cashModel) {
+    private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME, cashModel.getAlias());
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE, 0);
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME,
+                otherPaymentMethodModel.getName());
+        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE,
+                otherPaymentMethodModel.getReferenceNumber());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD,
-                TypePaymentMethodEnum.CASH.name());
+                otherPaymentMethodModel.getTypePaymentMethod().name());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT,
-                cashModel.getAmount().doubleValue());
+                otherPaymentMethodModel.getAvailableCredit().doubleValue());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID, 0);
 
         return contentValues;
