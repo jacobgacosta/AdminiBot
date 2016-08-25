@@ -74,12 +74,10 @@ public class AddPaymentMethodActivityTest {
     public void testLoadViews_setViews() {
 
         doReturn(mPaymentMethodsList).when(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
-        doReturn(mAddPaymentMethod).when(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
 
         mAddPaymentMethodActivity.loadViews();
 
         verify(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
-        verify(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method_container);
 
     }
 
@@ -91,8 +89,6 @@ public class AddPaymentMethodActivityTest {
         mAddPaymentMethodActivity.loadDataView();
 
         verify(mPaymentMethodsList).setAdapter((PaymentMethodAdapter) notNull());
-        verify(mPaymentMethodsList).setVisibility(View.VISIBLE);
-        verify(mAddPaymentMethod).setVisibility(View.GONE);
         verify(mAddPaymentMethodActivity).setTitle(R.string.title_payment_methods);
     }
 
