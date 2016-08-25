@@ -67,8 +67,6 @@ public class PaymentMethodsActivityTest {
     @Mock
     private View mView;
 
-    private Button mAddMore = mock(Button.class);
-
     @Mock
     private AppComponent mAppComponent;
 
@@ -77,6 +75,12 @@ public class PaymentMethodsActivityTest {
 
     @Mock
     private TextView mLabel;
+
+    @Mock
+    private View mAddNewPaymentMethodView;
+
+    @Mock
+    private Button mAddNewPaymentMethodButton;
 
     @InjectMocks
     @Spy
@@ -101,11 +105,16 @@ public class PaymentMethodsActivityTest {
 
         doReturn(mContainerPaymentMethods).when(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
         doReturn(mPaymentMethods).when(mContainerPaymentMethods).findViewById(R.id.payment_methods);
+        doReturn(mAddNewPaymentMethodView).when(mContainerPaymentMethods).
+                findViewById(R.id.add_new_payment_method_option);
+        doReturn(mAddNewPaymentMethodButton).when(mAddNewPaymentMethodView).findViewById(R.id.add_payment_method);
 
         mPaymentMethodsActivity.loadViews();
 
         verify(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
         verify(mContainerPaymentMethods).findViewById(R.id.payment_methods);
+        verify(mContainerPaymentMethods).findViewById(R.id.add_new_payment_method_option);
+        verify(mAddNewPaymentMethodView).findViewById(R.id.add_payment_method);
     }
 
     @Test
@@ -156,18 +165,22 @@ public class PaymentMethodsActivityTest {
     @Test
     public void testShowTypesPaymentMethods_emptyListPaymentMethods() {
 
-        mockStatic(LaunchIntents.class);
-        PowerMockito.doNothing().when(LaunchIntents.class);
-
-        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, Class.class);
+//        mockStatic(LaunchIntents.class);
+//        PowerMockito.doNothing().when(LaunchIntents.class);
+//
+//        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, Class.class);
 
         List<TypePaymentMethodEnum> emptyTypePaymentMethodEnumList = new ArrayList<>();
 
         mPaymentMethodsActivity.prepareView(emptyTypePaymentMethodEnumList);
 
-        verifyStatic(times(1));
-        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity,
-                AddPaymentMethodActivity.class);
+//        verifyStatic(times(1));
+//        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity,
+//                AddPaymentMethodActivity.class);
+        verify(mPaymentMethods).setVisibility(View.GONE);
+        verify(mAddNewPaymentMethodView).setVisibility(View.VISIBLE);
+
+
 
     }
 
@@ -198,11 +211,12 @@ public class PaymentMethodsActivityTest {
     }
 
     @Test
-    public void addListenersToViews() {
+    public void testAddListenersToViews() {
 
         mPaymentMethodsActivity.addListenersToViews();
 
         verify(mPaymentMethods).setOnItemClickListener(mPaymentMethodsActivity);
+        verify(mAddNewPaymentMethodButton).setOnClickListener(mPaymentMethodsActivity);
     }
 
     @Test
