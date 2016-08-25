@@ -3,7 +3,9 @@ package io.dojogeek.adminibot.daos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +24,13 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
     }
 
     @Override
-    public long createOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel) {
+    public long createOtherPaymentMethod(OtherPaymentMethodModel otherPaymentMethodModel) throws SQLException {
 
         openConnection();
 
         ContentValues contentValues = createContentValues(otherPaymentMethodModel);
 
-        long resutl = mDatabase.insert(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
+        long resutl = mDatabase.insertOrThrow(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethods.COLUMN_NAME_NULLABLE, contentValues);
 
         return resutl;
@@ -149,7 +151,7 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD,
                 otherPaymentMethodModel.getTypePaymentMethod().name());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT,
-                otherPaymentMethodModel.getAvailableCredit());
+                otherPaymentMethodModel.getAvailableCredit().doubleValue());
         contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID,
                 otherPaymentMethodModel.getUserId());
 
@@ -168,7 +170,7 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         otherPaymentMethodModel.setName(name);
         otherPaymentMethodModel.setReferenceNumber(reference);
         otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.valueOf(paymentMethod));
-        otherPaymentMethodModel.setAvailableCredit(availableCredit);
+        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(availableCredit));
         otherPaymentMethodModel.setUserId(userId);
 
         return otherPaymentMethodModel;
