@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.powermock.api.support.membermodification.MemberModifier;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class ExpenseCreationPresenterTest {
 
         long updatedRows = 1;
         long insertedRecordId = 1;
-        double availableCredit = 546;
+        BigDecimal availableCredit = new BigDecimal(546.983);
         double amounSpent = 120;
 
         List<ExpenseOtherPaymentMethodModel> expenseOtherPaymentMethodModels =  new ArrayList<>();
@@ -100,13 +101,13 @@ public class ExpenseCreationPresenterTest {
         when(mOtherPaymentMethodDao.updateOtherPaymentMethod(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId())).
                 thenReturn(updatedRows);
         when(mBankCardDao.getBankCardById(anyLong())).thenReturn(mBankCardModel);
-        when(mBankCardModel.getAvailableCredit()).thenReturn(availableCredit);
+        when(mBankCardModel.getAvailableCredit()).thenReturn(availableCredit.doubleValue());
         when(mBankCardDao.updateBankCard(mBankCardModel, mBankCardModel.getId())).thenReturn(updatedRows);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
 
-        double totalOtherPaymentMethod = availableCredit - amounSpent;
-        double totalBankCard = availableCredit + amounSpent;
+        double totalOtherPaymentMethod = availableCredit.doubleValue() - amounSpent;
+        double totalBankCard = availableCredit.doubleValue() + amounSpent;
 
         verifyBeginTransactions();
         verify(mExpenseDao).createExpense(mExpenseModel);
@@ -118,7 +119,7 @@ public class ExpenseCreationPresenterTest {
         verify(mOtherPaymentMethodDao, times(mExpenseModel.getOtherPaymentMethodModels().size())).
                 getOtherPaymentMethodById(anyLong());
         verify(mOtherPaymentMethodModel).getAvailableCredit();
-        verify(mOtherPaymentMethodModel).setAvailableCredit(totalOtherPaymentMethod);
+        verify(mOtherPaymentMethodModel).setAvailableCredit(new BigDecimal(totalOtherPaymentMethod));
         verify(mOtherPaymentMethodDao, times(mExpenseModel.getOtherPaymentMethodModels().size())).
                 updateOtherPaymentMethod(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId());
 
