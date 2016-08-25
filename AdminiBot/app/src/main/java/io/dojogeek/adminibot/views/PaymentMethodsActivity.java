@@ -2,11 +2,14 @@ package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -33,21 +36,19 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private LinearLayout mContainerPaymentMethods;
 
-    private LinearLayout mAddPaymentMethodOption;
-
     private ListView mPaymentMethods;
-
-    private Button mAddPaymentMethodButton;
 
     public static final String TAG = "PaymentMethodsActivity";
 
     @Override
-    public void showTypesPaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
+    public void prepareView(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
 
         if (typePaymentMethodEnumList.isEmpty()) {
-            showAddPaymentMethodOption();
+
+            launchAddPaymentMethodOption();
+
         } else {
-            listPaymentMethods(typePaymentMethodEnumList);
+            preparePaymentMethods(typePaymentMethodEnumList);
         }
 
     }
@@ -59,12 +60,26 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         switch (id) {
             case R.id.add_payment_method:
-                LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
+                launchAddPaymentMethodOption();
                 break;
             default:
                 Log.v(TAG, "No events for this view");
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Map<String, Serializable> flags = new HashMap<>();
+        flags.put("EXTRA_SESSION_ID", (TypePaymentMethodEnum) view.getTag());
+
+        try {
+            LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
+        } catch (ArgumentException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -81,14 +96,11 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     protected void loadViews() {
         mContainerPaymentMethods = (LinearLayout) findViewById(R.id.container_payment_methods);
-        mAddPaymentMethodOption = (LinearLayout) mContainerPaymentMethods.findViewById(R.id.add_payment_method_container);
         mPaymentMethods = (ListView) mContainerPaymentMethods.findViewById(R.id.payment_methods);
-        mAddPaymentMethodButton = (Button) mContainerPaymentMethods.findViewById(R.id.add_payment_method);
     }
 
     @Override
     protected void addListenersToViews() {
-        mAddPaymentMethodButton.setOnClickListener(this);
         mPaymentMethods.setOnItemClickListener(this);
     }
 
@@ -109,33 +121,43 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         paymentMethodsPresenter.unnusedView();
     }
 
-    private void showAddPaymentMethodOption() {
-        setTitle(R.string.title_activity_add_payment_method);
-        mAddPaymentMethodOption.setVisibility(View.VISIBLE);
-        mPaymentMethods.setVisibility(View.GONE);
+    private void launchAddPaymentMethodOption() {
+
+        LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
     }
 
-    private void listPaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
+    private void preparePaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
+
         setTitle(R.string.title_activity_choice_payment_method);
-        mPaymentMethods.setVisibility(View.VISIBLE);
-        mAddPaymentMethodOption.setVisibility(View.GONE);
+
+        addFooterToListView();
+
+        setListAdapter(typePaymentMethodEnumList);
+
+    }
+
+    private void addFooterToListView() {
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_add_new_payment_method,
+                mPaymentMethods, false);
+
+        TextView notificationLabel = (TextView) viewGroup.findViewById(R.id.notification_label);
+        notificationLabel.setVisibility(View.GONE);
+
+        Button addPaymentMethod = (Button) viewGroup.findViewById(R.id.add_payment_method);
+        addPaymentMethod.setOnClickListener(this);
+
+        mPaymentMethods.addFooterView(viewGroup, null, false);
+    }
+
+    private void setListAdapter(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
 
         PaymentMethodAdapter paymentMethodAdapter = new PaymentMethodAdapter(this, typePaymentMethodEnumList);
 
         mPaymentMethods.setAdapter(paymentMethodAdapter);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Map<String, Serializable> flags = new HashMap<>();
-        flags.put("EXTRA_SESSION_ID", (TypePaymentMethodEnum) view.getTag());
-
-        try {
-            LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
-        } catch (ArgumentException e) {
-            e.printStackTrace();
-        }
-
-    }
 }
