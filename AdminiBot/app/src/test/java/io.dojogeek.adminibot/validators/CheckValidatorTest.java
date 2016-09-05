@@ -45,7 +45,8 @@ public class CheckValidatorTest {
     public void testCheckModel_incorrectAmounts() {
 
         String [] tooLongAmount = {"12345678901", ".", ".900", ".90", "123456789011.90",
-                "123456789.900", "1234567.901", "78..90", "23.", "11111111..", "", null};
+                "123456789.900", "1234567.901", "78..90", "23.", "11111111..", "", "123456789011.90.",
+                "123456789011.90.0", "123456789011.90..", "123456789011.90.90.10", null};
 
         for (String amount : tooLongAmount) {
             CheckValidator checkValidator = createCheckValidator(CORRECT_ALIAS, amount, CORRECT_BANK,
