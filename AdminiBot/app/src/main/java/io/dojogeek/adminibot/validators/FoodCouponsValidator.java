@@ -4,7 +4,7 @@ public class FoodCouponsValidator extends Validator {
 
     private static String CODE = "code";
     private static String AMOUNT = "amount";
-    private static String EXPIRATION_DATE = "expirationDate";
+    private static String ALIAS = "alias";
 
     public void setCode(String code) {
         this.dataToValidate.put(CODE, code);
@@ -14,8 +14,8 @@ public class FoodCouponsValidator extends Validator {
         this.dataToValidate.put(AMOUNT, amount);
     }
 
-    public void setExpirationDate(String expirationDate) {
-        this.dataToValidate.put(EXPIRATION_DATE, expirationDate);
+    public void setAlias(String alias) {
+        this.dataToValidate.put(ALIAS, alias);
     }
 
     public boolean isValidCode() {
@@ -26,8 +26,8 @@ public class FoodCouponsValidator extends Validator {
         return this.isValid(AMOUNT);
     }
 
-    public boolean isValidExpirationDate() {
-        return this.isValid(EXPIRATION_DATE);
+    public boolean isValidAlias() {
+        return this.isValid(ALIAS);
     }
 
     public int getErrorMessageCode() {
@@ -38,14 +38,14 @@ public class FoodCouponsValidator extends Validator {
         return this.errorMessages.get(AMOUNT);
     }
 
-    public int getErrorMessageExpirationDate() {
-        return this.errorMessages.get(EXPIRATION_DATE);
+    public int getErrorMessageAlias() {
+        return this.errorMessages.get(ALIAS);
     }
 
     @Override
     protected void configureValidations() {
         this.validations.put(CODE, CompoundValidatorsFactory.foodCouponCodeValidator());
         this.validations.put(AMOUNT, CompoundValidatorsFactory.checkAmountValidator());
-        this.validations.put(EXPIRATION_DATE, CompoundValidatorsFactory.requiredValueValidator);
+        this.validations.put(ALIAS, CompoundValidatorsFactory.cashConceptValidator());
     }
 }
