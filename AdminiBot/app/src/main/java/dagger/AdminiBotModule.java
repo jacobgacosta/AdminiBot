@@ -14,6 +14,8 @@ import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.presenters.CashPresenterImpl;
 import io.dojogeek.adminibot.presenters.CheckPresenter;
 import io.dojogeek.adminibot.presenters.CheckPresenterImpl;
+import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
+import io.dojogeek.adminibot.presenters.FoodCouponPresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
@@ -176,6 +178,12 @@ public class AdminiBotModule {
     CheckPresenter provideCheckPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
 
         return new CheckPresenterImpl(mCheck, otherPaymentMethodDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    FoodCouponPresenter provideFoodCouponPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
+        return new FoodCouponPresenterImpl(mFoodCoupons, otherPaymentMethodDao);
     }
 
     @Provides
