@@ -100,4 +100,16 @@ public class CompoundValidatorsFactory {
 
         return compoundValidator;
     }
+
+    public static CompoundValidator foodCouponCodeValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_NUMBERS).
+                withErroMessage(R.string.error_wrong_only_numbers));
+        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.FOOD_COUPON_CODE_LENGHT).
+                withErroMessage(R.string.error_wrong_lenght_field));
+
+
+        return compoundValidator;
+    }
 }
