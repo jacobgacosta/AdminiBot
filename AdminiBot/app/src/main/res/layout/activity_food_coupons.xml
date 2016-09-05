@@ -10,9 +10,16 @@
     tools:context="io.dojogeek.adminibot.views.FoodCouponsActivity">
 
     <EditText
+        android:id="@+id/food_coupon_alias"
+        android:focusable="false"
+        android:hint="Alias"
+        style="@style/inputTheme" />
+
+    <EditText
         android:id="@+id/food_coupon_number"
         android:inputType="numberDecimal"
         android:hint="Número o código de vale"
+        android:layout_below="@+id/food_coupon_alias"
         style="@style/inputTheme" />
 
     <EditText
@@ -22,17 +29,10 @@
         android:layout_below="@+id/food_coupon_number"
         style="@style/inputTheme" />
 
-    <EditText
-        android:id="@+id/food_coupon_expiration_date"
-        android:focusable="false"
-        android:hint="Fecha de expiración"
-        android:layout_below="@+id/food_coupon_amount"
-        style="@style/inputTheme" />
-
     <Button
         android:id="@+id/add_food_coupond"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/food_coupon_expiration_date"
+        android:layout_below="@+id/food_coupon_amount"
         android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
