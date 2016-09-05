@@ -150,6 +150,8 @@
 
     <!-- add food coupon -->
     <string name="title_activity_add_food_coupon">Agregar vale de despensa</string>
+    <string name="success_insertion_food_coupon">Se agregó el cupon correctamente</string>
+    <string name="error_insertion_food_coupon">Se produjo un error al agregar el cupon</string>
 
     <!-- banks -->
     <string name="banks_bancomer">Bancomer</string>
