@@ -42,6 +42,7 @@
     <string name="error_wrong_lenght_issuance_code">La longitud del código de emisión es incorrecta</string>
     <string name="error_wrong_incorrect_amount">El monto debe estar compuesto de 10 enteros y 2 decimales como máximo</string>
     <string name="error_wrong_lenght_field">El campo es demasiado largo</string>
+    <string name="error_wrong_only_numbers">El campo debe ser numerico</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
 
