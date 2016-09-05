@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.views;
 
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -123,6 +125,32 @@ public class FoodCouponsActivityTest {
         verify(mockView).getId();
         verify(mockDatePickerFragment).show(mFoodCouponsActivity.getSupportFragmentManager(), DATEPICKER_TAG);
         verify(mockDatePickerFragment).setIdWidgetContainerDate(R.id.food_coupon_expiration_date);
+
+    }
+
+    @Test
+    public void testSubmitFoodCoupon_successSubmit() {
+
+        when(mAddFoodCoupon.getId()).thenReturn(R.id.add_food_coupond);
+
+        Editable editableCodeMock = mock(Editable.class);
+        when(mCode.getText()).thenReturn(editableCodeMock);
+        when(editableCodeMock.toString()).thenReturn(anyString());
+
+        Editable editableAmountMock = mock(Editable.class);
+        when(mAmount.getText()).thenReturn(editableAmountMock);
+        when(editableAmountMock.toString()).thenReturn(anyString());
+
+        Editable editableExpirationDateMock = mock(Editable.class);
+        when(mExpirationDate.getText()).thenReturn(editableExpirationDateMock);
+        when(editableExpirationDateMock.toString()).thenReturn(anyString());
+
+        mFoodCouponsActivity.onClick(mAddFoodCoupon);
+
+        verify(mAddFoodCoupon).getId();
+        verify(mCode).getText();
+        verify(mAmount).getText();
+        verify(mExpirationDate).getText();
 
     }
 
