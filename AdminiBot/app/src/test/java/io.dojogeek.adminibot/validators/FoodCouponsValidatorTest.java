@@ -21,13 +21,13 @@ public class FoodCouponsValidatorTest {
 
     private static final String CORRECT_CODE = "1234567891234566";
     private static final String CORRECT_AMOUNT = "239.89";
-    private static final String CORRECT_EXPIRATION_DATE = "24/02/1988";
+    private static final String CORRECT_ALIAS = "This a test alias";
 
     @Test
     public void testFoodCouponModel_isValid() {
 
         FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(CORRECT_CODE,
-                CORRECT_AMOUNT, CORRECT_EXPIRATION_DATE);
+                CORRECT_AMOUNT, CORRECT_ALIAS);
 
         boolean isValid = foodCouponsValidator.validate();
 
@@ -42,7 +42,7 @@ public class FoodCouponsValidatorTest {
         for (String code : codes) {
 
             FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(code,
-                    CORRECT_AMOUNT, CORRECT_EXPIRATION_DATE);
+                    CORRECT_AMOUNT, CORRECT_ALIAS);
             boolean isValid = foodCouponsValidator.validate();
             assertFalse(isValid);
             assertThat(foodCouponsValidator.getErrorMessageCode(), is(R.string.error_wrong_only_numbers));
@@ -55,7 +55,7 @@ public class FoodCouponsValidatorTest {
         String code = "12345678901234567";
 
         FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(code,
-                CORRECT_AMOUNT, CORRECT_EXPIRATION_DATE);
+                CORRECT_AMOUNT, CORRECT_ALIAS);
 
         boolean isValid = foodCouponsValidator.validate();
 
@@ -70,7 +70,7 @@ public class FoodCouponsValidatorTest {
 
         for (String code : codes) {
             FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(code,
-                    CORRECT_AMOUNT, CORRECT_EXPIRATION_DATE);
+                    CORRECT_AMOUNT, CORRECT_ALIAS);
             boolean isValid = foodCouponsValidator.validate();
             assertFalse(isValid);
             assertThat(foodCouponsValidator.getErrorMessageCode(), is(R.string.error_wrong_only_numbers));
@@ -88,7 +88,7 @@ public class FoodCouponsValidatorTest {
         for (String amount : tooLongAmount) {
 
             FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(CORRECT_CODE,
-                    amount, CORRECT_EXPIRATION_DATE);
+                    amount, CORRECT_ALIAS);
 
             boolean isValidCheck = foodCouponsValidator.validate();
 
@@ -100,6 +100,38 @@ public class FoodCouponsValidatorTest {
     }
 
     @Test
+    public void testCashModel_emptyConcept_isNotValid() {
+
+        String [] cocepts = {"", "   "};
+
+        for (String concept : cocepts) {
+
+            FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(CORRECT_CODE,
+                    CORRECT_AMOUNT, concept);
+
+            boolean isValid = foodCouponsValidator.validate();
+
+            assertFalse(isValid);
+            Assert.assertEquals(R.string.error_empty_value, foodCouponsValidator.getErrorMessageAlias());
+        }
+
+    }
+
+    @Test
+    public void testCashModel_conceptTooLong_isNotValid() {
+
+        String tooLongConcept = "this a test concept description too long 1234567890";
+
+        FoodCouponsValidator foodCouponsValidator = createFoodCouponsValidator(CORRECT_CODE,
+                CORRECT_AMOUNT, tooLongConcept);
+
+        boolean isValid = foodCouponsValidator.validate();
+
+        assertFalse(isValid);
+        Assert.assertEquals(R.string.error_wrong_lenght_field, foodCouponsValidator.getErrorMessageAlias());
+    }
+
+    /*@Test
     public void testFoodCouponModel_incorrectExpirationDates() {
 
         String [] dates = {"", "   ", null};
@@ -111,14 +143,14 @@ public class FoodCouponsValidatorTest {
             assertEquals(R.string.error_empty_value, foodCouponsValidator.getErrorMessageExpirationDate());
         }
 
-    }
+    }*/
 
-    private FoodCouponsValidator createFoodCouponsValidator(String code, String amount, String expirationDate) {
+    private FoodCouponsValidator createFoodCouponsValidator(String code, String amount, String alias) {
 
         FoodCouponsValidator foodCouponsValidator = new FoodCouponsValidator();
         foodCouponsValidator.setCode(code);
         foodCouponsValidator.setAmount(amount);
-        foodCouponsValidator.setExpirationDate(expirationDate);
+        foodCouponsValidator.setAlias(alias);
 
         return foodCouponsValidator;
     }
