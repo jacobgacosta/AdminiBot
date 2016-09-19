@@ -24,7 +24,8 @@
             android:id="@+id/credit_card_type"
             android:layout_below="@+id/card_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/card_number"
@@ -33,40 +34,47 @@
                 style="@style/inputTheme"
                 android:layout_weight="1"/>
 
-            <LinearLayout
+            <RadioGroup
                 android:id="@+id/cards_brands"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <ImageView
+                <RadioButton
                     android:id="@+id/visa"
-                    android:layout_width="50dp"
-                    android:layout_height="45dp"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_visa"/>
+                    android:background="@drawable/visa_image_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false" />
 
-                <ImageView
+                <RadioButton
                     android:id="@+id/mastercard"
-                    android:layout_width="50dp"
-                    android:layout_height="45dp"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_mastercard"/>
+                    android:background="@drawable/mc_image_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false" />
 
-                <ImageView
+                <RadioButton
                     android:id="@+id/amex"
-                    android:layout_width="50dp"
-                    android:layout_height="45dp"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_amex"/>
+                    android:background="@drawable/amex_image_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false" />
 
-            </LinearLayout>
+            </RadioGroup>
 
         </LinearLayout>
 

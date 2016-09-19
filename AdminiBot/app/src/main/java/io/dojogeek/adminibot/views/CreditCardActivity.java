@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -31,9 +32,9 @@ public class CreditCardActivity extends BaseActivity implements CreditCard, View
     private EditText mCreditLimit;
     private EditText mCuttoffDate;
     private SpinnerWithInternalImage mSpinnerWithInternalImage;
-    private ImageView mVisa;
-    private ImageView mMasterCard;
-    private ImageView mAmex;
+    private RadioButton mVisa;
+    private RadioButton mMasterCard;
+    private RadioButton mAmex;
     private LinearLayout mCardsBrands;
     private static String DATEPICKER_TAG = "datePicker";
     private Button mCreateCreditCard;
@@ -56,9 +57,9 @@ public class CreditCardActivity extends BaseActivity implements CreditCard, View
         mSpinnerWithInternalImage = (SpinnerWithInternalImage) findViewById(R.id.banks);
         mCreditLimit = (EditText) findViewById(R.id.credit_limit);
         mCardsBrands = (LinearLayout) findViewById(R.id.cards_brands);
-        mVisa = (ImageView) findViewById(R.id.visa);
-        mMasterCard = (ImageView) findViewById(R.id.mastercard);
-        mAmex = (ImageView) findViewById(R.id.amex);
+        mVisa = (RadioButton) findViewById(R.id.visa);
+        mMasterCard = (RadioButton) findViewById(R.id.mastercard);
+        mAmex = (RadioButton) findViewById(R.id.amex);
         mCuttoffDate = (EditText) findViewById(R.id.cuttoff_date);
         mCurrentBalance = (EditText) findViewById(R.id.current_balance);
         mPayDayLimit = (EditText) findViewById(R.id.pay_day_limit);
