@@ -43,6 +43,7 @@
     <string name="error_wrong_incorrect_amount">El monto debe estar compuesto de 10 enteros y 2 decimales como máximo</string>
     <string name="error_wrong_lenght_field">El campo es demasiado largo</string>
     <string name="error_wrong_only_numbers">El campo debe ser numerico</string>
+    <string name="error_wrong_length_card_number">Se debe especificar 3 digitos de identificación para la tarjeta</string>
     <string name="title_activity_home_activity">Adminibot!</string>
 
 
