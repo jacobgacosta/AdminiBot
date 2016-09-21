@@ -16,5 +16,7 @@ public interface ValidatorsValues {
     String AMOUNT_REGEX = "\\d[0-9]{0,10}(\\.{1}[0-9]{1,2})";
     String ACCOUNT_REGEX = "\\d[0-9]{3,17}";
     int FOOD_COUPON_CODE_LENGHT = 16;
+    int ACCOUNT_NUMBER_MINIMUM_LENGTH = 3;
+    int ACCOUNT_NUMBER_MAXIMUM_LENGTH = 16;
 
 }
