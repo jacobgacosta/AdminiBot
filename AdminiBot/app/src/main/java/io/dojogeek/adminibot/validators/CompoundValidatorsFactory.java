@@ -11,7 +11,7 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator emailValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.EMAIL_MAX_LENGTH).withErroMessage(R.string.error_wrong_length_email));
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.EMAIL_MAX_LENGTH).withErroMessage(R.string.error_wrong_length_email));
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.EMAIL_REGEXP).withErroMessage(R.string.error_wrong_format_email));
         compoundValidator.addValidator(requiredValueValidator);
 
@@ -21,7 +21,7 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator nameValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_name));
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_name));
         compoundValidator.addValidator(requiredValueValidator);
 
@@ -31,7 +31,7 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator lastNameValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.LAST_NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_last_name));
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.LAST_NAME_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_last_name));
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_last_name));
         compoundValidator.addValidator(requiredValueValidator);
 
@@ -40,7 +40,7 @@ public class CompoundValidatorsFactory {
 
     public static CompoundValidator passwordValidator() {
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.PASSWORD_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_password));
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.PASSWORD_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_password));
         compoundValidator.addValidator(requiredValueValidator);
 
         return  compoundValidator;
@@ -49,7 +49,7 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator cashConceptValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.CASH_CONCEPT_LENGHT).
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.CASH_CONCEPT_LENGHT).
                 withErroMessage(R.string.error_wrong_lenght_field));
         compoundValidator.addValidator(requiredValueValidator);
 
@@ -94,7 +94,7 @@ public class CompoundValidatorsFactory {
     public static CompoundValidator checkIssuanceCodeValidator() {
 
         CompoundValidator compoundValidator = new CompoundValidator();
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.ISSUANCE_CODE_LENGHT).
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.ISSUANCE_CODE_LENGHT).
                 withErroMessage(R.string.error_wrong_lenght_issuance_code));
         compoundValidator.addValidator(requiredValueValidator);
 
@@ -106,7 +106,7 @@ public class CompoundValidatorsFactory {
         CompoundValidator compoundValidator = new CompoundValidator();
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_NUMBERS).
                 withErroMessage(R.string.error_wrong_only_numbers));
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.FOOD_COUPON_CODE_LENGHT).
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.FOOD_COUPON_CODE_LENGHT).
                 withErroMessage(R.string.error_wrong_lenght_field));
 
 

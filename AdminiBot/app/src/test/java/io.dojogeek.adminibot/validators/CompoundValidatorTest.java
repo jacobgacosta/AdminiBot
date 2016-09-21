@@ -17,7 +17,7 @@ public class CompoundValidatorTest {
         CompoundValidator compoundValidator = new CompoundValidator();
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.EMAIL_REGEXP));
         compoundValidator.addValidator(new RequiredValueValidator());
-        compoundValidator.addValidator(LenghtValidator.withMaxLenght(ValidatorsValues.EMAIL_MAX_LENGTH));
+        compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.EMAIL_MAX_LENGTH));
 
         assertTrue(compoundValidator.isValid(email));
     }

@@ -69,7 +69,7 @@ public class ValidatorTest {
         Map<String, DataValidator> validations = new HashMap<>();
         validations.put("onlyLettersAndSpaces", RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES));
         validations.put("onlyNumbers", RegexValidator.withRegexp(ValidatorsValues.ONLY_NUMBERS));
-        validations.put("maxLength", LenghtValidator.withMaxLenght(3));
+        validations.put("maxLength", LenghtValidator.withMaxLength(3));
         validations.put("requiredValue", requiredValueValidator);
 
         return validations;
