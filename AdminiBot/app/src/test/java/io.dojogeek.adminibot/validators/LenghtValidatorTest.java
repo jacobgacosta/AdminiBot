@@ -61,4 +61,17 @@ public class LenghtValidatorTest {
         }
 
     }
+
+    @Test
+    public void lengthValidator_minimumLength_isTrue() {
+
+        int minimumLength = 3;
+        int maximumLength = 16;
+
+        String value = "012";
+
+        LenghtValidator lenghtValidator = LenghtValidator.withMinAndMaxLength(minimumLength, maximumLength);
+        boolean isValidValue = lenghtValidator.isValid(value);
+        assertTrue(isValidValue);
+    }
 }
