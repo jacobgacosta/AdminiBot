@@ -112,4 +112,16 @@ public class CompoundValidatorsFactory {
 
         return compoundValidator;
     }
+
+    public static CompoundValidator cardNumberValidator() {
+
+        CompoundValidator compoundValidator = new CompoundValidator();
+        compoundValidator.addValidator(LenghtValidator.
+                withMinAndMaxLength(ValidatorsValues.ACCOUNT_NUMBER_MINIMUM_LENGTH,
+                        ValidatorsValues.ACCOUNT_NUMBER_MAXIMUM_LENGTH).
+                withErroMessage(R.string.error_wrong_length_card_number));
+        compoundValidator.addValidator(requiredValueValidator);
+
+        return compoundValidator;
+    }
 }
