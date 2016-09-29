@@ -149,20 +149,20 @@ public class CreatorModels {
     }
 
     public static BankCardModel createBankCardModel() {
-        BankCardModel bankCardModel = createBankCardModel("Bancomer", "123456789012345678", 2, 2,
+        BankCardModel bankCardModel = createBankCardModel("Bancomer", "123456789012345678", 2, "VISA",
                 24000.00, CardTypeEnum.CREDIT_CARD, 1);
 
         return bankCardModel;
     }
 
-    public static BankCardModel createBankCardModel(String name, String number, long bankId, long trademarkId,
+    public static BankCardModel createBankCardModel(String name, String number, long bankId, String brand,
                                                     double availableCredit, CardTypeEnum cardType, long userId) {
 
         BankCardModel bankCardModel = new BankCardModel();
         bankCardModel.setName(name);
         bankCardModel.setNumber(number);
         bankCardModel.setBankId(bankId);
-        bankCardModel.setTrademarkId(trademarkId);
+        bankCardModel.setBrand(brand);
         bankCardModel.setAvailableCredit(availableCredit);
         bankCardModel.setCardType(cardType);
         bankCardModel.setUserId(userId);
@@ -172,8 +172,8 @@ public class CreatorModels {
 
     public static CardDetailModel createCardDetailModel() {
 
-        CardDetailModel cardDetailModel = createCardDetailModel(7632.90, 8378.00, DateUtils.getCurrentData(), DateUtils.getCurrentData(),
-                4);
+        CardDetailModel cardDetailModel = createCardDetailModel(7632.90, 8378.00,
+                DateUtils.getCurrentData(), DateUtils.getCurrentData(), 4);
 
         return cardDetailModel;
     }
