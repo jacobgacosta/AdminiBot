@@ -7,7 +7,6 @@ public class CardDetailModel {
     private double currentBalance;
     private String cuttoffDate;
     private String payDayLimit;
-    private long bankCardId;
 
     public long getId() {
         return id;
@@ -49,11 +48,4 @@ public class CardDetailModel {
         this.payDayLimit = payDayLimit;
     }
 
-    public long getBankCardId() {
-        return bankCardId;
-    }
-
-    public void setBankCardId(long bankCardId) {
-        this.bankCardId = bankCardId;
-    }
 }
