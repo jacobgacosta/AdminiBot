@@ -2,7 +2,10 @@ package dagger;
 
 import android.content.Context;
 
+import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
+import io.dojogeek.adminibot.daos.CardDetailDao;
+import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
 import io.dojogeek.adminibot.daos.CashDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
@@ -14,6 +17,8 @@ import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.presenters.CashPresenterImpl;
 import io.dojogeek.adminibot.presenters.CheckPresenter;
 import io.dojogeek.adminibot.presenters.CheckPresenterImpl;
+import io.dojogeek.adminibot.presenters.CreditCardPresenter;
+import io.dojogeek.adminibot.presenters.CreditCardPresenterImpl;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
@@ -184,6 +189,12 @@ public class AdminiBotModule {
     @AdminBotScope
     FoodCouponPresenter provideFoodCouponPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
         return new FoodCouponPresenterImpl(mFoodCoupons, otherPaymentMethodDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    CreditCardPresenter provideCreditCardPresenter(BankCardDaoImpl bankCardDao, CardDetailDaoImpl cardDetailDao) {
+        return new CreditCardPresenterImpl(mCreditCard, bankCardDao, cardDetailDao);
     }
 
     @Provides
