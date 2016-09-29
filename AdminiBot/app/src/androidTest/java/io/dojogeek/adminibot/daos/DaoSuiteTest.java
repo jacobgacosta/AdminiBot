@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
         IncomeDaoImplTest.class, BankCardDaoImplTest.class, CardDetailDaoImplTest.class,
         OtherPaymentMethodDaoImplTest.class, ExpenseBankCardDaoImplTest.class,
         IncomeBankCardDaoImplTest.class, ExpenseOtherPaymentMethodDaoTest.class,
-        IncomeOtherPaymentMethodsDaoTest.class})
+        IncomeOtherPaymentMethodsDaoTest.class, BankDaoImplTest.class,
+        CashDaoImplTest.class, TrademarkDaoImplTest.class})
 public class DaoSuiteTest {
 
 }
