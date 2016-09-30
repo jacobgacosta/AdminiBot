@@ -39,23 +39,29 @@ public class SpinnerWithInternalImage extends Spinner {
         getAttributes(context, attrs);
     }
 
-    public void createSpinner(int resourceIdHint, Map<String, Integer> imagesNamesAndTextItemsMap) {
+    public void createSpinner(int resourceIdHint, Map<Long, Map<String, Integer>> imagesNamesAndTextItemsMap) {
+
+        List<Long> ids = new ArrayList<>();
 
         List<Integer> textItems = new ArrayList<>();
 
-
         List<String> resourcesImages = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> entry : imagesNamesAndTextItemsMap.entrySet()) {
-            resourcesImages.add(entry.getKey());
-            textItems.add(entry.getValue());
+        for (Map.Entry<Long, Map<String, Integer>> entry : imagesNamesAndTextItemsMap.entrySet()) {
+
+            ids.add(entry.getKey());
+
+            for (Map.Entry<String, Integer> items : entry.getValue().entrySet()) {
+                resourcesImages.add(items.getKey());
+                textItems.add(items.getValue());
+            }
         }
 
         if (resourceIdHint != NO_RESOURCE) {
             textItems.add(resourceIdHint);
         }
 
-        SpinnerBankAdapter adapter = new SpinnerBankAdapter(mContext, resourcesImages, textItems);
+        SpinnerBankAdapter adapter = new SpinnerBankAdapter(mContext, ids, resourcesImages, textItems);
         setAdapter(adapter);
         setSelection(adapter.getCount());
     }
