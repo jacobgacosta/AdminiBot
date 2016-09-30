@@ -29,6 +29,7 @@ import io.dojogeek.adminibot.enums.BankEnum;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -60,15 +61,17 @@ public class SpinnerWithInternalImageTest {
 
         ArrayList<String> resourcesNames = mock(ArrayList.class);
         ArrayList<Integer> textItems = mock(ArrayList.class);
+        ArrayList<Long> ids = mock(ArrayList.class);
 
-        Map<String, Integer> mapOfSpinnerItems =  createItemsMapFromBankEnum(BankEnum.values());
+        Map<Long, Map<String, Integer>> mapOfSpinnerItems =  createItemsMapFromBankEnum(BankEnum.values());
 
         Resources resourcesMock = mock(Resources.class);
 
         int resourceId = 0;
         int count = 5;
 
-        whenNew(ArrayList.class).withNoArguments().thenReturn(textItems).thenReturn(resourcesNames);
+        whenNew(ArrayList.class).withNoArguments().thenReturn(ids).thenReturn(textItems).
+                thenReturn(resourcesNames);
 //        when(mContext.getResources()).thenReturn(resourcesMock);
 //        when(resourcesMock.getIdentifier(anyString(), anyString(), anyString())).thenReturn(resourceId);
 
@@ -82,6 +85,7 @@ public class SpinnerWithInternalImageTest {
 
         mSpinner.createSpinner(HINT_TEST, mapOfSpinnerItems);
 
+        verify(ids, times(mapOfSpinnerItems.size())).add(anyLong());
         verify(textItems, times(NUMBER_OF_HINT_ADDED)).add(HINT_TEST);
         verify(resourcesNames, times(mapOfSpinnerItems.size())).add(anyString());
         verify(mSpinner).setAdapter(spinnerBankAdapter);
@@ -104,7 +108,7 @@ public class SpinnerWithInternalImageTest {
 
         whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
 
-        mSpinner.createSpinner(0, new HashMap<String, Integer>());
+        mSpinner.createSpinner(0, new HashMap<Long, Map<String, Integer>>());
 
         verify(textItems, never()).add(0);
         verify(mSpinner).setAdapter(spinnerBankAdapter);
@@ -112,12 +116,14 @@ public class SpinnerWithInternalImageTest {
 
     }
 
-    private Map<String, Integer> createItemsMapFromBankEnum(BankEnum [] banks) {
+    private Map<Long, Map<String, Integer>> createItemsMapFromBankEnum(BankEnum [] banks) {
 
-        Map<String, Integer> banksMap = new HashMap<>();
+        Map<Long, Map<String, Integer>> banksMap = new HashMap<>();
 
-        for (BankEnum bank : banks) {
-            banksMap.put(bank.getImageName(), bank.getName());
+        for (int index = 0; index < banks.length; index++) {
+            Map<String, Integer> imageNameAndTextItem = new HashMap<>();
+            imageNameAndTextItem.put(banks[index].getImageName(), banks[index].getName());
+            banksMap.put(new Long(index), imageNameAndTextItem);
         }
 
         return banksMap;
