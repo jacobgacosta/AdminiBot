@@ -44,13 +44,16 @@ public class SpinnerBankAdapterTest {
     @Mock
     private Context mContext;
 
+    private List<Long> mBankIds = mock(List.class);
+
     private List<Integer> mItemsText = mock(List.class);
 
     private List<String> mResourcesImagesNames = mock(List.class);
 
     @InjectMocks
     @Spy
-    private SpinnerBankAdapter mSpinnerBankAdapter = new SpinnerBankAdapter(mContext, mResourcesImagesNames, mItemsText);
+    private SpinnerBankAdapter mSpinnerBankAdapter = new SpinnerBankAdapter(mContext, mBankIds,
+            mResourcesImagesNames, mItemsText);
 
     @Test
     public void testGetView() {
@@ -152,6 +155,20 @@ public class SpinnerBankAdapterTest {
 
         verify(mockTextView).setTextColor(color);
         verify(mockTextView).setHint(stringResource);
+
+    }
+
+    @Test
+    public void testGetItem_returnSelectedItem() {
+
+        int selectedOption = 1;
+        Long bankId = 1L;
+
+        when(mBankIds.get(selectedOption)).thenReturn(bankId);
+
+        Object actualObject = mSpinnerBankAdapter.getItem(selectedOption);
+
+        assertEquals(bankId, actualObject);
 
     }
 
