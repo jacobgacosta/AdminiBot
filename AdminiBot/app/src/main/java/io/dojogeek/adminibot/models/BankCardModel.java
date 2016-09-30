@@ -8,7 +8,7 @@ public class BankCardModel {
     private String name;
     private String number;
     private long bankId;
-    private long trademarkId;
+    private String brand;
     private double availableCredit;
     private CardTypeEnum cardType;
     private long userId;
@@ -45,12 +45,12 @@ public class BankCardModel {
         this.bankId = bankId;
     }
 
-    public long getTrademarkId() {
-        return trademarkId;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setTrademarkId(long trademarkId) {
-        this.trademarkId = trademarkId;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public double getAvailableCredit() {

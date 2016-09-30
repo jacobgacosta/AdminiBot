@@ -89,7 +89,7 @@ public class BankCardDaoImplTest {
         assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
         assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
         assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
-        assertEquals(expectedBankCardModel.getTrademarkId(), actualBankCardModel.getTrademarkId());
+        assertEquals(expectedBankCardModel.getBrand(), actualBankCardModel.getBrand());
         assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
         assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
         assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
@@ -233,7 +233,7 @@ public class BankCardDaoImplTest {
         for (int index = 1; index <= numberOfBankCardToCreate; index++) {
 
             BankCardModel bankCardModel = CreatorModels.createBankCardModel("Bancomer " + index,
-                    "12345678901234567" + index, 2 + index, 2 + index, 24000.00 + index, CardTypeEnum.DEBIT_CARD, 1 + index);
+                    "12345678901234567" + index, 2 + index, "VISA", 24000.00 + index, CardTypeEnum.DEBIT_CARD, 1 + index);
 
             mBankCardDao.createBankCard(bankCardModel);
             bankCardModels.add(bankCardModel);
@@ -263,7 +263,7 @@ public class BankCardDaoImplTest {
         assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
         assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
         assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
-        assertEquals(expectedBankCardModel.getTrademarkId(), actualBankCardModel.getTrademarkId());
+        assertEquals(expectedBankCardModel.getBrand(), actualBankCardModel.getBrand());
         assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
         assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
         assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
@@ -273,7 +273,7 @@ public class BankCardDaoImplTest {
         bankCardModel.setName("Updated name");
         bankCardModel.setNumber("123456789012345658");
         bankCardModel.setBankId(1);
-        bankCardModel.setTrademarkId(1);
+        bankCardModel.setBrand("AMEX");
         bankCardModel.setAvailableCredit(8743.90);
         bankCardModel.setCardType(CardTypeEnum.CREDIT_CARD);
         bankCardModel.setUserId(2);

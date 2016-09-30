@@ -146,7 +146,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         contentValues.put(BankCardsContract.BankCard.COLUMN_NAME, bankCardModel.getName());
         contentValues.put(BankCardsContract.BankCard.COLUMN_NUMBER, bankCardModel.getNumber());
         contentValues.put(BankCardsContract.BankCard.COLUMN_BANK_ID, bankCardModel.getBankId());
-        contentValues.put(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID, bankCardModel.getTrademarkId());
+        contentValues.put(BankCardsContract.BankCard.COLUMN_BRAND, bankCardModel.getBrand());
         contentValues.put(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE, bankCardModel.getAvailableCredit());
         contentValues.put(BankCardsContract.BankCard.COLUMN_CARD_TYPE, bankCardModel.getCardType().name());
         contentValues.put(BankCardsContract.BankCard.COLUMN_USER_ID, bankCardModel.getUserId());
@@ -162,7 +162,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         String name = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_NAME));
         String number = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_NUMBER));
         long bankId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_BANK_ID));
-        long trademarkId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_TRADEMARK_ID));
+        String brand = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_BRAND));
         double availableCredit = cursor.getDouble(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CREDIT_AVAILABLE));
         String cardType = cursor.getString(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_CARD_TYPE));
         long userId = cursor.getLong(cursor.getColumnIndex(BankCardsContract.BankCard.COLUMN_USER_ID));
@@ -171,7 +171,7 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
         bankCardModel.setName(name);
         bankCardModel.setNumber(number);
         bankCardModel.setBankId(bankId);
-        bankCardModel.setTrademarkId(trademarkId);
+        bankCardModel.setBrand(brand);
         bankCardModel.setAvailableCredit(availableCredit);
         bankCardModel.setCardType(CardTypeEnum.valueOf(cardType));
         bankCardModel.setUserId(userId);
