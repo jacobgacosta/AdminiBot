@@ -24,11 +24,13 @@ public class SpinnerBankAdapter extends BaseAdapter {
     private static final String DRAWABLE = "drawable";
     private static final int LAST_ITEM = 1;
     private Context mContext;
+    private List<Long> mBankIds;
     private List<String> mResourcesImagesNames;
     private List<Integer> mText;
 
-    public SpinnerBankAdapter(Context context, List<String> resourcesImagesNames, List<Integer> text) {
+    public SpinnerBankAdapter(Context context,List<Long> bankIds, List<String> resourcesImagesNames, List<Integer> text) {
         mContext = context;
+        mBankIds = bankIds;
         mResourcesImagesNames = resourcesImagesNames;
         mText = text;
     }
@@ -40,7 +42,7 @@ public class SpinnerBankAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mBankIds.get(position);
     }
 
     @Override
