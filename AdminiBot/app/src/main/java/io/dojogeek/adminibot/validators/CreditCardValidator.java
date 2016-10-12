@@ -45,6 +45,38 @@ public class CreditCardValidator extends Validator {
         dataToValidate.put(PAYDAY_LIMIT, paydayLimit);
     }
 
+    public boolean isValidCardName() {
+        return this.isValid(CARD_NAME);
+    }
+
+    public boolean isValidCardNumber() {
+        return this.isValid(CARD_NUMBER);
+    }
+
+    public boolean isValidCardBrand() {
+        return this.isValid(CREDIT_CARD_BRAND);
+    }
+
+    public boolean isValidCardBank() {
+        return this.isValid(BANK);
+    }
+
+    public boolean isValidCreditLimit() {
+        return this.isValid(CREDIT_LIMIT);
+    }
+
+    public boolean isValidCurrentBalance() {
+        return this.isValid(CURRENT_BALANCE);
+    }
+
+    public boolean isValidCuttoffDate() {
+        return this.isValid(CUTTOFF_DATE);
+    }
+
+    public boolean isValidPayDayLimit() {
+        return this.isValid(PAYDAY_LIMIT);
+    }
+
     public int getCardNameError() {
         return errorMessages.get(CARD_NAME);
     }
