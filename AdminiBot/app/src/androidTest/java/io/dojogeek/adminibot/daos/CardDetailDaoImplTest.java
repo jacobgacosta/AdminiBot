@@ -47,6 +47,8 @@ public class CardDetailDaoImplTest {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
+
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
         assertNotEquals(NO_OPERATION, insertedRecordId);
@@ -59,6 +61,8 @@ public class CardDetailDaoImplTest {
 
         CardDetailModel cardDetailModel = null;
 
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
+
         mCardDetailDao.createCardDetail(cardDetailModel);
 
     }
@@ -69,6 +73,8 @@ public class CardDetailDaoImplTest {
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
         cardDetailModel.setCuttoffDate(null);
 
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
+
         long insetedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
         assertThat(insetedRecordId, is(OPERATIONAL_ERROR));
@@ -78,6 +84,8 @@ public class CardDetailDaoImplTest {
     public void testGetCardDetailByBankCardId_successObtaining() throws DataException {
 
         CardDetailModel expectedCardDetailModel = CreatorModels.createCardDetailModel();
+
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
         mCardDetailDao.createCardDetail(expectedCardDetailModel);
 
@@ -102,6 +110,8 @@ public class CardDetailDaoImplTest {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
+
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
         CardDetailModel expectedUpdatedCardDetail = changeCardDetailValues(cardDetailModel);
@@ -124,6 +134,8 @@ public class CardDetailDaoImplTest {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
 
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
+
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
         String where = CardDetailContract.CardDetail._ID + "= " + insertedRecordId;
@@ -136,6 +148,8 @@ public class CardDetailDaoImplTest {
     public void testUpdateCardDetail_withNullRequiredField_noUpdate() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
@@ -165,6 +179,8 @@ public class CardDetailDaoImplTest {
     public void testDeleteCardDetail_successDeletion() {
 
         CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+
+        ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
         long insertedRecordId = mCardDetailDao.createCardDetail(cardDetailModel);
 
