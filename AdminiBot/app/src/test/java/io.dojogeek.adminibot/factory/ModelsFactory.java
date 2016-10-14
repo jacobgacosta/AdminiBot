@@ -5,7 +5,9 @@ import java.util.List;
 
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
+import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.models.CashModel;
+import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
@@ -63,4 +65,17 @@ public class ModelsFactory {
 
         return typePaymentMethodEnumList;
     }
+
+    public static CreditCardModel createCreditCardModel() {
+        CreditCardModel creditCardModel =
+                factory.manufacturePojo(CreditCardModel.class);
+
+        return creditCardModel;
+    }
+
+    public static BankModel createBankModel() {
+        return factory.manufacturePojo(BankModel.class);
+    }
+
+
 }
