@@ -139,6 +139,8 @@
     <!-- add card -->
     <string name="add_card_banks_hint">Elige el banco</string>
     <string name="title_activity_add_card">Agrega una nueva tarjeta</string>
+    <string name="success_insertion_cc">Se agregó la tarjeta correctamente</string>
+    <string name="error_insertion_cc">Se produjo un error al agregar la tarjeta</string>
 
     <!-- add cash -->
     <string name="title_activity_add_cash">Agregar concepto de efectivo</string>
