@@ -37,6 +37,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ExpenseCreationPresenterTest {
 
+    private ModelsFactory factory = new ModelsFactory();
 
     @Mock
     private BankCardModel mBankCardModel;
@@ -326,7 +327,10 @@ public class ExpenseCreationPresenterTest {
         expenseOtherPaymentMethodModels.add(mExpenseOtherPaymentMethodModel);
 
         when(mExpenseModel.getOtherPaymentMethodModels()).thenReturn(expenseOtherPaymentMethodModels);
-        when(mOtherPaymentMethodDao.getOtherPaymentMethodById(anyLong())).thenReturn(mOtherPaymentMethodModel);
+
+        OtherPaymentMethodModel otherPaymentMethodModel = factory.createOtherPaymentMethodModel();
+
+        when(mOtherPaymentMethodDao.getOtherPaymentMethodById(anyLong())).thenReturn(otherPaymentMethodModel);
         when(mOtherPaymentMethodDao.updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(),
                 anyLong())).thenThrow(SQLException.class);
 
