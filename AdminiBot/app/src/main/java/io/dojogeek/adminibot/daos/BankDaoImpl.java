@@ -7,12 +7,15 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
 import io.dojogeek.adminibot.sqlite.BanksContract;
 
 public class BankDaoImpl extends SQLiteGlobalDao implements BankDao {
 
+    @Inject
     public BankDaoImpl(Context context) {
         super(context);
     }
@@ -41,8 +44,8 @@ public class BankDaoImpl extends SQLiteGlobalDao implements BankDao {
     private BankModel getBankModelFromCursor(Cursor cursor) {
 
         long id = cursor.getLong(cursor.getColumnIndex(BanksContract.Bank._ID));
-        String name = cursor.getString(cursor.getColumnIndex(BanksContract.Bank.COLUMN_NAME));
-        Integer imageName = cursor.getInt(cursor.getColumnIndex(BanksContract.Bank.COLUMN_IMAGE_NAME));
+        int name = cursor.getInt(cursor.getColumnIndex(BanksContract.Bank.COLUMN_NAME));
+        String imageName = cursor.getString(cursor.getColumnIndex(BanksContract.Bank.COLUMN_IMAGE_NAME));
 
         BankModel bankModel = new BankModel();
         bankModel.setId(id);
