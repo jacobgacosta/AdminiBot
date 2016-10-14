@@ -23,6 +23,7 @@ public class CardDetailContract {
             CardDetail.COLUMN_CREDIT_LIMIT + " REAL NOT NULL, " +
             CardDetail.COLUMN_CURRENT_BALANCE + " REAL NOT NULL, " +
             CardDetail.COLUMN_CUTOFF_DATE + " DATETIME NOT NULL, " +
+            CardDetail.COLUMN_BANK_CARD_ID + " INTEGER NOT NULL, " +
             CardDetail.COLUMN_PAY_DAY_LIMIT + " TEXT NOT NULL) ";
 
 
