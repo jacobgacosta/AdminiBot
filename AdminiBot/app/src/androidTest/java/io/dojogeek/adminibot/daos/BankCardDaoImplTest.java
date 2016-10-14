@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -51,6 +52,8 @@ public class BankCardDaoImplTest {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
+
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
         assertNotEquals(NO_OPERATION, insertedRecordId);
@@ -62,24 +65,29 @@ public class BankCardDaoImplTest {
 
         BankCardModel bankCardModel = null;
 
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
+
         mBankCardDao.createBankCard(bankCardModel);
     }
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testCreateBankCard_withNullRequiredField_noInsertion() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
         bankCardModel.setName(null);
 
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
 
-        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
+        mBankCardDao.createBankCard(bankCardModel);
+
     }
 
     @Test
     public void testGetBankCardById_successObtaining() throws DataException {
 
         BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
+
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
 
         long insertedRecordId = mBankCardDao.createBankCard(expectedBankCardModel);
 
@@ -130,6 +138,9 @@ public class BankCardDaoImplTest {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
+
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
         BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
@@ -162,6 +173,8 @@ public class BankCardDaoImplTest {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
 
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
+
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
         BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
@@ -188,6 +201,8 @@ public class BankCardDaoImplTest {
     public void testDeleteBankCard_successDeletion() {
 
         BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
 
         long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
 
@@ -229,6 +244,8 @@ public class BankCardDaoImplTest {
     private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
 
         List<BankCardModel> bankCardModels = new ArrayList<>();
+
+        ((BankCardDaoImpl) mBankCardDao).openConnection();
 
         for (int index = 1; index <= numberOfBankCardToCreate; index++) {
 
