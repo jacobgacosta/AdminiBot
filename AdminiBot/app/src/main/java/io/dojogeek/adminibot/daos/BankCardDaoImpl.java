@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.daos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,13 @@ public class BankCardDaoImpl extends SQLiteGlobalDao implements BankCardDao {
     }
 
     @Override
-    public long createBankCard(BankCardModel bankCardModel) {
+    public long createBankCard(BankCardModel bankCardModel) throws SQLException {
 
-        openConnection();
+//        openConnection();
 
         ContentValues contentValues = createContentValues(bankCardModel);
 
-        long result = mDatabase.insert(BankCardsContract.BankCard.TABLE_NAME,
+        long result = mDatabase.insertOrThrow(BankCardsContract.BankCard.TABLE_NAME,
                 BankCardsContract.BankCard.COLUMN_NAME_NULLABLE, contentValues);
 
         return result;
