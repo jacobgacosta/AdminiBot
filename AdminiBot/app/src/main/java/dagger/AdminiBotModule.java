@@ -4,6 +4,7 @@ import android.content.Context;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
+import io.dojogeek.adminibot.daos.BankDaoImpl;
 import io.dojogeek.adminibot.daos.CardDetailDao;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
 import io.dojogeek.adminibot.daos.CashDaoImpl;
@@ -193,8 +194,9 @@ public class AdminiBotModule {
 
     @Provides
     @AdminBotScope
-    CreditCardPresenter provideCreditCardPresenter(BankCardDaoImpl bankCardDao, CardDetailDaoImpl cardDetailDao) {
-        return new CreditCardPresenterImpl(mCreditCard, bankCardDao, cardDetailDao);
+    CreditCardPresenter provideCreditCardPresenter(BankCardDaoImpl bankCardDao, CardDetailDaoImpl cardDetailDao,
+                                                   BankDaoImpl bankDao) {
+        return new CreditCardPresenterImpl(mCreditCard, bankCardDao, cardDetailDao, bankDao);
     }
 
     @Provides
