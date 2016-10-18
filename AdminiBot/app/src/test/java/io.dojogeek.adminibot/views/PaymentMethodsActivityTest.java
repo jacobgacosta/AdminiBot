@@ -237,7 +237,7 @@ public class PaymentMethodsActivityTest {
         verifyStatic(times(1));
 
         Map<String, Serializable> flags = new HashMap<>();
-        flags.put("EXTRA_SESSION_ID", TypePaymentMethodEnum.CASH);
+        flags.put(PaymentMethodsActivity.TYPE_PAYMENT_METHOD, TypePaymentMethodEnum.CASH);
 
         LaunchIntents.launchIntentWithExtraValues(mPaymentMethodsActivity, MyPaymentMethodsActivity.class, flags);
 
