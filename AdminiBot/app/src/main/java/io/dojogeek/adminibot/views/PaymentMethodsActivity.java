@@ -31,6 +31,8 @@ import io.dojogeek.adminibot.utils.LaunchIntents;
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods, View.OnClickListener,
         AdapterView.OnItemClickListener {
 
+    public static final String TYPE_PAYMENT_METHOD = "TYPE_PAYMENT_METHOD";
+
     @Inject
     public PaymentMethodsPresenter paymentMethodsPresenter;
 
@@ -76,7 +78,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         Map<String, Serializable> flags = new HashMap<>();
-        flags.put("EXTRA_SESSION_ID", (TypePaymentMethodEnum) view.getTag());
+        flags.put(TYPE_PAYMENT_METHOD, (TypePaymentMethodEnum) view.getTag());
 
         try {
             LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
