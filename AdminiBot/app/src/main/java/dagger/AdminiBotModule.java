@@ -208,8 +208,9 @@ public class AdminiBotModule {
     @Provides
     @AdminBotScope
     MyCreditCardsPresenter provideMyPaymentMethodsPresenter(BankCardDaoImpl bankCardDao,
-                                                            CardDetailDaoImpl cardDetailDao) {
-        return new MyCreditCardsPresenterImpl(mMyCreditCards, bankCardDao, cardDetailDao);
+                                                            CardDetailDaoImpl cardDetailDao,
+                                                            BankDaoImpl bankDao) {
+        return new MyCreditCardsPresenterImpl(mMyCreditCards, bankCardDao, cardDetailDao, bankDao);
     }
 
     @Provides
