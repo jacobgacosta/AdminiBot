@@ -22,11 +22,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
@@ -228,18 +225,15 @@ public class PaymentMethodsActivityTest {
 
         PowerMockito.doNothing().when(LaunchIntents.class);
 
-        LaunchIntents.launchIntentWithExtraValues(mPaymentMethodsActivity, MyPaymentMethodsActivity.class, new HashMap<String, Serializable>());
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
 
-        when(mView.getTag()).thenReturn(TypePaymentMethodEnum.CASH);
+        when(mView.getTag()).thenReturn(TypePaymentMethodEnum.CARD);
 
         mPaymentMethodsActivity.onItemClick(adapterView, mView, 0, 0);
 
         verifyStatic(times(1));
 
-        Map<String, Serializable> flags = new HashMap<>();
-        flags.put(PaymentMethodsActivity.TYPE_PAYMENT_METHOD, TypePaymentMethodEnum.CASH);
-
-        LaunchIntents.launchIntentWithExtraValues(mPaymentMethodsActivity, MyPaymentMethodsActivity.class, flags);
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
 
         verify(mView).getTag();
     }
