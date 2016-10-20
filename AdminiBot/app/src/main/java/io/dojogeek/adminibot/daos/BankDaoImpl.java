@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.sqlite.BankCardsContract;
 import io.dojogeek.adminibot.sqlite.BanksContract;
@@ -41,6 +42,30 @@ public class BankDaoImpl extends SQLiteGlobalDao implements BankDao {
         return banks;
     }
 
+    @Override
+    public BankModel getBankById(long bankId) {
+
+        openConnection();
+
+        String [] args = {String.valueOf(bankId)};
+
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + BanksContract.Bank.TABLE_NAME +
+                " WHERE _ID = ? ", args);
+
+        BankModel bankModel = new BankModel();
+
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+
+                bankModel = getBankModelFromCursor(cursor);
+                cursor.moveToNext();
+            }
+        }
+
+        return bankModel;
+    }
+
     private BankModel getBankModelFromCursor(Cursor cursor) {
 
         long id = cursor.getLong(cursor.getColumnIndex(BanksContract.Bank._ID));
@@ -53,5 +78,14 @@ public class BankDaoImpl extends SQLiteGlobalDao implements BankDao {
         bankModel.setImageName(imageName);
 
         return bankModel;
+    }
+
+    private boolean isEmptyResult(Cursor cursor) {
+
+        if (cursor.getCount() == NO_DATA) {
+            return true;
+        }
+
+        return false;
     }
 }
