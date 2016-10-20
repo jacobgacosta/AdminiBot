@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import io.dojogeek.adminibot.daos.CashDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
@@ -29,10 +30,10 @@ public class CashPresenterTest {
     private Cash mCashActivity;
 
     @Mock
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
 
     @InjectMocks
-    private CashPresenter cashPresenter = new CashPresenterImpl(mCashActivity, mOtherPaymentMethodDao);
+    private CashPresenter mCashPresenter = new CashPresenterImpl(mCashActivity, mOtherPaymentMethodDao);
 
     @Test
     public void testCreateCash_successfulCreation() {
@@ -41,7 +42,7 @@ public class CashPresenterTest {
 
         when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenReturn(SUCCESS_INSERTION);
 
-        cashPresenter.createCash(otherPaymentMethodModel);
+        mCashPresenter.createCash(otherPaymentMethodModel);
 
         verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCashActivity).notifySuccessfulInsertion();
@@ -56,11 +57,17 @@ public class CashPresenterTest {
 
         when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenThrow(new SQLException());
 
-        cashPresenter.createCash(otherPaymentMethodModel);
+        mCashPresenter.createCash(otherPaymentMethodModel);
 
         verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCashActivity, never()).notifySuccessfulInsertion();
         verify(mCashActivity, never()).returnToMyPaymentsMethods();
         verify(mCashActivity).notifyErrorInsertion();
+    }
+
+    @Test
+    public void testUnnusedView_closeConnections() {
+        mCashPresenter.unnusedView();
+        verify(mOtherPaymentMethodDao).closeConnection();
     }
 }

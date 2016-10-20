@@ -7,4 +7,6 @@ public interface CashPresenter {
 
     void createCash(OtherPaymentMethodModel otherPaymentMethodModel);
 
+    void unnusedView();
+
 }

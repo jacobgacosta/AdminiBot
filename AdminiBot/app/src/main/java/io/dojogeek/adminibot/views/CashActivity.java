@@ -71,7 +71,7 @@ public class CashActivity extends BaseActivity implements Cash, View.OnClickList
 
     @Override
     protected void closeConnections() {
-
+        mCashPresenter.unnusedView();
     }
 
     @Override

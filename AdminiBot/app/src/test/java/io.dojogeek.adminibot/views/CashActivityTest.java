@@ -311,5 +311,9 @@ public class CashActivityTest {
 
         LaunchIntents.launchIntentClearTop(mCashActivity, MainActivity.class);
     }
-
+    @Test
+    public void testCloseConnections() {
+        mCashActivity.closeConnections();
+        verify(mCashPresenter).unnusedView();
+    }
 }

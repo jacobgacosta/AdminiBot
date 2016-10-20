@@ -5,6 +5,7 @@ import android.database.SQLException;
 
 import io.dojogeek.adminibot.daos.CashDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.Cash;
@@ -34,5 +35,10 @@ public class CashPresenterImpl implements CashPresenter {
             mCash.notifyErrorInsertion();
         }
 
+    }
+
+    @Override
+    public void unnusedView() {
+        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
     }
 }
