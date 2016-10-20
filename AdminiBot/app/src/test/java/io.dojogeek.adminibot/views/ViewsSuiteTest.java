@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
         CheckActivityTest.class,
         CreditCardActivityTest.class,
         FoodCouponsActivityTest.class,
-        MyPaymentMethodsActivityTest.class,
+        MyCreditCardsActivityTest.class,
         PaymentMethodsActivityTest.class
 })
 public class ViewsSuiteTest {

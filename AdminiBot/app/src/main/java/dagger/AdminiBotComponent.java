@@ -7,7 +7,7 @@ import io.dojogeek.adminibot.views.CashActivity;
 import io.dojogeek.adminibot.views.CheckActivity;
 import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.FoodCouponsActivity;
-import io.dojogeek.adminibot.views.MyPaymentMethodsActivity;
+import io.dojogeek.adminibot.views.MyCreditCardsActivity;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
 import io.dojogeek.adminibot.views.LoginActivity;
@@ -42,5 +42,5 @@ public interface AdminiBotComponent {
 
     void inject(AddNewPaymentMethodActivity activity);
 
-    void inject(MyPaymentMethodsActivity activity);
+    void inject(MyCreditCardsActivity activity);
 }

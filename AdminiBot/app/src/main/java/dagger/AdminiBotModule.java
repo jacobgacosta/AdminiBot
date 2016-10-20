@@ -2,15 +2,11 @@ package dagger;
 
 import android.content.Context;
 
-import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.BankDaoImpl;
-import io.dojogeek.adminibot.daos.CardDetailDao;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
-import io.dojogeek.adminibot.daos.CashDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.TypesPaymentMethodsDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
@@ -22,6 +18,8 @@ import io.dojogeek.adminibot.presenters.CreditCardPresenter;
 import io.dojogeek.adminibot.presenters.CreditCardPresenterImpl;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenterImpl;
+import io.dojogeek.adminibot.presenters.MyCreditCardsPresenter;
+import io.dojogeek.adminibot.presenters.MyCreditCardsPresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
@@ -46,6 +44,8 @@ import io.dojogeek.adminibot.views.CreditCard;
 import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.FoodCoupons;
 import io.dojogeek.adminibot.views.FoodCouponsActivity;
+import io.dojogeek.adminibot.views.MyCreditCards;
+import io.dojogeek.adminibot.views.MyCreditCardsActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -73,6 +73,7 @@ public class AdminiBotModule {
     private Check mCheck;
     private FoodCoupons mFoodCoupons;
     private AddNewPaymentMethod mAddNewPaymentMethod;
+    private MyCreditCards mMyCreditCards;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -132,6 +133,11 @@ public class AdminiBotModule {
     public AdminiBotModule(AddNewPaymentMethod addNewPaymentMethod) {
         mAddNewPaymentMethod = addNewPaymentMethod;
         mContext = (AddNewPaymentMethodActivity) addNewPaymentMethod;
+    }
+
+    public AdminiBotModule(MyCreditCards myCreditCards) {
+        mMyCreditCards = myCreditCards;
+        mContext = (MyCreditCardsActivity) myCreditCards;
     }
 
     @Provides
@@ -197,6 +203,13 @@ public class AdminiBotModule {
     CreditCardPresenter provideCreditCardPresenter(BankCardDaoImpl bankCardDao, CardDetailDaoImpl cardDetailDao,
                                                    BankDaoImpl bankDao) {
         return new CreditCardPresenterImpl(mCreditCard, bankCardDao, cardDetailDao, bankDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    MyCreditCardsPresenter provideMyPaymentMethodsPresenter(BankCardDaoImpl bankCardDao,
+                                                            CardDetailDaoImpl cardDetailDao) {
+        return new MyCreditCardsPresenterImpl(mMyCreditCards, bankCardDao, cardDetailDao);
     }
 
     @Provides
