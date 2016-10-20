@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import io.dojogeek.adminibot.enums.BankEnum;
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
@@ -45,5 +46,16 @@ public class BankDaoImplTest {
 
         assertNotNull(actualBanks);
         assertEquals(initialInsertedBanks, actualBanks.size());
+    }
+
+    @Test
+    public void testGetBankById_successObtaining() throws DataException {
+
+        long existentBankId = 1;
+
+        BankModel actualBankModel = mBankDao.getBankById(existentBankId);
+
+        assertNotNull(actualBankModel);
+
     }
 }
