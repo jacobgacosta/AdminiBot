@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.FoodCoupons;
@@ -26,7 +27,7 @@ public class FoodCouponPresenterTest {
     private FoodCoupons mFoodCoupons;
 
     @Mock
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
 
     @InjectMocks
     private FoodCouponPresenter mFoodCouponPresenter = new FoodCouponPresenterImpl(mFoodCoupons,
@@ -61,5 +62,11 @@ public class FoodCouponPresenterTest {
         verify(mFoodCoupons, never()).notifySuccessfulInsertion();
         verify(mFoodCoupons, never()).returnToMyPaymentsMethods();
         verify(mFoodCoupons).notifyErrorInsertion();
+    }
+
+    @Test
+    public void testUnnusedView_closeConnections() {
+        mFoodCouponPresenter.unnusedView();
+        verify(mOtherPaymentMethodDao).closeConnection();;
     }
 }

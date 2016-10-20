@@ -356,4 +356,12 @@ public class FoodCouponsActivityTest {
         verify(mAmount).requestFocus();
 
     }
+
+    @Test
+    public void testCloseConnections() {
+
+        mFoodCouponsActivity.closeConnections();
+
+        verify(mFoodCouponPresenter).unnusedView();
+    }
 }

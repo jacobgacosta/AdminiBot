@@ -6,4 +6,6 @@ public interface FoodCouponPresenter {
 
     void createFoodCoupon(OtherPaymentMethodModel otherPaymentMethodModel);
 
+    void unnusedView();
+
 }

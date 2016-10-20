@@ -93,7 +93,7 @@ public class FoodCouponsActivity extends BaseActivity implements FoodCoupons , V
 
     @Override
     protected void closeConnections() {
-
+        mFoodCouponPresenter.unnusedView();
     }
 
     @Override
