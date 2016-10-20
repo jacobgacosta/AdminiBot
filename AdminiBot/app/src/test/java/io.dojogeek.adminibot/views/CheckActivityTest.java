@@ -413,4 +413,10 @@ public class CheckActivityTest {
 
         LaunchIntents.launchIntentClearTop(mCheckActivity, MainActivity.class);
     }
+
+    @Test
+    public void testCloseConnections() {
+        mCheckActivity.closeConnections();
+        verify(mCheckPresenter).unnusedView();
+    }
 }

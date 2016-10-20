@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.Check;
@@ -26,10 +27,10 @@ public class CheckPresenterTest {
     private Check mCheckActivity;
 
     @Mock
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
 
     @InjectMocks
-    private CheckPresenter checkPresenter = new CheckPresenterImpl(mCheckActivity, mOtherPaymentMethodDao);
+    private CheckPresenter mCheckPresenter = new CheckPresenterImpl(mCheckActivity, mOtherPaymentMethodDao);
 
     @Test
     public void testCreateCheck_successfulCreation() {
@@ -39,7 +40,7 @@ public class CheckPresenterTest {
         when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).
                 thenReturn(SUCCESS_INSERTION);
 
-        checkPresenter.createCheck(otherPaymentMethodModel);
+        mCheckPresenter.createCheck(otherPaymentMethodModel);
 
         verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCheckActivity).notifySuccessfulInsertion();
@@ -54,11 +55,17 @@ public class CheckPresenterTest {
 
         when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenThrow(new SQLException());
 
-        checkPresenter.createCheck(otherPaymentMethodModel);
+        mCheckPresenter.createCheck(otherPaymentMethodModel);
 
         verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
         verify(mCheckActivity, never()).notifySuccessfulInsertion();
         verify(mCheckActivity, never()).returnToMyPaymentsMethods();
         verify(mCheckActivity).notifyErrorInsertion();
+    }
+
+    @Test
+    public void testUnnusedView_closeConnections() {
+        mCheckPresenter.unnusedView();
+        verify(mOtherPaymentMethodDao).closeConnection();
     }
 }

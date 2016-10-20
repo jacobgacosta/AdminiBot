@@ -80,7 +80,7 @@ public class CheckActivity extends BaseActivity implements Check, View.OnClickLi
 
     @Override
     protected void closeConnections() {
-
+        mCheckPresenter.unnusedView();
     }
 
     private Map<String, Integer> createItemsMapFromBankEnum(BankEnum[] banks) {

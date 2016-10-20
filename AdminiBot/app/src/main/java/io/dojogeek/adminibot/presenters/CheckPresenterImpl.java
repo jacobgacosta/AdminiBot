@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.presenters;
 import android.database.SQLException;
 
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
+import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.Check;
 
@@ -30,6 +31,11 @@ public class CheckPresenterImpl implements CheckPresenter {
             mcheck.notifyErrorInsertion();
         }
 
+    }
+
+    @Override
+    public void unnusedView() {
+        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
     }
 
 }

@@ -6,4 +6,6 @@ public interface CheckPresenter {
 
     void createCheck(OtherPaymentMethodModel otherPaymentMethodModel);
 
+    void unnusedView();
+
 }
