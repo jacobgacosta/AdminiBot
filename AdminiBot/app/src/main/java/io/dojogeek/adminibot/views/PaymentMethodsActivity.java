@@ -11,10 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,7 +21,6 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.exceptions.ArgumentException;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
@@ -77,14 +73,17 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Map<String, Serializable> flags = new HashMap<>();
-        flags.put(TYPE_PAYMENT_METHOD, (TypePaymentMethodEnum) view.getTag());
+        TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
 
-        try {
-            LaunchIntents.launchIntentWithExtraValues(this, MyPaymentMethodsActivity.class, flags);
-        } catch (ArgumentException e) {
-            e.printStackTrace();
+        switch (typePaymentMethodEnum) {
+            case CARD:
+                LaunchIntents.launchIntentClearTop(this, MyCreditCardsActivity.class);
+                break;
+            default:
+                Log.v(this.getClass().getName(), "No operations for this event");
+                break;
         }
+
 
     }
 
