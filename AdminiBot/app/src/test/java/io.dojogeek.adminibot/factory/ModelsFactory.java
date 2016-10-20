@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.factory;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.dojogeek.adminibot.adapters.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
@@ -77,5 +78,8 @@ public class ModelsFactory {
         return factory.manufacturePojo(BankModel.class);
     }
 
+    public static DtoCreditCardAdapter createDtoCreditCardAdapter() {
+        return factory.manufacturePojo(DtoCreditCardAdapter.class);
+    }
 
 }
