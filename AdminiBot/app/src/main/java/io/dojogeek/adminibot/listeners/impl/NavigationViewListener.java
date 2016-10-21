@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.listeners;
+package io.dojogeek.adminibot.listeners.impl;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;

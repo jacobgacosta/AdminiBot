@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.listeners;
+package io.dojogeek.adminibot.listeners.impl;
 
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
