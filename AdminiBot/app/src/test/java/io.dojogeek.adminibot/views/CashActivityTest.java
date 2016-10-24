@@ -307,7 +307,7 @@ public class CashActivityTest {
 
         mCashActivity.returnToMyPaymentsMethods();
 
-        verifyStatic(times(1));
+        verifyStatic();
 
         LaunchIntents.launchIntentClearTop(mCashActivity, MainActivity.class);
     }
