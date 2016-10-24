@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.listeners.ActionBarDrawerToggleListener;
-import io.dojogeek.adminibot.listeners.NavigationViewListener;
+import io.dojogeek.adminibot.listeners.impl.ActionBarDrawerToggleListener;
+import io.dojogeek.adminibot.listeners.impl.NavigationViewListener;
 
 public class MainActivity extends BaseActivity {
 
