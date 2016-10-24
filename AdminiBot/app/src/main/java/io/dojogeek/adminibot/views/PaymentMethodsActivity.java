@@ -27,7 +27,6 @@ import io.dojogeek.adminibot.utils.LaunchIntents;
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods, View.OnClickListener,
         AdapterView.OnItemClickListener {
 
-    public static final String TYPE_PAYMENT_METHOD = "TYPE_PAYMENT_METHOD";
 
     @Inject
     public PaymentMethodsPresenter paymentMethodsPresenter;
