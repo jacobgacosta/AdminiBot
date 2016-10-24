@@ -171,4 +171,7 @@
     <string name="banks_bancoopel">Bancoopel</string>
     <string name="banks_famsa">Banco ahorro famsa</string>
 
+    <!-- My credit cards -->
+    <string name="my_credit_cards_number_label">Número:</string>
+
 </resources>
