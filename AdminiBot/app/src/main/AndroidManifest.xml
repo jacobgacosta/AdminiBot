@@ -46,9 +46,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.MainActivity" />
         </activity>
-        <activity android:name=".views.MyCreditCardsActivity"
+        <activity
+            android:name=".views.MyCreditCardsActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".views.AddPaymentMethodActivity"
             android:parentActivityName=".views.MainActivity"
@@ -73,9 +74,14 @@
             android:name=".views.FoodCouponsActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".views.AddNewPaymentMethodActivity"
+        <activity
+            android:name=".views.AddNewPaymentMethodActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".views.CreditCardDetailActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
