@@ -1,4 +1,4 @@
-package io.dojogeek.adminibot.adapters.dtos;
+package io.dojogeek.adminibot.dtos;
 
 public class DtoCreditCardAdapter {
 
