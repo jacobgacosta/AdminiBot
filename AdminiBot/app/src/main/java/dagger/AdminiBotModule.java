@@ -14,6 +14,8 @@ import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.presenters.CashPresenterImpl;
 import io.dojogeek.adminibot.presenters.CheckPresenter;
 import io.dojogeek.adminibot.presenters.CheckPresenterImpl;
+import io.dojogeek.adminibot.presenters.CreditCardDetailPresenter;
+import io.dojogeek.adminibot.presenters.CreditCardDetailPresenterImpl;
 import io.dojogeek.adminibot.presenters.CreditCardPresenter;
 import io.dojogeek.adminibot.presenters.CreditCardPresenterImpl;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
@@ -219,6 +221,15 @@ public class AdminiBotModule {
                                                             CardDetailDaoImpl cardDetailDao,
                                                             BankDaoImpl bankDao) {
         return new MyCreditCardsPresenterImpl(mMyCreditCards, bankCardDao, cardDetailDao, bankDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    CreditCardDetailPresenter provideCreditCardDetailPresenter(BankCardDaoImpl bankCardDao,
+                                                               CardDetailDaoImpl cardDetailDao,
+                                                               BankDaoImpl bankDao) {
+        return new CreditCardDetailPresenterImpl(mCreditCardDetail, bankCardDao, cardDetailDao,
+                bankDao);
     }
 
     @Provides
