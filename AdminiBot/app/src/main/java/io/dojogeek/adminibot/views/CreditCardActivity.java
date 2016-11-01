@@ -42,8 +42,8 @@ public class CreditCardActivity extends BaseActivity implements CreditCard, View
     public static final int SUCCESS_INSERTION_CREDIT_CARD = R.string.success_insertion_cc;
     public static final int ERROR_INSERTION_CREDIT_CARD = R.string.error_insertion_cc;
     private static final String VISA = "VISA";
-    private static final String MASTER_CARD = "MASTER CARD";
-    private static final String AMEX = "AMEX";
+    private static final String MASTER_CARD = "MASTER_CARD";
+    private static final String AMEX = "AMERICAN_EXPRESS";
     private EditText mCardName;
     private EditText mCardNumber;
     private EditText mCurrentBalance;
