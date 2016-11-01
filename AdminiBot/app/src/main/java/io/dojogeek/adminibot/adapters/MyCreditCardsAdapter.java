@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.adapters.dtos.DtoCreditCardAdapter;
+import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.exceptions.RecyclerItemException;
 import io.dojogeek.adminibot.listeners.RecyclerItemOnClickListener;
 
