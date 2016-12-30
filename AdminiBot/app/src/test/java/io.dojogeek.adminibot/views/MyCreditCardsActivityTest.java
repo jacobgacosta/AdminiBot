@@ -120,11 +120,11 @@ public class MyCreditCardsActivityTest {
     @Test
     public void testLoadDataView_setTitle() {
 
-        doNothing().when(mMyCreditCardsActivity).setTitle(R.string.title_activity_credit_card_detail);
+        doNothing().when(mMyCreditCardsActivity).setTitle(R.string.title_activity_my_credit_cards);
 
         mMyCreditCardsActivity.loadDataView();
 
-        verify(mMyCreditCardsActivity).setTitle(R.string.title_activity_credit_card_detail);
+        verify(mMyCreditCardsActivity).setTitle(R.string.title_activity_my_credit_cards);
     }
 
     @Test
