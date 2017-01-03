@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.dtos.DtoCreditCardDetail;
+import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
@@ -89,6 +90,10 @@ public class ModelsFactory {
 
     public CardDetailModel createCardDetailModel() {
         return factory.manufacturePojo(CardDetailModel.class);
+    }
+
+    public DtoSimpleAdapter createDtoSimpleAdapter() {
+        return factory.manufacturePojo(DtoSimpleAdapter.class);
     }
 
 }
