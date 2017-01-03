@@ -232,15 +232,22 @@ public class PaymentMethodsActivityTest {
 
         LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
 
-        when(mView.getTag()).thenReturn(TypePaymentMethodEnum.CARD);
+        TypePaymentMethodEnum [] paymentMethods = {TypePaymentMethodEnum.CARD,
+                TypePaymentMethodEnum.CASH};
 
-        mPaymentMethodsActivity.onItemClick(adapterView, mView, 0, 0);
+        for (TypePaymentMethodEnum typePaymentMethodEnum : paymentMethods) {
 
-        verifyStatic(times(1));
+            when(mView.getTag()).thenReturn(typePaymentMethodEnum);
 
+            mPaymentMethodsActivity.onItemClick(adapterView, mView, 0, 0);
+        }
+
+        verifyStatic();
         LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
+        verifyStatic();
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCashActivity.class);
 
-        verify(mView).getTag();
+        verify(mView, times(paymentMethods.length)).getTag();
     }
 
     @Test
