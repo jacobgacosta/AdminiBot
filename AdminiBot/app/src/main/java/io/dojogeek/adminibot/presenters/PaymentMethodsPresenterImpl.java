@@ -7,11 +7,9 @@ import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 import io.dojogeek.adminibot.views.PaymentMethods;
 
 public class PaymentMethodsPresenterImpl implements PaymentMethodsPresenter {

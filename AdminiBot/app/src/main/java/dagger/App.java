@@ -3,8 +3,6 @@ package dagger;
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Inject;
-
 public class App extends Application {
 
     private AppComponent component;

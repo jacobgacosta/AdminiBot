@@ -10,10 +10,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.BankDaoImpl;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
+import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
@@ -24,7 +24,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 @RunWith(PowerMockRunner.class)

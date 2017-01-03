@@ -3,13 +3,13 @@ package io.dojogeek.adminibot.presenters;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.BankDao;
 import io.dojogeek.adminibot.daos.BankDaoImpl;
 import io.dojogeek.adminibot.daos.CardDetailDao;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
+import io.dojogeek.adminibot.dtos.DtoCreditCardAdapter;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.views.MyCreditCards;

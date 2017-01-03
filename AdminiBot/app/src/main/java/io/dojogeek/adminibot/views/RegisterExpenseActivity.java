@@ -23,7 +23,6 @@ import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
-import io.dojogeek.adminibot.utils.DateUtils;
 
 public class RegisterExpenseActivity extends BaseActivity implements RegisterExpense, View.OnClickListener {
 

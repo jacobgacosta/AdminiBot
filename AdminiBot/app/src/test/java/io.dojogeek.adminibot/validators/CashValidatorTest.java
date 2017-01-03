@@ -1,7 +1,5 @@
 package io.dojogeek.adminibot.validators;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import io.dojogeek.adminibot.R;

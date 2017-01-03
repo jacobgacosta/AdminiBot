@@ -1,22 +1,14 @@
 package io.dojogeek.adminibot.views;
 
-import android.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -27,10 +19,8 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.DatePickerFragment;
 import io.dojogeek.adminibot.components.SpinnerWithInternalImage;
-import io.dojogeek.adminibot.enums.BankEnum;
 import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
-import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.presenters.CreditCardPresenter;

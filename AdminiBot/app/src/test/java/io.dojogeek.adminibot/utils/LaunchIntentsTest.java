@@ -15,9 +15,7 @@ import java.util.Map;
 
 import io.dojogeek.adminibot.exceptions.ArgumentException;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;

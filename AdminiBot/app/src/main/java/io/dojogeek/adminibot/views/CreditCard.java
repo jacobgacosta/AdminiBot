@@ -1,9 +1,6 @@
 package io.dojogeek.adminibot.views;
 
-import java.util.List;
 import java.util.Map;
-
-import io.dojogeek.adminibot.models.BankModel;
 
 public interface CreditCard {
 

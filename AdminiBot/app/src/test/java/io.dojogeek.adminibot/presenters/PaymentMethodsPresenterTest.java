@@ -9,11 +9,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.matchers.IsAList;
@@ -21,7 +18,9 @@ import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.PaymentMethods;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentMethodsPresenterTest {

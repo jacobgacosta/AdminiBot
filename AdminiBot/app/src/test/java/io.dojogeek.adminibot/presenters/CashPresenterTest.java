@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.presenters;
 
-import android.content.Context;
 import android.database.SQLException;
 
 import org.junit.Test;
@@ -9,11 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.dojogeek.adminibot.daos.CashDao;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
-import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.Cash;
 

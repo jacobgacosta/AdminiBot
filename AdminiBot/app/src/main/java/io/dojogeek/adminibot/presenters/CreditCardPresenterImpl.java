@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +17,6 @@ import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CreditCardModel;
-import io.dojogeek.adminibot.sqlite.CardDetailContract;
 import io.dojogeek.adminibot.views.CreditCard;
 
 public class CreditCardPresenterImpl implements CreditCardPresenter {

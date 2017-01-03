@@ -2,7 +2,6 @@ package io.dojogeek.adminibot.sqlite;
 
 import android.provider.BaseColumns;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;

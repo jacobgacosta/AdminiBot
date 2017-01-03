@@ -1,13 +1,10 @@
 package io.dojogeek.adminibot.views;
 
-import android.os.Build;
 import android.text.Editable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +21,6 @@ import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
@@ -33,7 +29,6 @@ import io.dojogeek.adminibot.validators.CashValidator;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;

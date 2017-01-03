@@ -2,7 +2,6 @@ package io.dojogeek.adminibot.presenters;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankDao;
-import io.dojogeek.adminibot.daos.BankDaoImpl;
 import io.dojogeek.adminibot.daos.CardDetailDao;
 import io.dojogeek.adminibot.dtos.DtoCreditCardDetail;
 import io.dojogeek.adminibot.enums.TrademarkEnum;
@@ -10,7 +9,6 @@ import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.BankModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
-import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.views.CreditCardDetail;
 
 public class CreditCardDetailPresenterImpl implements CreditCardDetailPresenter {

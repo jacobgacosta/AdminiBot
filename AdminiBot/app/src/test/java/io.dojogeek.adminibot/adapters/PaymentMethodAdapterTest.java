@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -25,11 +24,12 @@ import java.util.List;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 public class PaymentMethodAdapterTest {

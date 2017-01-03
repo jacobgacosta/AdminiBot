@@ -1,7 +1,5 @@
 package io.dojogeek.adminibot.validators;
 
-import java.util.Map;
-
 public class UserValidator extends Validator {
 
     protected static final String EMAIL = "email";

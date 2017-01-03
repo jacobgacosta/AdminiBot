@@ -3,10 +3,8 @@ package io.dojogeek.adminibot.views;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.content.res.ResourcesCompat;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +16,6 @@ import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DtoCreditCardDetail;
-import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.presenters.CreditCardDetailPresenter;
 
 public class CreditCardDetailActivity extends BaseActivity implements CreditCardDetail {

@@ -1,11 +1,18 @@
 package io.dojogeek.adminibot.components;
 
-import android.animation.*;
-import android.content.*;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.res.Resources;
-import android.util.*;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 
 import java.util.HashMap;
 import java.util.List;

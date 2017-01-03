@@ -1,14 +1,12 @@
 package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
-import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.powermock.api.support.membermodification.MemberModifier;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,10 +17,8 @@ import io.dojogeek.adminibot.daos.ExpenseBankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.factory.ModelsFactory;
-import io.dojogeek.adminibot.matchers.IsAList;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
@@ -30,9 +26,13 @@ import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.views.ExpenseCreation;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyObject;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.notNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExpenseCreationPresenterTest {

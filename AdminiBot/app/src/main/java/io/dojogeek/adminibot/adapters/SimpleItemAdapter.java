@@ -11,7 +11,6 @@ import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
-import io.dojogeek.adminibot.exceptions.RecyclerItemException;
 import io.dojogeek.adminibot.listeners.RecyclerItemOnClickListener;
 
 public class SimpleItemAdapter extends RecyclerView.Adapter<SimpleItemAdapter.ViewHolder> {

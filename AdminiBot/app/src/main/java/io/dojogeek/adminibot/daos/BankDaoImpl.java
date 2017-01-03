@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.daos;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -9,9 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankModel;
-import io.dojogeek.adminibot.sqlite.BankCardsContract;
 import io.dojogeek.adminibot.sqlite.BanksContract;
 
 public class BankDaoImpl extends SQLiteGlobalDao implements BankDao {

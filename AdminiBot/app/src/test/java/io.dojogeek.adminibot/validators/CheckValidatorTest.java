@@ -1,15 +1,10 @@
 package io.dojogeek.adminibot.validators;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
-import io.dojogeek.adminibot.views.Check;
-import io.dojogeek.adminibot.views.CheckActivity;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;

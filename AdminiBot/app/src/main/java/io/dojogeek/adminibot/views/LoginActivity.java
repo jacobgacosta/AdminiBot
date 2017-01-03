@@ -11,9 +11,9 @@ import javax.inject.Inject;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.validators.LoginValidator;
 import io.dojogeek.adminibot.presenters.LoginPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
+import io.dojogeek.adminibot.validators.LoginValidator;
 
 public class LoginActivity extends BaseActivity implements Login, View.OnClickListener {
 

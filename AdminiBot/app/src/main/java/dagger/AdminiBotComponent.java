@@ -8,12 +8,12 @@ import io.dojogeek.adminibot.views.CheckActivity;
 import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.CreditCardDetailActivity;
 import io.dojogeek.adminibot.views.FoodCouponsActivity;
+import io.dojogeek.adminibot.views.InboxFragment;
+import io.dojogeek.adminibot.views.LoginActivity;
 import io.dojogeek.adminibot.views.MyCashActivity;
 import io.dojogeek.adminibot.views.MyCreditCardsActivity;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
-import io.dojogeek.adminibot.views.LoginActivity;
-import io.dojogeek.adminibot.views.InboxFragment;
 import io.dojogeek.adminibot.views.RegisterUserActivity;
 
 @AdminBotScope

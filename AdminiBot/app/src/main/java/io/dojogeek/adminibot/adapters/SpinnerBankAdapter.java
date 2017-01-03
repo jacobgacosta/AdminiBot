@@ -7,17 +7,13 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Map;
 
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.components.SpinnerWithInternalImage;
-import io.dojogeek.adminibot.enums.BankEnum;
 
 public class SpinnerBankAdapter extends BaseAdapter {
 

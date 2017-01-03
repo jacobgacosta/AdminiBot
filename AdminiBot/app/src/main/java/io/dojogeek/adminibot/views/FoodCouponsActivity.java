@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +15,10 @@ import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.components.DatePickerFragment;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
-import io.dojogeek.adminibot.validators.CashValidator;
 import io.dojogeek.adminibot.validators.FoodCouponsValidator;
 
 public class FoodCouponsActivity extends BaseActivity implements FoodCoupons , View.OnClickListener {

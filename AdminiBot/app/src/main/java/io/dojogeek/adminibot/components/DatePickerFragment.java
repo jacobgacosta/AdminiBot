@@ -2,7 +2,6 @@ package io.dojogeek.adminibot.components;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;

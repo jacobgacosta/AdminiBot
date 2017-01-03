@@ -2,7 +2,6 @@ package io.dojogeek.adminibot.presenters;
 
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.daos.ExpenseDao;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.models.ExpenseModel;

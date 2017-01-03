@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.dojogeek.adminibot.enums.BankEnum;
-import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
-
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;

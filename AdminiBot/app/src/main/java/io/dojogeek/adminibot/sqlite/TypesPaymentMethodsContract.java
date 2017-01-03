@@ -2,17 +2,9 @@ package io.dojogeek.adminibot.sqlite;
 
 import android.provider.BaseColumns;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CLOSE_PARENTHESIS;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.CLOSE_QUOTE;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.COMMA_SEP;
 import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.INSERT_INTO;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.OPEN_PARENTHESIS;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.OPEN_QUOTE;
-import static io.dojogeek.adminibot.sqlite.SQLiteConstants.VALUES;
 
 public class TypesPaymentMethodsContract {
 

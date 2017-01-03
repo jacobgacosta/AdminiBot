@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,14 +20,11 @@ import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
-import io.dojogeek.adminibot.exceptions.RecyclerItemException;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.listeners.RecyclerItemOnClickListener;
-import io.dojogeek.adminibot.views.MyCreditCardsActivity;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

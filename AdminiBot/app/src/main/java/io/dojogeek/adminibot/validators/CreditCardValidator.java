@@ -1,7 +1,5 @@
 package io.dojogeek.adminibot.validators;
 
-import io.dojogeek.adminibot.utils.ValidatorsValues;
-
 public class CreditCardValidator extends Validator {
 
     private static String CARD_NAME = "cardName";

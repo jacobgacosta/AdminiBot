@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 

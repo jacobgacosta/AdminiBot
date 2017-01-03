@@ -2,16 +2,13 @@ package io.dojogeek.adminibot.components;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.SpinnerBankAdapter;

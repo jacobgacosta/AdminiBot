@@ -10,7 +10,6 @@ import java.util.List;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.ExpensesOthersPaymentMethodsContract;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
 
 public class ExpenseOtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements ExpenseOtherPaymentMethodDao {
 

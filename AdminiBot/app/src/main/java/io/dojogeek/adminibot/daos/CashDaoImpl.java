@@ -5,11 +5,8 @@ import android.content.Context;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
-import io.dojogeek.adminibot.sqlite.TypesPaymentMethodsContract;
 
 public class CashDaoImpl extends SQLiteGlobalDao implements CashDao {
 

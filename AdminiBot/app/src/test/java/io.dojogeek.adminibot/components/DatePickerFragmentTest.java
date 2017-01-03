@@ -2,11 +2,8 @@ package io.dojogeek.adminibot.components;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatDialogFragment;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -24,7 +21,6 @@ import io.dojogeek.adminibot.R;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

@@ -1,13 +1,10 @@
 package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import dagger.App;
 import dagger.AppComponent;
-import io.dojogeek.adminibot.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

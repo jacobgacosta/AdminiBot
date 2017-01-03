@@ -1,7 +1,5 @@
 package io.dojogeek.adminibot.validators;
 
-import android.util.Log;
-
 import io.dojogeek.adminibot.exceptions.ValidatorNullValueException;
 
 public class LenghtValidator implements DataValidator<String> {

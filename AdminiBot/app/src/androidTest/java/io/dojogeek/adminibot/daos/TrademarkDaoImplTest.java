@@ -5,7 +5,6 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,12 +13,11 @@ import java.util.List;
 import io.dojogeek.adminibot.enums.TrademarkEnum;
 import io.dojogeek.adminibot.models.TrademarkModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.sqlite.TrademarkContract;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
 public class TrademarkDaoImplTest {

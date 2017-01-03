@@ -1,10 +1,8 @@
 package io.dojogeek.adminibot.presenters;
 
-import android.annotation.SuppressLint;
 import android.database.SQLException;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
@@ -18,7 +16,6 @@ import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.SQLiteGlobalDao;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;

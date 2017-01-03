@@ -1,6 +1,5 @@
 package io.dojogeek.adminibot.presenters;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.daos.UserDao;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.views.RegisterUser;

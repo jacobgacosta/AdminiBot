@@ -13,8 +13,10 @@ import org.junit.runner.RunWith;
 import java.io.File;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class AdminiBotSQLiteOpenHelperTest {

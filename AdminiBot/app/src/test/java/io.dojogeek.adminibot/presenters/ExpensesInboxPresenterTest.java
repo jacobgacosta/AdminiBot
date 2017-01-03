@@ -9,14 +9,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.utils.DateUtils;
 import io.dojogeek.adminibot.views.ExpensesInbox;
 
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
     public class ExpensesInboxPresenterTest {

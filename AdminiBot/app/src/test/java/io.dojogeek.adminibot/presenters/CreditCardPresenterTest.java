@@ -6,23 +6,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.dojogeek.adminibot.daos.BankCardDao;
 import io.dojogeek.adminibot.daos.BankCardDaoImpl;
-import io.dojogeek.adminibot.daos.BankDao;
 import io.dojogeek.adminibot.daos.BankDaoImpl;
-import io.dojogeek.adminibot.daos.CardDetailDao;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.BankCardModel;
@@ -31,9 +24,7 @@ import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.views.CreditCard;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
