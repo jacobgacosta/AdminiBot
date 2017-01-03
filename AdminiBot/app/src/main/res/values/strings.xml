@@ -186,4 +186,8 @@
     <!-- Credit card detail -->
     <string name="title_activity_credit_card_detail">Detalle de tarjeta</string>
     <string name="credit_card_detail_spend">Realizar gasto</string>
+
+    <!-- Simple item -->
+    <string name="simple_item_badge">$</string>
+
 </resources>
