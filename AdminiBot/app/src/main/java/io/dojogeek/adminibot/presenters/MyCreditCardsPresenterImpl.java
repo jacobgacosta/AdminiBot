@@ -16,6 +16,7 @@ import io.dojogeek.adminibot.views.MyCreditCards;
 
 public class MyCreditCardsPresenterImpl implements MyCreditCardsPresenter {
 
+    public static String CREDIT_CARD_ICON_NAME = "ic_card";
     private MyCreditCards mMyCreditCards;
     private BankCardDao mBankCardDao;
     private CardDetailDao mCardDetailDao;
@@ -59,7 +60,7 @@ public class MyCreditCardsPresenterImpl implements MyCreditCardsPresenter {
         dtoCreditCardAdapter.setCreditCardNumber(bankCardModel.getNumber());
         dtoCreditCardAdapter.setCreditCardName(bankCardModel.getName());
         String bankCardImage = getBankImageByCardId(bankCardModel.getBankId());
-        dtoCreditCardAdapter.setCreditCardBankImageName(bankCardImage);
+        dtoCreditCardAdapter.setCreditCardBankImageName(CREDIT_CARD_ICON_NAME);
         dtoCreditCardAdapter.setCardId(bankCardModel.getId());
 
         return dtoCreditCardAdapter;

@@ -75,7 +75,7 @@ public class MyCreditCardsPresenterTest {
         verify(dtoCreditCardAdapterMock, times(bankCardModels.size())).
                 setCreditCardNumber(bankCardModels.get(0).getNumber());
         verify(dtoCreditCardAdapterMock, times(bankCardModels.size())).
-                setCreditCardBankImageName(imageName);
+                setCreditCardBankImageName(MyCreditCardsPresenterImpl.CREDIT_CARD_ICON_NAME);
         verify(dtoCreditCardAdapterMock, times(bankCardModels.size())).
                 setCardId(bankCardModels.get(0).getId());
         verify(dtoCreditCardsList, times(bankCardModels.size())).
