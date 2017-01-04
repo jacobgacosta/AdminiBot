@@ -61,7 +61,7 @@ public class MyCreditCardsActivityTest {
     private MyCreditCardsActivity mMyCreditCardsActivity = new MyCreditCardsActivity();
 
     @Test
-    public void testLoadDataView_listCreditCards() throws Exception {
+    public void test_listCreditCards() throws Exception {
 
         List<DtoCreditCardAdapter> creditCards = new ArrayList<>();
 
