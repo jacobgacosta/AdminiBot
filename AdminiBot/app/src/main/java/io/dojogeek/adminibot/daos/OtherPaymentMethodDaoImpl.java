@@ -170,7 +170,7 @@ public class OtherPaymentMethodDaoImpl extends SQLiteGlobalDao implements OtherP
         otherPaymentMethodModel.setName(name);
         otherPaymentMethodModel.setReferenceNumber(reference);
         otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.valueOf(paymentMethod));
-        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(availableCredit));
+        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(availableCredit).setScale(2, BigDecimal.ROUND_HALF_EVEN));
         otherPaymentMethodModel.setUserId(userId);
 
         return otherPaymentMethodModel;
