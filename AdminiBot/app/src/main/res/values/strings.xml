@@ -190,4 +190,7 @@
     <!-- Simple item -->
     <string name="simple_item_badge">$</string>
 
+    <!-- My cash-->
+    <string name="title_my_cash_activity">Mi efectivo</string>
+
 </resources>
