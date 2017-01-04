@@ -1,10 +1,14 @@
 package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.junit.Test;
@@ -89,9 +93,11 @@ public class SimpleItemAdapterTest {
 
         TextView textViewTitleMock = mock(TextView.class);
         TextView textViewSubtitleMock = mock(TextView.class);
+        ImageView imageViewMock = mock(ImageView.class);
 
         when(mockView.findViewById(R.id.payment_method_title)).thenReturn(textViewTitleMock);
         when(mockView.findViewById(R.id.payment_method_subtitle)).thenReturn(textViewSubtitleMock);
+        when(mockView.findViewById(R.id.payment_method_icon)).thenReturn(imageViewMock);
 
         SimpleItemAdapter.ViewHolder viewHolder = new SimpleItemAdapter.ViewHolder(mockView);
 
@@ -100,6 +106,7 @@ public class SimpleItemAdapterTest {
 
         verify(mockView).findViewById(R.id.payment_method_title);
         verify(mockView).findViewById(R.id.payment_method_subtitle);
+        verify(mockView).findViewById(R.id.payment_method_icon);
 
     }
 
@@ -110,22 +117,36 @@ public class SimpleItemAdapterTest {
 
         TextView textViewTitleMock = mock(TextView.class);
         TextView textViewSubtitleMock = mock(TextView.class);
+        ImageView imageViewMock = mock(ImageView.class);
 
         when(mockView.findViewById(R.id.payment_method_title)).thenReturn(textViewTitleMock);
         when(mockView.findViewById(R.id.payment_method_subtitle)).thenReturn(textViewSubtitleMock);
+        when(mockView.findViewById(R.id.payment_method_icon)).thenReturn(imageViewMock);
 
         SimpleItemAdapter.ViewHolder viewHolder = new SimpleItemAdapter.ViewHolder(mockView);
 
         int position = 0;
-
         DtoSimpleAdapter dtoSimpleAdapter = factory.createDtoSimpleAdapter();
-
         when(mSimpleAdapterList.get(position)).thenReturn(dtoSimpleAdapter);
+
+        String packageName = "io.dojogeek";
+        when(mContext.getPackageName()).thenReturn(packageName);
+
+        Resources resourcesMock = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(resourcesMock);
+        int drawableId = 0;
+        when(resourcesMock.getIdentifier(dtoSimpleAdapter.getIconName(),
+                SimpleItemAdapter.DRAWABLE, packageName)).thenReturn(drawableId);
+
+        PowerMockito.mockStatic(ResourcesCompat.class);
+        Drawable mockDrawable = mock(Drawable.class);
+        given(ResourcesCompat.getDrawable(resourcesMock, drawableId, null)).willReturn(mockDrawable);
 
         mSimpleItemAdapter.onBindViewHolder(viewHolder, position);
 
         verify(textViewTitleMock).setText(dtoSimpleAdapter.getTitle());
         verify(textViewSubtitleMock).setText(dtoSimpleAdapter.getSubtitle());
+        verify(imageViewMock).setImageDrawable(mockDrawable);
 
     }
 
