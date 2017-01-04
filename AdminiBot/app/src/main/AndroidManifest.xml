@@ -82,6 +82,10 @@
             android:name=".views.CreditCardDetailActivity"
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".views.MyCashActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
