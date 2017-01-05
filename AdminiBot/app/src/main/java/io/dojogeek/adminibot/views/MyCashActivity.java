@@ -55,7 +55,7 @@ public class MyCashActivity extends BaseActivity implements MyCash {
 
     @Override
     protected int getLayoutActivity() {
-        return R.layout.activity_my_credit_cards;
+        return R.layout.activity_my_cash;
     }
 
     @Override
