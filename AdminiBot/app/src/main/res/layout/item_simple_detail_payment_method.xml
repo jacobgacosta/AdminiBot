@@ -9,12 +9,12 @@
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/payment_method_icon"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:tint="@color/rounded_button_background_pressed"
-        android:src="@drawable/ic_cash"/>
+        android:tint="@color/light_grey"
+        android:src="@drawable/ic_cash"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,10 +28,9 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/global_background_dark"
-            android:text="Pago Mac Aaron"/>
+            android:textSize="20sp"
+            android:textColor="#473E3F"
+            android:text="PAGO MAC AARON"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,8 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/cardview_dark_background"
+                android:textColor="#218C8D"
                 android:text="@string/simple_item_badge"/>
 
             <TextView
@@ -52,9 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/cardview_dark_background"
-                android:text="1234"/>
+                android:textColor="#218C8D"
+                android:text="1450.50"/>
 
         </LinearLayout>
 
