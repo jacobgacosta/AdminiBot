@@ -46,8 +46,8 @@ public class SimpleItemAdapter extends RecyclerView.Adapter<SimpleItemAdapter.Vi
         holder.itemId = mSimpleAdapterList.get(position).getId();
         holder.title.setText(mSimpleAdapterList.get(position).getTitle());
         holder.subtitle.setText(mSimpleAdapterList.get(position).getSubtitle());
-        holder.imageView.setImageDrawable(getDrawableFromName(mSimpleAdapterList.
-                        get(position).getIconName()));
+        /*holder.imageView.setImageDrawable(getDrawableFromName(mSimpleAdapterList.
+                        get(position).getIconName()));*/
 
     }
 
@@ -66,13 +66,13 @@ public class SimpleItemAdapter extends RecyclerView.Adapter<SimpleItemAdapter.Vi
         public long itemId;
         public TextView title;
         public TextView subtitle;
-        public ImageView imageView;
+//        public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.payment_method_title);
             subtitle = (TextView) itemView.findViewById(R.id.payment_method_subtitle);
-            imageView = (ImageView) itemView.findViewById(R.id.payment_method_icon);
+//            imageView = (ImageView) itemView.findViewById(R.id.payment_method_icon);
 
             setListenerToView(itemView);
         }
