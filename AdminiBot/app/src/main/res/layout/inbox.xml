@@ -17,7 +17,7 @@
         android:src="@drawable/ic_new_spending"
         app:borderWidth="0dp"
         app:elevation="6dp"
-        app:backgroundTint="@color/rounded_button_background_pressed"
+        app:backgroundTint="#8EDC9D"
         android:layout_margin="15dp"/>
 
 </FrameLayout>
