@@ -52,7 +52,7 @@ public class MyCashActivityTest {
 
         int currentLayout = mCashActivity.getLayoutActivity();
 
-        assertThat(currentLayout, is(R.layout.activity_my_credit_cards));
+        assertThat(currentLayout, is(R.layout.activity_my_cash));
     }
 
     @Test
