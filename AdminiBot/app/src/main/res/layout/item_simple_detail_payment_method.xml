@@ -29,7 +29,8 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:textSize="20sp"
-            android:textColor="#473E3F"
+            android:textColor="@color/cardview_dark_background"
+            android:textAllCaps="true"
             android:text="PAGO MAC AARON"/>
 
         <LinearLayout
@@ -42,7 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:textColor="#218C8D"
+                android:textStyle="bold"
+                android:textColor="#79e42841"
                 android:text="@string/simple_item_badge"/>
 
             <TextView
@@ -50,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:textColor="#218C8D"
+                android:textStyle="bold"
+                android:textColor="#79e42841"
                 android:text="1450.50"/>
 
         </LinearLayout>

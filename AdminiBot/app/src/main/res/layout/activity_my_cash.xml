@@ -12,6 +12,7 @@
             android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#e5fff8e7"
             android:padding="3dp"
             android:scrollbars="none"
             android:layout_weight="1"/>
@@ -20,16 +21,40 @@
             android:id="@+id/viewB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#8EDC9D"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_horizontal"
+            android:background="#e57d5d"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="150px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:text="@string/total_label__my_cash_activity"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:text="@string/simple_item_badge"/>
+
+            <TextView
+                android:id="@+id/total_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical|center_horizontal"
-                android:textSize="25sp"
-                android:textColor="#473E3F"
-                android:text="Total: $7845.89"/>
+                android:textSize="30sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:text="579002899.91"/>
 
         </LinearLayout>
 
@@ -41,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_expense"
         android:tint="@color/cardview_light_background"
         app:backgroundTint="@color/global_background"
         app:layout_anchor="@id/my_recycler_view"
