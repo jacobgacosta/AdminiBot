@@ -3,7 +3,9 @@ package io.dojogeek.adminibot.views;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +21,8 @@ import io.dojogeek.adminibot.presenters.MyCashPresenter;
 public class MyCashActivity extends BaseActivity implements MyCash {
 
     private RecyclerView mRecyclerView;
+
+    private TextView mTotalCash;
 
     @Inject
     public MyCashPresenter mMyCashPresenter;
@@ -38,6 +42,8 @@ public class MyCashActivity extends BaseActivity implements MyCash {
     @Override
     protected void loadViews() {
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mTotalCash = (TextView) findViewById(R.id.total_cash);
+
     }
 
     @Override
@@ -80,5 +86,10 @@ public class MyCashActivity extends BaseActivity implements MyCash {
 
         mRecyclerView.setAdapter(simpleItemAdapter);
 
+    }
+
+    @Override
+    public void showTotalCash(BigDecimal total) {
+        mTotalCash.setText(total.toString());
     }
 }
