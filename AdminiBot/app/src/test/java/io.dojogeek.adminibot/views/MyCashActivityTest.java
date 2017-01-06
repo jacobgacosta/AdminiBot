@@ -3,6 +3,7 @@ package io.dojogeek.adminibot.views;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.mockito.Spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,9 @@ public class MyCashActivityTest {
 
     @Mock
     private RecyclerView mRecyclerView;
+
+    @Mock
+    private TextView mTotalCash;
 
     @Mock
     public MyCashPresenter mMyCashPresenter;
@@ -76,10 +81,12 @@ public class MyCashActivityTest {
     public void testLoadViews_setViews() {
 
         doReturn(mRecyclerView).when(mCashActivity).findViewById(R.id.my_recycler_view);
+        doReturn(mTotalCash).when(mCashActivity).findViewById(R.id.total_cash);
 
         mCashActivity.loadViews();
 
         verify(mCashActivity).findViewById(R.id.my_recycler_view);
+        verify(mCashActivity).findViewById(R.id.total_cash);
     }
 
     @Test
@@ -128,5 +135,16 @@ public class MyCashActivityTest {
         verify(mRecyclerView).setHasFixedSize(true);
         verify(mRecyclerView).setLayoutManager(linearLayoutManagerMock);
         verify(mRecyclerView).setAdapter(simpleItemAdapterMock);
+    }
+
+    @Test
+    public void testShowTotalCash_setValueToView() {
+
+        BigDecimal totalCash = new BigDecimal(873.90);
+
+        mCashActivity.showTotalCash(totalCash);
+
+        verify(mTotalCash).setText(totalCash.toString());
+
     }
 }
