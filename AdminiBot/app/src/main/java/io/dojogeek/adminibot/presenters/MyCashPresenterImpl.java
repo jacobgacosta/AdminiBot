@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.presenters;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +31,20 @@ public class MyCashPresenterImpl implements MyCashPresenter {
 
         List<DtoSimpleAdapter> dtoSimpleAdapters = new ArrayList<>();
 
+        BigDecimal totalCash = new BigDecimal(0);
+
         for (OtherPaymentMethodModel otherPaymentMethodModel : cashList) {
 
             DtoSimpleAdapter dtoSimpleAdapter = populateDtoSimpleAdapter(otherPaymentMethodModel);
 
             dtoSimpleAdapters.add(dtoSimpleAdapter);
+
+            totalCash = totalCash.add(otherPaymentMethodModel.getAvailableCredit());
         }
 
         mMyCash.listMyCash(dtoSimpleAdapters);
+
+        mMyCash.showTotalCash(totalCash);
 
     }
 
