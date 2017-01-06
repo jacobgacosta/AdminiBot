@@ -8,6 +8,7 @@ import org.mockito.Spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class MyCashPresenterTest {
     private MyCashPresenter mMyCashPresenter = new MyCashPresenterImpl(mMyCashActivity, mOtherPaymentMethodDao);
 
     @Test
-    public void testObtainCash_successfulObtaining() throws Exception {
+    public void testObtainCash_populateDtoSimpleAdapterFromModel() throws Exception {
 
         List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
         otherPaymentMethodModelList.add(factory.createOtherPaymentMethodModel());
@@ -63,6 +64,38 @@ public class MyCashPresenterTest {
         verify(dtoSimpleAdapterMock).setmTitle(otherPaymentMethodModelList.get(0).getName());
         verify(dtoSimpleAdapterMock).setSubtitle(otherPaymentMethodModelList.get(0).getAvailableCredit().toString());
         verify(dtoSimpleAdapters, times(otherPaymentMethodModelList.size())).add(dtoSimpleAdapterMock);
+    }
+
+    @Test
+    public void testObtainCash_invokeListMyCash() throws Exception {
+
+        ArrayList<DtoSimpleAdapter> dtoSimpleAdapters = mock(ArrayList.class);
+        whenNew(ArrayList.class).withNoArguments().thenReturn(dtoSimpleAdapters);
+
+        mMyCashPresenter.obtainCash();
+
+        verify(mMyCashActivity).listMyCash(dtoSimpleAdapters);
+    }
+
+    @Test
+    public void testObtainCash_calculateTotal() {
+
+        List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
+        otherPaymentMethodModelList.add(factory.createOtherPaymentMethodModel());
+        otherPaymentMethodModelList.add(factory.createOtherPaymentMethodModel());
+
+        when(mOtherPaymentMethodDao.getOtherPaymentMethodByType(TypePaymentMethodEnum.CASH)).
+                thenReturn(otherPaymentMethodModelList);
+
+        mMyCashPresenter.obtainCash();
+
+        BigDecimal totalCash = new BigDecimal(0);
+
+        for (OtherPaymentMethodModel otherPaymentMethodModel : otherPaymentMethodModelList) {
+            totalCash = totalCash.add(otherPaymentMethodModel.getAvailableCredit());
+        }
+
+        verify(mMyCashActivity).showTotalCash(totalCash);
     }
 
     @Test
