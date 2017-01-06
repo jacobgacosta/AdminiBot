@@ -192,5 +192,6 @@
 
     <!-- My cash-->
     <string name="title_my_cash_activity">Mi efectivo</string>
+    <string name="total_label__my_cash_activity">Total: </string>
 
 </resources>
