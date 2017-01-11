@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
 
         TextView description = (TextView) rootView.findViewById(R.id.payment_method_description);
         description.setText(getResouceStringFromSimpleString(mTypePaymentMethodEnumList.get(position).getName()));
+        description.setTypeface(null, Typeface.BOLD);
 
         ImageView imgPaymentMethod = (ImageView) rootView.findViewById(R.id.img_payment_method);
         imgPaymentMethod.setImageDrawable(getDrawableFromName(mTypePaymentMethodEnumList.get(position).getName()));
