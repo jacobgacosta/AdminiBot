@@ -81,11 +81,14 @@
         <activity
             android:name=".views.CreditCardDetailActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".views.MyCashActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".views.MyFoodCouponsActivity"
+            android:parentActivityName=".views.MainActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
