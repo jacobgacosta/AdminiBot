@@ -26,6 +26,8 @@ import io.dojogeek.adminibot.presenters.MyCashPresenter;
 import io.dojogeek.adminibot.presenters.MyCashPresenterImpl;
 import io.dojogeek.adminibot.presenters.MyCreditCardsPresenter;
 import io.dojogeek.adminibot.presenters.MyCreditCardsPresenterImpl;
+import io.dojogeek.adminibot.presenters.MyFoodCouponsPresenter;
+import io.dojogeek.adminibot.presenters.MyFoodCouponsPresenterImpl;
 import io.dojogeek.adminibot.presenters.NewPurchasePresenter;
 import io.dojogeek.adminibot.presenters.NewPurchasePresenterImpl;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
@@ -58,6 +60,8 @@ import io.dojogeek.adminibot.views.MyCash;
 import io.dojogeek.adminibot.views.MyCashActivity;
 import io.dojogeek.adminibot.views.MyCreditCards;
 import io.dojogeek.adminibot.views.MyCreditCardsActivity;
+import io.dojogeek.adminibot.views.MyFoodCoupons;
+import io.dojogeek.adminibot.views.MyFoodCouponsActivity;
 import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
@@ -84,6 +88,7 @@ public class AdminiBotModule {
     private MyCreditCards mMyCreditCards;
     private CreditCardDetail mCreditCardDetail;
     private MyCash mMyCash;
+    private MyFoodCoupons mMyFoodCoupons;
 
     public AdminiBotModule(RegisterUser registerUser) {
         mRegisterUser = registerUser;
@@ -158,6 +163,11 @@ public class AdminiBotModule {
     public AdminiBotModule(MyCash myCash) {
         mMyCash = myCash;
         mContext = (MyCashActivity) myCash;
+    }
+
+    public AdminiBotModule(MyFoodCoupons myFoodCoupons) {
+        mMyFoodCoupons = myFoodCoupons;
+        mContext = (MyFoodCouponsActivity) myFoodCoupons;
     }
 
     @Provides
@@ -246,6 +256,12 @@ public class AdminiBotModule {
     @AdminBotScope
     MyCashPresenter provideMyCashPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
         return new MyCashPresenterImpl(mMyCash, otherPaymentMethodDao);
+    }
+
+    @Provides
+    @AdminBotScope
+    MyFoodCouponsPresenter provideMyFoodCouponsPresenter(OtherPaymentMethodDaoImpl otherPaymentMethodDao) {
+        return new MyFoodCouponsPresenterImpl(mMyFoodCoupons, otherPaymentMethodDao);
     }
 
     @Provides
