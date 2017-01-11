@@ -194,4 +194,7 @@
     <string name="title_my_cash_activity">Mi efectivo</string>
     <string name="total_label__my_cash_activity">Total: </string>
 
+    <!-- My food coupons-->
+    <string name="title_my_food_coupons_activity">Mis vales de despensa</string>
+
 </resources>
