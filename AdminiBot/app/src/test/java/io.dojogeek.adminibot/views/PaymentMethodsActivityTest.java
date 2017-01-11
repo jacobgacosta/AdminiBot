@@ -233,7 +233,7 @@ public class PaymentMethodsActivityTest {
         LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
 
         TypePaymentMethodEnum [] paymentMethods = {TypePaymentMethodEnum.CARD,
-                TypePaymentMethodEnum.CASH};
+                TypePaymentMethodEnum.CASH, TypePaymentMethodEnum.FOOD_COUPONS};
 
         for (TypePaymentMethodEnum typePaymentMethodEnum : paymentMethods) {
 
@@ -246,6 +246,8 @@ public class PaymentMethodsActivityTest {
         LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCreditCardsActivity.class);
         verifyStatic();
         LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyCashActivity.class);
+        verifyStatic();
+        LaunchIntents.launchIntentClearTop(mPaymentMethodsActivity, MyFoodCouponsActivity.class);
 
         verify(mView, times(paymentMethods.length)).getTag();
     }
