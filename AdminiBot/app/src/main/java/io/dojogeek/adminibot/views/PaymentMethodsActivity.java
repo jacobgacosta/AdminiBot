@@ -81,6 +81,9 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
             case CASH:
                 LaunchIntents.launchIntentClearTop(this, MyCashActivity.class);
                 break;
+            case FOOD_COUPONS:
+                LaunchIntents.launchIntentClearTop(this, MyFoodCouponsActivity.class);
+                break;
             default:
                 Log.v(this.getClass().getName(), "No operations for this event");
                 break;
