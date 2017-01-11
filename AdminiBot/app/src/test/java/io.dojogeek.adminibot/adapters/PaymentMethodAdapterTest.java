@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
@@ -106,6 +107,7 @@ public class PaymentMethodAdapterTest {
 
         verify(mImagePaymentMethod).setImageDrawable(mDrawable);
         verify(mDescriptionPaymentMethod).setText(stringResource);
+        verify(mDescriptionPaymentMethod).setTypeface(null, Typeface.BOLD);
         verify(mLayoutPaymentMethod).setTag(mTypePaymentMethodEnumList.get(position));
     }
 
