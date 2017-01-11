@@ -16,7 +16,7 @@ import io.dojogeek.adminibot.views.MyCreditCards;
 
 public class MyCreditCardsPresenterImpl implements MyCreditCardsPresenter {
 
-    public static String CREDIT_CARD_ICON_NAME = "ic_card";
+    public static String CREDIT_CARD_ICON_NAME = "ic_ccard";
     private MyCreditCards mMyCreditCards;
     private BankCardDao mBankCardDao;
     private CardDetailDao mCardDetailDao;
