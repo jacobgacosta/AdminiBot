@@ -180,9 +180,10 @@ public class CreditCardDetailActivityTest {
     }
 
     @Test
-    public void testLoadDataView_setTitle() {
+    public void testLoadDataView_setTitle() throws Exception {
 
         doNothing().when(mCreditCardDetailActivity).setTitle(R.string.title_activity_credit_card_detail);
+        PowerMockito.doNothing().when(mCreditCardDetailActivity, "loadCreditCardDetailById");
 
         mCreditCardDetailActivity.loadDataView();
 
