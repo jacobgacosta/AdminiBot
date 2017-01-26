@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.views;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -49,6 +50,9 @@ public class AddPaymentMethodActivityTest {
     @Mock
     private View mView;
 
+    @Mock
+    private FloatingActionButton mAddNewPaymentMethodButton;
+
     @InjectMocks
     @Spy
     private AddPaymentMethodActivity mAddPaymentMethodActivity = new AddPaymentMethodActivity();
@@ -86,6 +90,7 @@ public class AddPaymentMethodActivityTest {
 
         mAddPaymentMethodActivity.loadDataView();
 
+        verify(mAddNewPaymentMethodButton).setVisibility(View.GONE);
         verify(mPaymentMethodsList).setAdapter((PaymentMethodAdapter) notNull());
         verify(mAddPaymentMethodActivity).setTitle(R.string.title_payment_methods);
     }
