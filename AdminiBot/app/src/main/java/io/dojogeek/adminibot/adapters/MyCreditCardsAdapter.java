@@ -46,9 +46,9 @@ public class MyCreditCardsAdapter extends RecyclerView.Adapter<MyCreditCardsAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.cardId = mDtoCreditCards.get(position).getCardId();
-        holder.creditCardBankImageName.
-                setImageDrawable(getDrawableFromName(mDtoCreditCards.
-                        get(position).getCreditCardBankImageName()));
+//        holder.creditCardBankImageName.
+//                setImageDrawable(getDrawableFromName(mDtoCreditCards.
+//                        get(position).getCreditCardBankImageName()));
         holder.creditCardName.setText(mDtoCreditCards.get(position).getCreditCardName());
         holder.creditCardNumber.setText(mDtoCreditCards.get(position).getCreditCardNumber());
     }
@@ -74,7 +74,7 @@ public class MyCreditCardsAdapter extends RecyclerView.Adapter<MyCreditCardsAdap
         public ViewHolder(View itemView) {
             super(itemView);
 
-            creditCardBankImageName = (ImageView) itemView.findViewById(R.id.credit_card_bank_image);
+//            creditCardBankImageName = (ImageView) itemView.findViewById(R.id.credit_card_bank_image);
             creditCardName = (TextView) itemView.findViewById(R.id.credit_card_name);
             creditCardNumber = (TextView) itemView.findViewById(R.id.credit_card_number);
 
