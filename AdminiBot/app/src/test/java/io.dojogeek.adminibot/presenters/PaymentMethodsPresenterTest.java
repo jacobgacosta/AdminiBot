@@ -45,13 +45,8 @@ public class PaymentMethodsPresenterTest {
         otherPaymentMethodModelOne.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
         otherPaymentMethodModelOne.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
 
-        OtherPaymentMethodModel otherPaymentMethodModelTwo = ModelsFactory.createOtherPaymentMethodModel();
-        otherPaymentMethodModelTwo.setTypePaymentMethod(TypePaymentMethodEnum.CHEQUE);
-        otherPaymentMethodModelTwo.setTypePaymentMethod(TypePaymentMethodEnum.CHEQUE);
-
         List<OtherPaymentMethodModel> otherPaymentMethodModelList = new ArrayList<>();
         otherPaymentMethodModelList.add(otherPaymentMethodModelOne);
-        otherPaymentMethodModelList.add(otherPaymentMethodModelTwo);
 
         List<BankCardModel> bankCardModelList = new ArrayList<>();
         bankCardModelList.add(ModelsFactory.createBankCardModel());

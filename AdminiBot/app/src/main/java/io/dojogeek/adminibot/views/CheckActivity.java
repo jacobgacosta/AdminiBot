@@ -141,7 +141,6 @@ public class CheckActivity extends BaseActivity implements Check, View.OnClickLi
         OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
         otherPaymentMethodModel.setName(mAlias.getText().toString());
         otherPaymentMethodModel.setReferenceNumber(mCheckNumber.getText().toString());
-        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CHEQUE);
         otherPaymentMethodModel.setAvailableCredit(new BigDecimal(mAmount.getText().toString()));
 
         mCheckPresenter.createCheck(otherPaymentMethodModel);

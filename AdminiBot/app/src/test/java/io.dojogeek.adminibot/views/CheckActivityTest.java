@@ -199,7 +199,7 @@ public class CheckActivityTest {
         verify(otherPaymentMethodModelMock).setAvailableCredit(new BigDecimal(amount));
         verify(otherPaymentMethodModelMock).setName(alias);
         verify(otherPaymentMethodModelMock).setReferenceNumber(checkNumber);
-        verify(otherPaymentMethodModelMock).setTypePaymentMethod(TypePaymentMethodEnum.CHEQUE);
+//        verify(otherPaymentMethodModelMock).setTypePaymentMethod(TypePaymentMethodEnum.CHEQUE);
 
         verify(mCheckPresenter).createCheck(otherPaymentMethodModelMock);
     }
