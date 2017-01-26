@@ -36,8 +36,6 @@ import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenterImpl;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenter;
 import io.dojogeek.adminibot.presenters.RegisterUserPresenterImpl;
-import io.dojogeek.adminibot.views.AddNewPaymentMethod;
-import io.dojogeek.adminibot.views.AddNewPaymentMethodActivity;
 import io.dojogeek.adminibot.views.AddPaymentMethod;
 import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.CardCreation;
@@ -84,7 +82,6 @@ public class AdminiBotModule {
     private Cash mCash;
     private Check mCheck;
     private FoodCoupons mFoodCoupons;
-    private AddNewPaymentMethod mAddNewPaymentMethod;
     private MyCreditCards mMyCreditCards;
     private CreditCardDetail mCreditCardDetail;
     private MyCash mMyCash;
@@ -143,11 +140,6 @@ public class AdminiBotModule {
     public AdminiBotModule(FoodCoupons foodCoupons) {
         mFoodCoupons = foodCoupons;
         mContext = (FoodCouponsActivity) foodCoupons;
-    }
-
-    public AdminiBotModule(AddNewPaymentMethod addNewPaymentMethod) {
-        mAddNewPaymentMethod = addNewPaymentMethod;
-        mContext = (AddNewPaymentMethodActivity) addNewPaymentMethod;
     }
 
     public AdminiBotModule(MyCreditCards myCreditCards) {
