@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,17 +29,16 @@ import io.dojogeek.adminibot.utils.LaunchIntents;
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods, View.OnClickListener,
         AdapterView.OnItemClickListener {
 
-
     @Inject
     public PaymentMethodsPresenter paymentMethodsPresenter;
 
-    private LinearLayout mContainerPaymentMethods;
+    private RelativeLayout mContainerPaymentMethods;
 
     private ListView mPaymentMethods;
 
-    private View mAddNewPaymentMethodView;
+    private TextView mNotificationLabel;
 
-    private Button mAddNewPaymentMethod;
+    private FloatingActionButton mAddNewPaymentMethodButton;
 
     public static final String TAG = "PaymentMethodsActivity";
 
@@ -105,16 +106,17 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Override
     protected void loadViews() {
-        mContainerPaymentMethods = (LinearLayout) findViewById(R.id.container_payment_methods);
+        mContainerPaymentMethods = (RelativeLayout) findViewById(R.id.container_payment_methods);
         mPaymentMethods = (ListView) mContainerPaymentMethods.findViewById(R.id.payment_methods);
-        mAddNewPaymentMethodView = mContainerPaymentMethods.findViewById(R.id.add_new_payment_method_option);
-        mAddNewPaymentMethod = (Button) mAddNewPaymentMethodView.findViewById(R.id.add_payment_method);
+        mNotificationLabel = (TextView) findViewById(R.id.notification_label);
+        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.add_payment_method);
     }
 
     @Override
     protected void addListenersToViews() {
+
+        mAddNewPaymentMethodButton.setOnClickListener(this);
         mPaymentMethods.setOnItemClickListener(this);
-        mAddNewPaymentMethod.setOnClickListener(this);
     }
 
     @Override
@@ -136,34 +138,16 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private void launchAddPaymentMethodOption() {
 
+        mNotificationLabel.setVisibility(View.VISIBLE);
         mPaymentMethods.setVisibility(View.GONE);
-        mAddNewPaymentMethodView.setVisibility(View.VISIBLE);
     }
 
     private void preparePaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
 
         setTitle(R.string.title_activity_choice_payment_method);
 
-        addFooterToListView();
-
         setListAdapter(typePaymentMethodEnumList);
 
-    }
-
-    private void addFooterToListView() {
-
-        LayoutInflater inflater = getLayoutInflater();
-
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_add_new_payment_method,
-                mPaymentMethods, false);
-
-        TextView notificationLabel = (TextView) viewGroup.findViewById(R.id.notification_label);
-        notificationLabel.setVisibility(View.GONE);
-
-        Button addPaymentMethod = (Button) viewGroup.findViewById(R.id.add_payment_method);
-        addPaymentMethod.setOnClickListener(this);
-
-        mPaymentMethods.addFooterView(viewGroup, null, false);
     }
 
     private void setListAdapter(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
