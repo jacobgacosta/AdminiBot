@@ -9,12 +9,12 @@
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground">
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/credit_card_bank_image"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:tint="#e57d5d"
-        android:src="@drawable/ic_ccard"/>
+   -->     android:src="@drawable/ic_ccard"/>
 
     <LinearLayout
         android:layout_width="match_parent"

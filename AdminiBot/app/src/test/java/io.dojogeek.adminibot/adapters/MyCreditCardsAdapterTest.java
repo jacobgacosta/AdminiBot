@@ -115,7 +115,7 @@ public class MyCreditCardsAdapterTest {
 
         when(mockView.findViewById(R.id.credit_card_name)).thenReturn(mCreditCardName);
         when(mockView.findViewById(R.id.credit_card_number)).thenReturn(mCreditCardNumber);
-        when(mockView.findViewById(R.id.credit_card_bank_image)).thenReturn(mCreditCardBankImageName);
+//        when(mockView.findViewById(R.id.credit_card_bank_image)).thenReturn(mCreditCardBankImageName);
 
         MyCreditCardsAdapter.ViewHolder viewHolder = new MyCreditCardsAdapter.ViewHolder(mockView);
 
@@ -124,7 +124,7 @@ public class MyCreditCardsAdapterTest {
         assertEquals(mCreditCardNumber, viewHolder.creditCardNumber);
         verify(mockView).findViewById(R.id.credit_card_name);
         verify(mockView).findViewById(R.id.credit_card_number);
-        verify(mockView).findViewById(R.id.credit_card_bank_image);
+//        verify(mockView).findViewById(R.id.credit_card_bank_image);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class MyCreditCardsAdapterTest {
         int position = 0;
 
         ImageView imageViewMock = mock(ImageView.class);
-        doReturn(imageViewMock).when(mMockView).findViewById(R.id.credit_card_bank_image);
+//        doReturn(imageViewMock).when(mMockView).findViewById(R.id.credit_card_bank_image);
 
         TextView creditCardNameTextViewMock = mock(TextView.class);
         doReturn(creditCardNameTextViewMock).when(mMockView).findViewById(R.id.credit_card_name);
