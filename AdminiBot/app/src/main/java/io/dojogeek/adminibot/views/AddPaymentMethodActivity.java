@@ -1,6 +1,7 @@
 package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,6 +21,8 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     private ListView mPaymentMethods;
 
+    private FloatingActionButton mAddNewPaymentMethodButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     @Override
     protected void loadViews() {
         mPaymentMethods = (ListView) findViewById(R.id.payment_methods);
+        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.add_payment_method);
     }
 
     @Override
@@ -45,6 +49,8 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     protected void loadDataView() {
 
         setTitle(R.string.title_payment_methods);
+
+        mAddNewPaymentMethodButton.setVisibility(View.GONE);
 
         List<TypePaymentMethodEnum> paymentMethodEnumList = Arrays.asList(TypePaymentMethodEnum.values());
 
