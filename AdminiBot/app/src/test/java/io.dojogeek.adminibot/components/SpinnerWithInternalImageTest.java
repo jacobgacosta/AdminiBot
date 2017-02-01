@@ -53,23 +53,18 @@ public class SpinnerWithInternalImageTest {
 
         Map<Long, Map<String, Integer>> mapOfSpinnerItems =  createItemsMapFromBankEnum(BankEnum.values());
 
-        Resources resourcesMock = mock(Resources.class);
-
-        int resourceId = 0;
         int count = 5;
 
         whenNew(ArrayList.class).withNoArguments().thenReturn(ids).thenReturn(textItems).
                 thenReturn(resourcesNames);
-//        when(mContext.getResources()).thenReturn(resourcesMock);
-//        when(resourcesMock.getIdentifier(anyString(), anyString(), anyString())).thenReturn(resourceId);
 
         SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
+        whenNew(SpinnerBankAdapter.class).withArguments(mContext, ids, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
+        when(spinnerBankAdapter.getCount()).thenReturn(count);
 
         doNothing().when(mSpinner).setAdapter(spinnerBankAdapter);
         doNothing().when(mSpinner).setSelection(count);
 
-        whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
-        when(spinnerBankAdapter.getCount()).thenReturn(count);
 
         mSpinner.createSpinner(HINT_TEST, mapOfSpinnerItems);
 
@@ -86,15 +81,17 @@ public class SpinnerWithInternalImageTest {
 
         ArrayList<String> resourcesNames = mock(ArrayList.class);
         ArrayList<Integer> textItems = mock(ArrayList.class);
+        ArrayList<Long> ids = mock(ArrayList.class);
 
-        whenNew(ArrayList.class).withNoArguments().thenReturn(textItems).thenReturn(resourcesNames);
+        whenNew(ArrayList.class).withNoArguments().thenReturn(ids).thenReturn(textItems).
+                thenReturn(resourcesNames);
 
         SpinnerBankAdapter spinnerBankAdapter = mock(SpinnerBankAdapter.class);
+        whenNew(SpinnerBankAdapter.class).withArguments(mContext, ids, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
 
         doNothing().when(mSpinner).setAdapter(spinnerBankAdapter);
         doNothing().when(mSpinner).setSelection(0);
 
-        whenNew(SpinnerBankAdapter.class).withArguments(mContext, resourcesNames, textItems).thenReturn(spinnerBankAdapter);
 
         mSpinner.createSpinner(0, new HashMap<Long, Map<String, Integer>>());
 

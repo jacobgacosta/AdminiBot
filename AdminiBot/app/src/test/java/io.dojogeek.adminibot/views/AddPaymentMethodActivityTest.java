@@ -76,10 +76,12 @@ public class AddPaymentMethodActivityTest {
     public void testLoadViews_setViews() {
 
         doReturn(mPaymentMethodsList).when(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
+        doReturn(mAddNewPaymentMethodButton).when(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method);
 
         mAddPaymentMethodActivity.loadViews();
 
         verify(mAddPaymentMethodActivity).findViewById(R.id.payment_methods);
+        verify(mAddPaymentMethodActivity).findViewById(R.id.add_payment_method);
 
     }
 
