@@ -1,10 +1,14 @@
 package io.dojogeek.adminibot.views;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -59,7 +63,7 @@ public class MyCreditCardsActivity extends BaseActivity implements MyCreditCards
     @Override
     protected void loadDataView() {
 
-        setTitle(R.string.title_activity_my_credit_cards);
+        setToolBarData();
 
         showCreditCardsList();
 
@@ -108,5 +112,20 @@ public class MyCreditCardsActivity extends BaseActivity implements MyCreditCards
         } catch (ArgumentException e) {
             Log.e(TAG, e.getMessage());
         }
+    }
+
+    private void setToolBarData() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_with_image);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_card);
+        icon.setImageDrawable(drawable);
+
+        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        title.setText(R.string.title_activity_my_credit_cards);
     }
 }

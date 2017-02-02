@@ -1,8 +1,11 @@
 package io.dojogeek.adminibot.views;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -54,7 +57,7 @@ public class MyCashActivity extends BaseActivity implements MyCash {
     @Override
     protected void loadDataView() {
 
-        setTitle(R.string.title_my_cash_activity);
+        setToolBarData();
 
         loadMyCash();
     }
@@ -91,5 +94,20 @@ public class MyCashActivity extends BaseActivity implements MyCash {
     @Override
     public void showTotalCash(BigDecimal total) {
         mTotalCash.setText(total.toString());
+    }
+
+    private void setToolBarData() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_with_image);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_cash);
+        icon.setImageDrawable(drawable);
+
+        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        title.setText(R.string.title_my_cash_activity);
     }
 }

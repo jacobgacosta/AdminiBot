@@ -49,7 +49,7 @@
         <activity
             android:name=".views.MyCreditCardsActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/CustomActionBarTheme" />
         <activity
             android:name=".views.AddPaymentMethodActivity"
             android:parentActivityName=".views.MainActivity"
@@ -81,10 +81,10 @@
         <activity
             android:name=".views.MyCashActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/CustomActionBarTheme" />
         <activity android:name=".views.MyFoodCouponsActivity"
             android:parentActivityName=".views.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/CustomActionBarTheme"></activity>
     </application>
 
 </manifest>

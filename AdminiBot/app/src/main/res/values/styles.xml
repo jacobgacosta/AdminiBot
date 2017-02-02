@@ -56,4 +56,9 @@
         <item name="android:textColor">@color/rounded_button_background</item>
     </style>
 
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/primary_background</item>
+        <item name="colorControlHighlight">#40FFFFFF</item>
+    </style>
+
 </resources>
