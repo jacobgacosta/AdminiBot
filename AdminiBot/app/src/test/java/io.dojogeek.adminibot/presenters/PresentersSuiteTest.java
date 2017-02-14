@@ -7,10 +7,14 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         CashPresenterTest.class,
         CheckPresenterTest.class,
+        CreditCardDetailPresenterTest.class,
         CreditCardPresenterTest.class,
         ExpenseCreationPresenterTest.class,
         ExpensesInboxPresenterTest.class,
         FoodCouponPresenterTest.class,
+        MyCashPresenterTest.class,
+        MyCreditCardsPresenterTest.class,
+        MyFoodCouponsPresenterTest.class,
         PaymentMethodsPresenterTest.class
 })
 public class PresentersSuiteTest {
