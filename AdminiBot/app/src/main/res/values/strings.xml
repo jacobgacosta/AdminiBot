@@ -197,4 +197,8 @@
     <!-- My food coupons-->
     <string name="title_my_food_coupons_activity">Mis vales de despensa</string>
 
+    <!-- action bar -->
+    <string name="add_payment_method">Agregar</string>
+    <string name="remove_payment_method">Eliminar</string>
+
 </resources>
