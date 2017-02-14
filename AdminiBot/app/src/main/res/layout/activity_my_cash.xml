@@ -29,7 +29,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:gravity="center_horizontal"
-            android:background="#e57d5d"
+            android:background="#A67BC342"
             android:orientation="horizontal">
 
             <TextView
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/spend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
