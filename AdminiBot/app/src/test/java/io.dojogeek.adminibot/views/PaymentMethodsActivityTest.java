@@ -3,6 +3,8 @@ package io.dojogeek.adminibot.views;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,6 +42,7 @@ import io.dojogeek.adminibot.utils.LaunchIntents;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.doReturn;
@@ -51,6 +54,7 @@ import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({LaunchIntents.class, Log.class, View.OnClickListener.class})
@@ -155,6 +159,7 @@ public class PaymentMethodsActivityTest {
 
         mPaymentMethodsActivity.prepareView(emptyTypePaymentMethodEnumList);
 
+        verify(mAddNewPaymentMethodButton).setVisibility(View.VISIBLE);
         verify(mPaymentMethods).setVisibility(View.GONE);
         verify(mNotificationLabel).setVisibility(View.VISIBLE);
     }
