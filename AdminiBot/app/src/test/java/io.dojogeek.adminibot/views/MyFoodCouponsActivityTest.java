@@ -1,15 +1,22 @@
 package io.dojogeek.adminibot.views;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -92,19 +99,48 @@ public class MyFoodCouponsActivityTest {
     }
 
     @Test
-    public void testLoadDataView_setTitle() {
+    public void testLoadDataView_buildToolbar() {
 
-        doNothing().when(mMyFoodCouponsActivity).setTitle(R.string.title_my_food_coupons_activity);
+        Toolbar toolbarMock = mock(Toolbar.class);
+        doReturn(toolbarMock).when(mMyFoodCouponsActivity).findViewById(R.id.toolbar_with_image);
+
+        doNothing().when(mMyFoodCouponsActivity).setSupportActionBar(toolbarMock);
+
+        ActionBar actionBarMock = mock(ActionBar.class);
+        doReturn(actionBarMock).when(mMyFoodCouponsActivity).getSupportActionBar();
+
+        doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
+
+        ImageView imageViewMock = mock(ImageView.class);
+        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+
+        Resources resources = mock(Resources.class);
+        doReturn(resources).when(mMyFoodCouponsActivity).getResources();
+
+        Drawable drawableMock = mock(Drawable.class);
+        doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_food_coupon);
+
+        TextView textViewMock = mock(TextView.class);
+        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mMyFoodCouponsActivity.loadDataView();
 
-        verify(mMyFoodCouponsActivity).setTitle(R.string.title_my_food_coupons_activity);
+        verify(mMyFoodCouponsActivity).findViewById(R.id.toolbar_with_image);
+        verify(mMyFoodCouponsActivity).setSupportActionBar(toolbarMock);
+        verify(mMyFoodCouponsActivity).getSupportActionBar();
+        verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
+        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+        verify(mMyFoodCouponsActivity).getResources();
+        verify(resources).getDrawable(R.drawable.ic_food_coupon);
+        verify(toolbarMock).findViewById(R.id.toolbar_title);
+        verify(imageViewMock).setImageDrawable(drawableMock);
+        verify(textViewMock).setText(R.string.title_my_food_coupons_activity);
     }
 
     @Test
     public void testLoadDataView_requestFoodCouponsList() throws Exception {
 
-        doNothing().when(mMyFoodCouponsActivity).setTitle(R.string.title_my_food_coupons_activity);
+        PowerMockito.doNothing().when(mMyFoodCouponsActivity, "setToolBarData");
 
         mMyFoodCouponsActivity.loadDataView();
 

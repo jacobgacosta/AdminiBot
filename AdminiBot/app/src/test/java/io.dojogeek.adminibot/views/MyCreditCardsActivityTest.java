@@ -1,9 +1,15 @@
 package io.dojogeek.adminibot.views;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,23 +124,42 @@ public class MyCreditCardsActivityTest {
     }
 
     @Test
-    public void testLoadDataView_setTitle() {
+    public void testLoadDataView_buildToolbar() throws Exception {
 
-        doNothing().when(mMyCreditCardsActivity).setTitle(R.string.title_activity_my_credit_cards);
+        Toolbar toolbarMock = mock(Toolbar.class);
+        doReturn(toolbarMock).when(mMyCreditCardsActivity).findViewById(R.id.toolbar_with_image);
+
+        doNothing().when(mMyCreditCardsActivity).setSupportActionBar(toolbarMock);
+
+        ActionBar actionBarMock = mock(ActionBar.class);
+        doReturn(actionBarMock).when(mMyCreditCardsActivity).getSupportActionBar();
+
+        doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
+
+        ImageView imageViewMock = mock(ImageView.class);
+        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+
+        Resources resources = mock(Resources.class);
+        doReturn(resources).when(mMyCreditCardsActivity).getResources();
+
+        Drawable drawableMock = mock(Drawable.class);
+        doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_card);
+
+        TextView textViewMock = mock(TextView.class);
+        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mMyCreditCardsActivity.loadDataView();
 
-        verify(mMyCreditCardsActivity).setTitle(R.string.title_activity_my_credit_cards);
-    }
-
-    @Test
-    public void testLoadDataView_showCreditCardsList() throws Exception {
-
-        doNothing().when(mMyCreditCardsActivity).setTitle(R.string.title_activity_my_credit_cards);
-
-        mMyCreditCardsActivity.loadDataView();
-
-        verify(mMyCreditCardsPresenter).obtainMyCreditCards();
+        verify(mMyCreditCardsActivity).findViewById(R.id.toolbar_with_image);
+        verify(mMyCreditCardsActivity).setSupportActionBar(toolbarMock);
+        verify(mMyCreditCardsActivity).getSupportActionBar();
+        verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
+        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+        verify(mMyCreditCardsActivity).getResources();
+        verify(resources).getDrawable(R.drawable.ic_card);
+        verify(toolbarMock).findViewById(R.id.toolbar_title);
+        verify(imageViewMock).setImageDrawable(drawableMock);
+        verify(textViewMock).setText(R.string.title_activity_my_credit_cards);
 
     }
 

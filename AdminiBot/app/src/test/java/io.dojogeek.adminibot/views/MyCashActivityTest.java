@@ -1,7 +1,15 @@
 package io.dojogeek.adminibot.views;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -10,8 +18,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,6 +38,7 @@ import io.dojogeek.adminibot.presenters.MyCashPresenter;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -47,6 +58,9 @@ public class MyCashActivityTest {
 
     @Mock
     public MyCashPresenter mMyCashPresenter;
+
+    @Mock
+    public FloatingActionButton mSpend;
 
     @InjectMocks
     @Spy
@@ -82,27 +96,64 @@ public class MyCashActivityTest {
 
         doReturn(mRecyclerView).when(mCashActivity).findViewById(R.id.my_recycler_view);
         doReturn(mTotalCash).when(mCashActivity).findViewById(R.id.total_cash);
+        doReturn(mSpend).when(mCashActivity).findViewById(R.id.spend);
 
         mCashActivity.loadViews();
 
         verify(mCashActivity).findViewById(R.id.my_recycler_view);
         verify(mCashActivity).findViewById(R.id.total_cash);
+        verify(mCashActivity).findViewById(R.id.spend);
     }
 
     @Test
-    public void testLoadDataView_setTitle() {
+    public void testLoadDataView_buildToolbar() {
 
-        doNothing().when(mCashActivity).setTitle(R.string.title_my_cash_activity);
+        Toolbar toolbarMock = mock(Toolbar.class);
+        doReturn(toolbarMock).when(mCashActivity).findViewById(R.id.toolbar_with_image);
+
+        doNothing().when(mCashActivity).setSupportActionBar(toolbarMock);
+
+        ActionBar actionBarMock = mock(ActionBar.class);
+        doReturn(actionBarMock).when(mCashActivity).getSupportActionBar();
+
+        doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
+
+        ImageView imageViewMock = mock(ImageView.class);
+        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+
+        Resources resources = mock(Resources.class);
+        doReturn(resources).when(mCashActivity).getResources();
+
+        Drawable drawableMock = mock(Drawable.class);
+        doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_cash);
+
+        TextView textViewMock = mock(TextView.class);
+        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mCashActivity.loadDataView();
 
-        verify(mCashActivity).setTitle(R.string.title_my_cash_activity);
+        verify(mCashActivity).findViewById(R.id.toolbar_with_image);
+        verify(mCashActivity).setSupportActionBar(toolbarMock);
+        verify(mCashActivity).getSupportActionBar();
+        verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
+        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+        verify(mCashActivity).getResources();
+        verify(resources).getDrawable(R.drawable.ic_cash);
+        verify(toolbarMock).findViewById(R.id.toolbar_title);
+        verify(imageViewMock).setImageDrawable(drawableMock);
+        verify(textViewMock).setText(R.string.title_my_cash_activity);
+
+    }
+
+    @Test
+    public void testAddListenerToView() {
+
     }
 
     @Test
     public void testLoadDataView_showCreditCardsList() throws Exception {
 
-        doNothing().when(mCashActivity).setTitle(R.string.title_my_cash_activity);
+        PowerMockito.doNothing().when(mCashActivity, "setToolBarData");
 
         mCashActivity.loadDataView();
 
@@ -146,5 +197,19 @@ public class MyCashActivityTest {
 
         verify(mTotalCash).setText(totalCash.toString());
 
+    }
+
+    @Test
+    public void testOnCreateOptionsMenu_showOptionsMenu() throws Exception {
+
+        Menu menuMock = mock(Menu.class);
+
+        MenuInflater menuInflaterMock = mock(MenuInflater.class);
+        doReturn(menuInflaterMock).when(mCashActivity).getMenuInflater();
+
+        boolean isEnabled = mCashActivity.onCreateOptionsMenu(menuMock);
+
+        assertTrue(isEnabled);
+        verify(menuInflaterMock).inflate(R.menu.menu_payment_method, menuMock);
     }
 }
