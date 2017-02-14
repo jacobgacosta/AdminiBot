@@ -50,7 +50,6 @@ public class PaymentMethodsPresenterTest {
 
         List<BankCardModel> bankCardModelList = new ArrayList<>();
         bankCardModelList.add(ModelsFactory.createBankCardModel());
-        bankCardModelList.add(ModelsFactory.createBankCardModel());
 
         when(mOtherPaymentMethodDao.getOtherPaymentMethods()).thenReturn(otherPaymentMethodModelList);
         when(mBankCardDao.getBankCards()).thenReturn(bankCardModelList);
@@ -60,7 +59,7 @@ public class PaymentMethodsPresenterTest {
         verify(mOtherPaymentMethodDao).getOtherPaymentMethods();
         verify(mBankCardDao).getBankCards();
         verify(mPaymentMethodsActivity).
-                prepareView(argThat(new IsAList<TypePaymentMethodEnum>().size(3)));
+                prepareView(argThat(new IsAList<TypePaymentMethodEnum>().size(2)));
 
     }
 
