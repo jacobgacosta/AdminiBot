@@ -103,7 +103,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
     private void insertCardTypes(SQLiteDatabase db) {
         db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_1);
         db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_2);
-        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_3);
     }
 
     private void insertBanks(SQLiteDatabase db) {

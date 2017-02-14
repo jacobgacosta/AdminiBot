@@ -78,9 +78,9 @@ public class CardCreationActivity extends BaseActivity implements CardCreation, 
             case DEBIT_CARD:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
-            case PREPAID_CARD:
-                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
-                break;
+//            case PREPAID_CARD:
+//                LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
+//                break;
             default:
                 Log.v(this.getLocalClassName(), "No operations for this selection.");
 

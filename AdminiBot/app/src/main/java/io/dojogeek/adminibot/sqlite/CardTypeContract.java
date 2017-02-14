@@ -9,7 +9,7 @@ import static io.dojogeek.adminibot.sqlite.SQLiteConstants.DROP_TABLE_IF_EXIST;
 public class CardTypeContract {
 
     public static final CardTypeEnum [] CARD_TYPES = {CardTypeEnum.CREDIT_CARD,
-            CardTypeEnum.DEBIT_CARD, CardTypeEnum.PREPAID_CARD};
+            CardTypeEnum.DEBIT_CARD};
 
     public static abstract class CardType implements BaseColumns {
 
@@ -34,12 +34,6 @@ public class CardTypeContract {
             " VALUES(" + CardType.COLUMN_NAME_NULLABLE + "," +
             "'" + CARD_TYPES[1].getCardType() + "'," +
             "'" + CARD_TYPES[1].getDescription() + "')";
-
-    public static final String SQL_INSERT_INITIAL_VALUES_3 = "INSERT INTO " + CardType.TABLE_NAME +
-            " VALUES(" + CardType.COLUMN_NAME_NULLABLE + "," +
-            "'" + CARD_TYPES[2].getCardType() + "'," +
-            "'" + CARD_TYPES[2].getDescription() + "')";
-
 
     public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + CardType.TABLE_NAME;
 
