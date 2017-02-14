@@ -45,7 +45,7 @@ public class FoodCouponsValidator extends Validator {
     @Override
     protected void configureValidations() {
         this.validations.put(CODE, CompoundValidatorsFactory.foodCouponCodeValidator());
-        this.validations.put(AMOUNT, CompoundValidatorsFactory.checkAmountValidator());
+        this.validations.put(AMOUNT, CompoundValidatorsFactory.requiredValueValidator);
         this.validations.put(ALIAS, CompoundValidatorsFactory.cashConceptValidator());
     }
 }
