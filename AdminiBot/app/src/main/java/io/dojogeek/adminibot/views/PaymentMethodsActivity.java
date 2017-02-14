@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -138,6 +140,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private void launchAddPaymentMethodOption() {
 
+        mAddNewPaymentMethodButton.setVisibility(View.VISIBLE);
         mNotificationLabel.setVisibility(View.VISIBLE);
         mPaymentMethods.setVisibility(View.GONE);
     }
@@ -156,6 +159,4 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         mPaymentMethods.setAdapter(paymentMethodAdapter);
     }
-
-
 }
