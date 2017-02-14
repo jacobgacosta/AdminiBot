@@ -2,9 +2,12 @@ package io.dojogeek.adminibot.views;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,14 +30,24 @@ public class MyCashActivity extends BaseActivity implements MyCash {
 
     private TextView mTotalCash;
 
+    private FloatingActionButton mSpend;
+
     @Inject
     public MyCashPresenter mMyCashPresenter;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_payment_method, menu);
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     protected void setupComponent(AppComponent appComponent) {
@@ -46,6 +59,7 @@ public class MyCashActivity extends BaseActivity implements MyCash {
     protected void loadViews() {
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mTotalCash = (TextView) findViewById(R.id.total_cash);
+        mSpend = (FloatingActionButton) findViewById(R.id.spend);
 
     }
 
@@ -101,7 +115,6 @@ public class MyCashActivity extends BaseActivity implements MyCash {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_with_image);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_cash);
