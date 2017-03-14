@@ -1,60 +1,53 @@
 package io.dojogeek.adminibot.views;
 
-import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.support.design.widget.FloatingActionButton;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
+import org.mockito.Spy;
+import org.junit.Before;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-import dagger.AdminiBotComponent;
-import dagger.AdminiBotModule;
 import dagger.AppComponent;
+import dagger.AdminiBotModule;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
+import dagger.AdminiBotComponent;
+import io.dojogeek.adminibot.utils.LaunchIntents;
+import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.exceptions.ArgumentException;
-import io.dojogeek.adminibot.factory.ModelsFactory;
+import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
-import io.dojogeek.adminibot.utils.LaunchIntents;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyObject;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.notNull;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.notNull;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.anyObject;
+import static org.powermock.api.mockito.PowerMockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.verifyStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({LaunchIntents.class, Log.class, View.OnClickListener.class})
@@ -67,7 +60,7 @@ public class PaymentMethodsActivityTest {
     private LinearLayout mAddPaymentMethodOption;
 
     @Mock
-    private ListView mPaymentMethods;
+    private ListView mPaymentMethodsList;
 
     @Mock
     private PaymentMethodsPresenter mPaymentMethodsPresenter;
@@ -88,7 +81,7 @@ public class PaymentMethodsActivityTest {
     private View mAddNewPaymentMethodView;
 
     @Mock
-    private TextView mNotificationLabel;
+    private TextView mNoPaymentMethodsLabel;
 
     @Mock
     private FloatingActionButton mAddNewPaymentMethodButton;
@@ -115,8 +108,8 @@ public class PaymentMethodsActivityTest {
     public void testLoadViews_setViews() {
 
         doReturn(mContainerPaymentMethods).when(mPaymentMethodsActivity).findViewById(R.id.container_payment_methods);
-        doReturn(mPaymentMethods).when(mContainerPaymentMethods).findViewById(R.id.payment_methods);
-        doReturn(mNotificationLabel).when(mPaymentMethodsActivity).findViewById(R.id.notification_label);
+        doReturn(mPaymentMethodsList).when(mContainerPaymentMethods).findViewById(R.id.payment_methods);
+        doReturn(mNoPaymentMethodsLabel).when(mPaymentMethodsActivity).findViewById(R.id.notification_label);
         doReturn(mAddNewPaymentMethodButton).when(mPaymentMethodsActivity).findViewById(R.id.add_payment_method);
 
         mPaymentMethodsActivity.loadViews();
@@ -143,25 +136,27 @@ public class PaymentMethodsActivityTest {
     public void testShowTypesPaymentMethods_listWithPaymentMethods() {
 
         List<TypePaymentMethodEnum> typePaymentMethodEnumList = ModelsFactory.createTypePaymentMethodEnumList();
-        Mockito.doNothing().when(mPaymentMethodsActivity).setTitle(R.string.title_activity_choice_payment_method);
+        Mockito.doNothing().when(mPaymentMethodsActivity).setTitle(R.string.title_choice_payment_method);
 
         mPaymentMethodsActivity.prepareView(typePaymentMethodEnumList);
 
-        verify(mPaymentMethods).setAdapter((PaymentMethodAdapter) anyObject());
-        verify(mPaymentMethodsActivity).setTitle(R.string.title_activity_choice_payment_method);
+        verify(mPaymentMethodsList).setAdapter((PaymentMethodAdapter) anyObject());
+        verify(mPaymentMethodsActivity).setTitle(R.string.title_choice_payment_method);
     }
 
 
     @Test
-    public void testShowTypesPaymentMethods_emptyListPaymentMethods() {
+    public void testShowTypesPaymentMethods_emptyList() {
+
+        doNothing().when(mPaymentMethodsActivity).setTitle(R.string.title_add_payment_method);
 
         List<TypePaymentMethodEnum> emptyTypePaymentMethodEnumList = new ArrayList<>();
 
         mPaymentMethodsActivity.prepareView(emptyTypePaymentMethodEnumList);
 
-        verify(mAddNewPaymentMethodButton).setVisibility(View.VISIBLE);
-        verify(mPaymentMethods).setVisibility(View.GONE);
-        verify(mNotificationLabel).setVisibility(View.VISIBLE);
+        verify(mPaymentMethodsActivity).setTitle(R.string.title_add_payment_method);
+        verify(mPaymentMethodsList).setVisibility(View.GONE);
+        verify(mNoPaymentMethodsLabel).setVisibility(View.VISIBLE);
     }
 
     @Test
@@ -195,7 +190,7 @@ public class PaymentMethodsActivityTest {
 
         mPaymentMethodsActivity.addListenersToViews();
 
-        verify(mPaymentMethods).setOnItemClickListener(mPaymentMethodsActivity);
+        verify(mPaymentMethodsList).setOnItemClickListener(mPaymentMethodsActivity);
         verify(mAddNewPaymentMethodButton).setOnClickListener(mPaymentMethodsActivity);
     }
 

@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:id="@+id/container_payment_methods"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="io.dojogeek.adminibot.views.PaymentMethodsActivity">
 
     <TextView
@@ -30,7 +29,6 @@
         android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
         android:tint="@color/cardview_light_background"
         android:src="@drawable/ic_add" />
 
