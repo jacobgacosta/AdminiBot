@@ -1,13 +1,16 @@
 package io.dojogeek.adminibot.models;
 
+import java.math.BigDecimal;
+
+import org.joda.time.DateTime;
+
 public class IncomeModel {
 
     private long id;
-    private String description;
-    private double amount;
-    private String date;
-    private String nextDate;
-    private long userId;
+    private String name;
+    private DateTime createdAt;
+    private DateTime nextEntry;
+    private BigDecimal totalAmount;
 
     public long getId() {
         return id;
@@ -17,43 +20,35 @@ public class IncomeModel {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getAmount() {
-        return amount;
+    public DateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setCreatedAt(DateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getDate() {
-        return date;
+    public DateTime getNextEntry() {
+        return nextEntry;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setNextEntry(DateTime nextEntry) {
+        this.nextEntry = nextEntry;
     }
 
-    public String getNextDate() {
-        return nextDate;
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setNextDate(String nextDate) {
-        this.nextDate = nextDate;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

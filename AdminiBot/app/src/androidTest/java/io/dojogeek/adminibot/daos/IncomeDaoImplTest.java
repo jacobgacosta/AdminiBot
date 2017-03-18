@@ -1,38 +1,43 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
+
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
+import org.joda.time.DateTimeComparator;
+
 import java.util.List;
+import java.util.ArrayList;
+import java.math.BigDecimal;
 
-import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
-import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
-import io.dojogeek.adminibot.utils.DateUtils;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
+import io.dojogeek.adminibot.exceptions.DataException;
+import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
+
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 @RunWith(AndroidJUnit4.class)
 public class IncomeDaoImplTest {
 
+    private static final long EQUALITY = 0;
+    private static final long NO_OPERATION = 0;
     private static final int SUCCESS_OPERATION = 1;
     private static final long OPERATIONAL_ERROR = -1;
-    private static final long NO_OPERATION = 0;
 
     private Context mContext;
     private IncomeDao mIncomeDao;
@@ -44,15 +49,15 @@ public class IncomeDaoImplTest {
     }
 
     @After
-    public void finishTest() {
+    public void tearDown() {
         ((IncomeDaoImpl) mIncomeDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
     @Test
-    public void testCreateIncome_successInsertion() {
+    public void testIncomeCreation_isCreated() {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
@@ -62,7 +67,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testCreateIncome_withNullModel_isException() {
+    public void testIncomeCreation_withNullModel_isNotCreated() {
 
         IncomeModel incomeModel = null;
 
@@ -71,31 +76,16 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testCreateIncome_withNullRequiredField_noInsertion() {
+    public void testGetIncomeById_successfulObtaining() throws DataException {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
-        incomeModel.setDescription(null);
-
-        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
-
-        assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
-    }
-
-    @Test
-    public void testGetIncomeById_successObtaining() throws DataException {
-
-        IncomeModel expectedIncomeModel = CreatorModels.createIncomeModel();
+        IncomeModel expectedIncomeModel = ModelsFactory.createIncomeModel();
 
         long insertedRecordId = mIncomeDao.createIncome(expectedIncomeModel);
 
         IncomeModel actualIncome = mIncomeDao.getIncomeById(insertedRecordId);
 
-        assertNotNull(actualIncome);
-        assertEquals(expectedIncomeModel.getDescription(), actualIncome.getDescription());
-        assertEquals(expectedIncomeModel.getAmount(), actualIncome.getAmount(), 0);
-        assertEquals(expectedIncomeModel.getDate(), actualIncome.getDate());
-        assertEquals(expectedIncomeModel.getNextDate(), actualIncome.getNextDate());
-        assertEquals(expectedIncomeModel.getUserId(), actualIncome.getUserId());
+        compareIncomes(expectedIncomeModel, actualIncome);
+
     }
 
     @Test(expected = DataException.class)
@@ -108,7 +98,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testGetIncomes_successObtainingList() {
+    public void testGetIncomes_obtainingASuccessfulList() {
 
         int numberOfIncomesToCreate = 5;
 
@@ -128,13 +118,14 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testUpdateIncome_successUpdate() throws DataException {
+    public void testUpdateIncome_successfulUpdate() throws DataException {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
-        IncomeModel expectedNewIncomeModel = changeIncomeModelValues(incomeModel);
+        IncomeModel expectedNewIncomeModel = incomeModel;
+        expectedNewIncomeModel.setTotalAmount(new BigDecimal(50000));
 
         String where = IncomesContract.Incomes._ID + "= " +  insertedRecordId;
 
@@ -157,9 +148,9 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testUpdateIncome_withNonExistentId_noUpdating() {
+    public void testUpdateIncome_withNonExistentId_noUpdate() {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
         long nonExistentId = 2;
 
@@ -171,25 +162,10 @@ public class IncomeDaoImplTest {
 
     }
 
-    @Test(expected = SQLiteConstraintException.class)
-    public void testUpdateIncome_withNullRequiredField_isException() {
-
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
-
-        long insertedRecordId = mIncomeDao.createIncome(incomeModel);
-
-        incomeModel.setDescription(null);
-
-        String where = IncomesContract.Incomes._ID + "= " +  insertedRecordId;
-
-        mIncomeDao.updateIncome(incomeModel, where);
-
-    }
-
     @Test
-    public void testDeleteIncome_successDeletion() {
+    public void testDeleteIncome_successfulDeletion() {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
@@ -201,7 +177,7 @@ public class IncomeDaoImplTest {
     @Test
     public void testDeleteIncome_withNonExistentId_noDeletion() {
 
-        IncomeModel incomeModel = CreatorModels.createIncomeModel();
+        IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
         mIncomeDao.createIncome(incomeModel);
 
@@ -218,8 +194,7 @@ public class IncomeDaoImplTest {
         List<IncomeModel> incomeModelList = new ArrayList<>();
 
         for (int index = 1; index <= numberOfIncomesToCreate; index++) {
-            IncomeModel incomeModel = CreatorModels.createIncomeModel("Test description " + index,
-                    24506.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), 1 + index);
+            IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
             mIncomeDao.createIncome(incomeModel);
             incomeModelList.add(incomeModel);
@@ -244,21 +219,18 @@ public class IncomeDaoImplTest {
     }
 
     private void compareIncomes(IncomeModel expectedIncomeModel, IncomeModel actualIncomeModel) {
+
         assertNotNull(actualIncomeModel);
-        assertEquals(expectedIncomeModel.getDescription(), actualIncomeModel.getDescription());
-        assertEquals(expectedIncomeModel.getAmount(), actualIncomeModel.getAmount(), 0);
-        assertEquals(expectedIncomeModel.getDate(), actualIncomeModel.getDate());
-        assertEquals(expectedIncomeModel.getNextDate(), actualIncomeModel.getNextDate());
-        assertEquals(expectedIncomeModel.getUserId(), actualIncomeModel.getUserId());
+        assertEquals(expectedIncomeModel.getName(), actualIncomeModel.getName());
+
+        DateTimeComparator date = DateTimeComparator.getDateOnlyInstance();
+        DateTimeComparator time = DateTimeComparator.getTimeOnlyInstance();
+
+        assertEquals(EQUALITY, date.compare(expectedIncomeModel.getCreatedAt(),
+                actualIncomeModel.getCreatedAt()));
+        assertEquals(EQUALITY, time.compare(expectedIncomeModel.getNextEntry().withMillisOfSecond(0),
+                actualIncomeModel.getNextEntry().withMillisOfSecond(0)));
+        assertEquals(expectedIncomeModel.getTotalAmount(), actualIncomeModel.getTotalAmount());
     }
 
-    private IncomeModel changeIncomeModelValues(IncomeModel incomeModel) {
-        incomeModel.setDescription("updated description");
-        incomeModel.setAmount(120.60);
-        incomeModel.setDate(DateUtils.getCurrentData());
-        incomeModel.setNextDate(null);
-        incomeModel.setUserId(1);
-
-        return incomeModel;
-    }
 }

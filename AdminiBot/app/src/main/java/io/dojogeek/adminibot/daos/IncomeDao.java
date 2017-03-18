@@ -2,18 +2,18 @@ package io.dojogeek.adminibot.daos;
 
 import java.util.List;
 
-import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.exceptions.DataException;
 
 public interface IncomeDao {
 
-    long createIncome(IncomeModel incomeModel);
-
-    IncomeModel getIncomeById(long incomeId) throws DataException;
-
     List<IncomeModel> getIncomes();
+
+    long deleteIncome(long incomeId);
+
+    long createIncome(IncomeModel incomeModel);
 
     long updateIncome(IncomeModel incomeModel, String where);
 
-    long deleteIncome(long incomeId);
+    IncomeModel getIncomeById(long incomeId) throws DataException;
 }

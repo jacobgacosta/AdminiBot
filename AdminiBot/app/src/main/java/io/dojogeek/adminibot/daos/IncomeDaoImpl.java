@@ -1,17 +1,20 @@
 package io.dojogeek.adminibot.daos;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
+import android.content.Context;
+import android.content.ContentValues;
 
-import java.util.ArrayList;
+import org.joda.time.format.DateTimeFormat;
+
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
+import io.dojogeek.adminibot.exceptions.DataException;
 
 public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
 
@@ -27,7 +30,7 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
 
         ContentValues contentValues = createContentValues(incomeModel);
 
-        long insertedIncomeId = mDatabase.insert(IncomesContract.Incomes.TABLE_NAME, IncomesContract.Incomes.COLUMN_NAME_NULLABLE, contentValues);
+        long insertedIncomeId = mDatabase.insert(IncomesContract.Incomes.TABLE_NAME, IncomesContract.Incomes.COLUMN_NULLABLE, contentValues);
 
         return insertedIncomeId;
     }
@@ -112,29 +115,28 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
     private ContentValues createContentValues(IncomeModel incomeModel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesContract.Incomes.COLUMN_DESCRIPTION, incomeModel.getDescription());
-        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomeModel.getAmount());
-        contentValues.put(IncomesContract.Incomes.COLUMN_DATE, incomeModel.getDate());
-        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY, incomeModel.getNextDate());
-        contentValues.put(IncomesContract.Incomes.COLUMN_USER_ID, incomeModel.getUserId());
+        contentValues.put(IncomesContract.Incomes.COLUMN_NAME, incomeModel.getName());
+        contentValues.put(IncomesContract.Incomes.COLUMN_CREATED_AT,
+                incomeModel.getCreatedAt().toString("yyyy-MM-dd HH:mm:ss"));
+        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY,
+                incomeModel.getNextEntry().toString("yyyy-MM-dd HH:mm:ss"));
+        contentValues.put(IncomesContract.Incomes.COLUMN_TOTAL_AMOUNT, incomeModel.getTotalAmount().toString());
 
         return contentValues;
     }
 
     private IncomeModel getIncomeModelFromCursor(Cursor cursor) {
 
-        String description = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_DESCRIPTION));
-        double amount = cursor.getDouble(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_AMOUNT));
-        String date = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_DATE));
+        String name = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NAME));
+        String amount = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_TOTAL_AMOUNT));
+        String createdAt = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_CREATED_AT));
         String nextEntry = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NEXT_ENTRY));
-        long userId = cursor.getLong(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_USER_ID));
 
         IncomeModel incomeModel = new IncomeModel();
-        incomeModel.setDescription(description);
-        incomeModel.setAmount(amount);
-        incomeModel.setDate(date);
-        incomeModel.setNextDate(nextEntry);
-        incomeModel.setUserId(userId);
+        incomeModel.setName(name);
+        incomeModel.setTotalAmount(new BigDecimal(amount));
+        incomeModel.setNextEntry(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(nextEntry));
+        incomeModel.setCreatedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(createdAt));
 
         return incomeModel;
     }
