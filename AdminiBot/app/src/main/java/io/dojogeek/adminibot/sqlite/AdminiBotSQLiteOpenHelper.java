@@ -6,11 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    public static String TAG = "AdminiBotSQLiteOpenHelper";
-
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "AdminiBot.db";
-
     private static AdminiBotSQLiteOpenHelper sInstance = null;
 
     public static AdminiBotSQLiteOpenHelper getInstance(Context ctx) {
@@ -53,7 +50,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(BankCardsContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesBankCardsContract.SQL_CREATE_TABLE);
         db.execSQL(ExpensesBankCardsContract.SQL_CREATE_TABLE);
-        //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
         db.execSQL(CardDetailContract.SQL_CREATE_TABLE);
         db.execSQL(BanksContract.SQL_CREATE_TABLE);
         db.execSQL(TrademarkContract.SQL_CREATE_TABLE);
@@ -63,7 +59,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(UsersContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesTypesContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesContract.SQL_DELETE_ENTRIES);
-        //db.execSQL(TypesPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(PaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesContract.SQL_DELETE_ENTRIES);
@@ -74,7 +69,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CardTypeContract.SQL_DELETE_ENTRIES);
         db.execSQL(BanksContract.SQL_DELETE_ENTRIES);
         db.execSQL(TrademarkContract.SQL_DELETE_ENTRIES);
-        //db.execSQL(CardTypeContract.SQL_CREATE_TABLE);
     }
 
     private void insertInitialValues(SQLiteDatabase db) {
@@ -82,8 +76,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         insertExpensesTypes(db);
         insertBanks(db);
         insertTrademarks(db);
-        //insertPaymentMethods(db);
-        //insertCardTypes(db);
     }
 
     private void insertExpensesTypes(SQLiteDatabase db) {
@@ -92,17 +84,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_3);
         db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_4);
         db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_5);
-    }
-
-    private void insertPaymentMethods(SQLiteDatabase db) {
-        db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_1);
-        db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_2);
-        db.execSQL(TypesPaymentMethodsContract.SQL_INSERT_INITIAL_VALUES_3);
-    }
-
-    private void insertCardTypes(SQLiteDatabase db) {
-        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_1);
-        db.execSQL(CardTypeContract.SQL_INSERT_INITIAL_VALUES_2);
     }
 
     private void insertBanks(SQLiteDatabase db) {

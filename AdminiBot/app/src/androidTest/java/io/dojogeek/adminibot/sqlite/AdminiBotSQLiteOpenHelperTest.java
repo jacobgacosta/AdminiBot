@@ -5,27 +5,28 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class AdminiBotSQLiteOpenHelperTest {
 
-    private static final int INSERT_ERROR = -1;
     private static final int NONE_TABLE_CREATED = 0;
+
     private Context mContext;
-    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
+    private AdminiBotSQLiteOpenHelper mAdminiBotSQLiteOpenHelper;
 
     @Before
     public void setup() {
@@ -44,7 +45,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_sameGetInstante_isTrue() {
+    public void testSingleton_isTheSameInstance() {
 
         AdminiBotSQLiteOpenHelper expectedAdminiBotSQLiteOpenHelper = AdminiBotSQLiteOpenHelper.getInstance(mContext);
 
@@ -52,7 +53,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_creationDB_isTrue() {
+    public void testDBCreation_itAlreadyExist() {
 
         File db = mContext.getDatabasePath(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
 
@@ -61,7 +62,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_versionDB_isTrue() {
+    public void testDBVersion_correctVersion() {
 
         int version = mSQLiteDatabase.getVersion();
 
@@ -69,7 +70,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     }
 
     @Test
-    public void sqliteHelper_creationTables_isTrue() {
+    public void testTablesCreation_theseAreCreated() {
 
         String [] tables = {ExpensesContract.Expense.TABLE_NAME,
                 ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
