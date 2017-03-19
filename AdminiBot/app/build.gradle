@@ -29,6 +29,9 @@ configurations.all {
 }
 
 dependencies {
+
+    compile 'net.danlew:android.joda:2.9.7'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // local tests
     testCompile 'junit:junit:4.12'
