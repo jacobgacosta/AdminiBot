@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertNotEquals;
@@ -40,7 +40,7 @@ public class CashDaoImplTest {
     @Test
     public void testCreateCash_successfulCreation() {
 
-        OtherPaymentMethodModel otherPaymentMethodModelcashModel = CreatorModels.createOtherPaymentMethodModel();
+        PaymentMethodModel otherPaymentMethodModelcashModel = ModelsFactory.createPaymentMethodModel();
 
         long insertedRecordId = mCashDao.createCash(otherPaymentMethodModelcashModel);
 

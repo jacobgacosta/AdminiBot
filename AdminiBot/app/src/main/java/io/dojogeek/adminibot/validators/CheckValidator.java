@@ -67,11 +67,11 @@ public class CheckValidator extends Validator{
 //    }
 
 //    public int getErrorMessageIssuanceCode() {
-//        return this.errorMessages.get(ISSUANCE_CODE);
+//        return this.errorMessages.getAll(ISSUANCE_CODE);
 //    }
 
 //    public int getErrorMessageCurrentAccount() {
-//        return this.errorMessages.get(CURRENT_ACCOUNT);
+//        return this.errorMessages.getAll(CURRENT_ACCOUNT);
 //    }
 
     public int getErrorMessageCheckNumber() {
@@ -79,7 +79,7 @@ public class CheckValidator extends Validator{
     }
 
 //    public int getErrorMessagePlaceAndDateOfIssue() {
-//        return this.errorMessages.get(DATE_OF_ISSUE);
+//        return this.errorMessages.getAll(DATE_OF_ISSUE);
 //    }
 
     public int getErrorMessageAmount() {
@@ -91,7 +91,7 @@ public class CheckValidator extends Validator{
     }
 
 //    public int getErrorMessageBank() {
-//        return this.errorMessages.get(BANK);
+//        return this.errorMessages.getAll(BANK);
 //    }
 
     @Override

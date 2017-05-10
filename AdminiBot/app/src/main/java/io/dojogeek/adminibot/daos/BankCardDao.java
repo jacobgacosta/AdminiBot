@@ -3,20 +3,24 @@ package io.dojogeek.adminibot.daos;
 import java.util.List;
 
 import io.dojogeek.adminibot.enums.CardTypeEnum;
-import io.dojogeek.adminibot.exceptions.DataException;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
+import io.dojogeek.adminibot.exceptions.DataException;
 
 public interface BankCardDao {
 
-    long createBankCard(BankCardModel bankCardModel);
+    long delete(long id);
 
-    BankCardModel getBankCardById(long cardBankId) throws DataException;
+    List<BankCardModel> getAll();
 
-    List<BankCardModel> getBankCards();
+    long create(BankCardModel bankCardModel);
 
-    long updateBankCard(BankCardModel bankCardModel, long id);
+    List<BankCardModel> getByCartType(String type);
 
-    long deleteBankCard(long bankCardId);
+    List<TypePaymentMethodEnum> getRegisteredTypes();
 
-    List<BankCardModel> getBankCardByCartType(CardTypeEnum cardType);
+    long update(BankCardModel bankCardModel, long id);
+
+    BankCardModel getById(long id) throws DataException;
+
 }

@@ -8,9 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.FoodCoupons;
 
 import static org.mockito.Mockito.never;
@@ -26,23 +26,23 @@ public class FoodCouponPresenterTest {
     private FoodCoupons mFoodCoupons;
 
     @Mock
-    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
+    private PaymentMethodDaoImpl mOtherPaymentMethodDaoImpl;
 
     @InjectMocks
     private FoodCouponPresenter mFoodCouponPresenter = new FoodCouponPresenterImpl(mFoodCoupons,
-            mOtherPaymentMethodDao);
+            mOtherPaymentMethodDaoImpl);
 
     @Test
     public void testCreateFoodCoupon_successfulCreation() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
+        PaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).
+        when(mOtherPaymentMethodDaoImpl.create(otherPaymentMethodModel)).
                 thenReturn(SUCCESS_INSERTION);
 
         mFoodCouponPresenter.createFoodCoupon(otherPaymentMethodModel);
 
-        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
+        verify(mOtherPaymentMethodDaoImpl).create(otherPaymentMethodModel);
         verify(mFoodCoupons).notifySuccessfulInsertion();
         verify(mFoodCoupons).returnToMyPaymentsMethods();
         verify(mFoodCoupons, never()).notifyErrorInsertion();
@@ -51,13 +51,13 @@ public class FoodCouponPresenterTest {
     @Test
     public void testCreateFoodCoupon_errorInsertion_withSQLException() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
+        PaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenThrow(new SQLException());
+        when(mOtherPaymentMethodDaoImpl.create(otherPaymentMethodModel)).thenThrow(new SQLException());
 
         mFoodCouponPresenter.createFoodCoupon(otherPaymentMethodModel);
 
-        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
+        verify(mOtherPaymentMethodDaoImpl).create(otherPaymentMethodModel);
         verify(mFoodCoupons, never()).notifySuccessfulInsertion();
         verify(mFoodCoupons, never()).returnToMyPaymentsMethods();
         verify(mFoodCoupons).notifyErrorInsertion();
@@ -66,6 +66,6 @@ public class FoodCouponPresenterTest {
     @Test
     public void testUnnusedView_closeConnections() {
         mFoodCouponPresenter.unnusedView();
-        verify(mOtherPaymentMethodDao).closeConnection();;
+        verify(mOtherPaymentMethodDaoImpl).closeConnection();;
     }
 }

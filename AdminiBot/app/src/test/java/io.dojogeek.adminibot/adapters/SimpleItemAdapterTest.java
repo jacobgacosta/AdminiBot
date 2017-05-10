@@ -133,7 +133,7 @@ public class SimpleItemAdapterTest {
         /*String packageName = "io.dojogeek";
         when(mContext.getPackageName()).thenReturn(packageName);
 
-        Resources resourcesMock = mock(Resources.class);
+        ResourceProvider resourcesMock = mock(ResourceProvider.class);
         when(mContext.getResources()).thenReturn(resourcesMock);
         int drawableId = 0;
         when(resourcesMock.getIdentifier(dtoSimpleAdapter.getIconName(),

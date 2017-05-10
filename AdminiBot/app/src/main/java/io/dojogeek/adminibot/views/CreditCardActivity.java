@@ -249,9 +249,9 @@ public class CreditCardActivity extends BaseActivity implements CreditCard, View
         bankCardModel.setNumber(mCardNumber.getText().toString());
         bankCardModel.setBrand(getRadioButtonTextFromId(mCardBrands.getCheckedRadioButtonId()));
         bankCardModel.setBankId((Long) mSpinnerWithInternalImage.getSelectedItem());
-        bankCardModel.setAvailableCredit(calculateAvailableCredit(mCurrentBalance.getText().toString(),
-                mCreditLimit.getText().toString()));
-        bankCardModel.setCardType(CardTypeEnum.CREDIT_CARD);
+//        bankCardModel.setAvailableCredit(calculateAvailableCredit(mCurrentBalance.getText().toString(),
+//                mCreditLimit.getText().toString()));
+//        bankCardModel.setCardType(CardTypeEnum.CREDIT_CARD);
 
         return bankCardModel;
     }

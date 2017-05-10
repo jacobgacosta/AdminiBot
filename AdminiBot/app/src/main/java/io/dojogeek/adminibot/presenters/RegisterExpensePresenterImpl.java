@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.dojogeek.adminibot.daos.ExpenseDao;
 import io.dojogeek.adminibot.daos.ExpenseTypeDao;
-import io.dojogeek.adminibot.daos.TypesPaymentMethodsDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDao;
 import io.dojogeek.adminibot.daos.UserDao;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
@@ -19,17 +19,17 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
     private ExpenseTypeDao mExpenseTypeDao;
     private ExpenseDao mExpenseDao;
     private UserDao mUserDao;
-    private TypesPaymentMethodsDao mTypesPaymentMethodsDao;
+    private PaymentMethodDao mPaymentMethodDao;
 
     public RegisterExpensePresenterImpl(RegisterExpense registerExpense,
                                         ExpenseTypeDao expenseTypeDao, ExpenseDao expenseDao,
-                                        UserDao userDao, TypesPaymentMethodsDao typesPaymentMethodsDao) {
+                                        UserDao userDao, PaymentMethodDao paymentMethodDao) {
 
         mRegisterExpense = registerExpense;
         mExpenseTypeDao = expenseTypeDao;
         mExpenseDao = expenseDao;
         mUserDao = userDao;
-        mTypesPaymentMethodsDao = typesPaymentMethodsDao;
+        mPaymentMethodDao = paymentMethodDao;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class RegisterExpensePresenterImpl implements RegisterExpensePresenter {
     public void getPaymentMethods() {
 
 
-        List<TypePaymentMethodModel> typePaymentMethodsModels = mTypesPaymentMethodsDao.getPaymentMethods();
+        List<TypePaymentMethodModel> typePaymentMethodsModels = null;
 
         mRegisterExpense.deployPaymentMethods(typePaymentMethodsModels);
     }

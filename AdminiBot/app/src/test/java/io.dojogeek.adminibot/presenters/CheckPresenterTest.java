@@ -8,9 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.factory.ModelsFactory;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.Check;
 
 import static org.mockito.Mockito.never;
@@ -26,22 +26,22 @@ public class CheckPresenterTest {
     private Check mCheckActivity;
 
     @Mock
-    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
+    private PaymentMethodDaoImpl mOtherPaymentMethodDaoImpl;
 
     @InjectMocks
-    private CheckPresenter mCheckPresenter = new CheckPresenterImpl(mCheckActivity, mOtherPaymentMethodDao);
+    private CheckPresenter mCheckPresenter = new CheckPresenterImpl(mCheckActivity, mOtherPaymentMethodDaoImpl);
 
     @Test
     public void testCreateCheck_successfulCreation() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
+        PaymentMethodModel paymentMethod = ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).
+        when(mOtherPaymentMethodDaoImpl.create(paymentMethod)).
                 thenReturn(SUCCESS_INSERTION);
 
-        mCheckPresenter.createCheck(otherPaymentMethodModel);
+        mCheckPresenter.createCheck(paymentMethod);
 
-        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
+        verify(mOtherPaymentMethodDaoImpl).create(paymentMethod);
         verify(mCheckActivity).notifySuccessfulInsertion();
         verify(mCheckActivity).returnToMyPaymentsMethods();
         verify(mCheckActivity, never()).notifyErrorInsertion();
@@ -50,13 +50,13 @@ public class CheckPresenterTest {
     @Test
     public void testCreateCheck_errorInsertion_withSQLException() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
+        PaymentMethodModel otherPaymentMethodModel = ModelsFactory.createOtherPaymentMethodModel();
 
-        when(mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel)).thenThrow(new SQLException());
+        when(mOtherPaymentMethodDaoImpl.create(otherPaymentMethodModel)).thenThrow(new SQLException());
 
         mCheckPresenter.createCheck(otherPaymentMethodModel);
 
-        verify(mOtherPaymentMethodDao).createOtherPaymentMethod(otherPaymentMethodModel);
+        verify(mOtherPaymentMethodDaoImpl).create(otherPaymentMethodModel);
         verify(mCheckActivity, never()).notifySuccessfulInsertion();
         verify(mCheckActivity, never()).returnToMyPaymentsMethods();
         verify(mCheckActivity).notifyErrorInsertion();
@@ -65,6 +65,6 @@ public class CheckPresenterTest {
     @Test
     public void testUnnusedView_closeConnections() {
         mCheckPresenter.unnusedView();
-        verify(mOtherPaymentMethodDao).closeConnection();
+        verify(mOtherPaymentMethodDaoImpl).closeConnection();
     }
 }

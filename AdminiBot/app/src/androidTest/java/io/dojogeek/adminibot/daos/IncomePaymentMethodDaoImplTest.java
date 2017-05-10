@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import io.dojogeek.adminibot.utiltest.ModelsFactory;
 import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.models.IncomePaymentMethodModel;
+import io.dojogeek.adminibot.models.IncomeTypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -33,26 +33,26 @@ public class IncomePaymentMethodDaoImplTest {
     private static final long OPERATIONAL_ERROR = -1;
 
     private Context mContext;
-    private IncomePaymentMethodDao mIncomePaymentMethodDao;
+    private IncomeTypePaymentMethodDao mIncomeTypePaymentMethodDao;
 
     @Before
     public void setup() {
         mContext = getTargetContext();
-        mIncomePaymentMethodDao = new IncomePaymentMethodDaoImpl(mContext);
+        mIncomeTypePaymentMethodDao = new IncomeTypeTypePaymentMethodDaoImpl(mContext);
     }
 
     @After
     public void tearDown() {
-        ((IncomePaymentMethodDaoImpl) mIncomePaymentMethodDao).closeConnection();
+        ((IncomeTypeTypePaymentMethodDaoImpl) mIncomeTypePaymentMethodDao).closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
     }
 
     @Test
     public void testCreation_isCreated() {
 
-        IncomePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
+        IncomeTypePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
 
-        long insertedRecordId = mIncomePaymentMethodDao.create(incomePaymentMethod);
+        long insertedRecordId = mIncomeTypePaymentMethodDao.create(incomePaymentMethod);
 
         assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
@@ -61,19 +61,19 @@ public class IncomePaymentMethodDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testCreation_withNullModel_isNotCreated() {
 
-        IncomePaymentMethodModel incomePaymentMethod = null;
+        IncomeTypePaymentMethodModel incomePaymentMethod = null;
 
-        mIncomePaymentMethodDao.create(incomePaymentMethod);
+        mIncomeTypePaymentMethodDao.create(incomePaymentMethod);
     }
 
     @Test
     public void testGetById_successfulObtaining() throws DataException {
 
-        IncomePaymentMethodModel expected = ModelsFactory.createIncomePaymentMethod();
+        IncomeTypePaymentMethodModel expected = ModelsFactory.createIncomePaymentMethod();
 
-        long insertedRecordId = mIncomePaymentMethodDao.create(expected);
+        long insertedRecordId = mIncomeTypePaymentMethodDao.create(expected);
 
-        IncomePaymentMethodModel actual = mIncomePaymentMethodDao.getById(insertedRecordId);
+        IncomeTypePaymentMethodModel actual = mIncomeTypePaymentMethodDao.getById(insertedRecordId);
 
         assertThat(actual, is(notNullValue()));
 
@@ -87,17 +87,17 @@ public class IncomePaymentMethodDaoImplTest {
 
         long nonExistentId = 4;
 
-        mIncomePaymentMethodDao.getById(nonExistentId);
+        mIncomeTypePaymentMethodDao.getById(nonExistentId);
     }
 
     @Test
-    public void testGet_obtainingASuccessfulList() {
+    public void testGetAll_obtainingASuccessfulList() {
 
         int numberOfInsertions = 5;
 
-        List<IncomePaymentMethodModel> expectedList = createIncomePaymentMethod(numberOfInsertions);
+        List<IncomeTypePaymentMethodModel> expectedList = createIncomePaymentMethod(numberOfInsertions);
 
-        List<IncomePaymentMethodModel> actualList = mIncomePaymentMethodDao.get();
+        List<IncomeTypePaymentMethodModel> actualList = mIncomeTypePaymentMethodDao.getAll();
 
         compareIncomePaymentMethodsList(expectedList, actualList);
     }
@@ -105,7 +105,7 @@ public class IncomePaymentMethodDaoImplTest {
     @Test
     public void testGet_withNoRecords_isEmptyList() {
 
-        List<IncomePaymentMethodModel> actualList = mIncomePaymentMethodDao.get();
+        List<IncomeTypePaymentMethodModel> actualList = mIncomeTypePaymentMethodDao.getAll();
 
         assertThat(actualList.isEmpty(), is(true));
     }
@@ -115,9 +115,9 @@ public class IncomePaymentMethodDaoImplTest {
 
         int numberOfInsertions = 2;
 
-        List<IncomePaymentMethodModel> expectedList = createIncomePaymentMethod(numberOfInsertions);
+        List<IncomeTypePaymentMethodModel> expectedList = createIncomePaymentMethod(numberOfInsertions);
 
-        List<IncomePaymentMethodModel> actualList = mIncomePaymentMethodDao.getByIncomeId(1);
+        List<IncomeTypePaymentMethodModel> actualList = mIncomeTypePaymentMethodDao.getByIncomeId(1);
 
         assertThat(actualList.isEmpty(), is(false));
         assertThat(actualList.size(), is(2));
@@ -130,7 +130,7 @@ public class IncomePaymentMethodDaoImplTest {
 
         long nonExistentId = 3;
 
-        List<IncomePaymentMethodModel> actualList = mIncomePaymentMethodDao.getByIncomeId(nonExistentId);
+        List<IncomeTypePaymentMethodModel> actualList = mIncomeTypePaymentMethodDao.getByIncomeId(nonExistentId);
 
         assertThat(actualList.isEmpty(), is(true));
     }
@@ -138,12 +138,12 @@ public class IncomePaymentMethodDaoImplTest {
     @Test
     public void testGetByPaymentMethodId_obtainingASuccessfulList() {
 
-        IncomePaymentMethodModel expected = ModelsFactory.createIncomePaymentMethod();
+        IncomeTypePaymentMethodModel expected = ModelsFactory.createIncomePaymentMethod();
 
-        mIncomePaymentMethodDao.create(expected);
+        mIncomeTypePaymentMethodDao.create(expected);
 
-        List<IncomePaymentMethodModel> actualList = mIncomePaymentMethodDao.
-                getByPaymentMethodId(expected.getPaymentMethodId());
+        List<IncomeTypePaymentMethodModel> actualList = mIncomeTypePaymentMethodDao.
+                getByTypePaymentMethodId(expected.getPaymentMethodId());
 
         assertThat(actualList.isEmpty(), is(false));
         assertThat(actualList.size(), is(1));
@@ -156,8 +156,8 @@ public class IncomePaymentMethodDaoImplTest {
 
         long nonExistentId = 3;
 
-        List<IncomePaymentMethodModel> actual =
-                mIncomePaymentMethodDao.getByPaymentMethodId(nonExistentId);
+        List<IncomeTypePaymentMethodModel> actual =
+                mIncomeTypePaymentMethodDao.getByTypePaymentMethodId(nonExistentId);
 
         assertThat(actual.isEmpty(), is(true));
     }
@@ -165,11 +165,11 @@ public class IncomePaymentMethodDaoImplTest {
     @Test
     public void testDelete_successfulDeletion() {
 
-        IncomePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
+        IncomeTypePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
 
-        long insertedRecordId = mIncomePaymentMethodDao.create(incomePaymentMethod);
+        long insertedRecordId = mIncomeTypePaymentMethodDao.create(incomePaymentMethod);
 
-        long deletedRows = mIncomePaymentMethodDao.delete(insertedRecordId);
+        long deletedRows = mIncomeTypePaymentMethodDao.delete(insertedRecordId);
 
         assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
@@ -179,28 +179,28 @@ public class IncomePaymentMethodDaoImplTest {
 
         long nonExistentId = 5;
 
-        long deletedRows = mIncomePaymentMethodDao.delete(nonExistentId);
+        long deletedRows = mIncomeTypePaymentMethodDao.delete(nonExistentId);
 
         assertThat(deletedRows, is(NO_OPERATION));
     }
 
-    private List<IncomePaymentMethodModel> createIncomePaymentMethod(int numberOfInsertions) {
+    private List<IncomeTypePaymentMethodModel> createIncomePaymentMethod(int numberOfInsertions) {
 
-        List<IncomePaymentMethodModel> incomePaymentMethods = new ArrayList<>();
+        List<IncomeTypePaymentMethodModel> incomePaymentMethods = new ArrayList<>();
 
         for (int index = 0; index < numberOfInsertions; index++) {
 
-            IncomePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
+            IncomeTypePaymentMethodModel incomePaymentMethod = ModelsFactory.createIncomePaymentMethod();
 
-            mIncomePaymentMethodDao.create(incomePaymentMethod);
+            mIncomeTypePaymentMethodDao.create(incomePaymentMethod);
             incomePaymentMethods.add(incomePaymentMethod);
         }
 
         return incomePaymentMethods;
     }
 
-    private void compareIncomePaymentMethodsList(List<IncomePaymentMethodModel> expectedList,
-                                                 List<IncomePaymentMethodModel> actualList) {
+    private void compareIncomePaymentMethodsList(List<IncomeTypePaymentMethodModel> expectedList,
+                                                 List<IncomeTypePaymentMethodModel> actualList) {
 
         assertThat(actualList, is(notNullValue()));
         assertThat(actualList.isEmpty(), is(false));
@@ -208,16 +208,16 @@ public class IncomePaymentMethodDaoImplTest {
 
         for (int index = 0; index < actualList.size(); index++) {
 
-            IncomePaymentMethodModel actual = actualList.get(index);
+            IncomeTypePaymentMethodModel actual = actualList.get(index);
 
-            IncomePaymentMethodModel expected = expectedList.get(index);
+            IncomeTypePaymentMethodModel expected = expectedList.get(index);
 
             compareIncomePaymentMethods(expected, actual);
         }
     }
 
-    private void compareIncomePaymentMethods(IncomePaymentMethodModel expected,
-                                                 IncomePaymentMethodModel actual) {
+    private void compareIncomePaymentMethods(IncomeTypePaymentMethodModel expected,
+                                                 IncomeTypePaymentMethodModel actual) {
 
         assertThat(actual, is(notNullValue()));
         assertThat(actual.getAmount(), is(expected.getAmount()));

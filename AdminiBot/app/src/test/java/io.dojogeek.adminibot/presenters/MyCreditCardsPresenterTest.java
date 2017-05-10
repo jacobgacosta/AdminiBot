@@ -54,7 +54,7 @@ public class MyCreditCardsPresenterTest {
         List<BankCardModel> bankCardModels = new ArrayList<>();
         bankCardModels.add(factory.createBankCardModel());
 
-        when(mBankCardDao.getBankCards()).thenReturn(bankCardModels);
+        when(mBankCardDao.getAll()).thenReturn(bankCardModels);
 
         DtoCreditCardAdapter dtoCreditCardAdapterMock = mock(DtoCreditCardAdapter.class);
         whenNew(DtoCreditCardAdapter.class).withNoArguments().thenReturn(dtoCreditCardAdapterMock);
@@ -69,7 +69,7 @@ public class MyCreditCardsPresenterTest {
 
         mMyCreditCardsPresenter.obtainMyCreditCards();
 
-        verify(mBankCardDao).getBankCards();
+        verify(mBankCardDao).getAll();
         verify(dtoCreditCardAdapterMock, times(bankCardModels.size())).
                 setCreditCardName(bankCardModels.get(0).getName());
         verify(dtoCreditCardAdapterMock, times(bankCardModels.size())).

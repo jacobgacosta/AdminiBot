@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/add_new_payment_method"
         android:icon="@drawable/ic_action_add_circle"
-        android:title="@string/add_payment_method"
+        android:title="@string/add_more_payment_method"
         app:showAsAction="ifRoom"/>
 
     <!--<item android:id="@+id/remove_payment_method"-->

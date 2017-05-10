@@ -2,27 +2,27 @@ package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
 
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.daos.PaymentMethodDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.Check;
 
 public class CheckPresenterImpl implements CheckPresenter {
 
     private Check mcheck;
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private PaymentMethodDao mPaymentMethodDao;
 
-    public CheckPresenterImpl(Check check, OtherPaymentMethodDao otherPaymentMethodDao) {
+    public CheckPresenterImpl(Check check, PaymentMethodDao paymentMethodDao) {
         this.mcheck = check;
-        mOtherPaymentMethodDao = otherPaymentMethodDao;
+        mPaymentMethodDao = paymentMethodDao;
     }
 
     @Override
-    public void createCheck(OtherPaymentMethodModel otherPaymentMethodModel) {
+    public void createCheck(PaymentMethodModel paymentMethod) {
 
         try {
 
-            mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+            mPaymentMethodDao.create(paymentMethod);
             mcheck.notifySuccessfulInsertion();
             mcheck.returnToMyPaymentsMethods();
 
@@ -35,7 +35,7 @@ public class CheckPresenterImpl implements CheckPresenter {
 
     @Override
     public void unnusedView() {
-        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
+        ((PaymentMethodDaoImpl) mPaymentMethodDao).closeConnection();
     }
 
 }

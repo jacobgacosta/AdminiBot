@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import org.joda.time.format.DateTimeFormat;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public long createMovementIncomeBankCard(IncomeBankCardModel movementIncomeBankCard) {
+    public long create(IncomeBankCardModel movementIncomeBankCard) {
 
         openConnection();
 
@@ -34,11 +37,11 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public IncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException {
+    public IncomeBankCardModel getById(long id) throws DataException {
 
         openConnection();
 
-        String [] args = {String.valueOf(movementIncomeBankCardId)};
+        String [] args = {String.valueOf(id)};
 
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM " + IncomesBankCardsContract.IncomesBankCards.TABLE_NAME +
                 " WHERE _ID = ? ", args);
@@ -53,7 +56,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public List<IncomeBankCardModel> getMovementsIncomesBankCards() {
+    public List<IncomeBankCardModel> get() {
 
         openConnection();
 
@@ -65,7 +68,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
             while (cursor.isAfterLast() == false) {
 
-                IncomeBankCardModel incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                IncomeBankCardModel incomeBankCardModel = getIncomeBankCardFromCursor(cursor);
 
                 incomeBankCardModels.add(incomeBankCardModel);
 
@@ -77,7 +80,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public List<IncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId) {
+    public List<IncomeBankCardModel> getByIncomeId(long incomeId) {
 
         openConnection();
 
@@ -96,7 +99,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public List<IncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId) {
+    public List<IncomeBankCardModel> getByBankCardId(long bankCardId) {
 
         openConnection();
 
@@ -115,8 +118,8 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public long updateMovementIncomeBankCard(IncomeBankCardModel incomeBankCardModel,
-                                             String where) {
+    public long update(IncomeBankCardModel incomeBankCardModel,
+                       String where) {
 
         openConnection();
 
@@ -128,7 +131,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     }
 
     @Override
-    public long deleteMovementIncomeBankCard(long movementIncomeBankCardId) {
+    public long delete(long movementIncomeBankCardId) {
 
         openConnection();
 
@@ -143,11 +146,18 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
     private ContentValues createContentValues(IncomeBankCardModel movementIncomeBankCard) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION, movementIncomeBankCard.getDescription());
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT, movementIncomeBankCard.getAmount());
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID, movementIncomeBankCard.getIncomeId());
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID, movementIncomeBankCard.getBankCardId());
-        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE, movementIncomeBankCard.getDate());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT,
+                movementIncomeBankCard.getAmount().toString());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID,
+                movementIncomeBankCard.getIncomeId());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID,
+                movementIncomeBankCard.getBankCardId());
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_CREATED_AT,
+                movementIncomeBankCard.getCreatedAt().toString("yyyy-MM-dd HH:mm:ss"));
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_UPDATED_AT,
+                movementIncomeBankCard.getUpdatedAt().toString("yyyy-MM-dd HH:mm:ss"));
+        contentValues.put(IncomesBankCardsContract.IncomesBankCards.COLUMN_DELETED_AT,
+                movementIncomeBankCard.getDeletedAt().toString("yyyy-MM-dd HH:mm:ss"));
 
         return contentValues;
     }
@@ -169,7 +179,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
             while (cursor.isAfterLast() == false) {
 
-                incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                incomeBankCardModel = getIncomeBankCardFromCursor(cursor);
                 cursor.moveToNext();
             }
         }
@@ -177,20 +187,31 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
         return incomeBankCardModel;
     }
 
-    private IncomeBankCardModel getMovementIncomeBankCardModelFromCursor(Cursor cursor) {
+    private IncomeBankCardModel getIncomeBankCardFromCursor(Cursor cursor) {
 
-        String description = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DESCRIPTION));
-        double amount = cursor.getDouble(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT));
-        long incomeId = cursor.getLong(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID));
-        long bankCardId = cursor.getLong(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID));
-        String date = cursor.getString(cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DATE));
+        String amount = cursor.getString(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_AMOUNT));
+        long incomeId = cursor.getLong(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_INCOME_ID));
+        long bankCardId = cursor.getLong(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_BANK_CARD_ID));
+        String createdAt = cursor.getString(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_CREATED_AT));
+        String updatedAt = cursor.getString(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_UPDATED_AT));
+        String deletedAt = cursor.getString(
+                cursor.getColumnIndex(IncomesBankCardsContract.IncomesBankCards.COLUMN_DELETED_AT));
 
         IncomeBankCardModel incomeBankCardModel = new IncomeBankCardModel();
-        incomeBankCardModel.setDescription(description);
-        incomeBankCardModel.setAmount(amount);
+        incomeBankCardModel.setAmount(new BigDecimal(amount));
         incomeBankCardModel.setIncomeId(incomeId);
         incomeBankCardModel.setBankCardId(bankCardId);
-        incomeBankCardModel.setDate(date);
+        incomeBankCardModel.setCreatedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").
+                parseDateTime(createdAt));
+        incomeBankCardModel.setUpdatedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").
+                parseDateTime(updatedAt));
+        incomeBankCardModel.setDeletedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").
+                parseDateTime(deletedAt));
 
         return incomeBankCardModel;
     }
@@ -203,7 +224,7 @@ public class IncomeBankCardDaoImpl extends SQLiteGlobalDao implements IncomeBank
 
             while (cursor.isAfterLast() == false) {
 
-                IncomeBankCardModel incomeBankCardModel = getMovementIncomeBankCardModelFromCursor(cursor);
+                IncomeBankCardModel incomeBankCardModel = getIncomeBankCardFromCursor(cursor);
                 movementExpenseBankCardModelList.add(incomeBankCardModel);
                 cursor.moveToNext();
             }

@@ -1,13 +1,14 @@
 package io.dojogeek.adminibot.models;
 
-import java.math.BigDecimal;
-
 import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
 
 public class IncomeModel {
 
     private long id;
     private String name;
+    private DateTime updateAt;
     private DateTime createdAt;
     private DateTime nextEntry;
     private BigDecimal totalAmount;
@@ -26,6 +27,14 @@ public class IncomeModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public DateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(DateTime updateAt) {
+        this.updateAt = updateAt;
     }
 
     public DateTime getCreatedAt() {

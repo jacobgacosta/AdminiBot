@@ -1,13 +1,20 @@
 package io.dojogeek.adminibot.models;
 
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
+
 public class IncomeBankCardModel {
 
     private long id;
-    private String description;
     private String date;
-    private double amount;
     private long incomeId;
+    private BigDecimal amount;
     private long bankCardId;
+    private String description;
+    private DateTime createdAt;
+    private DateTime updatedAt;
+    private DateTime deletedAt;
 
     public long getId() {
         return id;
@@ -25,14 +32,6 @@ public class IncomeBankCardModel {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public long getIncomeId() {
         return incomeId;
     }
@@ -41,11 +40,11 @@ public class IncomeBankCardModel {
         this.incomeId = incomeId;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -55,5 +54,37 @@ public class IncomeBankCardModel {
 
     public void setBankCardId(long bankCardId) {
         this.bankCardId = bankCardId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public DateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(DateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public DateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(DateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public DateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(DateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

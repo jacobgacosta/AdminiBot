@@ -2,28 +2,28 @@ package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
 
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.daos.PaymentMethodDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.Cash;
 
 public class CashPresenterImpl implements CashPresenter {
 
     private Cash mCash;
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private PaymentMethodDao mPaymentMethodDao;
 
 
-    public CashPresenterImpl(Cash cash, OtherPaymentMethodDao otherPaymentMethodDao) {
+    public CashPresenterImpl(Cash cash, PaymentMethodDao paymentMethodDao) {
         this.mCash = cash;
-        this.mOtherPaymentMethodDao = otherPaymentMethodDao;
+        this.mPaymentMethodDao = paymentMethodDao;
     }
 
     @Override
-    public void createCash(OtherPaymentMethodModel otherPaymentMethodModel) {
+    public void createCash(PaymentMethodModel paymentMethod) {
 
         try {
 
-            mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+            mPaymentMethodDao.create(paymentMethod);
             mCash.notifySuccessfulInsertion();
             mCash.returnToMyPaymentsMethods();
 
@@ -36,6 +36,6 @@ public class CashPresenterImpl implements CashPresenter {
 
     @Override
     public void unnusedView() {
-        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
+        ((PaymentMethodDaoImpl) mPaymentMethodDao).closeConnection();
     }
 }

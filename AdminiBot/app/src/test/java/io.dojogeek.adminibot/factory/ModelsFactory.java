@@ -14,7 +14,7 @@ import io.dojogeek.adminibot.models.CreditCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -44,12 +44,11 @@ public class ModelsFactory {
         return expenseBankCardModel;
     }
 
-    public static OtherPaymentMethodModel createOtherPaymentMethodModel() {
+    public static PaymentMethodModel createOtherPaymentMethodModel() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel =
-                factory.manufacturePojo(OtherPaymentMethodModel.class);
+        PaymentMethodModel paymentMethod = factory.manufacturePojo(PaymentMethodModel.class);
 
-        return otherPaymentMethodModel;
+        return paymentMethod;
     }
 
     public static BankCardModel createBankCardModel() {
@@ -62,7 +61,7 @@ public class ModelsFactory {
     public static List<TypePaymentMethodEnum> createTypePaymentMethodEnumList() {
 
         List<TypePaymentMethodEnum> typePaymentMethodEnumList = new ArrayList<>();
-        typePaymentMethodEnumList.add(TypePaymentMethodEnum.CARD);
+        typePaymentMethodEnumList.add(TypePaymentMethodEnum.CREDIT_CARD);
         typePaymentMethodEnumList.add(TypePaymentMethodEnum.CASH);
         typePaymentMethodEnumList.add(TypePaymentMethodEnum.FOOD_COUPONS);
 

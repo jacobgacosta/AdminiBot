@@ -15,8 +15,8 @@ import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.components.PaymentMethod;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.presenters.CashPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CashValidator;
@@ -130,22 +130,22 @@ public class CashActivity extends BaseActivity implements Cash, View.OnClickList
 
     private void processValidCash() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
+        PaymentMethodModel paymentMethod = new PaymentMethodModel();
 
         BigDecimal amount = new BigDecimal(mCashAmount.getText().toString());
 
-        otherPaymentMethodModel.setAvailableCredit(amount);
-        otherPaymentMethodModel.setName(mCashAlias.getText().toString());
-        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
-        otherPaymentMethodModel.setReferenceNumber(REFERENCE_NUMBER);
+//        otherPaymentMethodModel.setAvailableCredit(amount);
+//        otherPaymentMethodModel.setName(mCashAlias.getText().toString());
+//        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.CASH);
+//        otherPaymentMethodModel.setReferenceNumber(REFERENCE_NUMBER);
 
-        submitCash(otherPaymentMethodModel);
+        submitCash(paymentMethod);
 
     }
 
-    private void submitCash(OtherPaymentMethodModel otherPaymentMethodModel) {
+    private void submitCash(PaymentMethodModel paymentMethod) {
 
-        mCashPresenter.createCash(otherPaymentMethodModel);
+        mCashPresenter.createCash(paymentMethod);
 
     }
 

@@ -48,7 +48,7 @@ public class MyCreditCardsAdapter extends RecyclerView.Adapter<MyCreditCardsAdap
         holder.cardId = mDtoCreditCards.get(position).getCardId();
 //        holder.creditCardBankImageName.
 //                setImageDrawable(getDrawableFromName(mDtoCreditCards.
-//                        get(position).getCreditCardBankImageName()));
+//                        getAll(position).getCreditCardBankImageName()));
         holder.creditCardName.setText(mDtoCreditCards.get(position).getCreditCardName());
         holder.creditCardNumber.setText(mDtoCreditCards.get(position).getCreditCardNumber());
     }

@@ -7,17 +7,17 @@ import io.dojogeek.adminibot.models.IncomeBankCardModel;
 
 public interface IncomeBankCardDao {
 
-    long createMovementIncomeBankCard(IncomeBankCardModel movementIncomeBankCard);
+    List<IncomeBankCardModel> get();
 
-    IncomeBankCardModel getMovementIncomeBankCardById(long movementIncomeBankCardId) throws DataException;
+    long delete(long movementIncomeBankCardId);
 
-    List<IncomeBankCardModel> getMovementsIncomesBankCards();
+    List<IncomeBankCardModel> getByIncomeId(long incomeId);
 
-    List<IncomeBankCardModel> getMovementsIncomesBankCardsByIncomeId(long incomeId);
+    long create(IncomeBankCardModel movementIncomeBankCard);
 
-    List<IncomeBankCardModel> getMovementsIncomesBankCardsByBankCardId(long bankCardId);
+    IncomeBankCardModel getById(long id) throws DataException;
 
-    long updateMovementIncomeBankCard(IncomeBankCardModel incomeBankCardModel, String where);
+    List<IncomeBankCardModel> getByBankCardId(long bankCardId);
 
-    long deleteMovementIncomeBankCard(long movementIncomeBankCardId);
+    long update(IncomeBankCardModel incomeBankCardModel, String where);
 }

@@ -1,29 +1,29 @@
 package io.dojogeek.adminibot.views;
 
-import android.util.Log;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.ListView;
-import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.AppComponent;
-import dagger.AdminiBotModule;
-import io.dojogeek.adminibot.R;
 import dagger.AdminiBotComponent;
-import io.dojogeek.adminibot.utils.LaunchIntents;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import dagger.AdminiBotModule;
+import dagger.AppComponent;
+import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
+import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods, View.OnClickListener,
-        AdapterView.OnItemClickListener {
+public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods,
+        View.OnClickListener, AdapterView.OnItemClickListener {
 
     public static final String TAG = "PaymentMethodsActivity";
 
@@ -34,24 +34,25 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     private TextView mNoPaymentMethodsLabel;
 
-    private RelativeLayout mContainerPaymentMethods;
-
     private FloatingActionButton mAddNewPaymentMethodButton;
 
     @Override
-    public void prepareView(List<TypePaymentMethodEnum> paymentMethods) {
+    public void showRegistered(List<TypePaymentMethodEnum> paymentMethods) {
 
         if (paymentMethods.isEmpty()) {
 
-            showNoPaymentMethods();
+            setTitle(R.string.add_payment_method);
 
-        } else {
+            mNoPaymentMethodsLabel.setVisibility(View.VISIBLE);
 
-            setTitle(R.string.title_choice_payment_method);
+            mPaymentMethodsList.setVisibility(View.GONE);
 
-            listPaymentMethods(paymentMethods);
+            return;
         }
 
+        setTitle(R.string.make_payment_with);
+
+        listPaymentMethods(paymentMethods);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
 
         switch (typePaymentMethodEnum) {
-            case CARD:
+            case CREDIT_CARD:
                 LaunchIntents.launchIntentClearTop(this, MyCreditCardsActivity.class);
                 break;
             case CASH:
@@ -88,8 +89,6 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
                 Log.v(this.getClass().getName(), "No operations for this event");
                 break;
         }
-
-
     }
 
     @Override
@@ -105,10 +104,10 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Override
     protected void loadViews() {
-        mContainerPaymentMethods = (RelativeLayout) findViewById(R.id.container_payment_methods);
-        mPaymentMethodsList = (ListView) mContainerPaymentMethods.findViewById(R.id.payment_methods);
-        mNoPaymentMethodsLabel = (TextView) findViewById(R.id.notification_label);
-        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.add_payment_method);
+        RelativeLayout mContainerPaymentMethods = (RelativeLayout) findViewById(R.id.container_payment_methods);
+        mPaymentMethodsList = (ListView) mContainerPaymentMethods.findViewById(R.id.lst_payment_methods);
+        mNoPaymentMethodsLabel = (TextView) findViewById(R.id.txv_notification_label);
+        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.btn_add_payment_method);
     }
 
     @Override
@@ -121,8 +120,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     protected void loadDataView() {
 
-        mPaymentMethodsPresenter.loadPaymentMethods();
-
+        mPaymentMethodsPresenter.loadAvailablePaymentMethods();
     }
 
     @Override
@@ -132,24 +130,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Override
     protected void closeConnections() {
-        mPaymentMethodsPresenter.unnusedView();
-    }
-
-    private void showNoPaymentMethods() {
-
-        setTitle(R.string.title_add_payment_method);
-
-        mNoPaymentMethodsLabel.setVisibility(View.VISIBLE);
-
-        mPaymentMethodsList.setVisibility(View.GONE);
+        mPaymentMethodsPresenter.closeConnections();
     }
 
     private void listPaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
 
-        PaymentMethodAdapter paymentMethodAdapter = new PaymentMethodAdapter(this, typePaymentMethodEnumList);
+        PaymentMethodAdapter paymentMethodAdapter = new PaymentMethodAdapter(this,
+                typePaymentMethodEnumList);
 
         mPaymentMethodsList.setAdapter(paymentMethodAdapter);
-
     }
-
 }

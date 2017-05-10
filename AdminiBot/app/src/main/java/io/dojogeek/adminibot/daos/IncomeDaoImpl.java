@@ -114,31 +114,31 @@ public class IncomeDaoImpl extends SQLiteGlobalDao implements IncomeDao {
 
     private ContentValues createContentValues(IncomeModel incomeModel) {
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(IncomesContract.Incomes.COLUMN_NAME, incomeModel.getName());
-        contentValues.put(IncomesContract.Incomes.COLUMN_CREATED_AT,
-                incomeModel.getCreatedAt().toString("yyyy-MM-dd HH:mm:ss"));
-        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY,
-                incomeModel.getNextEntry().toString("yyyy-MM-dd HH:mm:ss"));
-        contentValues.put(IncomesContract.Incomes.COLUMN_TOTAL_AMOUNT, incomeModel.getTotalAmount().toString());
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(IncomesContract.Incomes.COLUMN_NAME, incomeModel.getName());
+//        contentValues.put(IncomesContract.Incomes.COLUMN_CREATED_AT,
+//                incomeModel.getCreatedAt().toString("yyyy-MM-dd HH:mm:ss"));
+//        contentValues.put(IncomesContract.Incomes.COLUMN_NEXT_ENTRY,
+//                incomeModel.getNextEntry().toString("yyyy-MM-dd HH:mm:ss"));
+//        contentValues.put(IncomesContract.Incomes.COLUMN_AMOUNT, incomeModel.getTotalAmount().toString());
 
-        return contentValues;
+        return null;
     }
 
     private IncomeModel getIncomeModelFromCursor(Cursor cursor) {
 
-        String name = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NAME));
-        String amount = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_TOTAL_AMOUNT));
-        String createdAt = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_CREATED_AT));
-        String nextEntry = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NEXT_ENTRY));
+//        String name = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NAME));
+//        String amount = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_AMOUNT));
+//        String createdAt = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_CREATED_AT));
+//        String nextEntry = cursor.getString(cursor.getColumnIndex(IncomesContract.Incomes.COLUMN_NEXT_ENTRY));
+//
+//        IncomeModel incomeModel = new IncomeModel();
+//        incomeModel.setName(name);
+//        incomeModel.setTotalAmount(new BigDecimal(amount));
+//        incomeModel.setNextEntry(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(nextEntry));
+//        incomeModel.setCreatedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(createdAt));
 
-        IncomeModel incomeModel = new IncomeModel();
-        incomeModel.setName(name);
-        incomeModel.setTotalAmount(new BigDecimal(amount));
-        incomeModel.setNextEntry(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(nextEntry));
-        incomeModel.setCreatedAt(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").parseDateTime(createdAt));
-
-        return incomeModel;
+        return null;
     }
 
     private boolean isEmptyResult(Cursor cursor) {

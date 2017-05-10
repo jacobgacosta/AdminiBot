@@ -47,7 +47,7 @@ public class SimpleItemAdapter extends RecyclerView.Adapter<SimpleItemAdapter.Vi
         holder.title.setText(mSimpleAdapterList.get(position).getTitle());
         holder.subtitle.setText(mSimpleAdapterList.get(position).getSubtitle());
         /*holder.imageView.setImageDrawable(getDrawableFromName(mSimpleAdapterList.
-                        get(position).getIconName()));*/
+                        getAll(position).getIconName()));*/
 
     }
 

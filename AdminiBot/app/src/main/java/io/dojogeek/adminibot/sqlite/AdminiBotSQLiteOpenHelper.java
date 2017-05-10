@@ -40,50 +40,41 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private void createTables(SQLiteDatabase db) {
         db.execSQL(UsersContract.SQL_CREATE_TABLE);
-        db.execSQL(ExpensesTypesContract.SQL_CREATE_TABLE);
-        db.execSQL(ExpensesContract.SQL_CREATE_TABLE);
-        db.execSQL(TypesPaymentMethodsContract.SQL_CREATE_TABLE);
-        db.execSQL(PaymentMethodsContract.SQL_CREATE_TABLE);
-        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(BanksContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesContract.SQL_CREATE_TABLE);
-        db.execSQL(IncomesOthersPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(ExpensesContract.SQL_CREATE_TABLE);
         db.execSQL(BankCardsContract.SQL_CREATE_TABLE);
+        db.execSQL(TrademarkContract.SQL_CREATE_TABLE);
+        db.execSQL(CardDetailContract.SQL_CREATE_TABLE);
+        db.execSQL(ExpensesTypesContract.SQL_CREATE_TABLE);
         db.execSQL(IncomesBankCardsContract.SQL_CREATE_TABLE);
         db.execSQL(ExpensesBankCardsContract.SQL_CREATE_TABLE);
-        db.execSQL(CardDetailContract.SQL_CREATE_TABLE);
-        db.execSQL(BanksContract.SQL_CREATE_TABLE);
-        db.execSQL(TrademarkContract.SQL_CREATE_TABLE);
+        db.execSQL(PaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(IncomesPaymentMethodsContract.SQL_CREATE_TABLE);
+        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_CREATE_TABLE);
     }
 
     private void deleteTables(SQLiteDatabase db) {
         db.execSQL(UsersContract.SQL_DELETE_ENTRIES);
-        db.execSQL(ExpensesTypesContract.SQL_DELETE_ENTRIES);
-        db.execSQL(ExpensesContract.SQL_DELETE_ENTRIES);
-        db.execSQL(PaymentMethodsContract.SQL_DELETE_ENTRIES);
-        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(BanksContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesContract.SQL_DELETE_ENTRIES);
-        db.execSQL(IncomesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(ExpensesContract.SQL_DELETE_ENTRIES);
+        db.execSQL(CardTypeContract.SQL_DELETE_ENTRIES);
+        db.execSQL(TrademarkContract.SQL_DELETE_ENTRIES);
         db.execSQL(BankCardsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(ExpensesTypesContract.SQL_DELETE_ENTRIES);
+        db.execSQL(PaymentMethodsContract.SQL_DELETE_ENTRIES);
         db.execSQL(IncomesBankCardsContract.SQL_DELETE_ENTRIES);
         db.execSQL(ExpensesBankCardsContract.SQL_DELETE_ENTRIES);
-        db.execSQL(CardTypeContract.SQL_DELETE_ENTRIES);
-        db.execSQL(BanksContract.SQL_DELETE_ENTRIES);
-        db.execSQL(TrademarkContract.SQL_DELETE_ENTRIES);
+        db.execSQL(IncomesPaymentMethodsContract.SQL_DELETE_ENTRIES);
+        db.execSQL(ExpensesOthersPaymentMethodsContract.SQL_DELETE_ENTRIES);
     }
 
     private void insertInitialValues(SQLiteDatabase db) {
 
-        insertExpensesTypes(db);
         insertBanks(db);
         insertTrademarks(db);
-    }
-
-    private void insertExpensesTypes(SQLiteDatabase db) {
-        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_1);
-        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_2);
-        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_3);
-        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_4);
-        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_5);
+        insertExpensesTypes(db);
     }
 
     private void insertBanks(SQLiteDatabase db) {
@@ -100,7 +91,6 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_10);
         db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_11);
         db.execSQL(BanksContract.SQL_INSERT_INITIAL_VALUES_12);
-
     }
 
     private void insertTrademarks(SQLiteDatabase db) {
@@ -108,5 +98,13 @@ public class AdminiBotSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_1);
         db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_2);
         db.execSQL(TrademarkContract.SQL_INSERT_INITIAL_VALUES_3);
+    }
+
+    private void insertExpensesTypes(SQLiteDatabase db) {
+        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_1);
+        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_2);
+        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_3);
+        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_4);
+        db.execSQL(ExpensesTypesContract.SQL_INSERT_INITIAL_VALUES_5);
     }
 }

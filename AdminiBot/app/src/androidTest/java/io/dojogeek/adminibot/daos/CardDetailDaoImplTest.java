@@ -14,7 +14,7 @@ import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.CardDetailContract;
 import io.dojogeek.adminibot.utils.DateUtils;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -47,7 +47,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testCreateCardDetail_successInsertion() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
@@ -72,7 +72,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testCreateCardDetail_withNullRequiredField_noInsertion() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
         cardDetailModel.setCuttoffDate(null);
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
@@ -85,7 +85,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testGetCardDetailByBankCardId_successObtaining() throws DataException {
 
-        CardDetailModel expectedCardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel expectedCardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
@@ -110,7 +110,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testUpdateCardDetail_successUpdating() throws DataException {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
@@ -134,7 +134,7 @@ public class CardDetailDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testUpdateCardDetail_withNullModel_isException() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
@@ -149,7 +149,7 @@ public class CardDetailDaoImplTest {
     @Test(expected = SQLiteConstraintException.class)
     public void testUpdateCardDetail_withNullRequiredField_noUpdate() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 
@@ -167,7 +167,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testUpdateCardDetail_withNonExistentId_noUpdating() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         long nonExistentId = 5;
 
@@ -180,7 +180,7 @@ public class CardDetailDaoImplTest {
     @Test
     public void testDeleteCardDetail_successDeletion() {
 
-        CardDetailModel cardDetailModel = CreatorModels.createCardDetailModel();
+        CardDetailModel cardDetailModel = ModelsFactory.createCardDetailModel();
 
         ((CardDetailDaoImpl) mCardDetailDao).openConnection();
 

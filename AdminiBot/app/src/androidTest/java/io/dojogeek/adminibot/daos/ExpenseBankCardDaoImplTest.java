@@ -16,7 +16,7 @@ import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.ExpensesBankCardsContract;
 import io.dojogeek.adminibot.utils.DateUtils;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -52,7 +52,7 @@ public class ExpenseBankCardDaoImplTest {
     @Test
     public void testCreateMovementExpenseBankCard_successInsertion() {
 
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        ExpenseBankCardModel expenseBankCardModel = ModelsFactory.createMovementExpenseBankCardModel();
 
         long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
 
@@ -70,7 +70,7 @@ public class ExpenseBankCardDaoImplTest {
     @Test
     public void testGetMovementExpenseBankCardById_successObtaining() throws DataException {
 
-        ExpenseBankCardModel expectedExpenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        ExpenseBankCardModel expectedExpenseBankCardModel = ModelsFactory.createMovementExpenseBankCardModel();
 
         long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expectedExpenseBankCardModel);
 
@@ -167,7 +167,7 @@ public class ExpenseBankCardDaoImplTest {
     @Test
     public void testUpdateMovementExpenseBankCard_successUpdating() throws DataException {
 
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        ExpenseBankCardModel expenseBankCardModel = ModelsFactory.createMovementExpenseBankCardModel();
 
         long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
 
@@ -191,7 +191,7 @@ public class ExpenseBankCardDaoImplTest {
 
         int inexistentId = 4;
 
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        ExpenseBankCardModel expenseBankCardModel = ModelsFactory.createMovementExpenseBankCardModel();
 
         String where = ExpensesBankCardsContract.ExpensesBankCard._ID + "= " + inexistentId;
 
@@ -203,7 +203,7 @@ public class ExpenseBankCardDaoImplTest {
     @Test
     public void testDeleteMovementExpenseBankCard_successDeletion() {
 
-        ExpenseBankCardModel expenseBankCardModel = CreatorModels.createMovementExpenseBankCardModel();
+        ExpenseBankCardModel expenseBankCardModel = ModelsFactory.createMovementExpenseBankCardModel();
 
         long insertedRecordId = mExpenseBankCardDao.createMovementExpenseBankCard(expenseBankCardModel);
 
@@ -229,7 +229,7 @@ public class ExpenseBankCardDaoImplTest {
 
         for (int index = 1; index <= numberOfInsertions; index++) {
 
-            ExpenseBankCardModel expenseBankCardModel = CreatorModels.
+            ExpenseBankCardModel expenseBankCardModel = ModelsFactory.
                     createMovementExpenseBankCardModel(2340 + index,
                             2, DateUtils.getCurrentData(), "test description" + index, 2);
 

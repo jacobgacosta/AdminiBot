@@ -1,9 +1,9 @@
 package io.dojogeek.adminibot.daos;
 
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 
 public interface CashDao {
 
-    long createCash(OtherPaymentMethodModel otherPaymentMethodModel);
+    long createCash(PaymentMethodModel paymentMethod);
 
 }

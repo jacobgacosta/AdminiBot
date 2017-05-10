@@ -1,10 +1,10 @@
 package io.dojogeek.adminibot.presenters;
 
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 
 public interface FoodCouponPresenter {
 
-    void createFoodCoupon(OtherPaymentMethodModel otherPaymentMethodModel);
+    void createFoodCoupon(PaymentMethodModel paymentMethod);
 
     void unnusedView();
 

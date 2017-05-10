@@ -5,8 +5,7 @@ import android.content.Context;
 
 import javax.inject.Inject;
 
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
-import io.dojogeek.adminibot.sqlite.PaymentMethodsContract;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 
 public class CashDaoImpl extends SQLiteGlobalDao implements CashDao {
 
@@ -16,30 +15,29 @@ public class CashDaoImpl extends SQLiteGlobalDao implements CashDao {
     }
 
     @Override
-    public long createCash(OtherPaymentMethodModel otherPaymentMethodModel) {
+    public long createCash(PaymentMethodModel paymentMethod) {
 
         openConnection();
 
-        ContentValues contentValues = createContentValues(otherPaymentMethodModel);
+        ContentValues contentValues = createContentValues(paymentMethod);
 
-        long result = mDatabase.insertOrThrow(PaymentMethodsContract.PaymentMethods.TABLE_NAME,
-                PaymentMethodsContract.PaymentMethods.COLUMN_NAME_NULLABLE, contentValues);
+        long result = 0;
 
         return result;
     }
 
-    private ContentValues createContentValues(OtherPaymentMethodModel otherPaymentMethodModel) {
+    private ContentValues createContentValues(PaymentMethodModel paymentMethod) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_NAME,
-                otherPaymentMethodModel.getName());
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_REFERENCE,
-                otherPaymentMethodModel.getReferenceNumber());
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_TYPE_PAYMENT_METHOD,
-                otherPaymentMethodModel.getTypePaymentMethod().name());
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_AVAILABLE_CREDIT,
-                otherPaymentMethodModel.getAvailableCredit().doubleValue());
-        contentValues.put(PaymentMethodsContract.PaymentMethods.COLUMN_USER_ID, 0);
+//        contentValues.put(PaymentMethodsContract.PaymentMethodDaoImpl.COLUMN_NAME,
+//                paymentMethod.getName());
+//        contentValues.put(PaymentMethodsContract.PaymentMethodDaoImpl.COLUMN_REFERENCE,
+//                paymentMethod.getReferenceNumber());
+//        contentValues.put(PaymentMethodsContract.PaymentMethodDaoImpl.COLUMN_TYPE_PAYMENT_METHOD,
+//                paymentMethod.getTypePaymentMethod().name());
+//        contentValues.put(PaymentMethodsContract.PaymentMethodDaoImpl.COLUMN_AVAILABLE_CREDIT,
+//                paymentMethod.getAvailableCredit().doubleValue());
+//        contentValues.put(PaymentMethodsContract.PaymentMethodDaoImpl.COLUMN_USER_ID, 0);
 
         return contentValues;
     }

@@ -14,7 +14,7 @@ import java.util.List;
 import io.dojogeek.adminibot.models.UserModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.UsersContract;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -50,7 +50,7 @@ public class UserDaoImplTest {
     @Test
     public void testCreateUser_successInsertion() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
 
         long insertedRecordId = createUser(userModel);
 
@@ -68,7 +68,7 @@ public class UserDaoImplTest {
     @Test
     public void testCreateUser_withNullRequiredField_noInsertion() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
         userModel.setName(null);
 
         long insertedRecordId = createUser(userModel);
@@ -79,7 +79,7 @@ public class UserDaoImplTest {
     @Test
     public void testGetUsers_successObtainingSingleUser() {
 
-        UserModel expectedUserModel = CreatorModels.createUserModel();
+        UserModel expectedUserModel = ModelsFactory.createUserModel();
 
         createUser(expectedUserModel);
 
@@ -106,7 +106,7 @@ public class UserDaoImplTest {
     @Test
     public void testUpdateUser_successUpdating() {
 
-        UserModel expectedUserModel = CreatorModels.createUserModel();
+        UserModel expectedUserModel = ModelsFactory.createUserModel();
 
         long insertedRecordId = createUser(expectedUserModel);
 
@@ -125,7 +125,7 @@ public class UserDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testUpdateUser_withNullModel_isException() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
 
         long insertedRecordId = createUser(userModel);
 
@@ -138,7 +138,7 @@ public class UserDaoImplTest {
     @Test
     public void testUpdateUser_withNullWhereSentence_noUpdating() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
 
         createUser(userModel);
 
@@ -158,7 +158,7 @@ public class UserDaoImplTest {
 
         String where = UsersContract.User._ID + "= " + nonExistentId;
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
 
         long updatedRows = mUserDao.updateUser(userModel, where);
 
@@ -168,7 +168,7 @@ public class UserDaoImplTest {
     @Test(expected = SQLiteConstraintException.class)
     public void testUpdateUser_withNullRequiredField_isException() {
 
-        UserModel userModel = CreatorModels.createUserModel();
+        UserModel userModel = ModelsFactory.createUserModel();
 
         long insertedRecordId = createUser(userModel);
 

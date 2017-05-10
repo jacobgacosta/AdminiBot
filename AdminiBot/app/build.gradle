@@ -30,7 +30,7 @@ configurations.all {
 
 dependencies {
 
-    compile 'net.danlew:android.joda:2.9.7'
+    compile 'joda-time:joda-time:2.9.9'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // local tests

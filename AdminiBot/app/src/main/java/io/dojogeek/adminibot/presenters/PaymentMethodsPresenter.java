@@ -2,7 +2,7 @@ package io.dojogeek.adminibot.presenters;
 
 public interface PaymentMethodsPresenter {
 
-    void loadPaymentMethods();
+    void closeConnections();
 
-    void unnusedView();
+    void loadAvailablePaymentMethods();
 }

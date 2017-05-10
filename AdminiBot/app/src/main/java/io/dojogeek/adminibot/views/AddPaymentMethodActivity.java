@@ -2,6 +2,7 @@ package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,7 +18,10 @@ import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class AddPaymentMethodActivity extends BaseActivity implements AddPaymentMethod, AdapterView.OnItemClickListener {
+public class AddPaymentMethodActivity extends BaseActivity implements AddPaymentMethod,
+        AdapterView.OnItemClickListener {
+
+    public static final String TAG = "AddPaymentMethodActivity";
 
     private ListView mPaymentMethods;
 
@@ -36,8 +40,8 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     @Override
     protected void loadViews() {
-        mPaymentMethods = (ListView) findViewById(R.id.payment_methods);
-        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.add_payment_method);
+        mPaymentMethods = (ListView) findViewById(R.id.lst_payment_methods);
+        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.btn_add_payment_method);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
     @Override
     protected void loadDataView() {
 
-        setTitle(R.string.title_payment_methods);
+        setTitle(R.string.choise_payment_method);
 
         mAddNewPaymentMethodButton.setVisibility(View.GONE);
 
@@ -75,19 +79,18 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
         TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
 
         switch (typePaymentMethodEnum) {
-            case CARD:
+            case CREDIT_CARD:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
             case CASH:
                 LaunchIntents.launchIntentClearTop(this, CashActivity.class);
                 break;
-            /*case CHEQUE:
-                LaunchIntents.launchIntentClearTop(this, CheckActivity.class);
-                break;*/
             case FOOD_COUPONS:
                 LaunchIntents.launchIntentClearTop(this, FoodCouponsActivity.class);
                 break;
+            default:
+                Log.v(TAG, "No events for this view");
+                break;
         }
-
     }
 }

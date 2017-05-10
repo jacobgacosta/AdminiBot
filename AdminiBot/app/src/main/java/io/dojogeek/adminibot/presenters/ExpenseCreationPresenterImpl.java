@@ -2,7 +2,6 @@ package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import io.dojogeek.adminibot.daos.BankCardDao;
@@ -13,15 +12,15 @@ import io.dojogeek.adminibot.daos.ExpenseDao;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDao;
 import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
+import io.dojogeek.adminibot.daos.PaymentMethodDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.SQLiteGlobalDao;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.ExpenseCreation;
 
 public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
@@ -29,18 +28,18 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
     private ExpenseCreation mExpenseCreation;
     private ExpenseDao mExpenseDao;
     private ExpenseOtherPaymentMethodDao mExpenseOtherPaymentMethodDao;
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private PaymentMethodDao mPaymentMethodDao;
     private BankCardDao mBankCardDao;
     private ExpenseBankCardDao mExpenseBankCardDao;
 
     public ExpenseCreationPresenterImpl(ExpenseCreation expenseCreation, ExpenseDao expenseDao,
-                                        OtherPaymentMethodDao otherPaymentMethodDao, BankCardDao bankCardDao,
+                                        PaymentMethodDao paymentMethodDao, BankCardDao bankCardDao,
                                         ExpenseOtherPaymentMethodDao expenseOtherPaymentMethodDao,
                                         ExpenseBankCardDao expenseBankCardDao) {
 
         mExpenseCreation = expenseCreation;
         mExpenseDao = expenseDao;
-        mOtherPaymentMethodDao = otherPaymentMethodDao;
+        mPaymentMethodDao = paymentMethodDao;
         mBankCardDao = bankCardDao;
         mExpenseOtherPaymentMethodDao = expenseOtherPaymentMethodDao;
         mExpenseBankCardDao = expenseBankCardDao;
@@ -94,21 +93,21 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
         for (ExpenseOtherPaymentMethodModel otherPaymentMethodModel: paymentMethodModels) {
 
-            OtherPaymentMethodModel otherPaymentMethodModelToUpdate = getOtherPaymentMethodById(otherPaymentMethodModel.getId());
+            PaymentMethodModel otherPaymentMethodModelToUpdate = getOtherPaymentMethodById(otherPaymentMethodModel.getId());
 
             otherPaymentMethodModelToUpdate =
                     updateAmountForOtherPaymentMethodModel(otherPaymentMethodModelToUpdate, otherPaymentMethodModel.getAmount());
 
-            mOtherPaymentMethodDao.updateOtherPaymentMethod(otherPaymentMethodModelToUpdate, otherPaymentMethodModelToUpdate.getId());
+            mPaymentMethodDao.update(otherPaymentMethodModelToUpdate, otherPaymentMethodModelToUpdate.getId());
         }
     }
 
-    private OtherPaymentMethodModel getOtherPaymentMethodById(long id) {
+    private PaymentMethodModel getOtherPaymentMethodById(long id) {
 
-        OtherPaymentMethodModel otherPaymentMethodModelToUpdate = null;
+        PaymentMethodModel otherPaymentMethodModelToUpdate = null;
 
         try {
-            otherPaymentMethodModelToUpdate = mOtherPaymentMethodDao.getOtherPaymentMethodById(id);
+            otherPaymentMethodModelToUpdate = mPaymentMethodDao.getById(id);
 
         } catch (DataException e) {
             e.printStackTrace();
@@ -117,11 +116,11 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
         return otherPaymentMethodModelToUpdate;
     }
 
-    private OtherPaymentMethodModel updateAmountForOtherPaymentMethodModel(OtherPaymentMethodModel otherPaymentMethodModel,
+    private PaymentMethodModel updateAmountForOtherPaymentMethodModel(PaymentMethodModel otherPaymentMethodModel,
                                                                            double amount) {
 
-        double totalAmount = otherPaymentMethodModel.getAvailableCredit().doubleValue() - amount;
-        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(totalAmount));
+//        double totalAmount = otherPaymentMethodModel.getAvailableCredit().doubleValue() - amount;
+//        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(totalAmount));
 
         return otherPaymentMethodModel;
     }
@@ -145,7 +144,7 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
             bankCardModelToUpdate = updateAmountForBankCardModel(bankCardModelToUpdate, expenseBankCardModel.getAmount());
 
-            mBankCardDao.updateBankCard(bankCardModelToUpdate, bankCardModelToUpdate.getId());
+            mBankCardDao.update(bankCardModelToUpdate, bankCardModelToUpdate.getId());
         }
     }
 
@@ -155,7 +154,7 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
         try {
             responseBankCardModel =
-                    mBankCardDao.getBankCardById(id);
+                    mBankCardDao.getById(id);
 
         } catch (DataException e) {
             e.printStackTrace();
@@ -166,9 +165,9 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
     private BankCardModel updateAmountForBankCardModel(BankCardModel bankCardModel, double amount) {
 
-        double availableCredit = bankCardModel.getAvailableCredit();
-
-        bankCardModel.setAvailableCredit(availableCredit + amount);
+//        double availableCredit = bankCardModel.getAvailableCredit();
+//
+//        bankCardModel.setAvailableCredit(availableCredit + amount);
 
         return bankCardModel;
     }
@@ -177,7 +176,7 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
         beginTransaction((ExpenseDaoImpl) mExpenseDao);
         beginTransaction((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
-        beginTransaction((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        beginTransaction((PaymentMethodDaoImpl) mPaymentMethodDao);
         beginTransaction((BankCardDaoImpl) mBankCardDao);
         beginTransaction((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
 
@@ -186,7 +185,7 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
     private void setTransactionsSuccessful() {
         setTransactionSuccessful((ExpenseDaoImpl) mExpenseDao);
         setTransactionSuccessful((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
-        setTransactionSuccessful((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        setTransactionSuccessful((PaymentMethodDaoImpl) mPaymentMethodDao);
         setTransactionSuccessful((BankCardDaoImpl) mBankCardDao);
         setTransactionSuccessful((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
     }
@@ -195,7 +194,7 @@ public class ExpenseCreationPresenterImpl implements ExpenseCreationPresenter {
 
         endTransaction((ExpenseDaoImpl) mExpenseDao);
         endTransaction((ExpenseOtherPaymentMethodDaoImpl) mExpenseOtherPaymentMethodDao);
-        endTransaction((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao);
+        endTransaction((PaymentMethodDaoImpl) mPaymentMethodDao);
         endTransaction((BankCardDaoImpl) mBankCardDao);
         endTransaction((ExpenseBankCardDaoImpl) mExpenseBankCardDao);
 

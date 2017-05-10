@@ -15,8 +15,7 @@ import dagger.AdminiBotComponent;
 import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.FoodCouponsValidator;
@@ -139,21 +138,21 @@ public class FoodCouponsActivity extends BaseActivity implements FoodCoupons , V
 
     private void processValidFoodCoupon() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
+        PaymentMethodModel paymentMethod = new PaymentMethodModel();
 
         BigDecimal amount = new BigDecimal(mAmount.getText().toString());
 
-        otherPaymentMethodModel.setAvailableCredit(amount);
-        otherPaymentMethodModel.setName(mAlias.getText().toString());
-        otherPaymentMethodModel.setTypePaymentMethod(TypePaymentMethodEnum.FOOD_COUPONS);
-        otherPaymentMethodModel.setReferenceNumber(mNumber.getText().toString());
+//        paymentMethod.setAvailableCredit(amount);
+//        paymentMethod.setName(mAlias.getText().toString());
+//        paymentMethod.setTypePaymentMethod(TypePaymentMethodEnum.FOOD_COUPONS);
+//        paymentMethod.setReferenceNumber(mNumber.getText().toString());
 
-        submitFoodCoupon(otherPaymentMethodModel);
+        submitFoodCoupon(paymentMethod);
     }
 
-    private void submitFoodCoupon(OtherPaymentMethodModel otherPaymentMethodModel) {
+    private void submitFoodCoupon(PaymentMethodModel paymentMethod) {
 
-        mFoodCouponPresenter.createFoodCoupon(otherPaymentMethodModel);
+        mFoodCouponPresenter.createFoodCoupon(paymentMethod);
     }
 
     private void showErrors(FoodCouponsValidator foodCouponsValidator) {

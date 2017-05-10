@@ -17,7 +17,7 @@ import io.dojogeek.adminibot.models.IncomeBankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.IncomesBankCardsContract;
 import io.dojogeek.adminibot.utils.DateUtils;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -50,9 +50,9 @@ public class IncomeBankCardDaoImplTest {
     @Test
     public void testCreateMovementIncomeBankCard_successInsertion() {
 
-        IncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel movementIncomeBankCard = ModelsFactory.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+        long insertedRecordId = mIncomeBankCardDao.create(movementIncomeBankCard);
 
         assertThat(insertedRecordId, is(not(NO_OPERATION)));
         assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
@@ -61,17 +61,17 @@ public class IncomeBankCardDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testCreateMovementIncomeBankCard_withNullModel_isException() {
 
-        mIncomeBankCardDao.createMovementIncomeBankCard(null);
+        mIncomeBankCardDao.create(null);
 
     }
 
     @Test
     public void testCreateMovementIncomeBankCard_withNullRequiredField_noInsertion() {
 
-        IncomeBankCardModel incomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel incomeBankCardModel = ModelsFactory.createMovementIncomeBankCardModel();
         incomeBankCardModel.setDescription(null);
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(incomeBankCardModel);
+        long insertedRecordId = mIncomeBankCardDao.create(incomeBankCardModel);
 
         assertThat(insertedRecordId, is(OPERATIONAL_ERROR));
     }
@@ -79,12 +79,12 @@ public class IncomeBankCardDaoImplTest {
     @Test
     public void testGetMovementIncomeBankCardById_successObtaining() throws DataException {
 
-        IncomeBankCardModel expectedIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel expectedIncomeBankCardModel = ModelsFactory.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(expectedIncomeBankCardModel);
+        long insertedRecordId = mIncomeBankCardDao.create(expectedIncomeBankCardModel);
 
         IncomeBankCardModel actualIncomeBankCardModel =
-                mIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
+                mIncomeBankCardDao.getById(insertedRecordId);
 
         assertThat(actualIncomeBankCardModel, is(notNullValue()));
         assertThat(actualIncomeBankCardModel.getAmount(), is(expectedIncomeBankCardModel.getAmount()));
@@ -99,7 +99,7 @@ public class IncomeBankCardDaoImplTest {
 
         long nonExistentMovementIncomeBankCardId = 4;
 
-        mIncomeBankCardDao.getMovementIncomeBankCardById(nonExistentMovementIncomeBankCardId);
+        mIncomeBankCardDao.getById(nonExistentMovementIncomeBankCardId);
 
     }
 
@@ -110,7 +110,7 @@ public class IncomeBankCardDaoImplTest {
 
         List<IncomeBankCardModel> expectedIncomeBankCardModels = createMovementsIncomesBankCards(numberOfInsertions);
 
-        List<IncomeBankCardModel> actualIncomeBankCardModels = mIncomeBankCardDao.getMovementsIncomesBankCards();
+        List<IncomeBankCardModel> actualIncomeBankCardModels = mIncomeBankCardDao.get();
 
         compareMovementsIncomesBankCardsModelsList(expectedIncomeBankCardModels, actualIncomeBankCardModels);
 
@@ -119,7 +119,7 @@ public class IncomeBankCardDaoImplTest {
     @Test
     public void testGetMovementsIncomesBankCards_withNoRecords_isEmptyList() {
 
-        List<IncomeBankCardModel> incomeBankCardModelList = mIncomeBankCardDao.getMovementsIncomesBankCards();
+        List<IncomeBankCardModel> incomeBankCardModelList = mIncomeBankCardDao.get();
 
         assertThat(incomeBankCardModelList.isEmpty(), is(true));
     }
@@ -134,7 +134,7 @@ public class IncomeBankCardDaoImplTest {
         List<IncomeBankCardModel> expectedIncomeBankCardModelList =  createMovementsIncomesBankCards(numberOfInsertions);
 
         List<IncomeBankCardModel> actualIncomeBankCardModelList =
-                mIncomeBankCardDao.getMovementsIncomesBankCardsByIncomeId(incomeId);
+                mIncomeBankCardDao.getByIncomeId(incomeId);
 
         compareMovementsIncomesBankCardsModelsList(expectedIncomeBankCardModelList, actualIncomeBankCardModelList);
     }
@@ -145,7 +145,7 @@ public class IncomeBankCardDaoImplTest {
         long incomeId = 0;
 
         List<IncomeBankCardModel> actualIncomeBankCardModelList =
-                mIncomeBankCardDao.getMovementsIncomesBankCardsByIncomeId(incomeId);
+                mIncomeBankCardDao.getByIncomeId(incomeId);
 
         assertThat(actualIncomeBankCardModelList.isEmpty(), is(true));
     }
@@ -160,7 +160,7 @@ public class IncomeBankCardDaoImplTest {
                 createMovementsIncomesBankCards(numberOfInsertions);
 
         List<IncomeBankCardModel> actualIncomeBankCardModelList =
-                mIncomeBankCardDao.getMovementsIncomesBankCardsByBankCardId(bankCardId);
+                mIncomeBankCardDao.getByBankCardId(bankCardId);
 
         compareMovementsIncomesBankCardsModelsList(expectedIncomeBankCardModelList, actualIncomeBankCardModelList);
 
@@ -172,7 +172,7 @@ public class IncomeBankCardDaoImplTest {
         int nonExistentId = 0;
 
         List<IncomeBankCardModel> actualIncomeBankCardModelList =
-                mIncomeBankCardDao.getMovementsIncomesBankCardsByBankCardId(nonExistentId);
+                mIncomeBankCardDao.getByBankCardId(nonExistentId);
 
         assertThat(actualIncomeBankCardModelList.isEmpty(), is(true));
     }
@@ -180,20 +180,20 @@ public class IncomeBankCardDaoImplTest {
     @Test
     public void testUpdateMovementIncomeBankCard_successUpdating() throws DataException {
 
-        IncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel movementIncomeBankCard = ModelsFactory.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+        long insertedRecordId = mIncomeBankCardDao.create(movementIncomeBankCard);
 
         IncomeBankCardModel updatedIncomeBankCardModel = changeMovementIncomeBankCardFields(movementIncomeBankCard);
 
         String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + insertedRecordId;
 
-        long updatedRows = mIncomeBankCardDao.updateMovementIncomeBankCard(updatedIncomeBankCardModel, where);
+        long updatedRows = mIncomeBankCardDao.update(updatedIncomeBankCardModel, where);
 
         assertThat(updatedRows, is(SUCCESS_OPERATION));
 
         IncomeBankCardModel actualIncomeBankCardModel =
-                mIncomeBankCardDao.getMovementIncomeBankCardById(insertedRecordId);
+                mIncomeBankCardDao.getById(insertedRecordId);
 
         compareMovementsIncomesBankCardsModels(updatedIncomeBankCardModel, actualIncomeBankCardModel);
     }
@@ -205,18 +205,18 @@ public class IncomeBankCardDaoImplTest {
 
         String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + 2;
 
-        mIncomeBankCardDao.updateMovementIncomeBankCard(updatedIncomeBankCardModel, where);
+        mIncomeBankCardDao.update(updatedIncomeBankCardModel, where);
 
     }
 
     @Test
     public void testUpdateMovementIncomeBankCard_withNullWhereSentence_noUpdating() {
 
-        IncomeBankCardModel updatedIncomeBankCardModel = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel updatedIncomeBankCardModel = ModelsFactory.createMovementIncomeBankCardModel();
 
         String where = null;
 
-        long updatedRows = mIncomeBankCardDao.updateMovementIncomeBankCard(updatedIncomeBankCardModel, where);
+        long updatedRows = mIncomeBankCardDao.update(updatedIncomeBankCardModel, where);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
@@ -224,15 +224,15 @@ public class IncomeBankCardDaoImplTest {
     @Test(expected = SQLiteConstraintException.class)
     public void testUpdateMovementIncomeBankCard_withNullRequiredField_isException() {
 
-        IncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel movementIncomeBankCard = ModelsFactory.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+        long insertedRecordId = mIncomeBankCardDao.create(movementIncomeBankCard);
 
         movementIncomeBankCard.setDescription(null);
 
         String where = IncomesBankCardsContract.IncomesBankCards._ID + "= " + insertedRecordId;
 
-        long updatedRows = mIncomeBankCardDao.updateMovementIncomeBankCard(movementIncomeBankCard, where);
+        long updatedRows = mIncomeBankCardDao.update(movementIncomeBankCard, where);
 
         assertThat(updatedRows, is(NO_OPERATION));
     }
@@ -240,11 +240,11 @@ public class IncomeBankCardDaoImplTest {
     @Test
     public void testDeleteMovementIncomeBankCard_successDeletion() {
 
-        IncomeBankCardModel movementIncomeBankCard = CreatorModels.createMovementIncomeBankCardModel();
+        IncomeBankCardModel movementIncomeBankCard = ModelsFactory.createMovementIncomeBankCardModel();
 
-        long insertedRecordId = mIncomeBankCardDao.createMovementIncomeBankCard(movementIncomeBankCard);
+        long insertedRecordId = mIncomeBankCardDao.create(movementIncomeBankCard);
 
-        long deletedRows = mIncomeBankCardDao.deleteMovementIncomeBankCard(insertedRecordId);
+        long deletedRows = mIncomeBankCardDao.delete(insertedRecordId);
 
         assertThat(deletedRows, is(SUCCESS_OPERATION));
     }
@@ -254,7 +254,7 @@ public class IncomeBankCardDaoImplTest {
 
         long nonExistentId = 2;
 
-        long deletedRows = mIncomeBankCardDao.deleteMovementIncomeBankCard(nonExistentId);
+        long deletedRows = mIncomeBankCardDao.delete(nonExistentId);
 
         assertThat(deletedRows, is(NO_OPERATION));
     }
@@ -266,10 +266,10 @@ public class IncomeBankCardDaoImplTest {
         for (int index = 0; index < numberOfInsertions; index++) {
 
             IncomeBankCardModel incomeBankCardModel =
-                    CreatorModels.createMovementIncomeBankCardModel(3409.80 + index, 2,
+                    ModelsFactory.createMovementIncomeBankCardModel(3409.80 + index, 2,
                             DateUtils.getCurrentData(), "Test description " + index, 2);
 
-            mIncomeBankCardDao.createMovementIncomeBankCard(incomeBankCardModel);
+            mIncomeBankCardDao.create(incomeBankCardModel);
             incomeBankCardModels.add(incomeBankCardModel);
         }
 
@@ -310,7 +310,6 @@ public class IncomeBankCardDaoImplTest {
 
     private IncomeBankCardModel changeMovementIncomeBankCardFields(IncomeBankCardModel incomeBankCardModel) {
 
-        incomeBankCardModel.setAmount(309.00);
         incomeBankCardModel.setBankCardId(2);
         incomeBankCardModel.setDate(DateUtils.getCurrentData());
         incomeBankCardModel.setDescription("updated description");

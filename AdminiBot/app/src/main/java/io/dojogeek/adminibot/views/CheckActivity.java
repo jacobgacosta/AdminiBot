@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +17,7 @@ import dagger.AdminiBotModule;
 import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.BankEnum;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.presenters.CheckPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CheckValidator;
@@ -138,12 +136,12 @@ public class CheckActivity extends BaseActivity implements Check, View.OnClickLi
 
     private void processValidCheck() {
 
-        OtherPaymentMethodModel otherPaymentMethodModel = new OtherPaymentMethodModel();
-        otherPaymentMethodModel.setName(mAlias.getText().toString());
-        otherPaymentMethodModel.setReferenceNumber(mCheckNumber.getText().toString());
-        otherPaymentMethodModel.setAvailableCredit(new BigDecimal(mAmount.getText().toString()));
+        PaymentMethodModel paymentMethod = new PaymentMethodModel();
+//        paymentMethod.setName(mAlias.getText().toString());
+//        paymentMethod.setReferenceNumber(mCheckNumber.getText().toString());
+//        paymentMethod.setAvailableCredit(new BigDecimal(mAmount.getText().toString()));
 
-        mCheckPresenter.createCheck(otherPaymentMethodModel);
+        mCheckPresenter.createCheck(paymentMethod);
     }
 
     private void showErrors(CheckValidator checkValidator) {

@@ -6,5 +6,5 @@ import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
 public interface PaymentMethods {
 
-    void prepareView(List<TypePaymentMethodEnum> paymentMethods);
+    void showRegistered(List<TypePaymentMethodEnum> paymentMethods);
 }

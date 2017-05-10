@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/ic_food_coupon"/>
+        android:src="@drawable/ic_food_coupon"
+        android:contentDescription=""/>
 
     <TextView
-        android:id="@+id/payment_method_description"
+        android:id="@+id/txv_name_payment_method"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingLeft="30dp"
-        android:textSize="20sp"
-        android:text="@string/ic_food_coupon"/>
+        android:textSize="20sp"/>
 </LinearLayout>

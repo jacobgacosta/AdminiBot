@@ -14,16 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -40,7 +42,6 @@ public class BankCardDaoImplTest {
     public void setup() {
         mContext = getTargetContext();
         mBankCardDao = new BankCardDaoImpl(mContext);
-//        ((BankCardDaoImpl)mBankCardDao).openConnection();
     }
 
     @After
@@ -50,253 +51,186 @@ public class BankCardDaoImplTest {
     }
 
     @Test
-    public void testCreateBankCard_successInsertion() {
+    public void testCreation_isCreated() {
 
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        BankCardModel bankCard = ModelsFactory.createBankCardModel();
 
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
-
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+        long insertedRecordId = mBankCardDao.create(bankCard);
 
         assertNotEquals(NO_OPERATION, insertedRecordId);
         assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
     }
 
     @Test(expected = NullPointerException.class)
-    public void testCreateBankCard_withNullModel_isException() {
+    public void testCreation_withNullModel_isNotCreated() {
 
-        BankCardModel bankCardModel = null;
-
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
-
-        mBankCardDao.createBankCard(bankCardModel);
-    }
-
-    @Test(expected = SQLException.class)
-    public void testCreateBankCard_withNullRequiredField_noInsertion() {
-
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
-        bankCardModel.setName(null);
-
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
-
-        mBankCardDao.createBankCard(bankCardModel);
-
+        mBankCardDao.create(null);
     }
 
     @Test
-    public void testGetBankCardById_successObtaining() throws DataException {
+    public void testGetById_successfulObtaining() throws DataException {
 
-        BankCardModel expectedBankCardModel = CreatorModels.createBankCardModel();
+        BankCardModel expected = ModelsFactory.createBankCardModel();
 
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
+        long insertedRecordId = mBankCardDao.create(expected);
 
-        long insertedRecordId = mBankCardDao.createBankCard(expectedBankCardModel);
+        BankCardModel actual = mBankCardDao.getById(insertedRecordId);
 
-        BankCardModel actualBankCardModel = mBankCardDao.getBankCardById(insertedRecordId);
-
-        assertNotNull(actualBankCardModel);
-        assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
-        assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
-        assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
-        assertEquals(expectedBankCardModel.getBrand(), actualBankCardModel.getBrand());
-        assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
-        assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
-        assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
-
+        assertNotNull(actual);
+        assertNull(actual.getUpdatedAt());
+        assertNotNull(actual.getCreatedAt());
+        assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getBrand(), actual.getBrand());
+        assertEquals(expected.getNumber(), actual.getNumber());
+        assertEquals(expected.getBankId(), actual.getBankId());
+        assertEquals(expected.getCardType(), actual.getCardType());
+        assertEquals(expected.getAvailableCredit(), actual.getAvailableCredit());
     }
 
     @Test(expected = DataException.class)
-    public void testGetBankCardById_withNonExistentId_isException() throws DataException {
+    public void testGetById_withNonExistentId_isException() throws DataException {
 
         long nonExistentId = 2;
 
-        mBankCardDao.getBankCardById(nonExistentId);
-
+        mBankCardDao.getById(nonExistentId);
     }
 
     @Test
-    public void testGetBankCards_successObtainingList() {
+    public void testGetAll_obtainingASuccessfulList() {
 
-        int numberOfBankCardToCreate = 5;
+        BankCardModel expected = ModelsFactory.createBankCardModel();
+        mBankCardDao.create(expected);
+        mBankCardDao.create(expected);
 
-        List<BankCardModel> expectedBankCardModels = createBankCardModels(numberOfBankCardToCreate);
+        List<BankCardModel> actualList = mBankCardDao.getAll();
 
-        List<BankCardModel> actualBankCardModels = mBankCardDao.getBankCards();
-
-        compareBankCardsList(expectedBankCardModels, actualBankCardModels);
+        assertNotNull(actualList);
+        assertEquals(2, actualList.size());
+        assertNull(actualList.get(0).getUpdatedAt());
+        assertNotNull(actualList.get(0).getCreatedAt());
+        assertEquals(expected.getName(), actualList.get(0).getName());
+        assertEquals(expected.getBrand(), actualList.get(0).getBrand());
+        assertEquals(expected.getNumber(), actualList.get(0).getNumber());
+        assertEquals(expected.getBankId(), actualList.get(0).getBankId());
+        assertEquals(expected.getCardType(), actualList.get(0).getCardType());
+        assertEquals(expected.getAvailableCredit(), actualList.get(0).getAvailableCredit());
     }
 
     @Test
     public void testGetBankCards_withNoRecords_isEmptyList() {
 
-        List<BankCardModel> actualBankCardModels = mBankCardDao.getBankCards();
+        List<BankCardModel> actualBankCardModels = mBankCardDao.getAll();
 
-        assertThat(actualBankCardModels.isEmpty(), is(true));
+        assertTrue(actualBankCardModels.isEmpty());
     }
 
     @Test
-    public void testUpdateBankCard_successUpdating() throws DataException {
+    public void testUpdate_successfulUpdate() throws DataException {
 
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        BankCardModel expected = ModelsFactory.createBankCardModel();
 
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
+        long insertedRecordId = mBankCardDao.create(expected);
 
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
+        expected.setBrand("AMEX");
 
-        BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
-
-        long updatedRows = mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
+        long updatedRows = mBankCardDao.update(expected, insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, updatedRows);
 
-        BankCardModel actualUpdatedBankCardModel = mBankCardDao.getBankCardById(insertedRecordId);
+        BankCardModel actual = mBankCardDao.getById(insertedRecordId);
 
-        compareBankCards(expectedUpdatedBankCard, actualUpdatedBankCardModel);
-
+        assertNotNull(actual);
+        assertNotNull(actual.getUpdatedAt());
+        assertNotNull(actual.getCreatedAt());
+        assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getBrand(), actual.getBrand());
+        assertEquals(expected.getNumber(), actual.getNumber());
+        assertEquals(expected.getBankId(), actual.getBankId());
+        assertEquals(expected.getCardType(), actual.getCardType());
+        assertEquals(expected.getAvailableCredit(), actual.getAvailableCredit());
     }
 
     @Test(expected = NullPointerException.class)
-    public void testUpdateBankCard_withNullModel_isException() {
+    public void testUpdate_withNullModel_isException() {
 
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        int bankCardId = 2;
 
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
-
-        BankCardModel expectedUpdatedBankCard = null;
-
-        mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
-
-    }
-
-    @Test(expected = SQLiteConstraintException.class)
-    public void testUpdateBankCard_withNullRequiredField_isException() {
-
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
-
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
-
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
-
-        BankCardModel expectedUpdatedBankCard = changeBankCardValues(bankCardModel);
-        expectedUpdatedBankCard.setName(null);
-
-        mBankCardDao.updateBankCard(expectedUpdatedBankCard, insertedRecordId);
+        mBankCardDao.update(null, bankCardId);
 
     }
 
     @Test
-    public void testUpdateBankCard_withNonExistentId_noUpdating() {
+    public void testUpdate_withNonExistentId_noUpdate() {
 
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        BankCardModel bankCardModel = ModelsFactory.createBankCardModel();
 
         long nonExistentId = 4;
 
-        long updatedRows = mBankCardDao.updateBankCard(bankCardModel, nonExistentId);
+        long updatedRows = mBankCardDao.update(bankCardModel, nonExistentId);
 
         assertThat(updatedRows, is(NO_OPERATION));
 
     }
 
     @Test
-    public void testDeleteBankCard_successDeletion() {
+    public void testDelete_successfulDeletion() {
 
-        BankCardModel bankCardModel = CreatorModels.createBankCardModel();
+        BankCardModel bankCardModel = ModelsFactory.createBankCardModel();
 
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
+        long insertedRecordId = mBankCardDao.create(bankCardModel);
 
-        long insertedRecordId = mBankCardDao.createBankCard(bankCardModel);
-
-        long deletedRows = mBankCardDao.deleteBankCard(insertedRecordId);
+        long deletedRows = mBankCardDao.delete(insertedRecordId);
 
         assertEquals(SUCCESS_OPERATION, deletedRows);
     }
 
     @Test
-    public void testDeleteBankCard_withNonExistentId_noDeletion() {
+    public void testDelete_withNonExistentId_noDeletion() {
 
         long nonExistentId = 5;
 
-        long deletedRows = mBankCardDao.deleteBankCard(nonExistentId);
+        long deletedRows = mBankCardDao.delete(nonExistentId);
 
         assertThat(deletedRows, is(NO_OPERATION));
     }
 
     @Test
-    public void testGetBankCardByCartType_successObtaining() {
+    public void testGetByCartType_successfulObtaining() {
 
-        int numberOfBankCardToCreate = 4;
+        BankCardModel bankCard = ModelsFactory.createBankCardModel();
+        mBankCardDao.create(bankCard);
 
-        List<BankCardModel> expectedBankCardsModels = createBankCardModels(numberOfBankCardToCreate);
+        List<BankCardModel> actualList = mBankCardDao.getByCartType(bankCard.getCardType());
 
-        List<BankCardModel> actualBankCardsModels = mBankCardDao.getBankCardByCartType(CardTypeEnum.DEBIT_CARD);
-
-        compareBankCardsList(expectedBankCardsModels, actualBankCardsModels);
-
+        assertNotNull(actualList);
+        assertEquals(1, actualList.size());
+        assertNull(actualList.get(0).getUpdatedAt());
+        assertNotNull(actualList.get(0).getCreatedAt());
+        assertEquals(bankCard.getName(), actualList.get(0).getName());
+        assertEquals(bankCard.getBrand(), actualList.get(0).getBrand());
+        assertEquals(bankCard.getNumber(), actualList.get(0).getNumber());
+        assertEquals(bankCard.getBankId(), actualList.get(0).getBankId());
+        assertEquals(bankCard.getCardType(), actualList.get(0).getCardType());
+        assertEquals(bankCard.getAvailableCredit(), actualList.get(0).getAvailableCredit());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testGetBankCardByCartType_withNullCardType_isException() {
+    @Test
+    public void testRegisteredBankCards_obtainingASuccessfulList() {
 
-        mBankCardDao.getBankCardByCartType(null);
+        BankCardModel bankCardModel1 = ModelsFactory.createBankCardModel();
 
-    }
+        BankCardModel bankCardModel2 = ModelsFactory.createBankCardModel();
 
-    private List<BankCardModel> createBankCardModels(int numberOfBankCardToCreate) {
+        BankCardModel bankCardModel3 = ModelsFactory.createBankCardModel();
+        bankCardModel2.setCardType("DEBIT_CARD");
 
-        List<BankCardModel> bankCardModels = new ArrayList<>();
+        mBankCardDao.create(bankCardModel1);
+        mBankCardDao.create(bankCardModel2);
+        mBankCardDao.create(bankCardModel3);
 
-        ((BankCardDaoImpl) mBankCardDao).openConnection();
+        List<TypePaymentMethodEnum> actualCardTypes = mBankCardDao.getRegisteredTypes();
 
-        for (int index = 1; index <= numberOfBankCardToCreate; index++) {
-
-            BankCardModel bankCardModel = CreatorModels.createBankCardModel("Bancomer " + index,
-                    "12345678901234567" + index, 2 + index, "VISA", 24000.00 + index, CardTypeEnum.DEBIT_CARD, 1 + index);
-
-            mBankCardDao.createBankCard(bankCardModel);
-            bankCardModels.add(bankCardModel);
-
-        }
-
-        return bankCardModels;
-    }
-
-    private void compareBankCardsList(List<BankCardModel> expectedBankCards, List<BankCardModel> actualBankCards) {
-
-        assertNotNull(actualBankCards);
-        assertTrue(!actualBankCards.isEmpty());
-        assertEquals(expectedBankCards.size(), actualBankCards.size());
-
-        for (int index = 0; index < actualBankCards.size(); index++) {
-
-            BankCardModel actualBankCardModel = actualBankCards.get(index);
-            BankCardModel expectedBankCardModel = actualBankCards.get(index);
-
-            compareBankCards(expectedBankCardModel, actualBankCardModel);
-        }
-    }
-
-    private void compareBankCards(BankCardModel expectedBankCardModel, BankCardModel actualBankCardModel) {
-        assertNotNull(actualBankCardModel);
-        assertEquals(expectedBankCardModel.getName(), actualBankCardModel.getName());
-        assertEquals(expectedBankCardModel.getNumber(), actualBankCardModel.getNumber());
-        assertEquals(expectedBankCardModel.getBankId(), actualBankCardModel.getBankId());
-        assertEquals(expectedBankCardModel.getBrand(), actualBankCardModel.getBrand());
-        assertEquals(expectedBankCardModel.getAvailableCredit(), actualBankCardModel.getAvailableCredit(), 0);
-        assertEquals(expectedBankCardModel.getCardType(), actualBankCardModel.getCardType());
-        assertEquals(expectedBankCardModel.getUserId(), actualBankCardModel.getUserId());
-    }
-
-    private BankCardModel changeBankCardValues(BankCardModel bankCardModel) {
-        bankCardModel.setName("Updated name");
-        bankCardModel.setNumber("123456789012345658");
-        bankCardModel.setBankId(1);
-        bankCardModel.setBrand("AMEX");
-        bankCardModel.setAvailableCredit(8743.90);
-        bankCardModel.setCardType(CardTypeEnum.CREDIT_CARD);
-        bankCardModel.setUserId(2);
-
-        return bankCardModel;
+        assertNotNull(actualCardTypes);
+        assertEquals(2, actualCardTypes.size());
     }
 }

@@ -1,10 +1,8 @@
 package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,101 +12,77 @@ import android.widget.TextView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.utils.ResourceProvider;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 @RunWith(PowerMockRunner.class)
+@PrepareForTest(ResourceProvider.class)
 public class PaymentMethodAdapterTest {
 
     @Mock
     private Context mContext;
 
-    @Mock
-    private List<TypePaymentMethodEnum> mTypePaymentMethodEnumList;
-
-    @Mock
-    private LayoutInflater mLayoutInflater;
-
-    @Mock
-    private View mLayoutPaymentMethod;
-
-    @Mock
-    private View mConvertView;
-
-    @Mock
-    private ViewGroup mParent;
-
-    @Mock
-    private ImageView mImagePaymentMethod;
-
-    @Mock
-    private TextView mDescriptionPaymentMethod;
-
-    @Mock
-    private Resources mResources;
-
-    @Mock
-    private Drawable mDrawable;
+    private List<TypePaymentMethodEnum> mList = Arrays.asList(TypePaymentMethodEnum.CREDIT_CARD);
 
     @InjectMocks
-    private ArrayAdapter<TypePaymentMethodEnum> typePaymentMethodEnumArrayAdapter =
-            new PaymentMethodAdapter(mContext, mTypePaymentMethodEnumList);
+    private ArrayAdapter<TypePaymentMethodEnum> mAdapter = new PaymentMethodAdapter(mContext, mList);
 
     @Test
-    public void testGetView_mappingData() {
+    public void testBuildView_mappingData() {
 
-        int position = 0;
-        int resourceId = 546785498;
-        String stringResource = "Efectivo";
+        ViewGroup group = mock(ViewGroup.class);
 
-        PowerMockito.mockStatic(ResourcesCompat.class);
-        BDDMockito.given(ResourcesCompat.getDrawable(mResources, resourceId, null)).willReturn(mDrawable);
+        View container = mock(View.class);
 
-        when(mTypePaymentMethodEnumList.get(position)).thenReturn(TypePaymentMethodEnum.CASH);
-        when(mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(mLayoutInflater);
-        when(mLayoutInflater.inflate(R.layout.item_payment_method, mParent, false)).thenReturn(mLayoutPaymentMethod);
-        when(mLayoutPaymentMethod.findViewById(R.id.img_payment_method)).thenReturn(mImagePaymentMethod);
-        when(mLayoutPaymentMethod.findViewById(R.id.payment_method_description)).thenReturn(mDescriptionPaymentMethod);
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getIdentifier("ic_cash", "string", mContext.getPackageName())).thenReturn(resourceId);
-        when(mResources.getString(resourceId)).thenReturn(stringResource);
-        when(mResources.getIdentifier("ic_cash", "drawable", mContext.getPackageName())).thenReturn(resourceId);
+        LayoutInflater layoutInflater = mock(LayoutInflater.class);
+        when(mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(layoutInflater);
+        when(layoutInflater.inflate(R.layout.item_payment_method, group,false)).thenReturn(container);
 
-        View actualView =
-                typePaymentMethodEnumArrayAdapter.getView(position, mConvertView, mParent);
+        TextView name = mock(TextView.class);
+        when(container.findViewById(R.id.txv_name_payment_method)).thenReturn(name);
 
-        assertNotNull(actualView);
-        assertThat(actualView, is(mLayoutPaymentMethod));
-        verify(mTypePaymentMethodEnumList, times(3)).get(position);
-        verify(mContext).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        verify(mLayoutInflater).inflate(R.layout.item_payment_method, mParent, false);
-        verify(mLayoutPaymentMethod).findViewById(R.id.img_payment_method);
-        verify(mLayoutPaymentMethod).findViewById(R.id.payment_method_description);
+        ImageView image = mock(ImageView.class);
+        when(container.findViewById(R.id.img_payment_method)).thenReturn(image);
 
-        verify(mContext, times(2)).getResources();
-        verify(mResources).getIdentifier(mTypePaymentMethodEnumList.get(position).getName(), "string", mContext.getPackageName());
-        verify(mResources).getString(resourceId);
-        verify(mResources).getIdentifier(mTypePaymentMethodEnumList.get(position).getName(), "drawable", mContext.getPackageName());
+        Drawable drawable = mock(Drawable.class);
+        mockStatic(ResourceProvider.class);
 
-        verify(mImagePaymentMethod).setImageDrawable(mDrawable);
-        verify(mDescriptionPaymentMethod).setText(stringResource);
-        verify(mDescriptionPaymentMethod).setTypeface(null, Typeface.BOLD);
-        verify(mLayoutPaymentMethod).setTag(mTypePaymentMethodEnumList.get(position));
+        when(ResourceProvider.
+                getStringFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getStringName())).
+                thenReturn("some text");
+
+        when(ResourceProvider.
+                getDrawableFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getResourceName())).
+                thenReturn(drawable);
+
+        View expectedView = mAdapter.getView(0, mock(View.class), group);
+
+        assertNotNull(expectedView);
+        verify(container).findViewById(R.id.txv_name_payment_method);
+        verifyStatic();
+        ResourceProvider.getStringFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getStringName());
+        verify(name).setText("some text");
+        verify(name).setTypeface(null, Typeface.BOLD);
+        verify(container).findViewById(R.id.img_payment_method);
+        verifyStatic();
+        ResourceProvider.getDrawableFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getResourceName());
+        verify(image).setImageDrawable(drawable);
+        verify(container).setTag(TypePaymentMethodEnum.CREDIT_CARD);
     }
-
 }

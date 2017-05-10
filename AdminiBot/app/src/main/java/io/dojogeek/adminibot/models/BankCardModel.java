@@ -1,25 +1,22 @@
 package io.dojogeek.adminibot.models;
 
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
+
 import io.dojogeek.adminibot.enums.CardTypeEnum;
 
 public class BankCardModel {
 
     private long id;
     private String name;
-    private String number;
     private long bankId;
     private String brand;
-    private double availableCredit;
-    private CardTypeEnum cardType;
-    private long userId;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String number;
+    private String cardType;
+    private DateTime createdAt;
+    private DateTime updatedAt;
+    private BigDecimal availableCredit;
 
     public long getId() {
         return id;
@@ -29,12 +26,12 @@ public class BankCardModel {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getName() {
+        return name;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getBankId() {
@@ -53,27 +50,43 @@ public class BankCardModel {
         this.brand = brand;
     }
 
-    public double getAvailableCredit() {
-        return availableCredit;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAvailableCredit(double availableCredit) {
-        this.availableCredit = availableCredit;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public CardTypeEnum getCardType() {
+    public String getCardType() {
         return cardType;
     }
 
-    public void setCardType(CardTypeEnum cardType) {
+    public void setCardType(String cardType) {
         this.cardType = cardType;
     }
 
-    public long getUserId() {
-        return userId;
+    public DateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setCreatedAt(DateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public DateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(DateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public BigDecimal getAvailableCredit() {
+        return availableCredit;
+    }
+
+    public void setAvailableCredit(BigDecimal availableCredit) {
+        this.availableCredit = availableCredit;
     }
 }

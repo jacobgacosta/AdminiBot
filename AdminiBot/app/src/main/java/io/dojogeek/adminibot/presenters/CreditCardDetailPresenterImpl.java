@@ -13,10 +13,10 @@ import io.dojogeek.adminibot.views.CreditCardDetail;
 
 public class CreditCardDetailPresenterImpl implements CreditCardDetailPresenter {
 
-    private CreditCardDetail mCreditCardDetail;
+    private BankDao mBankDao;
     private BankCardDao mBankCardDao;
     private CardDetailDao mCardDetailDao;
-    private BankDao mBankDao;
+    private CreditCardDetail mCreditCardDetail;
 
     public CreditCardDetailPresenterImpl(CreditCardDetail creditCardDetail, BankCardDao bankCardDao,
                                          CardDetailDao cardDetailDao, BankDao bankDao) {
@@ -31,7 +31,7 @@ public class CreditCardDetailPresenterImpl implements CreditCardDetailPresenter 
 
         try {
 
-            BankCardModel bankCardModel = mBankCardDao.getBankCardById(creditCardId);
+            BankCardModel bankCardModel = mBankCardDao.getById(creditCardId);
 
             CardDetailModel cardDetailModel = mCardDetailDao.getCardDetailByBankCardId(bankCardModel.getId());
 

@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
         MyCashPresenterTest.class,
         MyCreditCardsPresenterTest.class,
         MyFoodCouponsPresenterTest.class,
-        PaymentMethodsPresenterTest.class
+        PaymentMethodPresenterImplTest.class
 })
 public class PresentersSuiteTest {
 }

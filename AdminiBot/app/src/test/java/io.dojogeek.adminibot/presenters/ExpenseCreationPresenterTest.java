@@ -16,14 +16,14 @@ import io.dojogeek.adminibot.daos.BankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseBankCardDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseOtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.factory.ModelsFactory;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.models.ExpenseOtherPaymentMethodModel;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.ExpenseCreation;
 
 import static org.mockito.Mockito.anyLong;
@@ -43,7 +43,7 @@ public class ExpenseCreationPresenterTest {
     private BankCardModel mBankCardModel;
 
     @Mock
-    private OtherPaymentMethodModel mOtherPaymentMethodModel;
+    private PaymentMethodModel mOtherPaymentMethodModel;
 
     @Mock
     private ExpenseModel mExpenseModel;
@@ -67,7 +67,7 @@ public class ExpenseCreationPresenterTest {
     private ExpenseBankCardDaoImpl mExpenseBankCardDao;
 
     @Mock
-    private OtherPaymentMethodDaoImpl mOtherPaymentMethodDao;
+    private PaymentMethodDaoImpl mOtherPaymentMethodDaoImpl;
 
     @Mock
     private BankCardDaoImpl mBankCardDao;
@@ -75,7 +75,7 @@ public class ExpenseCreationPresenterTest {
     @InjectMocks
     private ExpenseCreationPresenter mExpenseCreationPresenter =
             new ExpenseCreationPresenterImpl(mExpenseCreationActivity, mExpenseDao,
-                    mOtherPaymentMethodDao, mBankCardDao, mExpenseOtherPaymentMethodDao, mExpenseBankCardDao);
+                    mOtherPaymentMethodDaoImpl, mBankCardDao, mExpenseOtherPaymentMethodDao, mExpenseBankCardDao);
 
     @Test
     public void testCreateExpense_successfulCreationWithBankCarAndOtherPaymentMethods() throws DataException {
@@ -97,13 +97,13 @@ public class ExpenseCreationPresenterTest {
         when(mExpenseBankCardModel.getAmount()).thenReturn(amounSpent);
         when(mExpenseModel.getOtherPaymentMethodModels()).thenReturn(expenseOtherPaymentMethodModels);
         when(mExpenseModel.getExpenseBankCardModels()).thenReturn(expenseBankCardModels);
-        when(mOtherPaymentMethodDao.getOtherPaymentMethodById(anyLong())).thenReturn(mOtherPaymentMethodModel);
-        when(mOtherPaymentMethodModel.getAvailableCredit()).thenReturn(availableCredit);
-        when(mOtherPaymentMethodDao.updateOtherPaymentMethod(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId())).
+        when(mOtherPaymentMethodDaoImpl.getById(anyLong())).thenReturn(mOtherPaymentMethodModel);
+//        when(mOtherPaymentMethodModel.getAvailableCredit()).thenReturn(availableCredit);
+        when(mOtherPaymentMethodDaoImpl.update(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId())).
                 thenReturn(updatedRows);
-        when(mBankCardDao.getBankCardById(anyLong())).thenReturn(mBankCardModel);
-        when(mBankCardModel.getAvailableCredit()).thenReturn(availableCredit.doubleValue());
-        when(mBankCardDao.updateBankCard(mBankCardModel, mBankCardModel.getId())).thenReturn(updatedRows);
+        when(mBankCardDao.getById(anyLong())).thenReturn(mBankCardModel);
+//        when(mBankCardModel.getAvailableCredit()).thenReturn(availableCredit.doubleValue());
+        when(mBankCardDao.update(mBankCardModel, mBankCardModel.getId())).thenReturn(updatedRows);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
 
@@ -117,23 +117,23 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseOtherPaymentMethodModel).setExpenseId(insertedRecordId);
         verify(mExpenseOtherPaymentMethodDao, times(mExpenseModel.getOtherPaymentMethodModels().size())).
                 createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) notNull());
-        verify(mOtherPaymentMethodDao, times(mExpenseModel.getOtherPaymentMethodModels().size())).
-                getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodModel).getAvailableCredit();
-        verify(mOtherPaymentMethodModel).setAvailableCredit(new BigDecimal(totalOtherPaymentMethod));
-        verify(mOtherPaymentMethodDao, times(mExpenseModel.getOtherPaymentMethodModels().size())).
-                updateOtherPaymentMethod(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId());
+        verify(mOtherPaymentMethodDaoImpl, times(mExpenseModel.getOtherPaymentMethodModels().size())).
+                getById(anyLong());
+//        verify(mOtherPaymentMethodModel).getAvailableCredit();
+//        verify(mOtherPaymentMethodModel).setAvailableCredit(new BigDecimal(totalOtherPaymentMethod));
+        verify(mOtherPaymentMethodDaoImpl, times(mExpenseModel.getOtherPaymentMethodModels().size())).
+                update(mOtherPaymentMethodModel, mOtherPaymentMethodModel.getId());
 
         verify(mExpenseModel, times(2)).getExpenseBankCardModels();
         verify(mExpenseBankCardModel).setExpenseId(insertedRecordId);
         verify(mExpenseBankCardDao, times(mExpenseModel.getExpenseBankCardModels().size())).
                 createMovementExpenseBankCard((ExpenseBankCardModel) notNull());
         verify(mBankCardDao, times(mExpenseModel.getExpenseBankCardModels().size())).
-                getBankCardById(anyLong());
+                getById(anyLong());
         verify(mBankCardModel).getAvailableCredit();
-        verify(mBankCardModel).setAvailableCredit(totalBankCard);
+//        verify(mBankCardModel).setAvailableCredit(totalBankCard);
         verify(mBankCardDao, times(mExpenseModel.getExpenseBankCardModels().size())).
-                updateBankCard(mBankCardModel, mBankCardModel.getId());
+                update(mBankCardModel, mBankCardModel.getId());
         verify(mExpenseCreationActivity).successfulExpenseCreation();
         verifySetTransactionsSuccessful();
         verifyEndTransactions();
@@ -147,13 +147,13 @@ public class ExpenseCreationPresenterTest {
 
         verify(mExpenseOtherPaymentMethodDao, never()).
                 createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).update((OtherPaymentMethodModel) anyObject(), anyLong());
 
         verify(mExpenseBankCardDao, never()).
                 createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
 
         verify(mExpenseCreationActivity).errorExpenseCreation();
 
@@ -171,11 +171,11 @@ public class ExpenseCreationPresenterTest {
 
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao, never()).createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao, never()).createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
         verifyEndTransactions();
@@ -198,11 +198,11 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao, never()).
                         createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao).createMovementExpenseBankCard((ExpenseBankCardModel) notNull());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -217,19 +217,19 @@ public class ExpenseCreationPresenterTest {
         expenseBankCardModels.add(mExpenseBankCardModel);
 
         when(mExpenseModel.getExpenseBankCardModels()).thenReturn(expenseBankCardModels);
-        when(mBankCardDao.getBankCardById(anyLong())).thenThrow(SQLException.class);
+        when(mBankCardDao.getById(anyLong())).thenThrow(SQLException.class);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
 
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao,never()).
                 createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).
-                updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).
+//                update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao).createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -244,8 +244,8 @@ public class ExpenseCreationPresenterTest {
         expenseBankCardModels.add(mExpenseBankCardModel);
 
         when(mExpenseModel.getExpenseBankCardModels()).thenReturn(expenseBankCardModels);
-        when(mBankCardDao.getBankCardById(anyLong())).thenReturn(mBankCardModel);
-        when(mBankCardDao.updateBankCard((BankCardModel) anyObject(),
+        when(mBankCardDao.getById(anyLong())).thenReturn(mBankCardModel);
+        when(mBankCardDao.update((BankCardModel) anyObject(),
                 anyLong())).thenThrow(SQLException.class);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
@@ -253,12 +253,12 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao, never()).
                 createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).
-                updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).
+//                update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao).createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao).getBankCardById(anyLong());
-        verify(mBankCardDao).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao).getById(anyLong());
+        verify(mBankCardDao).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -280,13 +280,13 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao).
                 createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao, never()).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).
-                updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl, never()).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).
+//                update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao, never()).
                 createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -301,19 +301,19 @@ public class ExpenseCreationPresenterTest {
         expenseOtherPaymentMethodModels.add(mExpenseOtherPaymentMethodModel);
 
         when(mExpenseModel.getOtherPaymentMethodModels()).thenReturn(expenseOtherPaymentMethodModels);
-        when(mOtherPaymentMethodDao.getOtherPaymentMethodById(anyLong())).thenThrow(SQLException.class);
+        when(mOtherPaymentMethodDaoImpl.getById(anyLong())).thenThrow(SQLException.class);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
 
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao).createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao, never()).
-                updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl).getById(anyLong());
+//        verify(mOtherPaymentMethodDaoImpl, never()).
+//                update((OtherPaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao, never()).
                 createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -328,22 +328,22 @@ public class ExpenseCreationPresenterTest {
 
         when(mExpenseModel.getOtherPaymentMethodModels()).thenReturn(expenseOtherPaymentMethodModels);
 
-        OtherPaymentMethodModel otherPaymentMethodModel = factory.createOtherPaymentMethodModel();
+        PaymentMethodModel otherPaymentMethodModel = factory.createOtherPaymentMethodModel();
 
-        when(mOtherPaymentMethodDao.getOtherPaymentMethodById(anyLong())).thenReturn(otherPaymentMethodModel);
-        when(mOtherPaymentMethodDao.updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(),
+        when(mOtherPaymentMethodDaoImpl.getById(anyLong())).thenReturn(otherPaymentMethodModel);
+        when(mOtherPaymentMethodDaoImpl.update((PaymentMethodModel) anyObject(),
                 anyLong())).thenThrow(SQLException.class);
 
         mExpenseCreationPresenter.createExpense(mExpenseModel);
 
         verify(mExpenseDao).createExpense(mExpenseModel);
         verify(mExpenseOtherPaymentMethodDao).createExpenseOtherPaymentMethod((ExpenseOtherPaymentMethodModel) anyObject());
-        verify(mOtherPaymentMethodDao).getOtherPaymentMethodById(anyLong());
-        verify(mOtherPaymentMethodDao).updateOtherPaymentMethod((OtherPaymentMethodModel) anyObject(), anyLong());
+        verify(mOtherPaymentMethodDaoImpl).getById(anyLong());
+        verify(mOtherPaymentMethodDaoImpl).update((PaymentMethodModel) anyObject(), anyLong());
         verify(mExpenseBankCardDao, never()).
                 createMovementExpenseBankCard((ExpenseBankCardModel) anyObject());
-        verify(mBankCardDao, never()).getBankCardById(anyLong());
-        verify(mBankCardDao, never()).updateBankCard((BankCardModel) anyObject(), anyLong());
+        verify(mBankCardDao, never()).getById(anyLong());
+        verify(mBankCardDao, never()).update((BankCardModel) anyObject(), anyLong());
         verify(mExpenseCreationActivity, never()).successfulExpenseCreation();
         verify(mExpenseCreationActivity).errorExpenseCreation();
         verifyNeverInvokeSetTransactionsSuccessful();
@@ -355,7 +355,7 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).beginTransaction();
         verify(mExpenseOtherPaymentMethodDao).beginTransaction();
         verify(mExpenseBankCardDao).beginTransaction();
-        verify(mOtherPaymentMethodDao).beginTransaction();
+        verify(mOtherPaymentMethodDaoImpl).beginTransaction();
         verify(mBankCardDao).beginTransaction();
 
     }
@@ -365,7 +365,7 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).setTransactionSuccessful();
         verify(mExpenseOtherPaymentMethodDao).setTransactionSuccessful();
         verify(mExpenseBankCardDao).setTransactionSuccessful();
-        verify(mOtherPaymentMethodDao).setTransactionSuccessful();
+        verify(mOtherPaymentMethodDaoImpl).setTransactionSuccessful();
         verify(mBankCardDao).setTransactionSuccessful();
 
     }
@@ -375,7 +375,7 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao).endTransaction();
         verify(mExpenseOtherPaymentMethodDao).endTransaction();
         verify(mExpenseBankCardDao).endTransaction();
-        verify(mOtherPaymentMethodDao).endTransaction();
+        verify(mOtherPaymentMethodDaoImpl).endTransaction();
         verify(mBankCardDao).endTransaction();
 
     }
@@ -384,7 +384,7 @@ public class ExpenseCreationPresenterTest {
         verify(mExpenseDao, never()).setTransactionSuccessful();
         verify(mExpenseOtherPaymentMethodDao, never()).setTransactionSuccessful();
         verify(mExpenseBankCardDao, never()).setTransactionSuccessful();
-        verify(mOtherPaymentMethodDao, never()).setTransactionSuccessful();
+        verify(mOtherPaymentMethodDaoImpl, never()).setTransactionSuccessful();
         verify(mBankCardDao, never()).setTransactionSuccessful();
     }
 

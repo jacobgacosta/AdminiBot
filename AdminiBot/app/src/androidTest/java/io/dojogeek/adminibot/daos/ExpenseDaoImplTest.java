@@ -16,7 +16,7 @@ import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.utils.DateUtils;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -52,7 +52,7 @@ public class ExpenseDaoImplTest {
     @Test
     public void testCreateExpense_successInsertion() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -73,7 +73,7 @@ public class ExpenseDaoImplTest {
     @Test(expected = SQLiteConstraintException.class)
     public void testCreateExpense_withNullRequieredField_isException() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
         expenseModel.setDescription(null);
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
@@ -107,7 +107,7 @@ public class ExpenseDaoImplTest {
     @Test
     public void testGetExpenseById_successObtaining() throws DataException {
 
-        ExpenseModel expectedExpenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expectedExpenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expectedExpenseModel);
 
@@ -120,7 +120,7 @@ public class ExpenseDaoImplTest {
     @Test(expected = DataException.class)
     public void testGetExpenseById_withNonExistentId_isException() throws DataException {
 
-        ExpenseModel expectedExpenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expectedExpenseModel = ModelsFactory.createExpenseModel();
 
         mExpenseDao.createExpense(expectedExpenseModel);
 
@@ -133,7 +133,7 @@ public class ExpenseDaoImplTest {
     @Test
     public void testUpdateExpense_successUpdating() throws DataException {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -152,7 +152,7 @@ public class ExpenseDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testUpdateExpense_withNullModel_isException() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -163,7 +163,7 @@ public class ExpenseDaoImplTest {
     @Test
     public void testUpdateExpense_withNonExistentId_noUpdating() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         mExpenseDao.createExpense(expenseModel);
 
@@ -179,7 +179,7 @@ public class ExpenseDaoImplTest {
     @Test(expected = SQLiteConstraintException.class)
     public void testUpdateExpense_withNullRequiredField_isException() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -193,7 +193,7 @@ public class ExpenseDaoImplTest {
     @Test
     public void testDeleteExpense_successDeletion() {
 
-        ExpenseModel expenseModel = CreatorModels.createExpenseModel();
+        ExpenseModel expenseModel = ModelsFactory.createExpenseModel();
 
         long insertedRecordId = mExpenseDao.createExpense(expenseModel);
 
@@ -250,9 +250,9 @@ public class ExpenseDaoImplTest {
         List<ExpenseModel> expenseModelList = new ArrayList<>();
 
         for (int index = 1; index <= numberOfDummyInsertions; index++) {
-            ExpenseModel expenseModel = CreatorModels.createExpenseModel("Expense type test " + index,
+            ExpenseModel expenseModel = ModelsFactory.createExpenseModel("Expense type test " + index,
                     567.90 + index, DateUtils.getCurrentData(), DateUtils.getCurrentData(), 2, 20 + index,
-                    CreatorModels.createExpenseOtherPaymentMethodModelList(), CreatorModels.createExpenseBankCardModelList());
+                    ModelsFactory.createExpenseOtherPaymentMethodModelList(), ModelsFactory.createExpenseBankCardModelList());
 
             mExpenseDao.createExpense(expenseModel);
             expenseModelList.add(expenseModel);

@@ -63,7 +63,7 @@ public class CreditCardPresenterTest {
         BankCardModel bankCardModelMock = mock(BankCardModel.class);
 
         when(creditCardModel.getBankCardModel()).thenReturn(bankCardModelMock);
-        when(mBankCardDao.createBankCard(bankCardModelMock)).thenReturn(insertedBankCardId);
+        when(mBankCardDao.create(bankCardModelMock)).thenReturn(insertedBankCardId);
 
         CardDetailModel cardDetailModelMock = mock(CardDetailModel.class);
 
@@ -78,7 +78,7 @@ public class CreditCardPresenterTest {
         verify(mCardDetailDao).openConnection();
         verify(mBankCardDao).beginTransaction();
 //        verify(mCardDetailDao).beginTransaction();
-        verify(mBankCardDao).createBankCard(creditCardModel.getBankCardModel());
+        verify(mBankCardDao).create(creditCardModel.getBankCardModel());
         verify(cardDetailModelMock).setBankCardId(insertedBankCardId);
         verify(mCardDetailDao).createCardDetail(creditCardModel.getCardDetailModel());
         verify(mCreditCard).notifySuccessfulInsertion();
@@ -99,9 +99,9 @@ public class CreditCardPresenterTest {
 
         when(creditCardModel.getBankCardModel()).thenReturn(bankCardModelMock);
 
-        when(mBankCardDao.createBankCard(bankCardModelMock)).thenThrow(new SQLException());
+        when(mBankCardDao.create(bankCardModelMock)).thenThrow(new SQLException());
 
-//        doThrow(SQLException.class).when(mBankCardDao).createBankCard(bankCardModelMock);
+//        doThrow(SQLException.class).when(mBankCardDao).create(bankCardModelMock);
 
         mCreditCardPresenter.createCreditCard(creditCardModel);
 
@@ -109,7 +109,7 @@ public class CreditCardPresenterTest {
         verify(mCardDetailDao).openConnection();
         verify(mBankCardDao).beginTransaction();
 //        verify(mCardDetailDao).beginTransaction();
-        verify(mBankCardDao).createBankCard(bankCardModelMock);
+        verify(mBankCardDao).create(bankCardModelMock);
         verify(mCardDetailDao, never()).createCardDetail((CardDetailModel) anyObject());
         verify(mBankCardDao, never()).setTransactionSuccessful();
         verify(mCardDetailDao, never()).setTransactionSuccessful();
@@ -128,7 +128,7 @@ public class CreditCardPresenterTest {
         long insertedBankCardId = 1;
         BankCardModel bankCardModelMock = mock(BankCardModel.class);
         when(creditCardModel.getBankCardModel()).thenReturn(bankCardModelMock);
-        when(mBankCardDao.createBankCard(bankCardModelMock)).thenReturn(insertedBankCardId);
+        when(mBankCardDao.create(bankCardModelMock)).thenReturn(insertedBankCardId);
 
         CardDetailModel cardDetailModelMock = mock(CardDetailModel.class);
         when(creditCardModel.getCardDetailModel()).thenReturn(cardDetailModelMock);
@@ -140,7 +140,7 @@ public class CreditCardPresenterTest {
         verify(mCardDetailDao).openConnection();
         verify(mBankCardDao).beginTransaction();
 //        verify(mCardDetailDao).beginTransaction();
-        verify(mBankCardDao).createBankCard(bankCardModelMock);
+        verify(mBankCardDao).create(bankCardModelMock);
         verify(mCardDetailDao).createCardDetail((CardDetailModel) anyObject());
         verify(mBankCardDao, never()).setTransactionSuccessful();
         verify(mCardDetailDao, never()).setTransactionSuccessful();

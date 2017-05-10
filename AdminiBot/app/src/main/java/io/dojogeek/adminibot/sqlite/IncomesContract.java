@@ -13,20 +13,22 @@ public class IncomesContract {
 
         public static final String COLUMN_NULLABLE = "null";
 
-        public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_CREATED_AT = "created_at";
-        public static final String COLUMN_NEXT_ENTRY = "next_entry";
-        public static final String COLUMN_TOTAL_AMOUNT = "total_amount";
+        static final String COLUMN_NAME = "name";
+        static final String COLUMN_AMOUNT = "total_amount";
+        static final String COLUMN_UPDATED_AT = "update_at";
+        static final String COLUMN_CREATED_AT = "created_at";
+        static final String COLUMN_NEXT_ENTRY = "next_entry";
 
     }
 
-    public static final String SQL_CREATE_TABLE = "CREATE TABLE " +  Incomes.TABLE_NAME +
-            "(" + Incomes._ID + " INTEGER PRIMARY KEY, " +
+    static final String SQL_CREATE_TABLE = "CREATE TABLE " +  Incomes.TABLE_NAME +
+            "(" + Incomes._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
             Incomes.COLUMN_NAME + " TEXT NOT NULL, " +
-            Incomes.COLUMN_TOTAL_AMOUNT + " REAL NOT NULL, " +
+            Incomes.COLUMN_AMOUNT + " TEXT NOT NULL, " +
             Incomes.COLUMN_NEXT_ENTRY + " TEXT, " +
-            Incomes.COLUMN_CREATED_AT + " TEXT NOT NULL)";
+            Incomes.COLUMN_CREATED_AT + " TEXT NOT NULL, " +
+            Incomes.COLUMN_UPDATED_AT + " TEXT NOT NULL)";
 
-    public static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + Incomes.TABLE_NAME;
+    static final String SQL_DELETE_ENTRIES = DROP_TABLE_IF_EXIST + Incomes.TABLE_NAME;
 
 }

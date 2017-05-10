@@ -1,27 +1,19 @@
 <resources>
     <string name="app_name">Adminibot</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_register">REGISTRO</string>
 
     <!-- user register -->
-    <string name="register_title">Registrar</string>
     <string name="register_hint_name">Nombre</string>
     <string name="register_hint_last_name">Apellidos</string>
     <string name="register_hint_email">Email</string>
-    <string name="action_bar_about_title">About</string>
     <string name="register_button_ok">OK</string>
-    <string name="register_ok">El usuario se registro con exito!</string>
-    <string name="register_failed">Se produjo un error, intentalo más tarde</string>
 
     <!-- login user -->
-    <string name="title_activity_login">LOGIN</string>
     <string name="login_hint_password">Pasword</string>
     <string name="login_button_enter">Entrar</string>
     <string name="login_register_now_link">¡Registrate ahora!</string>
-    <string name="title_activity_about_admini_bot">AboutAdminiBotActivity</string>
 
     <!-- about -->
-    <string name="about_title">¿Que es Adminibot?</string>
     <string name="about_description">Registra tus gastos diarios
     y obten un resumen periodico de los movimientos de tu capital. </string>
 
@@ -37,8 +29,6 @@
     <string name="error_wrong_lenght_concept">El concepto es demasiado largo</string>
     <string name="error_wrong_account">El número de cuenta es incorrecto</string>
     <string name="error_wrong_lenght_check_number">El número de cheque es numérico con un máximo de 18 digitos</string>
-    <string name="error_wrong_lenght_date">La longitud de la fecha es incorrecta</string>
-    <string name="error_wrong_lenght_amount">La longitud del monto es incorrecta</string>
     <string name="error_wrong_lenght_issuance_code">La longitud del código de emisión es incorrecta</string>
     <string name="error_wrong_incorrect_amount">El monto debe estar compuesto de 10 enteros y 2 decimales como máximo</string>
     <string name="error_wrong_lenght_field">El campo es demasiado largo</string>
@@ -59,25 +49,13 @@
     <string name="navigation_close_message">Close Navigation</string>
 
     <!-- home fragment -->
-    <string name="home_title_register_spending">Haz click en el botón para registrar una compra.</string>
 
     <!-- action bar menu -->
     <string name="action_bar_menu_notifications">Notificaciones</string>
 
     <!-- expenses types -->
     <string name="expenses_types_spinner_default_value">Selecciona el tipo de gasto</string>
-    <string name="expenses_types_foods">Alimentos</string>
-    <string name="expenses_types_clothes">Ropa</string>
-    <string name="expenses_types_drinks">Alcohol</string>
-    <string name="expenses_types_medicals">Médicos</string>
-    <string name="expenses_types_luxuries">Lujos</string>
 
-    <string name="expenses_types_foods_description">Cualquier alimento adquirido en tiendas departamentales,
-    tiendas de auto servicio, puestos de la calle etc.</string>
-    <string name="expenses_types_clothes_description">Ropa adquirida en cualquier punto de venta.</string>
-    <string name="expenses_types_drinks_description">Bebidas alcohólicas de cualquier tipo</string>
-    <string name="expenses_types_medicals_description">Gastos por medicamentos o consultas médicas</string>
-    <string name="expenses_types_luxuries_description">Productos adquiridos no necesarios pero si deseados.</string>
     <string name="title_activity_expense_registration">Registro de gasto</string>
 
     <!-- expense registration -->
@@ -86,14 +64,9 @@
     <string name="expense_registration_button_register">Registrar</string>
     <string name="expense_registration_suggestion">Lleva el registro de cada uno de tus gastos realizados para que de esta
     manera tengas cifras mas precisas de tu capital :)</string>
-    <string name="expense_registered_ok">El gasto se registro con exito!</string>
     <string name="expense_registered_add">+  agregar método de pago</string>
-    <string name="expense_registered_remove">-  eliminar método de pago</string>
 
     <!-- Inbox -->
-    <string name="inbox_expense_amount">Monto:</string>
-    <string name="inbox_expense_payment_method">Tipo de pago:</string>
-    <string name="inbox_expense_date">Pago realizado el:</string>
 
     <!-- payment methods types -->
     <string name="payment_methods_spinner_default_value">Selecciona un tipo de pago</string>
@@ -106,35 +79,25 @@
     <string name="payment_methods_cheque_description">Documento de pago</string>
 
     <!-- Card types -->
-    <string name="credit_card">Crédito</string>
-    <string name="debit_card">Débito</string>
-    <string name="prepaid_card">Prepago</string>
     <string name="title_activity_card_types">Escoge el tipo de tarjeta</string>
 
-    <string name="card_types_credit_description">Caulquier tarjeta de crédito</string>
-    <string name="card_types_debit_description">Cualquier tarjeta de débito</string>
-    <string name="card_types_prepaid_description">Cualquier tarjeta prepágo</string>
     <string name="title_activity_expenses_inbox">Gastos</string>
 
     <!-- messages -->
-    <string name="success_deletion">Registro eliminado</string>
-    <string name="error_deletion">Error al intentar borrar registro, intente más tarde</string>
-    <string name="expenses_success_creation">Gasto agregado</string>
-    <string name="expenses_error_creation">Se produjo un error al agregar gasto, intente más tarde</string>
 
-    <!-- payment methods -->
-    <string name="ic_card">Tarjeta</string>
-    <string name="ic_cash">Efectivo</string>
-    <string name="ic_cheque">Cheque</string>
-    <string name="ic_food_coupon">Vales de despensa</string>
-    <string name="title_payment_methods">Elige el método de pago</string>
+    <!-- Payment methods -->
+    <string name="food_coupons">Vales de despensa</string>
+    <string name="cash">Efectivo</string>
+    <string name="credit_card">Tarjeta de crédito</string>
+    <string name="debit_card">Tarjeta de débito</string>
+
+    <string name="choise_payment_method">Elige el método de pago</string>
 
     <!-- Add payment method -->
-    <string name="add_pm_no_payment_methods_label">No hay métodos de pago registrados</string>
-    <string name="add_pm_button">Agregar \u0020+</string>
-    <string name="add_more_pm_button">Agregar más...</string>
-    <string name="title_add_payment_method">Agregar método de pago</string>
-    <string name="title_choice_payment_method">Realizar gasto con: </string>
+    <string name="no_payment_methods_registered">No hay formas de pago registradas :( agrega un
+        ingreso o una tarjeta de credito para continuar.</string>
+    <string name="add_payment_method">Agregar forma de pago</string>
+    <string name="make_payment_with">Realizar gasto con: </string>
 
     <!-- add card -->
     <string name="add_card_banks_hint">Elige el banco</string>
@@ -181,7 +144,6 @@
     <string name="my_credit_cards_current_balance">Saldo actual:</string>
     <string name="my_credit_cards_cutoff_date">Fecha de corte:</string>
     <string name="my_credit_cards_payday_limit">Fecha límite de pago:</string>
-    <string name="my_credit_cards_trademark">Fecha límite de pago:</string>
 
     <!-- Credit card detail -->
     <string name="title_activity_credit_card_detail">Detalle de tarjeta</string>
@@ -198,7 +160,6 @@
     <string name="title_my_food_coupons_activity">Mis vales de despensa</string>
 
     <!-- action bar -->
-    <string name="add_payment_method">Agregar</string>
-    <string name="remove_payment_method">Eliminar</string>
+    <string name="add_more_payment_method">Agregar</string>
 
 </resources>

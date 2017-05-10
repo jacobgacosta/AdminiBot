@@ -1,10 +1,10 @@
 package io.dojogeek.adminibot.presenters;
 
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 
 public interface CheckPresenter {
 
-    void createCheck(OtherPaymentMethodModel otherPaymentMethodModel);
+    void createCheck(PaymentMethodModel paymentMethod);
 
     void unnusedView();
 

@@ -34,7 +34,7 @@ public class MyCreditCardsPresenterImpl implements MyCreditCardsPresenter {
     @Override
     public void obtainMyCreditCards() {
 
-        List<BankCardModel> bankCardModels = mBankCardDao.getBankCards();
+        List<BankCardModel> bankCardModels = mBankCardDao.getAll();
 
         List<DtoCreditCardAdapter> dtoCreditCardAdapterList = new ArrayList<>();
 

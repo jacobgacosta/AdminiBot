@@ -47,7 +47,7 @@ public class CreditCardPresenterImpl implements CreditCardPresenter {
 
             beginTransactions();
 
-            long insertedBankCardId = mBankCardDao.createBankCard(bankCardModel);
+            long insertedBankCardId = mBankCardDao.create(bankCardModel);
 
             CardDetailModel cardDetailModel = creditCardModel.getCardDetailModel();
             cardDetailModel.setBankCardId(insertedBankCardId);

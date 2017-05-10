@@ -51,7 +51,7 @@ public class CreditCardDetailPresenterTest {
         long creditCardIdtest = 1;
 
         BankCardModel bankCardModel = factory.createBankCardModel();
-        when(mBankCardDao.getBankCardById(creditCardIdtest)).thenReturn(bankCardModel);
+        when(mBankCardDao.getById(creditCardIdtest)).thenReturn(bankCardModel);
 
         CardDetailModel cardDetailModel = factory.createCardDetailModel();
         when(mCardDetailDao.getCardDetailByBankCardId(bankCardModel.getId())).thenReturn(cardDetailModel);
@@ -70,7 +70,7 @@ public class CreditCardDetailPresenterTest {
 
         mCreditCardDetailPresenter.loadCreditCardDetailById(creditCardIdtest);
 
-        verify(mBankCardDao).getBankCardById(creditCardIdtest);
+        verify(mBankCardDao).getById(creditCardIdtest);
         verify(mCardDetailDao).getCardDetailByBankCardId(bankCardModel.getId());
         verify(mBankDao).getBankById(bankCardModel.getBankId());
         verify(creditCardDetailMock).setCreditCardName(bankCardModel.getName());

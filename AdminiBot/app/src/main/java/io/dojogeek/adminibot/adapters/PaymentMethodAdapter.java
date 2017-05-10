@@ -1,10 +1,7 @@
 package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,53 +13,40 @@ import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.utils.ResourceProvider;
 
 public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
 
     private Context mContext;
-    private List<TypePaymentMethodEnum> mTypePaymentMethodEnumList;
+    private List<TypePaymentMethodEnum> mPaymentMethods;
 
-    public PaymentMethodAdapter(Context context, List<TypePaymentMethodEnum> objects) {
-        super(context, 0, objects);
+    public PaymentMethodAdapter(Context context, List<TypePaymentMethodEnum> paymentMethods) {
+
+        super(context, 0, paymentMethods);
 
         mContext = context;
-        mTypePaymentMethodEnumList = objects;
+
+        mPaymentMethods = paymentMethods;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        TypePaymentMethodEnum paymentMethod = mPaymentMethods.get(position);
 
-        View rootView = layoutInflater.inflate(R.layout.item_payment_method, parent, false);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        TextView description = (TextView) rootView.findViewById(R.id.payment_method_description);
-        description.setText(getResouceStringFromSimpleString(mTypePaymentMethodEnumList.get(position).getName()));
-        description.setTypeface(null, Typeface.BOLD);
+        View container = inflater.inflate(R.layout.item_payment_method, parent, false);
 
-        ImageView imgPaymentMethod = (ImageView) rootView.findViewById(R.id.img_payment_method);
-        imgPaymentMethod.setImageDrawable(getDrawableFromName(mTypePaymentMethodEnumList.get(position).getName()));
+        TextView name = (TextView) container.findViewById(R.id.txv_name_payment_method);
+        name.setText(ResourceProvider.getStringFromName(mContext, paymentMethod.getStringName()));
+        name.setTypeface(null, Typeface.BOLD);
 
-        rootView.setTag(mTypePaymentMethodEnumList.get(position));
+        ImageView image = (ImageView) container.findViewById(R.id.img_payment_method);
+        image.setImageDrawable(ResourceProvider.getDrawableFromName(mContext, paymentMethod.getResourceName()));
 
-        return rootView;
-    }
+        container.setTag(mPaymentMethods.get(position));
 
-    private String getResouceStringFromSimpleString(String resourceId) {
-
-        Resources resources = mContext.getResources();
-        int stringId = resources.getIdentifier(resourceId, "string", mContext.getPackageName());
-
-        return resources.getString(stringId);
-    }
-
-    private Drawable getDrawableFromName(String nameResource) {
-
-        Resources resources = mContext.getResources();
-        int drawableId = resources.getIdentifier(nameResource, "drawable", mContext.getPackageName());
-
-        Drawable drawable = ResourcesCompat.getDrawable(resources, drawableId, null);
-
-        return drawable;
+        return container;
     }
 }

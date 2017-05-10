@@ -1,35 +1,31 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Test;
+import org.joda.time.DateTimeComparator;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.joda.time.DateTimeComparator;
-
-import java.util.List;
-import java.util.ArrayList;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.IncomesContract;
 import io.dojogeek.adminibot.utiltest.ModelsFactory;
-import io.dojogeek.adminibot.exceptions.DataException;
-import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
-
-import static org.hamcrest.CoreMatchers.is;
-
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotEquals;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class IncomeDaoImplTest {
@@ -76,7 +72,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testGetIncomeById_successfulObtaining() throws DataException {
+    public void testGetById_successfulObtaining() throws DataException {
 
         IncomeModel expectedIncomeModel = ModelsFactory.createIncomeModel();
 
@@ -89,7 +85,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test(expected = DataException.class)
-    public void testGetIncomeById_withNonExistentId_isException() throws DataException {
+    public void testGetById_withNonExistentId_isException() throws DataException {
 
         long nonExistentId = 5;
 
@@ -98,7 +94,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testGetIncomes_obtainingASuccessfulList() {
+    public void testGetAll_obtainingASuccessfulList() {
 
         int numberOfIncomesToCreate = 5;
 
@@ -110,7 +106,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testGetIncomes_withNoRecords_isEmptyList() {
+    public void testGetAll_withNoRecords_isEmptyList() {
 
         List<IncomeModel> actualIncomeModels = mIncomeDao.getIncomes();
 
@@ -118,7 +114,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testUpdateIncome_successfulUpdate() throws DataException {
+    public void testUpdate_successfulUpdate() throws DataException {
 
         IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
@@ -139,7 +135,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testUpdateIncome_withNullModel_isException() {
+    public void testUpdate_withNullModel_isException() {
 
         String where = IncomesContract.Incomes._ID + "= " +  2;
 
@@ -148,7 +144,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testUpdateIncome_withNonExistentId_noUpdate() {
+    public void testUpdate_withNonExistentId_noUpdate() {
 
         IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
@@ -163,7 +159,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testDeleteIncome_successfulDeletion() {
+    public void testDelete_successfulDeletion() {
 
         IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
@@ -175,7 +171,7 @@ public class IncomeDaoImplTest {
     }
 
     @Test
-    public void testDeleteIncome_withNonExistentId_noDeletion() {
+    public void testDelete_withNonExistentId_noDeletion() {
 
         IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 

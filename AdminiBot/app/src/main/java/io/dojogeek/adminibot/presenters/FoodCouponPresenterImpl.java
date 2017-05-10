@@ -2,27 +2,27 @@ package io.dojogeek.adminibot.presenters;
 
 import android.database.SQLException;
 
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDao;
-import io.dojogeek.adminibot.daos.OtherPaymentMethodDaoImpl;
-import io.dojogeek.adminibot.models.OtherPaymentMethodModel;
+import io.dojogeek.adminibot.daos.PaymentMethodDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
+import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.FoodCoupons;
 
 public class FoodCouponPresenterImpl implements FoodCouponPresenter {
 
     private FoodCoupons mFoodCoupons;
-    private OtherPaymentMethodDao mOtherPaymentMethodDao;
+    private PaymentMethodDao mPaymentMethodDao;
 
-    public FoodCouponPresenterImpl(FoodCoupons foodCoupons, OtherPaymentMethodDao otherPaymentMethodDao) {
+    public FoodCouponPresenterImpl(FoodCoupons foodCoupons, PaymentMethodDao paymentMethodDao) {
         mFoodCoupons = foodCoupons;
-        mOtherPaymentMethodDao = otherPaymentMethodDao;
+        mPaymentMethodDao = paymentMethodDao;
     }
 
     @Override
-    public void createFoodCoupon(OtherPaymentMethodModel otherPaymentMethodModel) {
+    public void createFoodCoupon(PaymentMethodModel otherPaymentMethodModel) {
 
         try {
 
-            mOtherPaymentMethodDao.createOtherPaymentMethod(otherPaymentMethodModel);
+            mPaymentMethodDao.create(otherPaymentMethodModel);
             mFoodCoupons.notifySuccessfulInsertion();
             mFoodCoupons.returnToMyPaymentsMethods();
 
@@ -35,6 +35,6 @@ public class FoodCouponPresenterImpl implements FoodCouponPresenter {
 
     @Override
     public void unnusedView() {
-        ((OtherPaymentMethodDaoImpl) mOtherPaymentMethodDao).closeConnection();
+        ((PaymentMethodDaoImpl) mPaymentMethodDao).closeConnection();
     }
 }

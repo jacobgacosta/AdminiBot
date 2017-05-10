@@ -15,7 +15,7 @@ import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
 import io.dojogeek.adminibot.sqlite.ExpensesTypesContract;
-import io.dojogeek.adminibot.utiltest.CreatorModels;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
@@ -49,7 +49,7 @@ public class ExpenseTypeDaoImplTest {
     @Test
     public void testCreateExpenseType_successInsertion() {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -68,7 +68,7 @@ public class ExpenseTypeDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testCreateExpenseType_withNullRequiredField_isException() {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
         expenseTypeModel.setName(null);
 
         mExpenseTypeDao.createExpenseType(expenseTypeModel);
@@ -78,7 +78,7 @@ public class ExpenseTypeDaoImplTest {
     @Test
     public void testGetExpenseTypeById_successObtaining() throws DataException {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -93,7 +93,7 @@ public class ExpenseTypeDaoImplTest {
     @Test(expected = DataException.class)
     public void testGetExpenseTypeById_withNonExistentId_isException() throws DataException {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -120,7 +120,7 @@ public class ExpenseTypeDaoImplTest {
     @Test
     public void testUpdateExpensetype_successUpdating() throws DataException {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -140,7 +140,7 @@ public class ExpenseTypeDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testUpdateExpensetype_withNullModel_isException() {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -155,7 +155,7 @@ public class ExpenseTypeDaoImplTest {
     @Test
     public void testUpdateExpensetype_withNonExistentId_noUpdating() {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
@@ -173,7 +173,7 @@ public class ExpenseTypeDaoImplTest {
     @Test(expected = NullPointerException.class)
     public void testUpdateExpensetype_withNullRequiredField_isException() {
 
-        ExpenseTypeModel expenseTypeModel = CreatorModels.createExpenseTypeModel();
+        ExpenseTypeModel expenseTypeModel = ModelsFactory.createExpenseTypeModel();
 
         long insertedExpenseTypeId = mExpenseTypeDao.createExpenseType(expenseTypeModel);
 
