@@ -2,7 +2,7 @@
 <resources>
     <item name="primary_background" type="color">#FFFFFF</item>
     <item name="primary_text_color" type="color">#000000</item>
-    <item name="global_background" type="color">#00C3CC</item>
+    <item name="global_background" type="color">#5493c9</item>
     <item name="global_background_dark" type="color">#04b4bc</item>
     <item name="global_background_dark_pressed" type="color">#049da4</item>
     <item name="rounded_button_background" type="color">#A5DF00</item>
