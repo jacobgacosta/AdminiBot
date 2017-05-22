@@ -1,19 +1,25 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/adminiBotTheme</item>
         <item name="actionBarStyle">@style/adminiBotTheme</item>
     </style>
 
+    <!-- ActionBar styles -->
+    <style name="adminiBotTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/global_background</item>
+        <item name="background">@color/global_background</item>
+    </style>
+
+    <!-- ActionBar title text -->
+    <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
     <style name="CustomActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:actionBarStyle">@style/adminiBotActionBarTheme</item>
         <item name="actionBarStyle">@style/adminiBotActionBarTheme</item>
-    </style>
-
-    <style name="adminiBotTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:colorBackground">@color/global_background</item>
-        <item name="background">@color/global_background</item>
     </style>
 
     <style name="NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -24,7 +30,7 @@
     <style name="adminiBotActionBarTheme">
         <item name="android:colorBackground">@color/global_background</item>
         <item name="background">@color/global_background</item>
-        <item name="android:textColor">@color/primary_background</item>
+        <item name="android:textColor">@color/primary_text_color</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowActionBar">false</item>
     </style>
