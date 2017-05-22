@@ -86,10 +86,7 @@
     <!-- messages -->
 
     <!-- Payment methods -->
-    <string name="food_coupons">Vales de despensa</string>
-    <string name="cash">Efectivo</string>
     <string name="credit_card">Tarjeta de crédito</string>
-    <string name="debit_card">Tarjeta de débito</string>
 
     <string name="choise_payment_method">Elige el método de pago</string>
 
@@ -161,5 +158,12 @@
 
     <!-- action bar -->
     <string name="add_more_payment_method">Agregar</string>
+
+    <!-- * Welcome -->
+    <string name="welcome_title">Selecciona una opción :</string>
+    <string name="title1">Ingreso</string>
+    <string name="description1">Utiliza uno o varios metodo método de pago para registrar un ingreso.</string>
+    <string name="title2">Tarjeta de crédito</string>
+    <string name="description2">Registra una tarjeta de crédito.</string>
 
 </resources>
