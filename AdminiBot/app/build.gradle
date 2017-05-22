@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -8,7 +7,7 @@ android {
     defaultConfig {
         applicationId "io.dojogeek.adminibot"
         minSdkVersion 18
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,9 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    /*testOptions {
-        unitTests.returnDefaultValues = true
-    }*/
 }
 
 configurations.all {
@@ -64,9 +60,8 @@ dependencies {
     testCompile 'uk.co.jemos.podam:podam:5.2.0.RELEASE'
 
     // dagger
-    compile 'com.google.dagger:dagger:2.0'
-    provided 'com.google.dagger:dagger-compiler:2.0'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.google.dagger:dagger:2.9'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
 
     // Recycler and CardView dependencies
     compile 'com.android.support:cardview-v7:23.0.+'
