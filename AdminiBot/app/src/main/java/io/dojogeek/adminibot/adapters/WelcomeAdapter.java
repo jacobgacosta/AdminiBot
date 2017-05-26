@@ -35,7 +35,7 @@ public class WelcomeAdapter extends ArrayAdapter<Integer[]> {
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View container = inflater.inflate(R.layout.item_wellcome, parent, false);
+        View container = inflater.inflate(R.layout.item_welcome, parent, false);
 
         ImageView image = (ImageView) container.findViewById(R.id.option_image);
         image.setImageResource(mItems.get(position)[IMAGE]);

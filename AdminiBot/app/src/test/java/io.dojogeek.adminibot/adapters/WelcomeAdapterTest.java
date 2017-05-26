@@ -39,7 +39,7 @@ public class WelcomeAdapterTest {
         when(container.findViewById(R.id.option_description)).thenReturn(description);
 
         LayoutInflater inflater =  mock(LayoutInflater.class);
-        when(inflater.inflate(R.layout.item_wellcome, group, false)).thenReturn(container);
+        when(inflater.inflate(R.layout.item_welcome, group, false)).thenReturn(container);
 
         Context context = mock(Context.class);
         when(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(inflater);
@@ -54,7 +54,7 @@ public class WelcomeAdapterTest {
         assertEquals(container, actualView);
 
         verify(context).getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        verify(inflater).inflate(R.layout.item_wellcome, group, false);
+        verify(inflater).inflate(R.layout.item_welcome, group, false);
         verify(container).findViewById(R.id.option_image);
         verify(container).findViewById(R.id.option_title);
         verify(container).findViewById(R.id.option_description);
