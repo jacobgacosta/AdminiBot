@@ -58,6 +58,7 @@ public class ConceptOfIncomeDialog extends DialogFragment {
                         editor.putString(getString(R.string.concept_of_income), concept.getText().toString());
                         editor.commit();
 
+                        dialog.dismiss();
                     }
 
                 });
