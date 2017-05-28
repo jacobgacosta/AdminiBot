@@ -20,47 +20,6 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
     private ListView mItemsContainer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_welcome);
-
-        this.instantiateViews();
-
-        this.setListeners();
-
-        this.loadViewData();
-
-    }
-
-    public void instantiateViews() {
-
-        mItemsContainer = (ListView) findViewById(R.id.items_container);
-
-    }
-
-    public void loadViewData() {
-
-        setTitle(R.string.welcome_title);
-
-        List<Integer[]> items = new ArrayList<>();
-        items.add(new Integer[]{R.drawable.ic_cash, R.string.title1, R.string.description1});
-        items.add(new Integer[]{R.drawable.ic_cash, R.string.title2, R.string.description2});
-
-        WelcomeAdapter adapter = new WelcomeAdapter(this, items);
-
-        mItemsContainer.setAdapter(adapter);
-
-    }
-
-    public void setListeners() {
-
-        mItemsContainer.setOnItemClickListener(this);
-
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         switch (position) {
@@ -77,10 +36,52 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_welcome);
+
+        this.instantiateViews();
+
+        this.setListeners();
+
+        this.loadViewData();
+
+    }
+
+    private void instantiateViews() {
+
+        mItemsContainer = (ListView) findViewById(R.id.list_options);
+
+    }
+
+    private void setListeners() {
+
+        mItemsContainer.setOnItemClickListener(this);
+
+    }
+
+    private void loadViewData() {
+
+        setTitle(R.string.welcome_title);
+
+        List<Integer[]> items = new ArrayList<>();
+        items.add(new Integer[]{R.drawable.ic_cash, R.string.title1, R.string.description1});
+        items.add(new Integer[]{R.drawable.ic_cash, R.string.title2, R.string.description2});
+
+        WelcomeAdapter adapter = new WelcomeAdapter(this, items);
+
+        mItemsContainer.setAdapter(adapter);
+
+    }
+
     private void launchView(Class activity) {
 
         Intent intent = new Intent(this, activity);
         startActivity(intent);
 
     }
+
 }
