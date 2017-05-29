@@ -65,11 +65,11 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
 
     private void loadViewData() {
 
-        setTitle(R.string.welcome_title);
+        setTitle(R.string.title_welcome);
 
         List<Integer[]> items = new ArrayList<>();
-        items.add(new Integer[]{R.drawable.ic_cash, R.string.title1, R.string.description1});
-        items.add(new Integer[]{R.drawable.ic_cash, R.string.title2, R.string.description2});
+        items.add(new Integer[]{R.drawable.ic_cash, R.string.title_option_1, R.string.msg_description_1});
+        items.add(new Integer[]{R.drawable.ic_card, R.string.title_option_2, R.string.msg_description_2});
 
         WelcomeAdapter adapter = new WelcomeAdapter(this, items);
 
