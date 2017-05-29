@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".views.PaymentMethodsActivity"
+            android:parentActivityName=".views.WelcomeActivity"
+            android:theme="@style/AppTheme" />
+
         <!--<activity
             android:name=".views.RegisterUserActivity"
             android:label="@string/title_activity_register" />
