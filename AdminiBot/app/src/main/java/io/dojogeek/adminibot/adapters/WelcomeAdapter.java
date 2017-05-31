@@ -37,13 +37,13 @@ public class WelcomeAdapter extends ArrayAdapter<Integer[]> {
 
         View container = inflater.inflate(R.layout.item_welcome, parent, false);
 
-        ImageView image = (ImageView) container.findViewById(R.id.option_image);
+        ImageView image = (ImageView) container.findViewById(R.id.image_option);
         image.setImageResource(mItems.get(position)[IMAGE]);
 
-        TextView title = (TextView) container.findViewById(R.id.option_title);
+        TextView title = (TextView) container.findViewById(R.id.text_option_title);
         title.setText(mItems.get(position)[TITLE]);
 
-        TextView description = (TextView) container.findViewById(R.id.option_description);
+        TextView description = (TextView) container.findViewById(R.id.text_option_description);
         description.setText(mItems.get(position)[DESCRIPTION]);
 
         return container;

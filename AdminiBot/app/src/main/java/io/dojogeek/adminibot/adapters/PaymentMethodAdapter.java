@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
         mContext = context;
 
         mPaymentMethods = paymentMethods;
+        
     }
 
     @Override
@@ -38,15 +38,16 @@ public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
 
         View container = inflater.inflate(R.layout.item_payment_method, parent, false);
 
-        TextView name = (TextView) container.findViewById(R.id.txv_name_payment_method);
+        TextView name = (TextView) container.findViewById(R.id.text_name_payment_method);
         name.setText(ResourceProvider.getStringFromName(mContext, paymentMethod.getStringName()));
-        name.setTypeface(null, Typeface.BOLD);
 
-        ImageView image = (ImageView) container.findViewById(R.id.img_payment_method);
+        ImageView image = (ImageView) container.findViewById(R.id.image_payment_method);
         image.setImageDrawable(ResourceProvider.getDrawableFromName(mContext, paymentMethod.getResourceName()));
 
         container.setTag(mPaymentMethods.get(position));
 
         return container;
+
     }
+
 }

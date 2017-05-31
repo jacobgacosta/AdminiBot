@@ -1,7 +1,6 @@
 package io.dojogeek.adminibot.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,29 +43,29 @@ public class PaymentMethodAdapterTest {
     private ArrayAdapter<TypePaymentMethodEnum> mAdapter = new PaymentMethodAdapter(mContext, mList);
 
     @Test
-    public void testBuildView_mappingData() {
+    public void testAdapter_buildItemView() {
 
         ViewGroup group = mock(ViewGroup.class);
 
-        View container = mock(View.class);
+        View view = mock(View.class);
 
         LayoutInflater layoutInflater = mock(LayoutInflater.class);
         when(mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(layoutInflater);
-        when(layoutInflater.inflate(R.layout.item_payment_method, group,false)).thenReturn(container);
+        when(layoutInflater.inflate(R.layout.item_payment_method, group, false)).thenReturn(view);
 
         TextView name = mock(TextView.class);
-        when(container.findViewById(R.id.txv_name_payment_method)).thenReturn(name);
+        when(view.findViewById(R.id.text_name_payment_method)).thenReturn(name);
 
         ImageView image = mock(ImageView.class);
-        when(container.findViewById(R.id.img_payment_method)).thenReturn(image);
+        when(view.findViewById(R.id.image_payment_method)).thenReturn(image);
 
-        Drawable drawable = mock(Drawable.class);
         mockStatic(ResourceProvider.class);
 
         when(ResourceProvider.
                 getStringFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getStringName())).
                 thenReturn("some text");
 
+        Drawable drawable = mock(Drawable.class);
         when(ResourceProvider.
                 getDrawableFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getResourceName())).
                 thenReturn(drawable);
@@ -74,15 +73,16 @@ public class PaymentMethodAdapterTest {
         View expectedView = mAdapter.getView(0, mock(View.class), group);
 
         assertNotNull(expectedView);
-        verify(container).findViewById(R.id.txv_name_payment_method);
+        verify(view).findViewById(R.id.text_name_payment_method);
         verifyStatic();
         ResourceProvider.getStringFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getStringName());
         verify(name).setText("some text");
-        verify(name).setTypeface(null, Typeface.BOLD);
-        verify(container).findViewById(R.id.img_payment_method);
+        verify(view).findViewById(R.id.image_payment_method);
         verifyStatic();
         ResourceProvider.getDrawableFromName(mContext, TypePaymentMethodEnum.CREDIT_CARD.getResourceName());
         verify(image).setImageDrawable(drawable);
-        verify(container).setTag(TypePaymentMethodEnum.CREDIT_CARD);
+        verify(view).setTag(TypePaymentMethodEnum.CREDIT_CARD);
+
     }
+
 }
