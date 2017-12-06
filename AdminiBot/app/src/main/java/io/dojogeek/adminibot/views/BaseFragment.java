@@ -16,7 +16,7 @@ public abstract class BaseFragment extends Fragment {
 
         mView = inflater.inflate(idLayout, container, false);
 
-        setupComponent(App.get(this.getActivity()).component());
+//        setupComponent(App.get(this.getActivity()).component());
 
         return this;
     }

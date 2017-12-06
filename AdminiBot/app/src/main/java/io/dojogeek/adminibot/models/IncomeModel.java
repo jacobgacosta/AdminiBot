@@ -60,4 +60,5 @@ public class IncomeModel {
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
+
 }

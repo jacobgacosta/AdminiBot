@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -24,7 +23,7 @@ import io.dojogeek.adminibot.adapters.SimpleItemAdapter;
 import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
 import io.dojogeek.adminibot.presenters.MyCashPresenter;
 
-public class MyCashActivity extends BaseActivity implements MyCash {
+public class MyCashActivity extends BaseActivity2 implements MyCash {
 
     private RecyclerView mRecyclerView;
 
@@ -116,11 +115,11 @@ public class MyCashActivity extends BaseActivity implements MyCash {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
+//        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_cash);
-        icon.setImageDrawable(drawable);
+//        icon.setImageDrawable(drawable);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText(R.string.title_my_cash_activity);
+//        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        title.setText(R.string.title_my_cash_activity);
     }
 }

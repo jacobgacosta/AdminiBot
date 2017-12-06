@@ -2,56 +2,37 @@ package io.dojogeek.adminibot.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
-import dagger.App;
-import dagger.AppComponent;
+import io.dojogeek.adminibot.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-        setupComponent(App.get(this).component());
+        setContentView(getContentView());
 
-        int idLayoutActivity = getLayoutActivity();
-        super.setContentView(idLayoutActivity);
-
-        prepareViewComponentsAndListeners();
-
-        loadDataView();
+        this.configToolbar();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void configToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((TextView) findViewById(R.id.text_title_toolbar)).setText(getToolbarTitle());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        closeConnections();
+    public int getToolbarTitle() {
+        throw new RuntimeException("Stub!");
     }
 
-    private void prepareViewComponentsAndListeners() {
-
-        loadViews();
-
-        addListenersToViews();
+    public int getContentView() {
+        throw new RuntimeException("Stub!");
     }
-
-    protected abstract void setupComponent(AppComponent appComponent);
-
-    protected abstract void loadViews();
-
-    protected abstract void addListenersToViews();
-
-    protected abstract void loadDataView();
-
-    protected abstract int getLayoutActivity();
-
-    protected abstract void closeConnections();
 
 }

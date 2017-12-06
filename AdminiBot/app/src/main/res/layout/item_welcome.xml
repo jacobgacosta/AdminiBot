@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
         android:id="@+id/image_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_gravity="center_vertical"
+        android:tint="@color/global_background"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:gravity="center_vertical"
+        android:layout_marginLeft="16dp"
         android:orientation="vertical">
 
         <TextView
@@ -24,20 +26,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
             android:text="Simple método de pago"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/text_option_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
             android:text="Registra un ingreso utilizando un método de pago."
-            android:textSize="17sp"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

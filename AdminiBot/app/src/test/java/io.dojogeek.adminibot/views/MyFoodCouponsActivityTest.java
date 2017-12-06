@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.junit.Test;
@@ -58,7 +57,7 @@ public class MyFoodCouponsActivityTest {
 
     @Test
     public void testExtendBaseActivity() {
-        assertTrue(mMyFoodCouponsActivity instanceof BaseActivity);
+        assertTrue(mMyFoodCouponsActivity instanceof BaseActivity2);
     }
 
     @Test
@@ -112,7 +111,7 @@ public class MyFoodCouponsActivityTest {
         doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
 
         ImageView imageViewMock = mock(ImageView.class);
-        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+//        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
 
         Resources resources = mock(Resources.class);
         doReturn(resources).when(mMyFoodCouponsActivity).getResources();
@@ -121,7 +120,7 @@ public class MyFoodCouponsActivityTest {
         doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_food_coupon);
 
         TextView textViewMock = mock(TextView.class);
-        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
+//        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mMyFoodCouponsActivity.loadDataView();
 
@@ -129,10 +128,10 @@ public class MyFoodCouponsActivityTest {
         verify(mMyFoodCouponsActivity).setSupportActionBar(toolbarMock);
         verify(mMyFoodCouponsActivity).getSupportActionBar();
         verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
-        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+//        verify(toolbarMock).findViewById(R.id.toolbar_icon);
         verify(mMyFoodCouponsActivity).getResources();
         verify(resources).getDrawable(R.drawable.ic_food_coupon);
-        verify(toolbarMock).findViewById(R.id.toolbar_title);
+//        verify(toolbarMock).findViewById(R.id.toolbar_title);
         verify(imageViewMock).setImageDrawable(drawableMock);
         verify(textViewMock).setText(R.string.title_my_food_coupons_activity);
     }

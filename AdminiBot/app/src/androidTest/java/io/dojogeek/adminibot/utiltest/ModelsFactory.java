@@ -41,10 +41,10 @@ public class ModelsFactory {
 
     public static TypePaymentMethodModel createTypePaymentMethodModel() {
 
-        TypePaymentMethodModel typePaymentMethodModel = createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
-                R.string.payment_methods_food_coupons_description);
+//        TypePaymentMethodModel typePaymentMethodModel = createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
+//                R.string.payment_methods_food_coupons_description);
 
-        return typePaymentMethodModel;
+        return null;
     }
 
     public static TypePaymentMethodModel createTypePaymentMethodModel(int name, int description) {
@@ -57,12 +57,12 @@ public class ModelsFactory {
 
     public static TypePaymentMethodModel[] createTypesPaymentMethods() {
 
-        TypePaymentMethodModel[] typesPaymentMethods = {createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
-                R.string.payment_methods_food_coupons_description), createTypePaymentMethodModel(R.string.payment_methods_cash,
-                R.string.payment_methods_cash_description), createTypePaymentMethodModel(R.string.payment_methods_cheque,
-                R.string.payment_methods_cheque_description)};
-
-        return typesPaymentMethods;
+//        TypePaymentMethodModel[] typesPaymentMethods = {createTypePaymentMethodModel(R.string.payment_methods_food_coupons,
+//                R.string.payment_methods_food_coupons_description), createTypePaymentMethodModel(R.string.payment_methods_cash,
+//                R.string.payment_methods_cash_description), createTypePaymentMethodModel(R.string.payment_methods_cheque,
+//                R.string.payment_methods_cheque_description)};
+//
+        return null;
     }
 
     public static ExpenseTypeModel createExpenseTypeModel() {
@@ -123,7 +123,7 @@ public class ModelsFactory {
         IncomeModel incomeModel = new IncomeModel();
         incomeModel.setName("Income name test");
         incomeModel.setTotalAmount(new BigDecimal(45900));
-        incomeModel.setCreatedAt(DateTime.now());
+//        incomeModel.setCreatedAt(DateTime.now());
         incomeModel.setNextEntry(DateTime.now());
 
         return incomeModel;

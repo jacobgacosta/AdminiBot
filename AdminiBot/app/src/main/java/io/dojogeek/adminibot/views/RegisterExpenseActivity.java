@@ -24,11 +24,11 @@ import io.dojogeek.adminibot.models.ExpenseTypeModel;
 import io.dojogeek.adminibot.models.TypePaymentMethodModel;
 import io.dojogeek.adminibot.presenters.RegisterExpensePresenter;
 
-public class RegisterExpenseActivity extends BaseActivity implements RegisterExpense, View.OnClickListener {
+public class RegisterExpenseActivity extends BaseActivity2 implements RegisterExpense, View.OnClickListener {
 
     private static String TAG = "ExpenseRegistrationActivity";
     private static final int DEFAULT_VALUE_SPINNER_EXPENSES_TYPES = R.string.expenses_types_spinner_default_value;
-    private static final int DEFAULT_VALUE_SPINNER_PAYMENT__METHODS = R.string.payment_methods_spinner_default_value;
+//    private static final int DEFAULT_VALUE_SPINNER_PAYMENT__METHODS = R.string.payment_methods_spinner_default_value;
 
     private EditText mName;
     private PaymentMethod mPaymentMethod;
@@ -71,7 +71,7 @@ public class RegisterExpenseActivity extends BaseActivity implements RegisterExp
             //paymentMethods.add(typePaymentMethodModel.name.getName());
         }
 
-        mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);
+//        mPaymentMethod.createSpinner(paymentMethods, DEFAULT_VALUE_SPINNER_PAYMENT__METHODS);
 
     }
 

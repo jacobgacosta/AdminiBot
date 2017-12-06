@@ -20,7 +20,7 @@ import io.dojogeek.adminibot.presenters.FoodCouponPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.FoodCouponsValidator;
 
-public class FoodCouponsActivity extends BaseActivity implements FoodCoupons , View.OnClickListener {
+public class FoodCouponsActivity extends BaseActivity2 implements FoodCoupons , View.OnClickListener {
 
     public static final int SUCCESS_INSERTION_FOOD_COUPON = R.string.success_insertion_food_coupon;
     public static final int ERROR_INSERTION_FOOD_COUPON = R.string.error_insertion_food_coupon;

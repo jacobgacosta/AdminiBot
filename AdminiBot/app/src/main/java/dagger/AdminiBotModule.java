@@ -7,6 +7,7 @@ import io.dojogeek.adminibot.daos.BankDaoImpl;
 import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
+import io.dojogeek.adminibot.daos.IncomeDaoImpl;
 import io.dojogeek.adminibot.daos.IncomeTypeTypePaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
@@ -41,7 +42,6 @@ import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.CardCreation;
 import io.dojogeek.adminibot.views.CardCreationActivity;
 import io.dojogeek.adminibot.views.Cash;
-import io.dojogeek.adminibot.views.CashActivity;
 import io.dojogeek.adminibot.views.Check;
 import io.dojogeek.adminibot.views.CheckActivity;
 import io.dojogeek.adminibot.views.CreditCard;
@@ -60,6 +60,7 @@ import io.dojogeek.adminibot.views.MyCreditCards;
 import io.dojogeek.adminibot.views.MyCreditCardsActivity;
 import io.dojogeek.adminibot.views.MyFoodCoupons;
 import io.dojogeek.adminibot.views.MyFoodCouponsActivity;
+import io.dojogeek.adminibot.views.PaymentMethods;
 import io.dojogeek.adminibot.views.PaymentMethodsActivity;
 import io.dojogeek.adminibot.views.RegisterExpense;
 import io.dojogeek.adminibot.views.RegisterExpenseActivity;
@@ -74,7 +75,7 @@ public class AdminiBotModule {
     private Inbox mInbox;
     private Context mContext;
     private RegisterExpense mRegisterExpense;
-    private io.dojogeek.adminibot.views.PaymentMethods mPaymentMethods;
+    private PaymentMethods mPaymentMethods;
     private AddPaymentMethod mAddPaymentMethod;
     private CardCreation mCardCreation;
     private CreditCard mCreditCard;
@@ -106,7 +107,7 @@ public class AdminiBotModule {
         mContext = ((RegisterExpenseActivity) registerExpense);
     }
 
-    public AdminiBotModule(io.dojogeek.adminibot.views.PaymentMethods paymentMethods) {
+    public AdminiBotModule(PaymentMethods paymentMethods) {
         mPaymentMethods = paymentMethods;
         mContext = ((PaymentMethodsActivity) paymentMethods);
     }
@@ -124,11 +125,6 @@ public class AdminiBotModule {
     public AdminiBotModule(CreditCard creditCard) {
         mCreditCard = creditCard;
         mContext = (CreditCardActivity) creditCard;
-    }
-
-    public AdminiBotModule(Cash cash) {
-        mCash = cash;
-        mContext = (CashActivity) cash;
     }
 
     public AdminiBotModule(Check check) {
@@ -194,12 +190,10 @@ public class AdminiBotModule {
 
     @Provides
     @AdminBotScope
-    PaymentMethodsPresenter providePaymentMethodsPresenter(IncomeTypeTypePaymentMethodDaoImpl incomeTypePaymentMethodDaoImpl,
-                                                           BankCardDaoImpl bankCardDaoImpl,
-                                                           PaymentMethodDaoImpl paymentMethodDaoImpl) {
+    PaymentMethodsPresenter providePaymentMethodsPresenter(IncomeDaoImpl incomeDao) {
 
-        return new PaymentMethodsPresenterImpl(mPaymentMethods, incomeTypePaymentMethodDaoImpl,
-                bankCardDaoImpl, paymentMethodDaoImpl) ;
+        return new PaymentMethodsPresenterImpl(mPaymentMethods, incomeDao);
+
     }
 
     @Provides

@@ -15,7 +15,7 @@ import io.dojogeek.adminibot.presenters.LoginPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.LoginValidator;
 
-public class LoginActivity extends BaseActivity implements Login, View.OnClickListener {
+public class LoginActivity extends BaseActivity2 implements Login, View.OnClickListener {
 
     @Inject
     public LoginPresenter loginPresenter;

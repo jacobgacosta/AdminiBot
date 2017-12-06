@@ -10,6 +10,6 @@
         android:gravity="center"
         android:padding="10dp"
         android:textSize="30sp"
-        android:text="@string/credit_card"/>
+        android:text="@string/msg_credit_card"/>
 
 </LinearLayout>

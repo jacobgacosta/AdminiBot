@@ -26,7 +26,7 @@ public class PaymentMethodAdapter extends ArrayAdapter<TypePaymentMethodEnum> {
         mContext = context;
 
         mPaymentMethods = paymentMethods;
-        
+
     }
 
     @Override

@@ -2,26 +2,34 @@ package io.dojogeek.adminibot.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.WelcomeAdapter;
 
-public class WelcomeActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public static String TAG = "WelcomeActivity";
     private ListView mItemsContainer;
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        this.instantiateViews();
+
+        this.setListeners();
+
+        this.loadViewData();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
                 this.launchView(PaymentMethodsActivity.class);
@@ -33,55 +41,37 @@ public class WelcomeActivity extends AppCompatActivity implements AdapterView.On
                 Log.i(TAG, "No actions for the selected option");
                 break;
         }
-
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public int getToolbarTitle() {
+        return R.string.title_welcome;
+    }
 
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_welcome);
-
-        this.instantiateViews();
-
-        this.setListeners();
-
-        this.loadViewData();
-
+    @Override
+    public int getContentView() {
+        return R.layout.activity_welcome;
     }
 
     private void instantiateViews() {
-
         mItemsContainer = (ListView) findViewById(R.id.list_options);
-
     }
 
     private void setListeners() {
-
         mItemsContainer.setOnItemClickListener(this);
-
     }
 
     private void loadViewData() {
-
-        setTitle(R.string.title_welcome);
-
-        List<Integer[]> items = new ArrayList<>();
-        items.add(new Integer[]{R.drawable.ic_cash, R.string.title_option_1, R.string.msg_description_1});
-        items.add(new Integer[]{R.drawable.ic_card, R.string.title_option_2, R.string.msg_description_2});
-
-        WelcomeAdapter adapter = new WelcomeAdapter(this, items);
-
-        mItemsContainer.setAdapter(adapter);
-
+        mItemsContainer.setAdapter(new WelcomeAdapter(this, Arrays.asList(
+                new Integer[]{R.drawable.ic_wel_cash, R.string.title_option_1, R.string.msg_description_1},
+                new Integer[]{R.drawable.ic_card, R.string.title_option_2, R.string.msg_description_2},
+                new Integer[]{R.drawable.ic_savings, R.string.title_option_3, R.string.msg_description_3}
+        )));
     }
 
     private void launchView(Class activity) {
-
         Intent intent = new Intent(this, activity);
         startActivity(intent);
-
     }
 
 }

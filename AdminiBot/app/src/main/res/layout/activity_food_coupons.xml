@@ -11,22 +11,19 @@
 
     <EditText
         android:id="@+id/food_coupon_alias"
-        android:hint="Alias"
-        style="@style/inputTheme" />
+        android:hint="Alias"/>
 
     <EditText
         android:id="@+id/food_coupon_number"
         android:inputType="numberDecimal"
         android:hint="Número o código de vale"
-        android:layout_below="@+id/food_coupon_alias"
-        style="@style/inputTheme" />
+        android:layout_below="@+id/food_coupon_alias"/>
 
     <EditText
         android:id="@+id/food_coupon_amount"
         android:inputType="numberDecimal"
         android:hint="Monto"
-        android:layout_below="@+id/food_coupon_number"
-        style="@style/inputTheme" />
+        android:layout_below="@+id/food_coupon_number"/>
 
     <Button
         android:id="@+id/add_food_coupond"

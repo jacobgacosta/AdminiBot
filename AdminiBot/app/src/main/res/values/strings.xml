@@ -68,12 +68,6 @@
 
     <!-- Inbox -->
 
-    <!-- payment methods types -->
-    <string name="payment_methods_spinner_default_value">Selecciona un tipo de pago</string>
-    <string name="payment_methods_cheque">cheque</string>
-    <string name="payment_methods_food_coupons">Vales de despensa</string>
-    <string name="payment_methods_cash">Efectivo</string>
-
     <string name="payment_methods_food_coupons_description">Vales de despensa, tarjetas o cupones</string>
     <string name="payment_methods_cash_description">Dinero en efectivo</string>
     <string name="payment_methods_cheque_description">Documento de pago</string>
@@ -84,9 +78,6 @@
     <string name="title_activity_expenses_inbox">Gastos</string>
 
     <!-- messages -->
-
-    <!-- Payment methods -->
-    <string name="credit_card">Tarjeta de crédito</string>
 
     <string name="choise_payment_method">Elige el método de pago</string>
 
@@ -118,6 +109,7 @@
     <string name="error_insertion_food_coupon">Se produjo un error al agregar el cupon</string>
 
     <!-- banks -->
+    <string name="banks_hint">Seleccione un banco</string>
     <string name="banks_bancomer">Bancomer</string>
     <string name="banks_banamex">Banamex</string>
     <string name="banks_banorte">Bancomer</string>
@@ -160,10 +152,55 @@
     <string name="add_more_payment_method">Agregar</string>
 
     <!-- * Welcome -->
-    <string name="welcome_title">Selecciona una opción :</string>
-    <string name="title1">Ingreso</string>
-    <string name="description1">Utiliza uno o varios metodo método de pago para registrar un ingreso.</string>
-    <string name="title2">Tarjeta de crédito</string>
-    <string name="description2">Registra una tarjeta de crédito.</string>
+    <string name="title_welcome">Selecciona una opción</string>
+    <string name="title_option_1">Ingreso</string>
+    <string name="msg_description_1">Utiliza uno o varios metodo método de pago para registrar un ingreso.</string>
+    <string name="title_option_2">Tarjeta de crédito</string>
+    <string name="msg_description_2">Registra una tarjeta de crédito.</string>
+    <string name="title_option_3">Ahorros</string>
+    <string name="msg_description_3">Registra tus ahorros.</string>
+
+    <!-- * Payment methods dialog -->
+    <string name="title_concept_of_income">Concepto del ingreso *</string>
+    <string name="error_concept_of_income">El concepto es obligatorio</string>
+
+    <!-- * Dialog buttons -->
+    <string name="msg_accept">Aceptar</string>
+    <string name="msg_cancel">Cancelar</string>
+
+    <!-- * Cash dialog -->
+    <string name="title_cash_amount">Monto en efectivo *</string>
+
+    <string name="error_amount">El monto no puede estar vacío</string>
+
+    <!-- * Food coupon dialog -->
+    <string name="title_food_coupon_amount">Monto de vales o cupones de despensa *</string>
+
+    <!-- * Payment methods activity -->
+    <string name="title_payment_methods">Metodos de pago</string>
+    <string name="title_alert_empty_payment_methods">¡Hey!</string>
+    <string name="msg_alert_empty_payment_methods">Agrega algun método de pago para continuar.</string>
+
+    <!-- * payment methods types -->
+    <string name="msg_food_coupons">Vales de despensa</string>
+    <string name="msg_cash">Efectivo</string>
+    <string name="msg_credit_card">Tarjeta de crédito</string>
+    <string name="msg_debit_card">Tarjeta de débito</string>
+
+    <!-- * debit card -->
+    <string name="title_debit_card">Nueva tarjeta de débito</string>
+    <string name="msg_debit_card_name">Nombre de la tarjeta *</string>
+    <string name="msg_debit_card_number">Número *</string>
+    <string name="msg_debit_card_amount">Monto *</string>
+    <string name="msg_debit_card_button">Agregar</string>
+    <string-array name="banks_array">
+        <item>Banamex</item>
+        <item>Bancomer</item>
+        <item>Santander</item>
+        <item>HSBC</item>
+        <item>Wallmart</item>
+        <item>Scotia bank</item>
+        <item>American Express</item>
+    </string-array>
 
 </resources>

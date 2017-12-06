@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -29,7 +27,7 @@ import io.dojogeek.adminibot.listeners.RecyclerItemOnClickListener;
 import io.dojogeek.adminibot.presenters.MyCreditCardsPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class MyCreditCardsActivity extends BaseActivity implements MyCreditCards, RecyclerItemOnClickListener {
+public class MyCreditCardsActivity extends BaseActivity2 implements MyCreditCards, RecyclerItemOnClickListener {
 
     public static final String CREDIT_CARD_ID = "CREDIT_CARD_ID";
     public static final String TAG = "MyCreditCardsActivity";
@@ -121,11 +119,11 @@ public class MyCreditCardsActivity extends BaseActivity implements MyCreditCards
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
+//        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_card);
-        icon.setImageDrawable(drawable);
+//        icon.setImageDrawable(drawable);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText(R.string.title_activity_my_credit_cards);
+//        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        title.setText(R.string.title_activity_my_credit_cards);
     }
 }

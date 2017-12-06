@@ -1,8 +1,9 @@
 package io.dojogeek.adminibot.presenters;
 
+import io.dojogeek.adminibot.models.IncomeModel;
+
 public interface PaymentMethodsPresenter {
 
-    void closeConnections();
+    void registerIncome(IncomeModel income);
 
-    void loadAvailablePaymentMethods();
 }

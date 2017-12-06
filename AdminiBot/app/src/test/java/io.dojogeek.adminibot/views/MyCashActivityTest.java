@@ -119,7 +119,7 @@ public class MyCashActivityTest {
         doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
 
         ImageView imageViewMock = mock(ImageView.class);
-        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+//        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
 
         Resources resources = mock(Resources.class);
         doReturn(resources).when(mCashActivity).getResources();
@@ -128,7 +128,7 @@ public class MyCashActivityTest {
         doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_cash);
 
         TextView textViewMock = mock(TextView.class);
-        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
+//        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mCashActivity.loadDataView();
 
@@ -136,10 +136,10 @@ public class MyCashActivityTest {
         verify(mCashActivity).setSupportActionBar(toolbarMock);
         verify(mCashActivity).getSupportActionBar();
         verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
-        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+//        verify(toolbarMock).findViewById(R.id.toolbar_icon);
         verify(mCashActivity).getResources();
         verify(resources).getDrawable(R.drawable.ic_cash);
-        verify(toolbarMock).findViewById(R.id.toolbar_title);
+//        verify(toolbarMock).findViewById(R.id.toolbar_title);
         verify(imageViewMock).setImageDrawable(drawableMock);
         verify(textViewMock).setText(R.string.title_my_cash_activity);
 

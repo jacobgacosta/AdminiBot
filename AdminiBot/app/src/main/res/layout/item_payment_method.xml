@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin">
 
     <ImageView
         android:id="@+id/image_payment_method"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_food_coupon"
-        android:contentDescription=""/>
+        android:contentDescription=""
+        android:src="@drawable/ic_cash"
+        android:tint="@color/global_background"/>
 
-    <TextView
-        android:id="@+id/text_name_payment_method"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingLeft="30dp"
-        android:textSize="20sp"/>
+        android:orientation="vertical"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:id="@+id/text_name_payment_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:textColor="#5d5d5d"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/listDivider"/>
+
+    </LinearLayout>
+
 </LinearLayout>

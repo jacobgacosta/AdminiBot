@@ -20,9 +20,10 @@ import io.dojogeek.adminibot.sqlite.IncomesContract;
 import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -32,22 +33,26 @@ public class IncomeDaoImplTest {
 
     private static final long EQUALITY = 0;
     private static final long NO_OPERATION = 0;
-    private static final int SUCCESS_OPERATION = 1;
+    private static final long SUCCESS_OPERATION = 1;
     private static final long OPERATIONAL_ERROR = -1;
 
     private Context mContext;
-    private IncomeDao mIncomeDao;
+    private IncomeDaoImpl mIncomeDao;
 
     @Before
     public void setup() {
+
         mContext = getTargetContext();
         mIncomeDao = new IncomeDaoImpl(mContext);
+
     }
 
     @After
     public void tearDown() {
-        ((IncomeDaoImpl) mIncomeDao).closeConnection();
+
+        mIncomeDao.closeConnection();
         mContext.deleteDatabase(AdminiBotSQLiteOpenHelper.DATABASE_NAME);
+
     }
 
     @Test
@@ -57,8 +62,8 @@ public class IncomeDaoImplTest {
 
         long insertedRecordId = mIncomeDao.createIncome(incomeModel);
 
-        assertNotEquals(NO_OPERATION, insertedRecordId);
-        assertNotEquals(OPERATIONAL_ERROR, insertedRecordId);
+        assertThat(insertedRecordId, is(not(NO_OPERATION)));
+        assertThat(insertedRecordId, is(not(OPERATIONAL_ERROR)));
 
     }
 
@@ -103,6 +108,7 @@ public class IncomeDaoImplTest {
         List<IncomeModel> actualIncomeModels = mIncomeDao.getIncomes();
 
         compareIncomesList(expectedIncomeModels, actualIncomeModels);
+
     }
 
     @Test
@@ -111,6 +117,7 @@ public class IncomeDaoImplTest {
         List<IncomeModel> actualIncomeModels = mIncomeDao.getIncomes();
 
         assertThat(actualIncomeModels.isEmpty(), is(true));
+
     }
 
     @Test
@@ -127,7 +134,7 @@ public class IncomeDaoImplTest {
 
         long updatedRows = mIncomeDao.updateIncome(expectedNewIncomeModel, where);
 
-        assertEquals(SUCCESS_OPERATION, updatedRows);
+        assertThat(updatedRows, is(equalTo(SUCCESS_OPERATION)));
 
         IncomeModel actualUpdatedIncome = mIncomeDao.getIncomeById(insertedRecordId);
 
@@ -167,7 +174,8 @@ public class IncomeDaoImplTest {
 
         long deletedRows = mIncomeDao.deleteIncome(insertedRecordId);
 
-        assertEquals(SUCCESS_OPERATION, deletedRows);
+        assertThat(deletedRows, is(SUCCESS_OPERATION));
+
     }
 
     @Test
@@ -193,25 +201,27 @@ public class IncomeDaoImplTest {
             IncomeModel incomeModel = ModelsFactory.createIncomeModel();
 
             mIncomeDao.createIncome(incomeModel);
+
             incomeModelList.add(incomeModel);
         }
 
         return incomeModelList;
+
     }
 
     private void compareIncomesList(List<IncomeModel> expectedIncomes, List<IncomeModel> actualIncomes) {
 
         assertNotNull(actualIncomes);
-        assertTrue(!actualIncomes.isEmpty());
+        assertTrue(! actualIncomes.isEmpty());
         assertEquals(expectedIncomes.size(), actualIncomes.size());
 
         for (int index = 0; index < actualIncomes.size(); index++) {
-
             IncomeModel actualIncomeModel = actualIncomes.get(index);
             IncomeModel expectedIncomeModel = expectedIncomes.get(index);
 
             compareIncomes(expectedIncomeModel, actualIncomeModel);
         }
+
     }
 
     private void compareIncomes(IncomeModel expectedIncomeModel, IncomeModel actualIncomeModel) {
@@ -227,6 +237,7 @@ public class IncomeDaoImplTest {
         assertEquals(EQUALITY, time.compare(expectedIncomeModel.getNextEntry().withMillisOfSecond(0),
                 actualIncomeModel.getNextEntry().withMillisOfSecond(0)));
         assertEquals(expectedIncomeModel.getTotalAmount(), actualIncomeModel.getTotalAmount());
+
     }
 
 }

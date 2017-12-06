@@ -14,14 +14,12 @@
 
             <io.dojogeek.adminibot.components.CustomSpinner
                 android:id="@+id/mandayory_payment_method"
-                style="@style/spinnerTheme"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>
 
             <EditText
                 android:id="@+id/mandatory_amount"
                 android:inputType="numberDecimal"
-                style="@style/inputTheme"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:hint="@string/expense_registration_hint_amount" />

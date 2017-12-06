@@ -1,143 +1,143 @@
 package io.dojogeek.adminibot.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import dagger.AdminiBotComponent;
+import dagger.AdminiBot;
 import dagger.AdminiBotModule;
-import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
+import io.dojogeek.adminibot.components.AlertDialogFragment;
+import io.dojogeek.adminibot.components.CashDialogFragment;
+import io.dojogeek.adminibot.components.FoodCouponDialog;
+import io.dojogeek.adminibot.components.IncomeConceptDialog;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
-import io.dojogeek.adminibot.utils.LaunchIntents;
 
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods,
-        View.OnClickListener, AdapterView.OnItemClickListener {
+        IncomeConceptDialog.Acceptable, CashDialogFragment.Acceptable, FoodCouponDialog.Acceptable,
+        AdapterView.OnItemClickListener, View.OnClickListener {
 
     public static final String TAG = "PaymentMethodsActivity";
 
     @Inject
-    public PaymentMethodsPresenter mPaymentMethodsPresenter;
+    public PaymentMethodsPresenter mPresenter;
 
-    private ListView mPaymentMethodsList;
-
-    private TextView mNoPaymentMethodsLabel;
-
-    private FloatingActionButton mAddNewPaymentMethodButton;
-
-    @Override
-    public void showRegistered(List<TypePaymentMethodEnum> paymentMethods) {
-
-        if (paymentMethods.isEmpty()) {
-
-            setTitle(R.string.add_payment_method);
-
-            mNoPaymentMethodsLabel.setVisibility(View.VISIBLE);
-
-            mPaymentMethodsList.setVisibility(View.GONE);
-
-            return;
-        }
-
-        setTitle(R.string.make_payment_with);
-
-        listPaymentMethods(paymentMethods);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        int id = view.getId();
-
-        switch (id) {
-            case R.id.add_payment_method:
-                LaunchIntents.launchIntentClearTop(this, AddPaymentMethodActivity.class);
-                break;
-            default:
-                Log.v(TAG, "No events for this view");
-                break;
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        TypePaymentMethodEnum typePaymentMethodEnum = (TypePaymentMethodEnum) view.getTag();
-
-        switch (typePaymentMethodEnum) {
-            case CREDIT_CARD:
-                LaunchIntents.launchIntentClearTop(this, MyCreditCardsActivity.class);
-                break;
-            case CASH:
-                LaunchIntents.launchIntentClearTop(this, MyCashActivity.class);
-                break;
-            case FOOD_COUPONS:
-                LaunchIntents.launchIntentClearTop(this, MyFoodCouponsActivity.class);
-                break;
-            default:
-                Log.v(this.getClass().getName(), "No operations for this event");
-                break;
-        }
-    }
+    private TextView mTotalIncome;
+    private TextView mIncomeConcept;
+    private ListView mPaymentMethods;
+    private FloatingActionButton mStoreIncome;
+    private BigDecimal mTotalAmount = new BigDecimal(0.0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.setupInjector();
+
+        this.instantiateViews();
+
+        this.addListeners();
+
+        this.loadView();
+
+        this.showIncomeConceptInput();
     }
 
     @Override
-    protected void setupComponent(AppComponent appComponent) {
-        AdminiBotComponent adminiBotComponent = appComponent.plus(new AdminiBotModule(this));
-        adminiBotComponent.inject(this);
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch ((TypePaymentMethodEnum) view.getTag()) {
+            case CASH:
+                new CashDialogFragment().show(getSupportFragmentManager(), "cashDialog");
+                break;
+            case FOOD_COUPONS:
+                new FoodCouponDialog().show(getSupportFragmentManager(), "foodCoupon");
+                break;
+            case DEBIT_CARD:
+                Intent intent = new Intent(this, DebitCardActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
-    protected void loadViews() {
-        RelativeLayout mContainerPaymentMethods = (RelativeLayout) findViewById(R.id.container_payment_methods);
-        mPaymentMethodsList = (ListView) mContainerPaymentMethods.findViewById(R.id.lst_payment_methods);
-        mNoPaymentMethodsLabel = (TextView) findViewById(R.id.txv_notification_label);
-        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.btn_add_payment_method);
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_save_payment_methods:
+                new AlertDialogFragment().setText(R.string.msg_alert_empty_payment_methods)
+                        .show(getSupportFragmentManager(), "alertDialog");
+                break;
+        }
     }
 
     @Override
-    protected void addListenersToViews() {
+    public void acceptCashAmount(BigDecimal amount) {
+        mTotalAmount = mTotalAmount.add(amount);
 
-        mAddNewPaymentMethodButton.setOnClickListener(this);
-        mPaymentMethodsList.setOnItemClickListener(this);
+        mTotalIncome.setText("$" + mTotalAmount);
     }
 
     @Override
-    protected void loadDataView() {
-
-        mPaymentMethodsPresenter.loadAvailablePaymentMethods();
+    public void acceptIncomeConcept(String value) {
+        mIncomeConcept.setText(value);
     }
 
     @Override
-    protected int getLayoutActivity() {
+    public void acceptFoodCouponAmount(BigDecimal amount) {
+        mTotalAmount = mTotalAmount.add(amount);
+
+        mTotalIncome.setText("$" + mTotalAmount);
+    }
+
+    @Override
+    public int getContentView() {
         return R.layout.activity_payment_methods;
     }
 
     @Override
-    protected void closeConnections() {
-        mPaymentMethodsPresenter.closeConnections();
+    public int getToolbarTitle() {
+        return R.string.title_payment_methods;
     }
 
-    private void listPaymentMethods(List<TypePaymentMethodEnum> typePaymentMethodEnumList) {
-
-        PaymentMethodAdapter paymentMethodAdapter = new PaymentMethodAdapter(this,
-                typePaymentMethodEnumList);
-
-        mPaymentMethodsList.setAdapter(paymentMethodAdapter);
+    private void addListeners() {
+        mPaymentMethods.setOnItemClickListener(this);
+        mStoreIncome.setOnClickListener(this);
     }
+
+    private void setupInjector() {
+        ((AdminiBot) getApplication()).getComponent().plus(new AdminiBotModule(this)).inject(this);
+    }
+
+    private void instantiateViews() {
+        mTotalIncome = (TextView) findViewById(R.id.text_total_amount);
+        mIncomeConcept = (TextView) findViewById(R.id.text_income_concept);
+        mPaymentMethods = (ListView) findViewById(R.id.list_payment_methods);
+        mStoreIncome = (FloatingActionButton) findViewById(R.id.button_save_payment_methods);
+    }
+
+    private void loadView() {
+        PaymentMethodAdapter adapter = new PaymentMethodAdapter(this,
+                Arrays.asList(TypePaymentMethodEnum.FOOD_COUPONS, TypePaymentMethodEnum.CASH,
+                        TypePaymentMethodEnum.DEBIT_CARD));
+
+        mPaymentMethods.setAdapter(adapter);
+    }
+
+    private void showIncomeConceptInput() {
+        DialogFragment dialogFragment = new IncomeConceptDialog();
+        dialogFragment.show(getSupportFragmentManager(), "incomeConcept");
+        dialogFragment.setCancelable(false);
+    }
+
 }

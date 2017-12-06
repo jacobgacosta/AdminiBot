@@ -27,7 +27,6 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.DatePickerFragment;
 import io.dojogeek.adminibot.components.SpinnerWithInternalImage;
-import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CreditCardModel;
@@ -111,7 +110,7 @@ public class CreditCardActivityTest {
     @Test
     public void testExtendBaseActivity() {
 
-        assertTrue(mCreditCardActivity instanceof BaseActivity);
+        assertTrue(mCreditCardActivity instanceof BaseActivity2);
 
     }
 

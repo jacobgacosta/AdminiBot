@@ -16,7 +16,7 @@ import io.dojogeek.adminibot.utils.AlertDialogs;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.UserValidator;
 
-public class RegisterUserActivity extends BaseActivity implements RegisterUser, View.OnClickListener {
+public class RegisterUserActivity extends BaseActivity2 implements RegisterUser, View.OnClickListener {
 
     @Inject
     public RegisterUserPresenter registerUserPresenter;

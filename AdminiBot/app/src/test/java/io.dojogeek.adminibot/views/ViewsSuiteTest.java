@@ -7,7 +7,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AddPaymentMethodActivityTest.class,
         CardCreationActivityTest.class,
-        CashActivityTest.class,
         CheckActivityTest.class,
         CreditCardActivityTest.class,
         CreditCardDetailActivityTest.class,
@@ -15,7 +14,6 @@ import org.junit.runners.Suite;
         MyCashActivityTest.class,
         MyCreditCardsActivityTest.class,
         MyFoodCouponsActivityTest.class,
-        PaymentMethodsActivityTest.class
 })
 public class ViewsSuiteTest {
 }

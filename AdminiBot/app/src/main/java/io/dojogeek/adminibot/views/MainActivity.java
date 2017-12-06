@@ -16,7 +16,7 @@ import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.listeners.impl.ActionBarDrawerToggleListener;
 import io.dojogeek.adminibot.listeners.impl.NavigationViewListener;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity2 {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;

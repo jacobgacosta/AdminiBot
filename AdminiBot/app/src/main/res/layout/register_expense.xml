@@ -28,7 +28,6 @@
 
             <EditText
                 android:id="@+id/expense_name"
-                style="@style/inputTheme"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="32dp"
@@ -36,7 +35,6 @@
 
             <io.dojogeek.adminibot.components.CustomSpinner
                 android:id="@+id/expenses_types"
-                style="@style/spinnerTheme"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_below="@+id/expense_name" />

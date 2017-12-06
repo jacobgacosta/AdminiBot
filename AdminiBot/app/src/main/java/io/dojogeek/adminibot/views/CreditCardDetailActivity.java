@@ -18,7 +18,7 @@ import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DtoCreditCardDetail;
 import io.dojogeek.adminibot.presenters.CreditCardDetailPresenter;
 
-public class CreditCardDetailActivity extends BaseActivity implements CreditCardDetail {
+public class CreditCardDetailActivity extends BaseActivity2 implements CreditCardDetail {
 
     public static final String TAG = "CreditCardDetailActivity";
     public static final String DRAWABLE = "drawable";

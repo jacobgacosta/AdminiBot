@@ -17,7 +17,7 @@ import io.dojogeek.adminibot.adapters.CardTypeAdapter;
 import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class CardCreationActivity extends BaseActivity implements CardCreation, AdapterView.OnItemClickListener {
+public class CardCreationActivity extends BaseActivity2 implements CardCreation, AdapterView.OnItemClickListener {
 
     private ListView mCardTypes;
 

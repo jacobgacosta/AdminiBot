@@ -137,7 +137,7 @@ public class MyCreditCardsActivityTest {
         doNothing().when(actionBarMock).setDisplayHomeAsUpEnabled(true);
 
         ImageView imageViewMock = mock(ImageView.class);
-        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
+//        doReturn(imageViewMock).when(toolbarMock).findViewById(R.id.toolbar_icon);
 
         Resources resources = mock(Resources.class);
         doReturn(resources).when(mMyCreditCardsActivity).getResources();
@@ -146,7 +146,7 @@ public class MyCreditCardsActivityTest {
         doReturn(drawableMock).when(resources).getDrawable(R.drawable.ic_card);
 
         TextView textViewMock = mock(TextView.class);
-        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
+//        doReturn(textViewMock).when(toolbarMock).findViewById(R.id.toolbar_title);
 
         mMyCreditCardsActivity.loadDataView();
 
@@ -154,10 +154,10 @@ public class MyCreditCardsActivityTest {
         verify(mMyCreditCardsActivity).setSupportActionBar(toolbarMock);
         verify(mMyCreditCardsActivity).getSupportActionBar();
         verify(actionBarMock).setDisplayHomeAsUpEnabled(true);
-        verify(toolbarMock).findViewById(R.id.toolbar_icon);
+//        verify(toolbarMock).findViewById(R.id.toolbar_icon);
         verify(mMyCreditCardsActivity).getResources();
         verify(resources).getDrawable(R.drawable.ic_card);
-        verify(toolbarMock).findViewById(R.id.toolbar_title);
+//        verify(toolbarMock).findViewById(R.id.toolbar_title);
         verify(imageViewMock).setImageDrawable(drawableMock);
         verify(textViewMock).setText(R.string.title_activity_my_credit_cards);
 

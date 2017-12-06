@@ -17,8 +17,7 @@
         <EditText
             android:id="@+id/card_name"
             android:hint="Nombre de la tarjeta"
-            android:inputType="text"
-            style="@style/inputTheme" />
+            android:inputType="text"/>
 
         <LinearLayout
             android:id="@+id/credit_card_type"
@@ -26,13 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/card_number"
-                android:hint="No. de tarjeta"
-                android:inputType="number"
-                style="@style/inputTheme"
-                android:layout_weight="1"/>
 
             <RadioGroup
                 android:id="@+id/cards_brands"
@@ -80,7 +72,6 @@
 
         <io.dojogeek.adminibot.components.SpinnerWithInternalImage
             android:id="@+id/banks"
-            style="@style/spinnerTheme"
             android:layout_below="@+id/credit_card_type"
             android:layout_width="match_parent"
             android:layout_height="45dp" />
@@ -89,29 +80,25 @@
             android:id="@+id/credit_limit"
             android:inputType="numberDecimal"
             android:hint="Limite de crédito"
-            android:layout_below="@+id/banks"
-            style="@style/inputTheme" />
+            android:layout_below="@+id/banks"/>
 
         <EditText
             android:id="@+id/current_balance"
             android:inputType="numberDecimal"
             android:hint="Saldo actual"
-            android:layout_below="@+id/credit_limit"
-            style="@style/inputTheme" />
+            android:layout_below="@+id/credit_limit"/>
 
         <EditText
             android:id="@+id/cuttoff_date"
             android:focusable="false"
             android:hint="Fecha de corte"
-            android:layout_below="@+id/current_balance"
-            style="@style/inputTheme" />
+            android:layout_below="@+id/current_balance"/>
 
         <EditText
             android:id="@+id/pay_day_limit"
             android:focusable="false"
             android:hint="Fecha limite de pago"
-            android:layout_below="@+id/cuttoff_date"
-            style="@style/inputTheme" />
+            android:layout_below="@+id/cuttoff_date"/>
 
         <Button
             android:id="@+id/create_credit_card"

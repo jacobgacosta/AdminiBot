@@ -9,9 +9,11 @@ public class App extends Application {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
 
         setupGraph();
+
     }
 
     public static App get(Context context) {
@@ -25,4 +27,5 @@ public class App extends Application {
     private void setupGraph() {
         component = DaggerAppComponent.builder().appModule(new AppModule()).build();
     }
+
 }

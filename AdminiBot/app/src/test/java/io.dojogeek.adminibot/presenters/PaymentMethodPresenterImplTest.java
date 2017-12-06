@@ -3,79 +3,42 @@ package io.dojogeek.adminibot.presenters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
-import io.dojogeek.adminibot.daos.BankCardDaoImpl;
-import io.dojogeek.adminibot.daos.IncomeTypeTypePaymentMethodDaoImpl;
-import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
-import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
+import io.dojogeek.adminibot.daos.IncomeDao;
+import io.dojogeek.adminibot.models.IncomeModel;
 import io.dojogeek.adminibot.views.PaymentMethods;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({PaymentMethodsPresenterImpl.class})
 public class PaymentMethodPresenterImplTest {
 
-    @Mock
-    private PaymentMethods mActivity;
-
-    @Mock
-    private BankCardDaoImpl mBankCardDaoImpl;
-
-    @Mock
-    private PaymentMethodDaoImpl mPaymentMethodDaoImpl;
-
-    @Mock
-    private IncomeTypeTypePaymentMethodDaoImpl mIncomeTypePaymentMethodDaoImpl;
+    private PaymentMethods mPaymentMethods = mock(PaymentMethods.class);
+    private IncomeDao mIncomeDao = mock(IncomeDao.class);
 
     @InjectMocks
-    private PaymentMethodsPresenter mPresenter = new PaymentMethodsPresenterImpl(mActivity,
-            mIncomeTypePaymentMethodDaoImpl, mBankCardDaoImpl, mPaymentMethodDaoImpl);
+    private PaymentMethodsPresenterImpl mPresenter = new PaymentMethodsPresenterImpl(mPaymentMethods, mIncomeDao);
 
     @Test
-    public void testAvailablePaymentMethods_onlyOtherPaymentMethods() {
+    public void testRegisterIncome_correctFlow() {
 
-        List<TypePaymentMethodEnum> paymentMethods = new ArrayList<>();
-        paymentMethods.add(TypePaymentMethodEnum.CASH);
-        paymentMethods.add(TypePaymentMethodEnum.FOOD_COUPONS);
+        IncomeModel income = new IncomeModel();
+        income.setName("Income test");
+        income.setTotalAmount(new BigDecimal(0.0));
 
-        when(mPaymentMethodDaoImpl.getRegisteredTypes()).thenReturn(paymentMethods);
+        when(mIncomeDao.createIncome(income)).thenReturn(1L);
 
-        mPresenter.loadAvailablePaymentMethods();
+        mPresenter.registerIncome(income);
 
-        verify(mPaymentMethodDaoImpl).getRegisteredTypes();
-        verify(mActivity).showRegistered(paymentMethods);
+        verify(mIncomeDao).createIncome(income);
+        verify(mPaymentMethods).stashIncomeId(1L);
+
     }
 
-    @Test
-    public void testAvailablePaymentMethods_onlyBankCards() {
-
-        List<TypePaymentMethodEnum> bankCards = new ArrayList<>();
-        bankCards.add(TypePaymentMethodEnum.CREDIT_CARD);
-        bankCards.add(TypePaymentMethodEnum.DEBIT_CARD);
-
-        when(mBankCardDaoImpl.getRegisteredTypes()).thenReturn(bankCards);
-
-        mPresenter.loadAvailablePaymentMethods();
-
-        verify(mBankCardDaoImpl).getRegisteredTypes();
-        verify(mActivity).showRegistered(bankCards);
-    }
-
-    @Test
-    public void testCloseConnections() {
-
-        mPresenter.closeConnections();
-
-        verify(mBankCardDaoImpl).closeConnection();
-        verify(mPaymentMethodDaoImpl).closeConnection();
-        verify(mIncomeTypePaymentMethodDaoImpl).closeConnection();
-    }
 }

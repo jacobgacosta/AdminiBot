@@ -19,7 +19,6 @@ import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.components.DatePickerFragment;
 import io.dojogeek.adminibot.components.SpinnerWithInternalImage;
-import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CreditCardModel;
@@ -27,7 +26,7 @@ import io.dojogeek.adminibot.presenters.CreditCardPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CreditCardValidator;
 
-public class CreditCardActivity extends BaseActivity implements CreditCard, View.OnClickListener {
+public class CreditCardActivity extends BaseActivity2 implements CreditCard, View.OnClickListener {
 
     public static final int SUCCESS_INSERTION_CREDIT_CARD = R.string.success_insertion_cc;
     public static final int ERROR_INSERTION_CREDIT_CARD = R.string.error_insertion_cc;
@@ -109,7 +108,7 @@ public class CreditCardActivity extends BaseActivity implements CreditCard, View
     @Override
     protected void loadViews() {
         mCardName = (EditText) findViewById(R.id.card_name);
-        mCardNumber = (EditText) findViewById(R.id.card_number);
+//        mCardNumber = (EditText) findViewById(R.id.card_number);
         mSpinnerWithInternalImage = (SpinnerWithInternalImage) findViewById(R.id.banks);
         mCreditLimit = (EditText) findViewById(R.id.credit_limit);
         mCardBrands = (RadioGroup) findViewById(R.id.cards_brands);

@@ -22,7 +22,7 @@ import io.dojogeek.adminibot.presenters.CheckPresenter;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.validators.CheckValidator;
 
-public class CheckActivity extends BaseActivity implements Check, View.OnClickListener {
+public class CheckActivity extends BaseActivity2 implements Check, View.OnClickListener {
 
     public static final int SUCCESS_INSERTION_CHECK = R.string.success_insertion_check;
     public static final int ERROR_INSERTION_CHECK = R.string.error_insertion_check;
@@ -83,9 +83,6 @@ public class CheckActivity extends BaseActivity implements Check, View.OnClickLi
 
         Map<String, Integer> banksMap = new HashMap<>();
 
-        banksMap.put("ic_amex", R.string.banks_amex);
-        banksMap.put("ic_visa", R.string.banks_banamex);
-        banksMap.put("ic_mastercard", R.string.banks_bancoopel);
 
         return banksMap;
     }

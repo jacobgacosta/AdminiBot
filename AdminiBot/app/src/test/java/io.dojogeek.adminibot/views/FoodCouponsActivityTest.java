@@ -63,7 +63,7 @@ public class FoodCouponsActivityTest {
     @Test
     public void testExtendBaseActivity() {
 
-        assertTrue(mFoodCouponsActivity instanceof BaseActivity);
+        assertTrue(mFoodCouponsActivity instanceof BaseActivity2);
 
     }
 

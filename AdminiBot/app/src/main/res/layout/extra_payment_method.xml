@@ -22,12 +22,10 @@
 
         <io.dojogeek.adminibot.components.CustomSpinner
             android:id="@+id/added_payment_method"
-            style="@style/spinnerTheme"
             android:layout_height="45dp"/>
 
         <EditText
             android:id="@+id/added_amount"
-            style="@style/inputTheme"
             android:inputType="numberDecimal"
             android:hint="@string/expense_registration_hint_amount" />
 

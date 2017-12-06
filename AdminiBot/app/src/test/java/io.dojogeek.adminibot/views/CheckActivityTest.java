@@ -72,7 +72,7 @@ public class CheckActivityTest {
     @Test
     public void testExtendBaseActivity() {
 
-        assertTrue(mCheckActivity instanceof BaseActivity);
+        assertTrue(mCheckActivity instanceof BaseActivity2);
 
     }
 

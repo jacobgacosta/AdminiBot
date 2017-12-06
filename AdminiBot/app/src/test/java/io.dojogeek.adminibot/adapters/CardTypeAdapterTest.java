@@ -64,7 +64,7 @@ public class CardTypeAdapterTest {
     public void testGetView_mappingData() {
 
         int position = 0;
-        int resourceId = R.string.credit_card;
+        int resourceId = R.string.msg_credit_card;
         String stringResource = "Tarjeta de Crédito";
 
         doReturn(CardTypeEnum.CREDIT_CARD).when(mCardTypeEnumList).get(position);

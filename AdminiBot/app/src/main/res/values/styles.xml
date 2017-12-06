@@ -2,69 +2,27 @@
 
     <!-- Base application theme -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/adminiBotTheme</item>
-        <item name="actionBarStyle">@style/adminiBotTheme</item>
+        <item name="android:actionBarStyle">@style/AdminiBotTheme</item>
+        <item name="actionBarStyle">@style/AdminiBotTheme</item>
     </style>
 
     <!-- ActionBar styles -->
-    <style name="adminiBotTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="AdminiBotTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/global_background</item>
         <item name="background">@color/global_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="colorControlNormal">#FFFFFF</item>
     </style>
 
-    <!-- ActionBar title text -->
-    <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/primary_text_color</item>
+    <!-- No action bar -->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/global_background</item>
     </style>
 
-    <style name="CustomActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:actionBarStyle">@style/adminiBotActionBarTheme</item>
-        <item name="actionBarStyle">@style/adminiBotActionBarTheme</item>
-    </style>
-
-    <style name="NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name = "android:windowActionBar">false</item>
-        <item name = "android:windowNoTitle">true</item>
-    </style>
-
-    <style name="adminiBotActionBarTheme">
-        <item name="android:colorBackground">@color/global_background</item>
-        <item name="background">@color/global_background</item>
-        <item name="android:textColor">@color/primary_text_color</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowActionBar">false</item>
-    </style>
-
-    <style name="titleTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/primary_background</item>
-    </style>
-
-    <style name="inputTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:background">@drawable/edit_text_shape</item>
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">45dp</item>
-        <item name="android:textColor">@color/edit_text_color</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
-    <style name="spinnerTheme" parent="inputTheme">
-        <item name="android:background">@drawable/spinner_selector</item>
-        <item name="android:textColor">@color/edit_text_color</item>
-    </style>
-
-    <style name="registerOkButton" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textSize">48sp</item>
-        <item name="android:textColor">@color/rounded_button_background</item>
-    </style>
-
-    <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@color/primary_background</item>
-        <item name="colorControlHighlight">#40FFFFFF</item>
+    <!-- primary button -->
+    <style name="PrimaryButton" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/global_background</item>
+        <item name="colorControlHighlight">@color/global_background_dark</item>
     </style>
 
 </resources>

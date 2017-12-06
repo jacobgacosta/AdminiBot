@@ -1,13 +1,9 @@
 package io.dojogeek.adminibot.views;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -21,7 +17,7 @@ import io.dojogeek.adminibot.adapters.SimpleItemAdapter;
 import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
 import io.dojogeek.adminibot.presenters.MyFoodCouponsPresenter;
 
-public class MyFoodCouponsActivity extends BaseActivity implements MyFoodCoupons {
+public class MyFoodCouponsActivity extends BaseActivity2 implements MyFoodCoupons {
 
     private RecyclerView mRecyclerView;
 
@@ -91,11 +87,11 @@ public class MyFoodCouponsActivity extends BaseActivity implements MyFoodCoupons
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_food_coupon);
-        icon.setImageDrawable(drawable);
+//        ImageView icon = (ImageView) toolbar.findViewById(R.id.toolbar_icon);
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_food_coupon);
+//        icon.setImageDrawable(drawable);
 
-        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        title.setText(R.string.title_my_food_coupons_activity);
+//        TextView title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//        title.setText(R.string.title_my_food_coupons_activity);
     }
 }

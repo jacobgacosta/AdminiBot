@@ -18,7 +18,7 @@ import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.utils.LaunchIntents;
 
-public class AddPaymentMethodActivity extends BaseActivity implements AddPaymentMethod,
+public class AddPaymentMethodActivity extends BaseActivity2 implements AddPaymentMethod,
         AdapterView.OnItemClickListener {
 
     public static final String TAG = "AddPaymentMethodActivity";
@@ -40,8 +40,8 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
 
     @Override
     protected void loadViews() {
-        mPaymentMethods = (ListView) findViewById(R.id.lst_payment_methods);
-        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.btn_add_payment_method);
+//        mPaymentMethods = (ListView) findViewById(R.id.lst_payment_methods);
+//        mAddNewPaymentMethodButton = (FloatingActionButton) findViewById(R.id.btn_add_payment_method);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AddPaymentMethodActivity extends BaseActivity implements AddPayment
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
                 break;
             case CASH:
-                LaunchIntents.launchIntentClearTop(this, CashActivity.class);
+//                LaunchIntents.launchIntentClearTop(this, CashActivity.class);
                 break;
             case FOOD_COUPONS:
                 LaunchIntents.launchIntentClearTop(this, FoodCouponsActivity.class);

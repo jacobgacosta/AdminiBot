@@ -1,38 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/container_payment_methods"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+
+        <LinearLayout
+            android:id="@+id/layout_payment_methods_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/global_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_income_concept"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="io.dojogeek.adminibot.views.PaymentMethodsActivity">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Pago de quincena zigo"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/txv_notification_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="@string/no_payment_methods_registered"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/text_total_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="$0.00"
+                android:textColor="#FFFFFF"
+                android:textSize="50sp"/>
 
-    <ListView
-        android:id="@+id/lst_payment_methods"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/text_added_payment_methods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list_payment_methods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_add_payment_method"
+        android:id="@+id/button_save_payment_methods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
-        android:tint="@color/cardview_light_background"/>
+        android:backgroundTint="#FFC107"
+        android:clickable="true"
+        android:src="@drawable/ic_ok"
+        app:borderWidth="0dp"
+        app:layout_anchor="@id/layout_payment_methods_detail"
+        app:layout_anchorGravity="bottom|right|end"/>
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

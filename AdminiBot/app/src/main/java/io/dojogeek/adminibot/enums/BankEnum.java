@@ -5,9 +5,9 @@ import io.dojogeek.adminibot.R;
 
 public enum BankEnum {
 
-    BBVA_BANCOMER(R.string.banks_bancomer, "ic_amex"),
     BANAMEX(R.string.banks_banamex, "ic_amex"),
     BANORTE(R.string.banks_banorte, "ic_amex"),
+    BANCOMER(R.string.banks_bancomer, "ic_bancomer"),
     SANTANDER(R.string.banks_santander, "ic_amex"),
     HSBC(R.string.banks_hsbc, "ic_amex"),
     INBURSA_WALMART(R.string.banks_wallmart, "ic_amex"),

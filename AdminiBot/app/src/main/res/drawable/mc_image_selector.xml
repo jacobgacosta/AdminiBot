@@ -4,36 +4,19 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="@color/global_background"></solid>
-                    <stroke
-                        android:color="@color/global_background"
-                        android:width="2dp"/>
-                    <corners android:radius="4dp"/>
+                    <solid android:color="@color/global_background" />
+                    <stroke android:color="@color/global_background"/>
                 </shape>
             </item>
-            <item
-                android:drawable="@drawable/ic_mastercard"
-                android:bottom="2dp"
-                android:top="2dp"
-                android:left="4dp"
-                android:right="4dp"/>
         </layer-list>
     </item>
     <item android:state_checked="false">
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="@android:color/transparent">
-                    </solid>
-                    <corners android:radius="4dp"/>
+                    <solid android:color="@android:color/transparent" />
                 </shape>
             </item>
-            <item
-                android:drawable="@drawable/ic_mastercard"
-                android:bottom="2dp"
-                android:top="2dp"
-                android:left="4dp"
-                android:right="4dp"/>
         </layer-list>
     </item>
 </selector>
