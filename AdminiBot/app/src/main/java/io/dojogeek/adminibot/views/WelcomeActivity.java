@@ -15,17 +15,17 @@ import io.dojogeek.adminibot.adapters.WelcomeAdapter;
 public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public static String TAG = "WelcomeActivity";
+
     private ListView mItemsContainer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getToolbarTitle() {
+        return R.string.title_welcome;
+    }
 
-        this.instantiateViews();
-
-        this.setListeners();
-
-        this.loadViewData();
+    @Override
+    public int getContentView() {
+        return R.layout.activity_welcome;
     }
 
     @Override
@@ -44,16 +44,17 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
     }
 
     @Override
-    public int getToolbarTitle() {
-        return R.string.title_welcome;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        this.initializeViews();
+
+        this.setListeners();
+
+        this.prepareView();
     }
 
-    @Override
-    public int getContentView() {
-        return R.layout.activity_welcome;
-    }
-
-    private void instantiateViews() {
+    private void initializeViews() {
         mItemsContainer = (ListView) findViewById(R.id.list_options);
     }
 
@@ -61,7 +62,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
         mItemsContainer.setOnItemClickListener(this);
     }
 
-    private void loadViewData() {
+    private void prepareView() {
         mItemsContainer.setAdapter(new WelcomeAdapter(this, Arrays.asList(
                 new Integer[]{R.drawable.ic_wel_cash, R.string.title_option_1, R.string.msg_description_1},
                 new Integer[]{R.drawable.ic_card, R.string.title_option_2, R.string.msg_description_2},

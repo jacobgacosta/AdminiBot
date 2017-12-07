@@ -33,7 +33,6 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Inject
     public PaymentMethodsPresenter mPresenter;
-
     private TextView mTotalIncome;
     private TextView mIncomeConcept;
     private ListView mPaymentMethods;
@@ -41,18 +40,32 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getToolbarTitle() {
+        return R.string.title_payment_methods;
+    }
 
-        this.setupInjector();
+    @Override
+    public int getContentView() {
+        return R.layout.activity_payment_methods;
+    }
 
-        this.instantiateViews();
+    @Override
+    public void acceptIncomeConcept(String value) {
+        mIncomeConcept.setText(value);
+    }
 
-        this.addListeners();
+    @Override
+    public void acceptCashAmount(BigDecimal amount) {
+        mTotalAmount = mTotalAmount.add(amount);
 
-        this.loadView();
+        mTotalIncome.setText("$" + mTotalAmount);
+    }
 
-        this.showIncomeConceptInput();
+    @Override
+    public void acceptFoodCouponAmount(BigDecimal amount) {
+        mTotalAmount = mTotalAmount.add(amount);
+
+        mTotalIncome.setText("$" + mTotalAmount);
     }
 
     @Override
@@ -82,35 +95,21 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     }
 
     @Override
-    public void acceptCashAmount(BigDecimal amount) {
-        mTotalAmount = mTotalAmount.add(amount);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        mTotalIncome.setText("$" + mTotalAmount);
+        this.setupInjector();
+
+        this.initializeViews();
+
+        this.setListeners();
+
+        this.prepareView();
+
+        this.showIncomeConceptInput();
     }
 
-    @Override
-    public void acceptIncomeConcept(String value) {
-        mIncomeConcept.setText(value);
-    }
-
-    @Override
-    public void acceptFoodCouponAmount(BigDecimal amount) {
-        mTotalAmount = mTotalAmount.add(amount);
-
-        mTotalIncome.setText("$" + mTotalAmount);
-    }
-
-    @Override
-    public int getContentView() {
-        return R.layout.activity_payment_methods;
-    }
-
-    @Override
-    public int getToolbarTitle() {
-        return R.string.title_payment_methods;
-    }
-
-    private void addListeners() {
+    private void setListeners() {
         mPaymentMethods.setOnItemClickListener(this);
         mStoreIncome.setOnClickListener(this);
     }
@@ -119,14 +118,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         ((AdminiBot) getApplication()).getComponent().plus(new AdminiBotModule(this)).inject(this);
     }
 
-    private void instantiateViews() {
+    private void initializeViews() {
         mTotalIncome = (TextView) findViewById(R.id.text_total_amount);
         mIncomeConcept = (TextView) findViewById(R.id.text_income_concept);
         mPaymentMethods = (ListView) findViewById(R.id.list_payment_methods);
         mStoreIncome = (FloatingActionButton) findViewById(R.id.button_save_payment_methods);
     }
 
-    private void loadView() {
+    private void prepareView() {
         PaymentMethodAdapter adapter = new PaymentMethodAdapter(this,
                 Arrays.asList(TypePaymentMethodEnum.FOOD_COUPONS, TypePaymentMethodEnum.CASH,
                         TypePaymentMethodEnum.DEBIT_CARD));
