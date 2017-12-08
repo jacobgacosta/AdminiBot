@@ -38,6 +38,8 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private ListView mPaymentMethods;
     private FloatingActionButton mStoreIncome;
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
+    private BigDecimal mTotalCash = new BigDecimal(0.0);
+    private BigDecimal mTotalFoodCoupons = new BigDecimal(0.0);
 
     @Override
     public int getToolbarTitle() {
@@ -56,14 +58,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Override
     public void acceptCashAmount(BigDecimal amount) {
-        mTotalAmount = mTotalAmount.add(amount);
+        mTotalAmount = mTotalAmount.add(mTotalCash.add(amount));
 
         mTotalIncome.setText("$" + mTotalAmount);
     }
 
     @Override
     public void acceptFoodCouponAmount(BigDecimal amount) {
-        mTotalAmount = mTotalAmount.add(amount);
+        mTotalAmount = mTotalAmount.add(mTotalFoodCoupons.add(amount));
 
         mTotalIncome.setText("$" + mTotalAmount);
     }
