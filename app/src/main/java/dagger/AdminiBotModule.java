@@ -8,7 +8,6 @@ import io.dojogeek.adminibot.daos.CardDetailDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseDaoImpl;
 import io.dojogeek.adminibot.daos.ExpenseTypeDaoImpl;
 import io.dojogeek.adminibot.daos.IncomeDaoImpl;
-import io.dojogeek.adminibot.daos.IncomeTypeTypePaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.UserDaoImpl;
 import io.dojogeek.adminibot.presenters.CashPresenter;

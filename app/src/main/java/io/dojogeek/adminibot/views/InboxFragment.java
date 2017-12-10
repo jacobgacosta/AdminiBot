@@ -1,26 +1,20 @@
 package io.dojogeek.adminibot.views;
 
-import android.util.Log;
-
 import android.os.Bundle;
-
-
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
-
 import android.widget.ListView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.AppComponent;
 import dagger.AdminiBotModule;
-
+import dagger.AppComponent;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.models.ExpenseModel;
-import io.dojogeek.adminibot.utils.LaunchIntents;
 import io.dojogeek.adminibot.presenters.NewPurchasePresenter;
 
 public class InboxFragment extends BaseFragment implements Inbox, View.OnClickListener {

@@ -1,8 +1,6 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteConstraintException;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -10,10 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.enums.CardTypeEnum;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.BankCardModel;

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dagger.App;
 import dagger.AppComponent;
 
 public abstract class BaseFragment extends Fragment {

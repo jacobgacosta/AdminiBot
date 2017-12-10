@@ -1,29 +1,26 @@
 package io.dojogeek.adminibot.daos;
 
 import android.content.Context;
-
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import io.dojogeek.adminibot.utiltest.ModelsFactory;
 import io.dojogeek.adminibot.exceptions.DataException;
 import io.dojogeek.adminibot.models.IncomeTypePaymentMethodModel;
 import io.dojogeek.adminibot.sqlite.AdminiBotSQLiteOpenHelper;
+import io.dojogeek.adminibot.utiltest.ModelsFactory;
 
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
-
 import static org.junit.Assert.assertThat;
-
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 @RunWith(AndroidJUnit4.class)
 public class IncomePaymentMethodDaoImplTest {

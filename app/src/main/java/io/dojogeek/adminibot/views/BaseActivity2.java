@@ -3,7 +3,6 @@ package io.dojogeek.adminibot.views;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import dagger.App;
 import dagger.AppComponent;
 
 public abstract class BaseActivity2 extends AppCompatActivity {

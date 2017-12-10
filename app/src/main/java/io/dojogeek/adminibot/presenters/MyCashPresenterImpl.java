@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.daos.PaymentMethodDao;
+import io.dojogeek.adminibot.daos.PaymentMethodDaoImpl;
 import io.dojogeek.adminibot.dtos.DtoSimpleAdapter;
 import io.dojogeek.adminibot.models.PaymentMethodModel;
 import io.dojogeek.adminibot.views.MyCash;

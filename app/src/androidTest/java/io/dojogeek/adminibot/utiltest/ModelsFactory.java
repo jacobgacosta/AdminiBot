@@ -6,11 +6,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.dojogeek.adminibot.R;
-import io.dojogeek.adminibot.enums.CardTypeEnum;
+import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.models.BankCardModel;
-import io.dojogeek.adminibot.enums.ExpenseTypeEnum;
 import io.dojogeek.adminibot.models.CardDetailModel;
 import io.dojogeek.adminibot.models.CashModel;
 import io.dojogeek.adminibot.models.ExpenseBankCardModel;

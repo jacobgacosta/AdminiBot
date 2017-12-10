@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -4,8 +4,6 @@ import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
 
-import io.dojogeek.adminibot.enums.CardTypeEnum;
-
 public class BankCardModel {
 
     private long id;
