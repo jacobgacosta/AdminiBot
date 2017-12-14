@@ -1,7 +1,7 @@
 package io.dojogeek.adminibot.presenters;
 
 import io.dojogeek.adminibot.daos.IncomeDao;
-import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.dtos.IncomeDto;
 import io.dojogeek.adminibot.views.PaymentMethods;
 
 public class PaymentMethodsPresenterImpl implements PaymentMethodsPresenter {
@@ -17,7 +17,7 @@ public class PaymentMethodsPresenterImpl implements PaymentMethodsPresenter {
     }
 
     @Override
-    public void registerIncome(IncomeModel income) {
+    public void registerIncome(IncomeDto income) {
 
 //        mPaymentMethods.stashIncomeId(mIncomeDao.createIncome(income));
 

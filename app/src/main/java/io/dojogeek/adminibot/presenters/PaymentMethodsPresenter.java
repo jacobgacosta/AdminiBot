@@ -1,9 +1,9 @@
 package io.dojogeek.adminibot.presenters;
 
-import io.dojogeek.adminibot.models.IncomeModel;
+import io.dojogeek.adminibot.dtos.IncomeDto;
 
 public interface PaymentMethodsPresenter {
 
-    void registerIncome(IncomeModel income);
+    void registerIncome(IncomeDto income);
 
 }

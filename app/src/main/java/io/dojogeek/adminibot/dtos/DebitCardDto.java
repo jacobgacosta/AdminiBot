@@ -1,4 +1,6 @@
 package io.dojogeek.adminibot.dtos;
 
-public class DebitCardDto {
+import java.io.Serializable;
+
+public class DebitCardDto implements Serializable {
 }
