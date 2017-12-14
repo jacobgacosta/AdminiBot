@@ -1,5 +1,6 @@
 package io.dojogeek.adminibot.views;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,10 +19,10 @@ import dagger.AdminiBot;
 import dagger.AdminiBotModule;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
-import io.dojogeek.adminibot.components.AlertDialogFragment;
 import io.dojogeek.adminibot.components.CashDialogFragment;
 import io.dojogeek.adminibot.components.FoodCouponDialogFragment;
 import io.dojogeek.adminibot.components.IncomeConceptDialog;
+import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.IncomeDto;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
@@ -38,7 +39,6 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private TextView mIncomeConcept;
     private ListView mPaymentMethods;
     private FloatingActionButton mStoreIncome;
-    private IncomeDto mIncome = new IncomeDto();
     private BigDecimal mTotalCash = new BigDecimal(0.0);
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
     private BigDecimal mTotalFoodCoupons = new BigDecimal(0.0);
@@ -94,8 +94,12 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_save_payment_methods:
-                new AlertDialogFragment().setText(R.string.msg_alert_empty_payment_methods)
-                        .show(getSupportFragmentManager(), "alertDialog");
+                if (mTotalAmount.compareTo(BigDecimal.ZERO) == 0) {
+                    this.alertForNonExistentIncome();
+
+                } else {
+                    this.saveIncome();
+                }
                 break;
         }
     }
@@ -143,6 +147,38 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         DialogFragment dialogFragment = new IncomeConceptDialog();
         dialogFragment.show(getSupportFragmentManager(), "incomeConcept");
         dialogFragment.setCancelable(false);
+    }
+
+    private void alertForNonExistentIncome() {
+        View view = this.getLayoutInflater().inflate(R.layout.dialog_alert, null);
+        ((TextView) view.findViewById(R.id.text_alert)).setText(R.string.msg_alert_empty_payment_methods);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.msg_accept, null);
+        builder.show();
+    }
+
+    private void saveIncome() {
+        IncomeDto income = new IncomeDto();
+        income.setName((String) mIncomeConcept.getText());
+        income.setTotalAmount(mTotalAmount);
+
+        DebitCardDto debitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
+
+        if (debitCard != null) {
+            income.setDebitCard(debitCard);
+        }
+
+        if (mTotalFoodCoupons.compareTo(BigDecimal.ZERO) != 0) {
+            income.setTotalFoodCoupons(mTotalFoodCoupons);
+        }
+
+        if (mTotalCash.compareTo(BigDecimal.ZERO) != 0) {
+            income.setTotalFoodCoupons(mTotalCash);
+        }
+
+        mPresenter.registerIncome(income);
     }
 
 }
