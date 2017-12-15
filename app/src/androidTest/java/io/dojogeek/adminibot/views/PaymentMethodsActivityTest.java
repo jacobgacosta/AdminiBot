@@ -5,11 +5,17 @@ import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.dtos.IncomeDto;
+import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -23,6 +29,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -30,6 +39,18 @@ public class PaymentMethodsActivityTest {
 
     @Rule
     public ActivityTestRule<PaymentMethodsActivity> mActivityRule = new ActivityTestRule<>(PaymentMethodsActivity.class);
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
+    @Mock
+    private PaymentMethodsPresenter presenter;
+
+    @Before
+    public void setUp() {
+        PaymentMethodsActivity paymentMethodsActivity = mActivityRule.getActivity();
+        paymentMethodsActivity.mPresenter = presenter;
+    }
 
     @Test
     public void testIncomeConcept_isAccepted() {
@@ -169,6 +190,21 @@ public class PaymentMethodsActivityTest {
 
         intended(hasComponent(DebitCardActivity.class.getName()));
         Intents.release(); // clear the Intents state and stop recording intents
+    }
+
+    @Test
+    public void testClickSaveButton_processIncome() {
+        fillIncomeConcept();
+
+        onView(withText(R.string.msg_cash)).perform(click());
+        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
+        onView(withText(R.string.msg_accept)).perform(click());
+
+        doNothing().when(presenter).registerIncome(any(IncomeDto.class));
+
+        onView(withId(R.id.button_save_payment_methods)).perform(click());
+
+        verify(presenter).registerIncome(any(IncomeDto.class));
     }
 
     private void fillIncomeConcept() {
