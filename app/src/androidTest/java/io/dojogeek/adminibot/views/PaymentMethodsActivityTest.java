@@ -200,12 +200,20 @@ public class PaymentMethodsActivityTest {
         onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
         onView(withText(R.string.msg_accept)).perform(click());
 
-        doNothing().when(presenter).registerIncome(any(IncomeDto.class));
-
         onView(withId(R.id.button_save_payment_methods)).perform(click());
+
+        onView(withId(R.id.confirm_income_title)).check(matches(isDisplayed()));
+        onView(withId(R.id.total_amount_cash)).check(matches(isDisplayed())).check(matches(withText("$17500.00")));
+        onView(withId(R.id.total_food_coupons)).check(matches(isDisplayed())).check(matches(withText("$0")));
+        onView(withId(R.id.total_amount_debit_cards)).check(matches(isDisplayed())).check(matches(withText("$0")));
+        onView(withId(R.id.total_amount_income)).check(matches(isDisplayed())).check(matches(withText("$17500.00")));
+        onView(withText(R.string.msg_accept)).perform(click());
+
+        doNothing().when(presenter).registerIncome(any(IncomeDto.class));
 
         verify(presenter).registerIncome(any(IncomeDto.class));
     }
+
 
     private void fillIncomeConcept() {
         onView(withId(R.id.edit_concept_of_income)).perform(typeText("This a test concept"));
