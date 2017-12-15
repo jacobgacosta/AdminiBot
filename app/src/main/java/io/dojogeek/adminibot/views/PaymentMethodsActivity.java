@@ -1,7 +1,9 @@
 package io.dojogeek.adminibot.views;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -28,8 +30,8 @@ import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods,
-        IncomeConceptDialog.Acceptable, CashDialogFragment.Acceptable, FoodCouponDialogFragment.Acceptable,
-        AdapterView.OnItemClickListener, View.OnClickListener {
+        CashDialogFragment.Acceptable, FoodCouponDialogFragment.Acceptable,
+        IncomeConceptDialog.Acceptable, AdapterView.OnItemClickListener, View.OnClickListener {
 
     public static final String TAG = "PaymentMethodsActivity";
 
@@ -39,8 +41,10 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private TextView mIncomeConcept;
     private ListView mPaymentMethods;
     private FloatingActionButton mStoreIncome;
+    private DebitCardDto mDebitCard;
     private BigDecimal mTotalCash = new BigDecimal(0.0);
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
+    private BigDecimal mTotalDebitCards = new BigDecimal(0.0);
     private BigDecimal mTotalFoodCoupons = new BigDecimal(0.0);
 
     @Override
@@ -66,6 +70,17 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     public void acceptFoodCouponAmount(BigDecimal amount) {
         mTotalFoodCoupons = mTotalFoodCoupons.add(amount);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        mDebitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
+
+        mTotalDebitCards = mTotalDebitCards.add(mDebitCard.getTotal());
+
+        refreshTotalIncome(mDebitCard.getTotal());
     }
 
     @Override
@@ -98,7 +113,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
                     this.alertForNonExistentIncome();
 
                 } else {
-                    this.saveIncome();
+                    this.confirmSavingIncome();
                 }
                 break;
         }
@@ -159,15 +174,37 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         builder.show();
     }
 
+    private void confirmSavingIncome() {
+        Resources res = getResources();
+
+        View view = this.getLayoutInflater().inflate(R.layout.dialog_confirm_save_income, null);
+        ((TextView) view.findViewById(R.id.total_amount_cash))
+                .setText(res.getString(R.string.msg_total_amount_cash, mTotalCash));
+        ((TextView) view.findViewById(R.id.total_food_coupons))
+                .setText(res.getString(R.string.msg_total_amount_cash, mTotalFoodCoupons));
+        ((TextView) view.findViewById(R.id.total_amount_debit_cards))
+                .setText(res.getString(R.string.msg_total_amount_debit_cards, mTotalDebitCards));
+        ((TextView) view.findViewById(R.id.total_amount_income))
+                .setText(res.getString(R.string.msg_total_income, mTotalAmount));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.msg_accept, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                PaymentMethodsActivity.this.saveIncome();
+            }
+        });
+        builder.setNegativeButton(R.string.msg_cancel, null);
+        builder.show();
+    }
+
     private void saveIncome() {
         IncomeDto income = new IncomeDto();
         income.setName((String) mIncomeConcept.getText());
         income.setTotalAmount(mTotalAmount);
 
-        DebitCardDto debitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
-
-        if (debitCard != null) {
-            income.setDebitCard(debitCard);
+        if (mDebitCard != null) {
+            income.setDebitCard(mDebitCard);
         }
 
         if (mTotalFoodCoupons.compareTo(BigDecimal.ZERO) != 0) {
