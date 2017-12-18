@@ -65,10 +65,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/layout_payment_methods_detail"
-        app:backgroundTint="#FFC107"
+        app:backgroundTint="#6f6bdd"
         app:elevation="7dp"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_ok"
+        android:src="@drawable/ic_save"
         app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>
