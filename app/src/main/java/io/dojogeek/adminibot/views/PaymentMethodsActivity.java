@@ -75,6 +75,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
 
         mDebitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
 
