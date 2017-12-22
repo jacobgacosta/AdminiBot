@@ -12,7 +12,7 @@
         android:layout_height="24dp"
         android:contentDescription=""
         android:src="@drawable/ic_cash"
-        android:tint="@color/global_background"/>
+        android:tint="#e26156"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0097A7"
+        android:background="#6ec0b8"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">
@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/title_concept_of_income"
             android:inputType="text|textCapSentences"
-            android:textColor="#747474"
             android:textSize="27sp"/>
 
     </android.support.design.widget.TextInputLayout>

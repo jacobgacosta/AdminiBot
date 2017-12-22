@@ -17,6 +17,8 @@
     <!-- No action bar -->
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/global_background</item>
+        <item name="colorControlNormal">@color/global_background</item>
+        <item name="colorControlActivated">@color/global_background</item>
     </style>
 
     <!-- primary button -->
@@ -24,5 +26,6 @@
         <item name="colorButtonNormal">@color/global_background</item>
         <item name="colorControlHighlight">@color/global_background_dark</item>
     </style>
+
 
 </resources>

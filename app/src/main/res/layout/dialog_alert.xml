@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#78909C"
+        android:background="#fad36a"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">
@@ -27,6 +27,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/title_alert_empty_payment_methods"
+        android:textColor="@color/primary_text_color"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -38,6 +39,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/primary_text_color"
         android:textSize="16sp"/>
 
     <View

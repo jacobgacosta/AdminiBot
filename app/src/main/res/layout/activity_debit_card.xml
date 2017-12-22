@@ -38,8 +38,8 @@
 
         <Spinner
             android:id="@+id/spinner_banks"
-            android:layout_width="match_parent"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"/>
 
@@ -76,14 +76,12 @@
 
         <Button
             android:id="@+id/btn_add_debit_card"
-            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="40dp"
-            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/general_button_custom"
             android:text="@string/msg_debit_card_button"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:textColor="#FFF"/>
+            android:textColor="#ffff"/>
 
     </LinearLayout>
 
