@@ -201,11 +201,15 @@
         <item>Scotia bank</item>
         <item>American Express</item>
     </string-array>
+    <string name="msg_error_empty_name">El nombre de la tarjeta es requerido</string>
+    <string name="msg_error_empty_card_number">El número de tarjeta es requerido</string>
+    <string name="msg_error_empty_card_amount">El monto es requerido</string>
 
     <!-- * total income dialog -->
     <string name="msg_total_amount_cash">$%1$s</string>
     <string name="msg_total_amount_food_coupons">$%1$s</string>
     <string name="msg_total_amount_debit_cards">$%1$s</string>
     <string name="msg_total_income">$%1$s</string>
+
 
 </resources>

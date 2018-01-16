@@ -78,10 +78,11 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         setIntent(intent);
 
         mDebitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
+        BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
-        mTotalDebitCards = mTotalDebitCards.add(mDebitCard.getTotal());
+        mTotalDebitCards = mTotalDebitCards.add(amount);
 
-        refreshTotalIncome(mDebitCard.getTotal());
+        refreshTotalIncome(amount);
     }
 
     @Override
