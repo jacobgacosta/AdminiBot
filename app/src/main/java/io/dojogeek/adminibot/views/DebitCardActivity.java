@@ -13,8 +13,6 @@ import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.utils.Images;
 import io.dojogeek.adminibot.validators.DebitCardValidator;
 
-import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
-
 public class DebitCardActivity extends BaseActivity {
 
     private EditText mName;
@@ -81,18 +79,18 @@ public class DebitCardActivity extends BaseActivity {
         DebitCardValidator validator = new DebitCardValidator(this, debitCard);
 
         if (validator.isValid()) {
-            this.backToPaymentMethodsActivity();
+            this.accept(debitCard);
         }
 
         this.showErrorFrom(validator);
 
     }
 
-    private void backToPaymentMethodsActivity() {
-        Intent intent = new Intent(DebitCardActivity.this, PaymentMethodsActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("debit_card", new DebitCardDto());
-        startActivity(intent);
+    private void accept(DebitCardDto debitCard) {
+        Intent intent = new Intent();
+        intent.putExtra("debit_card", debitCard);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void showErrorFrom(DebitCardValidator validator) {

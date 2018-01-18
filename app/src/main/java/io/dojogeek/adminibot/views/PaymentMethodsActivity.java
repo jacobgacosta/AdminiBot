@@ -73,11 +73,10 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        mDebitCard = (DebitCardDto) getIntent().getSerializableExtra("debit_card");
+        mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
         mTotalDebitCards = mTotalDebitCards.add(amount);
@@ -102,7 +101,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
                 break;
             case DEBIT_CARD:
                 Intent intent = new Intent(this, DebitCardActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
         }
     }

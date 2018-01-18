@@ -11,23 +11,19 @@ import org.junit.runner.RunWith;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
 
-import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+import static android.app.Activity.RESULT_OK;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasFlag;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
@@ -63,7 +59,10 @@ public class DebitCardActivityTest {
         this.checkError(R.id.edit_card_amount, R.string.msg_error_empty_card_amount);
         this.fillEditText(R.id.edit_card_amount, "17500");
         this.saveDebitCard();
-        intended(allOf(hasFlag(FLAG_ACTIVITY_REORDER_TO_FRONT), hasExtra(equalTo("debit_card"), any(DebitCardDto.class))));
+
+        assertEquals(RESULT_OK, intentsTestRule.getActivityResult().getResultCode());
+        DebitCardDto debitCardDto = (DebitCardDto) intentsTestRule.getActivityResult().getResultData().getSerializableExtra("debit_card");
+        assertEquals("Card for test", debitCardDto.getName());
     }
 
     private void saveDebitCard() {
