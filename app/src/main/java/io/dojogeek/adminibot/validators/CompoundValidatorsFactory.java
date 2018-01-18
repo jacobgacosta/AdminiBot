@@ -35,7 +35,7 @@ public class CompoundValidatorsFactory {
         compoundValidator.addValidator(RegexValidator.withRegexp(ValidatorsValues.ONLY_LETTERS_AND_SPACES).withErroMessage(R.string.error_wrong_format_last_name));
         compoundValidator.addValidator(requiredValueValidator);
 
-        return  compoundValidator;
+        return compoundValidator;
     }
 
     public static CompoundValidator passwordValidator() {
@@ -43,7 +43,7 @@ public class CompoundValidatorsFactory {
         compoundValidator.addValidator(LenghtValidator.withMaxLength(ValidatorsValues.PASSWORD_MAX_LENGHT).withErroMessage(R.string.error_wrong_lenght_password));
         compoundValidator.addValidator(requiredValueValidator);
 
-        return  compoundValidator;
+        return compoundValidator;
     }
 
     public static CompoundValidator cashConceptValidator() {

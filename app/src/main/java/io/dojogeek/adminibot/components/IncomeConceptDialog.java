@@ -84,17 +84,13 @@ public class IncomeConceptDialog extends DialogFragment {
     }
 
     private void throwExceptionIfNotAcceptable(FragmentActivity activity) {
-
         if (!(activity instanceof Acceptable)) {
             throw new RuntimeException("The content view need to implement Acceptable interface");
         }
-
     }
 
     public interface Acceptable {
-
         void acceptIncomeConcept(String value);
-
     }
 
 }
