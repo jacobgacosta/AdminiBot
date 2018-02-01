@@ -26,6 +26,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertTrue;
@@ -212,6 +213,18 @@ public class PaymentMethodsActivityTest {
         doNothing().when(presenter).registerIncome(any(IncomeDto.class));
 
         verify(presenter).registerIncome(any(IncomeDto.class));
+    }
+
+    @Test
+    public void testClickEditButton_launchMovementsView() {
+        fillIncomeConcept();
+
+        Intents.init();// start recording the fired intents
+
+        onView(withContentDescription(R.string.msg_action_bar_edit_action)).perform(click());
+
+        intended(hasComponent(MovementsActivity.class.getName()));
+        Intents.release(); // clear the Intents state and stop recording intents
     }
 
 
