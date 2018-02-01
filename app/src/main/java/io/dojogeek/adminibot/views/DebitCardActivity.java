@@ -27,7 +27,7 @@ public class DebitCardActivity extends BaseActivity {
     }
 
     @Override
-    public int getContentView() {
+    public int getLayout() {
         return R.layout.activity_debit_card;
     }
 

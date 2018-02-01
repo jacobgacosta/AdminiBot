@@ -24,7 +24,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
     }
 
     @Override
-    public int getContentView() {
+    public int getLayout() {
         return R.layout.activity_welcome;
     }
 

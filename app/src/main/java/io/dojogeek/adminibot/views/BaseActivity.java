@@ -13,7 +13,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(getContentView());
+        setContentView(getLayout());
 
         this.configToolbar();
     }
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         throw new RuntimeException("Stub!");
     }
 
-    public int getContentView() {
+    public int getLayout() {
         throw new RuntimeException("Stub!");
     }
 

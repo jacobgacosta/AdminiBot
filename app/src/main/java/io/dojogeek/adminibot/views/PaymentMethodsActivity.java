@@ -53,7 +53,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     }
 
     @Override
-    public int getContentView() {
+    public int getLayout() {
         return R.layout.activity_payment_methods;
     }
 
@@ -80,7 +80,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
             return;
 
         }
-        
+
         mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
 
 
