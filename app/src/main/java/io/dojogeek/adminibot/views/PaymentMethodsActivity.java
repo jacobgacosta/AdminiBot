@@ -76,7 +76,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (data == null) {
+            return;
+
+        }
+        
         mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
+
+
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
         mTotalDebitCards = mTotalDebitCards.add(amount);
