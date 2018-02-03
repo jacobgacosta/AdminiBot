@@ -9,6 +9,14 @@ import io.dojogeek.adminibot.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public int getToolbarTitle() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public int getLayout() {
+        throw new RuntimeException("Stub!");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((TextView) findViewById(R.id.text_title_toolbar)).setText(getToolbarTitle());
-    }
-
-    public int getToolbarTitle() {
-        throw new RuntimeException("Stub!");
-    }
-
-    public int getLayout() {
-        throw new RuntimeException("Stub!");
     }
 
 }
