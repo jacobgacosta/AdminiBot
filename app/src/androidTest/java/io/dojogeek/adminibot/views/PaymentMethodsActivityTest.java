@@ -1,8 +1,7 @@
 package io.dojogeek.adminibot.views;
 
-import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.MediumTest;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -39,7 +38,7 @@ import static org.mockito.Mockito.verify;
 public class PaymentMethodsActivityTest {
 
     @Rule
-    public ActivityTestRule<PaymentMethodsActivity> mActivityRule = new ActivityTestRule<>(PaymentMethodsActivity.class);
+    public IntentsTestRule<PaymentMethodsActivity> mActivityRule = new IntentsTestRule<>(PaymentMethodsActivity.class);
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -185,12 +184,9 @@ public class PaymentMethodsActivityTest {
     public void testDebitCard_registrationViewIsLaunched() {
         fillIncomeConcept();
 
-        Intents.init();// start recording the fired intents
-
         onView(withText(R.string.msg_debit_card)).perform(click());
 
         intended(hasComponent(DebitCardActivity.class.getName()));
-        Intents.release(); // clear the Intents state and stop recording intents
     }
 
     @Test
@@ -219,12 +215,9 @@ public class PaymentMethodsActivityTest {
     public void testClickEditButton_launchMovementsView() {
         fillIncomeConcept();
 
-        Intents.init();// start recording the fired intents
-
         onView(withContentDescription(R.string.msg_action_bar_edit_action)).perform(click());
 
         intended(hasComponent(MovementsActivity.class.getName()));
-        Intents.release(); // clear the Intents state and stop recording intents
     }
 
 
