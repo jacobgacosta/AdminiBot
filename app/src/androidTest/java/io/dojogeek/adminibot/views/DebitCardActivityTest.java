@@ -36,13 +36,18 @@ public class DebitCardActivityTest {
 
     @Test
     public void testNewDebitCard_addOne() {
-        onView(withId(R.id.edit_card_name)).perform(typeText("Debit card test name"));
+        onView(withId(R.id.edit_card_name)).perform(typeText("Card for test"));
         onView(withId(R.id.spinner_banks)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Santander"))).perform(click());
         onView(withId(R.id.spinner_banks)).check(matches(withSpinnerText(containsString("Santander"))));
         onView(withId(R.id.edit_card_number)).perform(typeText("1234567891011121")).perform(closeSoftKeyboard());
         onView(withId(R.id.edit_card_amount)).perform(typeText("47900"));
-        onView(withId(R.id.btn_add_debit_card)).perform(closeSoftKeyboard()).perform(click());
+
+        this.saveDebitCard();
+
+        assertEquals(RESULT_OK, intentsTestRule.getActivityResult().getResultCode());
+        DebitCardDto debitCardDto = (DebitCardDto) intentsTestRule.getActivityResult().getResultData().getSerializableExtra("debit_card");
+        assertEquals("Card for test", debitCardDto.getName());
     }
 
     @Test
@@ -57,12 +62,6 @@ public class DebitCardActivityTest {
 
         this.saveDebitCard();
         this.checkError(R.id.edit_card_amount, R.string.msg_error_empty_card_amount);
-        this.fillEditText(R.id.edit_card_amount, "17500");
-        this.saveDebitCard();
-
-        assertEquals(RESULT_OK, intentsTestRule.getActivityResult().getResultCode());
-        DebitCardDto debitCardDto = (DebitCardDto) intentsTestRule.getActivityResult().getResultData().getSerializableExtra("debit_card");
-        assertEquals("Card for test", debitCardDto.getName());
     }
 
     private void saveDebitCard() {
