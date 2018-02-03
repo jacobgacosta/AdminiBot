@@ -73,25 +73,6 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (data == null) {
-            return;
-
-        }
-
-        mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
-
-
-        BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
-
-        mTotalDebitCards = mTotalDebitCards.add(amount);
-
-        refreshTotalIncome(amount);
-    }
-
-    @Override
     public void refreshTotalIncome(BigDecimal amount) {
         mTotalAmount = mTotalAmount.add(amount);
         mTotalIncome.setText("$" + mTotalAmount);
@@ -125,6 +106,25 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
                 }
                 break;
         }
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null) {
+            return;
+
+        }
+
+        mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
+
+
+        BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
+
+        mTotalDebitCards = mTotalDebitCards.add(amount);
+
+        refreshTotalIncome(amount);
     }
 
     @Override
