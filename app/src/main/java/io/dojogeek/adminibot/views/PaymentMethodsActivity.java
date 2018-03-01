@@ -7,13 +7,17 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,6 +46,9 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private ListView mPaymentMethods;
     private FloatingActionButton mStoreIncome;
     private DebitCardDto mDebitCard;
+    private List<BigDecimal> mCashMovements = new ArrayList<>();
+    private List<BigDecimal> mFoodCouponsMovements = new ArrayList<>();
+    private List<DebitCardDto> mDebitCardMovements = new ArrayList<>();
     private BigDecimal mTotalCash = new BigDecimal(0.0);
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
     private BigDecimal mTotalDebitCards = new BigDecimal(0.0);
@@ -65,16 +72,21 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     public void acceptCashAmount(BigDecimal amount) {
         mTotalCash = mTotalCash.add(amount);
+
+        mCashMovements.add(amount);
     }
 
     @Override
     public void acceptFoodCouponAmount(BigDecimal amount) {
         mTotalFoodCoupons = mTotalFoodCoupons.add(amount);
+
+        mFoodCouponsMovements.add(amount);
     }
 
     @Override
     public void refreshTotalIncome(BigDecimal amount) {
         mTotalAmount = mTotalAmount.add(amount);
+
         mTotalIncome.setText("$" + mTotalAmount);
     }
 
@@ -107,7 +119,27 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
                 break;
         }
     }
-    
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, R.id.menu_edit_action, Menu.NONE, R.string.msg_action_bar_edit_action)
+                .setIcon(R.drawable.ic_action_edit)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_edit_action:
+                Intent intent = new Intent(this, MovementsActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,6 +155,8 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
         mTotalDebitCards = mTotalDebitCards.add(amount);
+
+        mDebitCardMovements.add(mDebitCard);
 
         refreshTotalIncome(amount);
     }

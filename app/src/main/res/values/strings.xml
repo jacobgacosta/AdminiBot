@@ -179,6 +179,7 @@
     <string name="title_payment_methods">Metodos de pago</string>
     <string name="title_alert_empty_payment_methods">¡Hey!</string>
     <string name="msg_alert_empty_payment_methods">Agrega algun método de pago para continuar.</string>
+    <string name="msg_action_bar_edit_action">Editar</string>
 
     <!-- * payment methods types -->
     <string name="msg_food_coupons">Vales de despensa</string>
