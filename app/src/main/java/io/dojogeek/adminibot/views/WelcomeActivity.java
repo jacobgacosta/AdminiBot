@@ -64,7 +64,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
 
     private void prepareView() {
         mItemsContainer.setAdapter(new WelcomeAdapter(this, Arrays.asList(
-                new Integer[]{R.drawable.ic_money2, R.string.title_option_1, R.string.msg_description_1},
+                new Integer[]{R.drawable.ic_cash, R.string.title_option_1, R.string.msg_description_1},
                 new Integer[]{R.drawable.ic_card, R.string.title_option_2, R.string.msg_description_2},
                 new Integer[]{R.drawable.ic_savings, R.string.title_option_3, R.string.msg_description_3}
         )));
