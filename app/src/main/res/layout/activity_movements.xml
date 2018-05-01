@@ -11,25 +11,36 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
+            layout="@layout/toolbar"
+            android:theme="@style/AdminiBotTheme2"/>
 
         <LinearLayout
             android:id="@+id/layout_payment_methods_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/global_background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:background="#6ec0b8"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_income_concept"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_layout_concept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Pago de quincena zigo"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:layout_marginTop="20dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <EditText
+                    android:id="@+id/edit_income_concept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:hint="@string/title_concept_of_income"
+                    android:inputType="text|textCapSentences"
+                    android:textColor="@color/primary_background"
+                    android:textSize="25sp"/>
+
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:id="@+id/text_total_amount"
@@ -38,16 +49,18 @@
                 android:layout_marginBottom="14dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="$0.00"
-                android:textColor="#B2EBF2"
-                android:textSize="50sp"/>
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"/>
 
         </LinearLayout>
 
         <ListView
-            android:id="@+id/list_payment_methods"
+            android:id="@+id/list_incomes_movements"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"/>
+            android:divider="@null"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"/>
 
     </LinearLayout>
 
@@ -56,8 +69,8 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_save"
-        app:backgroundTint="#03A9F4"
+        android:src="@drawable/ic_done"
+        app:backgroundTint="#97b94d"
         app:elevation="7dp"
         app:layout_anchor="@id/layout_payment_methods_detail"
         app:layout_anchorGravity="bottom|right|end"/>

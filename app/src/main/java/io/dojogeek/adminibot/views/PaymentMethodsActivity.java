@@ -17,7 +17,6 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -46,9 +45,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     private ListView mPaymentMethods;
     private FloatingActionButton mStoreIncome;
     private DebitCardDto mDebitCard;
-    private List<BigDecimal> mCashMovements = new ArrayList<>();
-    private List<BigDecimal> mFoodCouponsMovements = new ArrayList<>();
-    private List<DebitCardDto> mDebitCardMovements = new ArrayList<>();
+    private ArrayList<DebitCardDto> mDebitCardMovements = new ArrayList<>();
     private BigDecimal mTotalCash = new BigDecimal(0.0);
     private BigDecimal mTotalAmount = new BigDecimal(0.0);
     private BigDecimal mTotalDebitCards = new BigDecimal(0.0);
@@ -72,15 +69,11 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     public void acceptCashAmount(BigDecimal amount) {
         mTotalCash = mTotalCash.add(amount);
-
-        mCashMovements.add(amount);
     }
 
     @Override
     public void acceptFoodCouponAmount(BigDecimal amount) {
         mTotalFoodCoupons = mTotalFoodCoupons.add(amount);
-
-        mFoodCouponsMovements.add(amount);
     }
 
     @Override
@@ -134,6 +127,10 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         switch (item.getItemId()) {
             case R.id.menu_edit_action:
                 Intent intent = new Intent(this, MovementsActivity.class);
+                intent.putExtra("income_concept", (String) mIncomeConcept.getText());
+                intent.putExtra("cash", mTotalCash);
+                intent.putExtra("food_coupons", mTotalFoodCoupons);
+                intent.putExtra("debit_card", mDebitCardMovements);
                 startActivity(intent);
                 break;
         }
@@ -150,7 +147,6 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         }
 
         mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
-
 
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 

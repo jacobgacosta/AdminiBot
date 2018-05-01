@@ -34,7 +34,7 @@ public class PaymentMethodPresenterImplTest {
 
         when(mIncomeDao.createIncome(income)).thenReturn(1L);
 
-        mPresenter.registerIncome(income);
+        //mPresenter.registerIncome(income);
 
         verify(mIncomeDao).createIncome(income);
         //verify(mPaymentMethods).stashIncomeId(1L);

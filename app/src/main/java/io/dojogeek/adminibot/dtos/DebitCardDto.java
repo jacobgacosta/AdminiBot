@@ -8,7 +8,6 @@ public class DebitCardDto implements Serializable {
     private String mNumber;
     private String mAmount;
 
-
     public String getName() {
         return mName;
     }

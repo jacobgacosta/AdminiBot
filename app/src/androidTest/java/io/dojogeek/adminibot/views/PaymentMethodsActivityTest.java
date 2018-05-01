@@ -1,5 +1,7 @@
 package io.dojogeek.adminibot.views;
 
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -12,10 +14,14 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.math.BigDecimal;
+
 import io.dojogeek.adminibot.R;
+import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.IncomeDto;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 
+import static android.app.Activity.RESULT_OK;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -23,11 +29,19 @@ import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.Intents.intending;
+import static android.support.test.espresso.intent.matcher.BundleMatchers.hasEntry;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtras;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -38,7 +52,7 @@ import static org.mockito.Mockito.verify;
 public class PaymentMethodsActivityTest {
 
     @Rule
-    public IntentsTestRule<PaymentMethodsActivity> mActivityRule = new IntentsTestRule<>(PaymentMethodsActivity.class);
+    public IntentsTestRule<PaymentMethodsActivity> intentsTestRule = new IntentsTestRule<>(PaymentMethodsActivity.class);
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -48,7 +62,7 @@ public class PaymentMethodsActivityTest {
 
     @Before
     public void setUp() {
-        PaymentMethodsActivity paymentMethodsActivity = mActivityRule.getActivity();
+        PaymentMethodsActivity paymentMethodsActivity = intentsTestRule.getActivity();
         paymentMethodsActivity.mPresenter = presenter;
     }
 
@@ -70,7 +84,7 @@ public class PaymentMethodsActivityTest {
     public void testIncomeConcept_cancelFlow() {
         onView(withText(R.string.msg_cancel)).perform(click());
 
-        assertTrue(mActivityRule.getActivity().isFinishing());
+        assertTrue(intentsTestRule.getActivity().isFinishing());
     }
 
     @Test
@@ -215,9 +229,34 @@ public class PaymentMethodsActivityTest {
     public void testClickEditButton_launchMovementsView() {
         fillIncomeConcept();
 
+        onView(withText(R.string.msg_cash)).perform(click());
+        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
+        onView(withText(R.string.msg_accept)).perform(click());
+
+        onView(withText(R.string.msg_food_coupons)).perform(click());
+        onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("17500.09"));
+        onView(withText(R.string.msg_accept)).perform(click());
+
+        DebitCardDto debitCardDto = new DebitCardDto();
+        debitCardDto.setAmount("12930");
+
+        Intent intent = new Intent();
+        intent.putExtra("debit_card", debitCardDto);
+        Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(RESULT_OK, intent);
+
+        intending(toPackage("io.dojogeek.adminibot")).respondWith(result);
+
         onView(withContentDescription(R.string.msg_action_bar_edit_action)).perform(click());
 
-        intended(hasComponent(MovementsActivity.class.getName()));
+        intended(allOf(
+                hasComponent(MovementsActivity.class.getName()),
+                hasExtra("income_concept", "This a test concept"),
+                hasExtra("cash", new BigDecimal("17500.00")),
+                hasExtra("food_coupons", new BigDecimal("17500.09")),
+                hasExtras(allOf(
+                        hasEntry(equalTo("debit_card"), hasItem(debitCardDto))
+                ))
+        ));
     }
 
 

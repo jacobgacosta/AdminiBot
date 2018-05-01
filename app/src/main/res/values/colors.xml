@@ -2,7 +2,7 @@
 <resources>
     <item name="primary_background" type="color">#FFFFFF</item>
     <item name="primary_text_color" type="color">#000000</item>
-    <item name="global_background" type="color">#3daac7</item>
+    <item name="global_background" type="color">#00BCD4</item>
     <item name="alert_dialog_button_text" type="color">#607D8B</item>
     <item name="global_background_dark" type="color">#FF01A3B7</item>
     <item name="global_background_dark_pressed" type="color">#049da4</item>
@@ -14,4 +14,5 @@
     <item name="light_yellow" type="color">#ecdf7b</item>
     <item name="global_button_color" type="color">#e26156</item>
     <item name="global_pressed_button_color" type="color">#d25a4f</item>
+    <item name="movements" type="color">#6ec0b8</item>
 </resources>

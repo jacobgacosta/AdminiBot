@@ -154,7 +154,7 @@
     <!-- * Welcome -->
     <string name="title_welcome">Selecciona una opción</string>
     <string name="title_option_1">Ingreso</string>
-    <string name="msg_description_1">Utiliza uno o varios metodo método de pago para registrar un ingreso.</string>
+    <string name="msg_description_1">Registra uno o varios metodos de pago.</string>
     <string name="title_option_2">Tarjeta de crédito</string>
     <string name="msg_description_2">Registra una tarjeta de crédito.</string>
     <string name="title_option_3">Ahorros</string>
@@ -211,6 +211,9 @@
     <string name="msg_total_amount_food_coupons">$%1$s</string>
     <string name="msg_total_amount_debit_cards">$%1$s</string>
     <string name="msg_total_income">$%1$s</string>
+
+    <!-- * empty title -->
+    <string name="title_empty">Editar movimientos</string>
 
 
 </resources>
