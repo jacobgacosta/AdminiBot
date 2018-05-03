@@ -24,7 +24,7 @@ public class IncomeConceptDialog extends DialogFragment {
 
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_income_concept, null);
 
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity(), R.style.AdminiBotAlertDialog)
                 .setView(view)
                 .setPositiveButton(R.string.msg_accept, null)
                 .setNegativeButton(R.string.msg_cancel, null)

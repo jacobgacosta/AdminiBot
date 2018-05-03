@@ -6,17 +6,10 @@
         <item name="actionBarStyle">@style/AdminiBotTheme</item>
     </style>
 
-    <!-- ActionBar styles -->
-    <style name="AdminiBotTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <!-- Main theme -->
+    <style name="AdminiBotTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">@color/global_background</item>
         <item name="background">@color/global_background</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="colorControlNormal">#FFFFFF</item>
-    </style>
-
-    <style name="AdminiBotTheme2" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/movements</item>
-        <item name="background">@color/movements</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="colorControlNormal">#FFFFFF</item>
     </style>
@@ -28,11 +21,33 @@
         <item name="colorControlActivated">@color/global_background</item>
     </style>
 
-    <!-- primary button -->
-    <style name="PrimaryButton" parent="Theme.AppCompat.Light">
-        <item name="colorButtonNormal">@color/global_background</item>
-        <item name="colorControlHighlight">@color/global_background_dark</item>
+    <!-- Income Concept EditText theme -->
+    <style name="IncomeConceptTextInputLayout" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">#00BCD4</item>
+        <item name="colorAccent">#00BCD4</item>
+        <item name="colorControlNormal">#00BCD4</item>
+        <item name="colorControlActivated">#00BCD4</item>
+        <item name="textColorError">#F44336</item>
+        <item name="android:textColorHighlight">#00BCD4</item>
+        <item name="android:textColorLink">#00BCD4</item>
     </style>
 
+    <!-- AdminiBot AlertDialog theme -->
+    <style name="AdminiBotAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#00BCD4</item>
+        <item name="android:textColor">#00BCD4</item>
+        <item name="android:textColorPrimary">#00BCD4</item>
+    </style>
+
+    <!-- Income Movements EditText theme -->
+    <style name="IncomeMovementsTextInputLayout" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#FFFFFF</item>
+        <item name="textColorError">#F44336</item>
+        <item name="android:textColorHighlight">#FFFFFF</item>
+        <item name="android:textColorLink">#FFFFFF</item>
+    </style>
 
 </resources>

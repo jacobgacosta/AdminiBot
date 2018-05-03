@@ -29,7 +29,8 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:text="Pago de quincena zigo"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/text_total_amount"
@@ -38,8 +39,8 @@
                 android:layout_marginBottom="14dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="$0.00"
-                android:textColor="#B2EBF2"
-                android:textSize="50sp"/>
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"/>
 
         </LinearLayout>
 
@@ -57,7 +58,7 @@
         android:layout_height="56dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_save"
-        app:backgroundTint="#03A9F4"
+        app:backgroundTint="#00BCD4"
         app:elevation="7dp"
         app:layout_anchor="@id/layout_payment_methods_detail"
         app:layout_anchorGravity="bottom|right|end"/>

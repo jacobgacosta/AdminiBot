@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:contentDescription=""
         android:src="@drawable/ic_cash"
-        android:tint="#F44336"/>
+        android:tint="#00BCD4"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

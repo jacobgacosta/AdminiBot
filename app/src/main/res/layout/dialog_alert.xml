@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fad36a"
+        android:background="#00BCD4"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">

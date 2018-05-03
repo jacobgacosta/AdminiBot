@@ -26,7 +26,7 @@ public class CashDialogFragment extends DialogFragment {
 
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_cash, null);
 
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity(), R.style.AdminiBotAlertDialog)
                 .setView(view)
                 .setPositiveButton(R.string.msg_accept, null)
                 .setNegativeButton(R.string.msg_cancel, null)

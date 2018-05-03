@@ -206,7 +206,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         View view = this.getLayoutInflater().inflate(R.layout.dialog_alert, null);
         ((TextView) view.findViewById(R.id.text_alert)).setText(R.string.msg_alert_empty_payment_methods);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AdminiBotAlertDialog);
         builder.setView(view);
         builder.setPositiveButton(R.string.msg_accept, null);
         builder.show();
@@ -225,7 +225,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         ((TextView) view.findViewById(R.id.total_amount_income))
                 .setText(res.getString(R.string.msg_total_income, mTotalAmount));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AdminiBotAlertDialog);
         builder.setView(view);
         builder.setPositiveButton(R.string.msg_accept, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

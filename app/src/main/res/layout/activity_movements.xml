@@ -11,14 +11,13 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:theme="@style/AdminiBotTheme2"/>
+            layout="@layout/toolbar"/>
 
         <LinearLayout
-            android:id="@+id/layout_payment_methods_detail"
+            android:id="@+id/layout_movements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6ec0b8"
+            android:background="@color/global_background"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -27,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:paddingLeft="24dp"
-                android:paddingRight="24dp">
+                android:paddingRight="24dp"
+                android:theme="@style/IncomeMovementsTextInputLayout">
 
                 <EditText
                     android:id="@+id/edit_income_concept"
@@ -70,9 +70,9 @@
         android:layout_height="56dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_done"
-        app:backgroundTint="#97b94d"
+        app:backgroundTint="#00BCD4"
         app:elevation="7dp"
-        app:layout_anchor="@id/layout_payment_methods_detail"
+        app:layout_anchor="@id/layout_movements"
         app:layout_anchorGravity="bottom|right|end"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6ec0b8"
+        android:background="#00BCD4"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_idea"
-            android:tint="#FFF59D"/>
+            android:tint="#FFEB3B"/>
 
     </LinearLayout>
 
@@ -26,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:theme="@style/IncomeConceptTextInputLayout">
 
         <EditText
             android:id="@+id/edit_concept_of_income"

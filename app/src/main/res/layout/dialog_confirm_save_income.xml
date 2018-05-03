@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#95ca4d"
+        android:background="#00BCD4"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">
@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cash"/>
+            android:src="@drawable/ic_cash_dialog"/>
 
     </LinearLayout>
 

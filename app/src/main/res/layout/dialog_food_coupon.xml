@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#e26156"
+        android:background="#00BCD4"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="24dp">
@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:theme="@style/IncomeConceptTextInputLayout">
 
         <EditText
             android:id="@+id/edit_food_coupon_amount"
@@ -33,7 +34,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/title_food_coupon_amount"
             android:inputType="numberDecimal"
-            android:textColor="#747474"
             android:textSize="27sp"/>
 
     </android.support.design.widget.TextInputLayout>

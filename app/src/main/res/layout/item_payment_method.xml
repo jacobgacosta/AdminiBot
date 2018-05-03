@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:contentDescription=""
         android:src="@drawable/ic_cash"
-        android:tint="#F44336"/>
+        android:tint="#00BCD4"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingLeft="24dp"
+            android:paddingLeft="32dp"
             android:text="Vales de despensa"
             android:textColor="#212121"
             android:textSize="16sp"/>
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="24dp"
+            android:layout_marginLeft="32dp"
             android:background="?android:attr/listDivider"/>
 
     </RelativeLayout>
