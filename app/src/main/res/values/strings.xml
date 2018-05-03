@@ -160,7 +160,7 @@
     <string name="title_option_3">Ahorros</string>
     <string name="msg_description_3">Registra tus ahorros.</string>
 
-    <!-- * Payment methods concept dialog -->
+    <!-- * Payment methods income concept dialog -->
     <string name="title_concept_of_income">Concepto del ingreso *</string>
     <string name="error_concept_of_income">El concepto es obligatorio</string>
 

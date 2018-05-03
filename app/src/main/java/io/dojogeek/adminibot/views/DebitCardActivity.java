@@ -83,7 +83,6 @@ public class DebitCardActivity extends BaseActivity {
         }
 
         this.showErrorFrom(validator);
-
     }
 
     private void accept(DebitCardDto debitCard) {

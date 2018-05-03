@@ -2,6 +2,9 @@ package io.dojogeek.adminibot.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -15,10 +18,12 @@ import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.MovementDto;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
-public class MovementsActivity extends BaseActivity {
+public class MovementsActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText mIncomeConcept;
+    private TextInputLayout mTextInputLayoutIncomeConcept;
     private ListView mIncomeMovements;
+    private FloatingActionButton mUpdateMovements;
 
     @Override
     public int getToolbarTitle() {
@@ -31,17 +36,35 @@ public class MovementsActivity extends BaseActivity {
     }
 
     @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_update_movements:
+                String incomeConcept = mIncomeConcept.getText().toString();
+
+                if (incomeConcept == null || incomeConcept.isEmpty()) {
+                    mTextInputLayoutIncomeConcept.setError(getString(R.string.error_concept_of_income));
+                    mTextInputLayoutIncomeConcept.requestFocus();
+                }
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.initializeViews();
 
         this.prepareView();
+
+        this.setListener();
     }
 
     private void initializeViews() {
-        mIncomeConcept = findViewById(R.id.edit_income_concept);
+        mIncomeConcept = findViewById(R.id.edit_concept_of_income);
         mIncomeMovements = findViewById(R.id.list_incomes_movements);
+        mUpdateMovements = findViewById(R.id.button_update_movements);
+        mTextInputLayoutIncomeConcept = findViewById(R.id.text_input_layout_concept);
     }
 
     private void prepareView() {
@@ -57,6 +80,10 @@ public class MovementsActivity extends BaseActivity {
 
             mIncomeMovements.setAdapter(movementsAdapter);
         }
+    }
+
+    public void setListener() {
+        mUpdateMovements.setOnClickListener(this);
     }
 
     private List<MovementDto> fillListMovementsFrom(Intent intent) {

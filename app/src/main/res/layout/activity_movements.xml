@@ -30,15 +30,13 @@
                 android:theme="@style/IncomeMovementsTextInputLayout">
 
                 <EditText
-                    android:id="@+id/edit_income_concept"
+                    android:id="@+id/edit_concept_of_income"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
                     android:hint="@string/title_concept_of_income"
                     android:inputType="text|textCapSentences"
                     android:textColor="@color/primary_background"
-                    android:textSize="25sp"/>
+                    android:textSize="27sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -48,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
                 android:gravity="center_vertical|center_horizontal"
+                android:padding="10dp"
                 android:text="$0.00"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"/>
@@ -65,7 +64,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_save_payment_methods"
+        android:id="@+id/button_update_movements"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="16dp"
