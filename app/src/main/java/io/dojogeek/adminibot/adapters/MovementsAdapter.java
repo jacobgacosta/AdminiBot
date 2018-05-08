@@ -46,6 +46,8 @@ public class MovementsAdapter extends ArrayAdapter<MovementDto> {
         TextView totalAmount = container.findViewById(R.id.text_income_total_amount);
         totalAmount.setText("$" + movementDto.getTotal().toString());
 
+        container.setTag(mPaymentMethods.get(position).getType());
+
         return container;
     }
 }

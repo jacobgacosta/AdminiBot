@@ -5,20 +5,24 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.MovementsAdapter;
+import io.dojogeek.adminibot.components.CashDialogFragment;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.MovementDto;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
-public class MovementsActivity extends BaseActivity implements View.OnClickListener {
+public class MovementsActivity extends BaseActivity implements View.OnClickListener,
+        AdapterView.OnItemClickListener, CashDialogFragment.Acceptable {
 
     private EditText mIncomeConcept;
     private TextInputLayout mTextInputLayoutIncomeConcept;
@@ -49,6 +53,29 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    public void setListener() {
+        mUpdateMovements.setOnClickListener(this);
+        mIncomeMovements.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void acceptCashAmount(BigDecimal amount) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch ((TypePaymentMethodEnum) view.getTag()) {
+            case CASH:
+                CashDialogFragment cashDialogFragment = new CashDialogFragment();
+                cashDialogFragment.show(getSupportFragmentManager(), "cashDialog");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cash", getIntent().getSerializableExtra("cash"));
+                cashDialogFragment.setArguments(bundle);
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +98,10 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
         if (getIntent().getExtras() != null) {
             String incomeConcept = getIntent().getStringExtra("income_concept");
 
-            mIncomeConcept.setText(incomeConcept);
-            mIncomeConcept.setSelection(incomeConcept.length());
+            if (incomeConcept != null) {
+                mIncomeConcept.setText(incomeConcept);
+                mIncomeConcept.setSelection(incomeConcept.length());
+            }
 
             List<MovementDto> movements = this.fillListMovementsFrom(getIntent());
 
@@ -82,27 +111,34 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    public void setListener() {
-        mUpdateMovements.setOnClickListener(this);
-    }
-
     private List<MovementDto> fillListMovementsFrom(Intent intent) {
         List<MovementDto> movements = new ArrayList<>();
-        movements.add(this.createMovementDto(TypePaymentMethodEnum.CASH,
-                (BigDecimal) intent.getSerializableExtra("cash"),
-                null));
-        movements.add(this.createMovementDto(TypePaymentMethodEnum.FOOD_COUPONS,
-                (BigDecimal) intent.getSerializableExtra("food_coupons"),
-                null));
 
-        List<DebitCardDto> debitCards = (ArrayList) intent.getSerializableExtra("debit_card");
+        Serializable cash = intent.getSerializableExtra("cash");
 
-        BigDecimal total = new BigDecimal(0.0);
+        if (cash != null) {
+            movements.add(this.createMovementDto(TypePaymentMethodEnum.CASH, (BigDecimal) cash, null));
 
-        for (DebitCardDto debitCardDto : debitCards) {
-            total = total.add(new BigDecimal(debitCardDto.getAmount()));
         }
-        movements.add(this.createMovementDto(TypePaymentMethodEnum.DEBIT_CARD, total, debitCards));
+
+        Serializable foodCoupons = intent.getSerializableExtra("food_coupons");
+
+        if (foodCoupons != null) {
+            movements.add(this.createMovementDto(TypePaymentMethodEnum.FOOD_COUPONS, (BigDecimal) foodCoupons, null));
+        }
+
+
+        Serializable debitCards = intent.getSerializableExtra("debit_card");
+
+        if (debitCards != null) {
+            BigDecimal total = new BigDecimal(0.0);
+
+            for (DebitCardDto debitCardDto : (List<DebitCardDto>) debitCards) {
+                total = total.add(new BigDecimal(debitCardDto.getAmount()));
+            }
+            movements.add(this.createMovementDto(TypePaymentMethodEnum.DEBIT_CARD, total, debitCards));
+        }
+
 
         return movements;
     }

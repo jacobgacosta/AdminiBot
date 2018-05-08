@@ -225,7 +225,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         ((TextView) view.findViewById(R.id.total_amount_income))
                 .setText(res.getString(R.string.msg_total_income, mTotalAmount));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AdminiBotAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
         builder.setPositiveButton(R.string.msg_accept, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

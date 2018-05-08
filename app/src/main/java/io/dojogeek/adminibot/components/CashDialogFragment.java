@@ -38,6 +38,11 @@ public class CashDialogFragment extends DialogFragment {
             public void onShow(DialogInterface dialogInterface) {
                 final EditText amount = (EditText) view.findViewById(R.id.edit_cash_amount);
 
+                if (getArguments() != null) {
+                    BigDecimal cash = (BigDecimal) getArguments().getSerializable("cash");
+                    amount.setText(cash.toString());
+                }
+
                 ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
                         .showSoftInput(amount, InputMethodManager.SHOW_IMPLICIT);
 

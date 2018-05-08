@@ -105,4 +105,16 @@ public class MovementsActivityTest {
         onView(withText(R.string.error_concept_of_income)).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testEditCashAmount_showAmountToEdit() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
+        intent.putExtra("cash", new BigDecimal(17400));
+
+        mActivityRule.launchActivity(intent);
+
+        onView(withText(R.string.msg_cash)).perform(click());
+        onView(withId(R.id.edit_cash_amount)).check(matches(withText("17400")));
+    }
+
 }
