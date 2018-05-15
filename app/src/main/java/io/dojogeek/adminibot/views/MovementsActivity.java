@@ -17,12 +17,13 @@ import java.util.List;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.MovementsAdapter;
 import io.dojogeek.adminibot.components.CashDialogFragment;
+import io.dojogeek.adminibot.components.FoodCouponDialogFragment;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.MovementDto;
 import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 
 public class MovementsActivity extends BaseActivity implements View.OnClickListener,
-        AdapterView.OnItemClickListener, CashDialogFragment.Acceptable {
+        AdapterView.OnItemClickListener, CashDialogFragment.Acceptable, FoodCouponDialogFragment.Acceptable {
 
     private EditText mIncomeConcept;
     private TextInputLayout mTextInputLayoutIncomeConcept;
@@ -64,14 +65,26 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    public void acceptFoodCouponAmount(BigDecimal amount) {
+
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch ((TypePaymentMethodEnum) view.getTag()) {
             case CASH:
                 CashDialogFragment cashDialogFragment = new CashDialogFragment();
                 cashDialogFragment.show(getSupportFragmentManager(), "cashDialog");
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("cash", getIntent().getSerializableExtra("cash"));
-                cashDialogFragment.setArguments(bundle);
+                Bundle cashBundle = new Bundle();
+                cashBundle.putSerializable("cash", getIntent().getSerializableExtra("cash"));
+                cashDialogFragment.setArguments(cashBundle);
+                break;
+            case FOOD_COUPONS:
+                FoodCouponDialogFragment foodCouponDialogFragment = new FoodCouponDialogFragment();
+                foodCouponDialogFragment.show(getSupportFragmentManager(), "foodCouponsDialog");
+                Bundle foodCouponsBundle = new Bundle();
+                foodCouponsBundle.putSerializable("food_coupons", getIntent().getSerializableExtra("food_coupons"));
+                foodCouponDialogFragment.setArguments(foodCouponsBundle);
                 break;
         }
     }

@@ -129,4 +129,28 @@ public class MovementsActivityTest {
         onView(withId(R.id.edit_cash_amount)).check(matches(withText("")));
     }
 
+    @Test
+    public void testEditFoodCoupons_showAmountToEdit() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
+        intent.putExtra("food_coupons", new BigDecimal(17400));
+
+        mActivityRule.launchActivity(intent);
+
+        onView(withText(R.string.msg_food_coupons)).perform(click());
+        onView(withId(R.id.edit_food_coupon_amount)).check(matches(withText("17400")));
+    }
+
+    @Test
+    public void testEditFoodCoupons_showEmptyEditTextIfAmountIsZero() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
+        intent.putExtra("food_coupons", new BigDecimal(0));
+
+        mActivityRule.launchActivity(intent);
+
+        onView(withText(R.string.msg_food_coupons)).perform(click());
+        onView(withId(R.id.edit_food_coupon_amount)).check(matches(withText("")));
+    }
+
 }

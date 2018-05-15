@@ -36,13 +36,21 @@ public class FoodCouponDialogFragment extends DialogFragment {
 
             @Override
             public void onShow(DialogInterface dialogInterface) {
-                final EditText amount = (EditText) view.findViewById(R.id.edit_food_coupon_amount);
+                final EditText amount = view.findViewById(R.id.edit_food_coupon_amount);
+
+                if (getArguments() != null) {
+                    BigDecimal foodCouponsAmount = (BigDecimal) getArguments().getSerializable("food_coupons");
+
+                    if (foodCouponsAmount.compareTo(BigDecimal.ZERO) != 0) {
+                        amount.setText(foodCouponsAmount.toString());
+                    }
+                }
 
                 ((InputMethodManager) getActivity()
                         .getSystemService(Context.INPUT_METHOD_SERVICE))
                         .showSoftInput(amount, InputMethodManager.SHOW_IMPLICIT);
 
-                final TextInputLayout inputLayoutAmount = (TextInputLayout) view
+                final TextInputLayout inputLayoutAmount = view
                         .findViewById(R.id.text_input_layout_food_coupon);
 
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE)
