@@ -117,4 +117,16 @@ public class MovementsActivityTest {
         onView(withId(R.id.edit_cash_amount)).check(matches(withText("17400")));
     }
 
+    @Test
+    public void testEditCashAmount_showEmptyEditTextIfAmountIsZero() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
+        intent.putExtra("cash", new BigDecimal(0));
+
+        mActivityRule.launchActivity(intent);
+
+        onView(withText(R.string.msg_cash)).perform(click());
+        onView(withId(R.id.edit_cash_amount)).check(matches(withText("")));
+    }
+
 }

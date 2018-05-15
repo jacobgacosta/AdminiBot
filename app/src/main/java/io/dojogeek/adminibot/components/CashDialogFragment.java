@@ -40,7 +40,11 @@ public class CashDialogFragment extends DialogFragment {
 
                 if (getArguments() != null) {
                     BigDecimal cash = (BigDecimal) getArguments().getSerializable("cash");
-                    amount.setText(cash.toString());
+
+                    if (cash.compareTo(BigDecimal.ZERO) != 0) {
+                        amount.setText(cash.toString());
+                    }
+
                 }
 
                 ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
