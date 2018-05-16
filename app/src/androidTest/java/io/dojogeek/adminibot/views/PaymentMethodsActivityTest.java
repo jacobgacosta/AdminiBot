@@ -259,7 +259,6 @@ public class PaymentMethodsActivityTest {
         ));
     }
 
-
     private void fillIncomeConcept() {
         onView(withId(R.id.edit_concept_of_income)).perform(typeText("This a test concept"));
         onView(withText(R.string.msg_accept)).perform(click());

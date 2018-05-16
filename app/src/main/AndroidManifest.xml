@@ -105,6 +105,8 @@
             android:parentActivityName=".views.MainActivity"
             android:theme="@style/CustomActionBarTheme"></activity>
         -->
+        <activity android:name=".views.DebitCardsActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -86,6 +86,10 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
                 foodCouponsBundle.putSerializable("food_coupons", getIntent().getSerializableExtra("food_coupons"));
                 foodCouponDialogFragment.setArguments(foodCouponsBundle);
                 break;
+            case DEBIT_CARD:
+                Intent intent = new Intent(this, DebitCardsActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

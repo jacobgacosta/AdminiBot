@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.DataInteraction;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.MediumTest;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
@@ -22,6 +23,8 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -32,7 +35,7 @@ import static org.hamcrest.CoreMatchers.anything;
 public class MovementsActivityTest {
 
     @Rule
-    public ActivityTestRule<MovementsActivity> mActivityRule = new ActivityTestRule<>(MovementsActivity.class, false, false);
+    public IntentsTestRule<MovementsActivity> mActivityRule = new IntentsTestRule<>(MovementsActivity.class, false, false);
 
     @Test
     public void testEditIncomeConcept_incomeConceptIsShownToEdit() {
@@ -151,6 +154,28 @@ public class MovementsActivityTest {
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withId(R.id.edit_food_coupon_amount)).check(matches(withText("")));
+    }
+
+    @Test
+    public void testEditBankCard_theRegisteredCardsIsLaunched() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
+
+        DebitCardDto debitCardDto = new DebitCardDto();
+        debitCardDto.setName("Santander Zero");
+        debitCardDto.setNumber("1234567891011121");
+        debitCardDto.setAmount("45000");
+
+        ArrayList<DebitCardDto> debitCardDtos = new ArrayList<>();
+        debitCardDtos.add(debitCardDto);
+
+        intent.putExtra("debit_card", debitCardDtos);
+
+        mActivityRule.launchActivity(intent);
+
+        onView(withText(R.string.msg_debit_card)).perform(click());
+
+        intended(hasComponent(DebitCardsActivity.class.getName()));
     }
 
 }
