@@ -88,6 +88,7 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
                 break;
             case DEBIT_CARD:
                 Intent intent = new Intent(this, DebitCardsActivity.class);
+                intent.putExtra("debit_card", getIntent().getSerializableExtra("debit_card"));
                 startActivity(intent);
                 break;
         }

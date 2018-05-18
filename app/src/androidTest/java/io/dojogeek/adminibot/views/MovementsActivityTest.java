@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
@@ -24,11 +23,17 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.BundleMatchers.hasEntry;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtras;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -175,7 +180,12 @@ public class MovementsActivityTest {
 
         onView(withText(R.string.msg_debit_card)).perform(click());
 
-        intended(hasComponent(DebitCardsActivity.class.getName()));
+        intended(allOf(
+                hasComponent(DebitCardsActivity.class.getName()),
+                hasExtras(allOf(
+                        hasEntry(equalTo("debit_card"), hasItem(debitCardDto))
+                ))
+        ));
     }
 
 }
