@@ -34,6 +34,7 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItemInArray;
 
 @RunWith(AndroidJUnit4.class)
 @MediumTest
@@ -163,9 +164,6 @@ public class MovementsActivityTest {
 
     @Test
     public void testEditBankCard_theRegisteredCardsIsLaunched() {
-        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        Intent intent = new Intent(targetContext, MovementsActivity.class);
-
         DebitCardDto debitCardDto = new DebitCardDto();
         debitCardDto.setName("Santander Zero");
         debitCardDto.setNumber("1234567891011121");
@@ -174,6 +172,8 @@ public class MovementsActivityTest {
         ArrayList<DebitCardDto> debitCardDtos = new ArrayList<>();
         debitCardDtos.add(debitCardDto);
 
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent intent = new Intent(targetContext, MovementsActivity.class);
         intent.putExtra("debit_card", debitCardDtos);
 
         mActivityRule.launchActivity(intent);
