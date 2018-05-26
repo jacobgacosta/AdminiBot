@@ -123,9 +123,7 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
 
             List<MovementDto> movements = this.fillListMovementsFrom(getIntent());
 
-            MovementsAdapter movementsAdapter = new MovementsAdapter(this, movements);
-
-            mIncomeMovements.setAdapter(movementsAdapter);
+            mIncomeMovements.setAdapter(new MovementsAdapter(this, movements));
         }
     }
 
@@ -145,13 +143,12 @@ public class MovementsActivity extends BaseActivity implements View.OnClickListe
             movements.add(this.createMovementDto(TypePaymentMethodEnum.FOOD_COUPONS, (BigDecimal) foodCoupons, null));
         }
 
-
-        Serializable debitCards = intent.getSerializableExtra("debit_card");
+        List<DebitCardDto> debitCards = (List<DebitCardDto>) intent.getSerializableExtra("debit_card");
 
         if (debitCards != null) {
             BigDecimal total = new BigDecimal(0.0);
 
-            for (DebitCardDto debitCardDto : (List<DebitCardDto>) debitCards) {
+            for (DebitCardDto debitCardDto : debitCards) {
                 total = total.add(new BigDecimal(debitCardDto.getAmount()));
             }
             movements.add(this.createMovementDto(TypePaymentMethodEnum.DEBIT_CARD, total, debitCards));
