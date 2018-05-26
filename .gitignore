@@ -80,6 +80,8 @@ obj/
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/caches
+.idea/codeStyles
 
 # OS-specific files
 .DS_Store
@@ -175,9 +177,9 @@ tmp/
 .worksheet
 
 ### Eclipse Patch ###
-# Eclipse Core    
+# Eclipse Core
 
-# JDT-specific (Eclipse Java Development Tools)   
+# JDT-specific (Eclipse Java Development Tools)
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
