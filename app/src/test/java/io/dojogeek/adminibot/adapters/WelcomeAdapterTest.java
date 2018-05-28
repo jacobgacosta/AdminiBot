@@ -38,17 +38,17 @@ public class WelcomeAdapterTest {
         TextView description = mock(TextView.class);
         when(container.findViewById(R.id.text_option_description)).thenReturn(description);
 
-        LayoutInflater inflater =  mock(LayoutInflater.class);
+        LayoutInflater inflater = mock(LayoutInflater.class);
         when(inflater.inflate(R.layout.item_welcome, group, false)).thenReturn(container);
 
         Context context = mock(Context.class);
         when(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).thenReturn(inflater);
 
-        List<Integer []> items = new ArrayList<>();
+        List<Integer[]> items = new ArrayList<>();
         items.add(new Integer[]{R.drawable.ic_cash, R.string.title_option_1, R.string.msg_description_1});
 
         WelcomeAdapter adapter = new WelcomeAdapter(context, items);
-        View actualView  = adapter.getView(0, mock(View.class), group);
+        View actualView = adapter.getView(0, mock(View.class), group);
 
         assertNotNull(actualView);
         assertEquals(container, actualView);
