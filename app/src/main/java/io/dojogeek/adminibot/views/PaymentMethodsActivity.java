@@ -146,7 +146,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         }
 
-        mDebitCard = (DebitCardDto) data.getSerializableExtra("debit_card");
+        mDebitCard = (DebitCardDto) data.getParcelableExtra("debit_card");
 
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
