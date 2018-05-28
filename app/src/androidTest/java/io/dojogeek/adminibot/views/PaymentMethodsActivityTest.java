@@ -34,14 +34,13 @@ import static android.support.test.espresso.intent.matcher.BundleMatchers.hasEnt
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtras;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -52,7 +51,7 @@ import static org.mockito.Mockito.verify;
 public class PaymentMethodsActivityTest {
 
     @Rule
-    public IntentsTestRule<PaymentMethodsActivity> intentsTestRule = new IntentsTestRule<>(PaymentMethodsActivity.class);
+    public IntentsTestRule<PaymentMethodsActivity> intentsTestRule = new IntentsTestRule(PaymentMethodsActivity.class);
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -94,7 +93,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testCash_isAccepted() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
@@ -105,7 +104,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testCash_errorIfAcceptWithEmptyAmount() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withText(R.string.msg_accept)).perform(closeSoftKeyboard()).perform(click());
@@ -114,7 +113,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testCash_cancelFlow() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withText(R.string.msg_cancel)).perform(closeSoftKeyboard()).perform(click());
@@ -123,7 +122,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testCash_isCancelable() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withId(R.id.edit_cash_amount)).perform(closeSoftKeyboard()).check(matches(isDisplayed()));
@@ -133,7 +132,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testFoodCoupon_isAccepted() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("17500.09"));
@@ -144,7 +143,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testFoodCoupon_errorIfAcceptWithEmptyAmount() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withText(R.string.msg_accept)).perform(closeSoftKeyboard()).perform(click());
@@ -153,7 +152,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testFoodCoupon_cancelFlow() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withText(R.string.msg_cancel)).perform(closeSoftKeyboard()).perform(click());
@@ -162,7 +161,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testFoodCoupon_isCancelable() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withId(R.id.edit_food_coupon_amount)).perform(closeSoftKeyboard()).check(matches(isDisplayed()));
@@ -172,7 +171,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testRegistrationSomePaymentMethods() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withId(R.id.edit_cash_amount)).perform(typeText("1000.90"));
@@ -187,7 +186,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testClickSaveButton_withNoPaymentMethodAdded() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withId(R.id.button_save_payment_methods)).perform(click());
         onView(withText(R.string.msg_alert_empty_payment_methods)).check(matches(isDisplayed()));
@@ -196,7 +195,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testDebitCard_registrationViewIsLaunched() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_debit_card)).perform(click());
 
@@ -205,7 +204,7 @@ public class PaymentMethodsActivityTest {
 
     @Test
     public void testClickSaveButton_processIncome() {
-        fillIncomeConcept();
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_cash)).perform(click());
         onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
@@ -226,25 +225,30 @@ public class PaymentMethodsActivityTest {
     }
 
     @Test
-    public void testClickEditButton_launchMovementsView() {
-        fillIncomeConcept();
-
-        onView(withText(R.string.msg_cash)).perform(click());
-        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
-        onView(withText(R.string.msg_accept)).perform(click());
+    public void testClickEditButton_launchMovementsViewWithExtras() {
+        this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("17500.09"));
         onView(withText(R.string.msg_accept)).perform(click());
 
+        onView(withText(R.string.msg_cash)).perform(click());
+        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
+        onView(withText(R.string.msg_accept)).perform(click());
+
         DebitCardDto debitCardDto = new DebitCardDto();
+        debitCardDto.setName("Santander Zero");
         debitCardDto.setAmount("12930");
+        debitCardDto.setNumber("1234 5678 9109 1234");
 
         Intent intent = new Intent();
         intent.putExtra("debit_card", debitCardDto);
+
         Instrumentation.ActivityResult result = new Instrumentation.ActivityResult(RESULT_OK, intent);
 
-        intending(toPackage("io.dojogeek.adminibot")).respondWith(result);
+        intending(hasComponent(DebitCardActivity.class.getName())).respondWith(result);
+
+        onView(withText(R.string.msg_debit_card)).perform(click());
 
         onView(withContentDescription(R.string.msg_action_bar_edit_action)).perform(click());
 
