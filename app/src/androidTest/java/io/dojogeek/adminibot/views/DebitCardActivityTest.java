@@ -46,7 +46,7 @@ public class DebitCardActivityTest {
         this.saveDebitCard();
 
         assertEquals(RESULT_OK, intentsTestRule.getActivityResult().getResultCode());
-        DebitCardDto debitCardDto = (DebitCardDto) intentsTestRule.getActivityResult().getResultData().getSerializableExtra("debit_card");
+        DebitCardDto debitCardDto = (DebitCardDto) intentsTestRule.getActivityResult().getResultData().getParcelableExtra("debit_card");
         assertEquals("Card for test", debitCardDto.getName());
     }
 
