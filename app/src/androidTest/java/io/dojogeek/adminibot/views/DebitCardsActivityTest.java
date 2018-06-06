@@ -46,7 +46,6 @@ public class DebitCardsActivityTest {
         mActivityRule.launchActivity(intent);
 
         onView(withId(R.id.text_card_number)).check(matches(isDisplayed())).check(matches(withText("1234    5678    9101    1121")));
-        onView(withId(R.id.text_card_balance)).check(matches(isDisplayed())).check(matches(withText("$17500")));
     }
 
 }
