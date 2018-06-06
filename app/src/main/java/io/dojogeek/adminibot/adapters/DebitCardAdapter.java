@@ -34,8 +34,6 @@ public class DebitCardAdapter extends RecyclerView.Adapter<DebitCardAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //holder.mBankName.setText(mDebitCardDtos.get(position).getName());
-
         String number = mDebitCardDtos.get(position).getNumber();
 
         holder.mCardNumber.setText(
@@ -44,7 +42,6 @@ public class DebitCardAdapter extends RecyclerView.Adapter<DebitCardAdapter.View
                         + number.substring(8, 12).concat("    ")
                         + number.substring(12, 16)
         );
-        holder.mBalance.setText("$" + mDebitCardDtos.get(position).getAmount());
     }
 
     @Override
@@ -53,20 +50,13 @@ public class DebitCardAdapter extends RecyclerView.Adapter<DebitCardAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mBankName;
         TextView mCardNumber;
-        TextView mBalance;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            //mBankName = itemView.findViewById(R.id.text_bank_name);
-
             mCardNumber = itemView.findViewById(R.id.text_card_number);
-
-            mBalance = itemView.findViewById(R.id.text_card_balance);
         }
-
     }
 
 }
