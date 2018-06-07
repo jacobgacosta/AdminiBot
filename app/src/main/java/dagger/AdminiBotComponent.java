@@ -3,7 +3,6 @@ package dagger;
 import io.dojogeek.adminibot.views.AddPaymentMethodActivity;
 import io.dojogeek.adminibot.views.CardCreationActivity;
 import io.dojogeek.adminibot.views.CheckActivity;
-import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.CreditCardDetailActivity;
 import io.dojogeek.adminibot.views.FoodCouponsActivity;
 import io.dojogeek.adminibot.views.InboxFragment;
@@ -32,8 +31,6 @@ public interface AdminiBotComponent {
     void inject(AddPaymentMethodActivity activity);
 
     void inject(CardCreationActivity activity);
-
-    void inject(CreditCardActivity activity);
 
     void inject(CheckActivity activity);
 

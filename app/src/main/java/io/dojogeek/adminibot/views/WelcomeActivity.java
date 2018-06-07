@@ -35,7 +35,6 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
                 this.launchView(PaymentMethodsActivity.class);
                 break;
             case 1:
-                this.launchView(CreditCardActivity.class);
                 break;
             default:
                 Log.i(TAG, "No actions for the selected option");

@@ -44,7 +44,6 @@ import io.dojogeek.adminibot.views.Cash;
 import io.dojogeek.adminibot.views.Check;
 import io.dojogeek.adminibot.views.CheckActivity;
 import io.dojogeek.adminibot.views.CreditCard;
-import io.dojogeek.adminibot.views.CreditCardActivity;
 import io.dojogeek.adminibot.views.CreditCardDetail;
 import io.dojogeek.adminibot.views.CreditCardDetailActivity;
 import io.dojogeek.adminibot.views.FoodCoupons;
@@ -119,11 +118,6 @@ public class AdminiBotModule {
     public AdminiBotModule(CardCreation cardCreation) {
         mCardCreation = cardCreation;
         mContext = (CardCreationActivity) cardCreation;
-    }
-
-    public AdminiBotModule(CreditCard creditCard) {
-        mCreditCard = creditCard;
-        mContext = (CreditCardActivity) creditCard;
     }
 
     public AdminiBotModule(Check check) {

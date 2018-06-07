@@ -33,8 +33,6 @@ public class DatePickerFragment extends AppCompatDialogFragment implements DateP
         String date = String.format("%1$d-%2$d-%3$d", year, monthOfYear, dayOfMonth);
 
         if (mIdWidgetContainerDate == 0) {
-            EditText editText = (EditText) getActivity().findViewById(R.id.cuttoff_date);
-            editText.setText(date);
         } else {
             EditText editText = (EditText) getActivity().findViewById(mIdWidgetContainerDate);
             editText.setText(date);

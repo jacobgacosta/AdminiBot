@@ -73,7 +73,6 @@ public class CardCreationActivity extends BaseActivity2 implements CardCreation,
         switch (cardTypeEnum) {
 
             case CREDIT_CARD:
-                LaunchIntents.launchIntentClearTop(this, CreditCardActivity.class);
                 break;
             case DEBIT_CARD:
                 LaunchIntents.launchIntentClearTop(this, CardCreationActivity.class);
