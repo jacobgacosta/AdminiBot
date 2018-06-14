@@ -192,6 +192,7 @@
     <string name="msg_debit_card_name">Nombre de la tarjeta *</string>
     <string name="msg_debit_card_number">Número *</string>
     <string name="msg_debit_card_amount">Monto *</string>
+    <string name="msg_debit_card_valid_thru">Valida hasta</string>
     <string name="msg_debit_card_button">Agregar</string>
     <string-array name="banks_array">
         <item>Banamex</item>
