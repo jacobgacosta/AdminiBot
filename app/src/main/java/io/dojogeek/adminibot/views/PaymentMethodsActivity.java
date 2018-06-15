@@ -69,18 +69,15 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     @Override
     public void acceptCashAmount(BigDecimal amount) {
         mTotalCash = mTotalCash.add(amount);
+
+        this.refreshTotalIncome(mTotalAmount);
     }
 
     @Override
     public void acceptFoodCouponAmount(BigDecimal amount) {
         mTotalFoodCoupons = mTotalFoodCoupons.add(amount);
-    }
 
-    @Override
-    public void refreshTotalIncome(BigDecimal amount) {
-        mTotalAmount = mTotalAmount.add(amount);
-
-        mTotalIncome.setText("$" + mTotalAmount);
+        this.refreshTotalIncome(mTotalFoodCoupons);
     }
 
     @Override
@@ -146,7 +143,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         }
 
-        mDebitCard = (DebitCardDto) data.getParcelableExtra("debit_card");
+        mDebitCard = data.getParcelableExtra("debit_card");
 
         BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
 
@@ -216,14 +213,7 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         Resources res = getResources();
 
         View view = this.getLayoutInflater().inflate(R.layout.dialog_confirm_save_income, null);
-        ((TextView) view.findViewById(R.id.total_amount_cash))
-                .setText(res.getString(R.string.msg_total_amount_cash, mTotalCash));
-        ((TextView) view.findViewById(R.id.total_food_coupons))
-                .setText(res.getString(R.string.msg_total_amount_cash, mTotalFoodCoupons));
-        ((TextView) view.findViewById(R.id.total_amount_debit_cards))
-                .setText(res.getString(R.string.msg_total_amount_debit_cards, mTotalDebitCards));
-        ((TextView) view.findViewById(R.id.total_amount_income))
-                .setText(res.getString(R.string.msg_total_income, mTotalAmount));
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
@@ -254,6 +244,12 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         }
 
         mPresenter.registerIncome(income);
+    }
+
+    private void refreshTotalIncome(BigDecimal amount) {
+        mTotalAmount = mTotalAmount.add(amount);
+
+        mTotalIncome.setText("$" + mTotalAmount);
     }
 
 }

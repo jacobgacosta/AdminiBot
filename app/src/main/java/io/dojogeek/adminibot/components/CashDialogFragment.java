@@ -50,7 +50,7 @@ public class CashDialogFragment extends DialogFragment {
                 ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
                         .showSoftInput(amount, InputMethodManager.SHOW_IMPLICIT);
 
-                final TextInputLayout inputLayoutAmount = (TextInputLayout) view
+                final TextInputLayout inputLayoutAmount = view
                         .findViewById(R.id.text_input_layout_cash_amount);
 
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -68,7 +68,6 @@ public class CashDialogFragment extends DialogFragment {
                                 bdAmount = bdAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
                                 ((Acceptable) getActivity()).acceptCashAmount(bdAmount);
-                                ((PaymentMethods) getActivity()).refreshTotalIncome(bdAmount);
 
                                 dialog.dismiss();
                             }

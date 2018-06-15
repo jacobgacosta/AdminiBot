@@ -68,7 +68,6 @@ public class FoodCouponDialogFragment extends DialogFragment {
                                 bdAmount = bdAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
                                 ((Acceptable) getActivity()).acceptFoodCouponAmount(bdAmount);
-                                ((PaymentMethods) getActivity()).refreshTotalIncome(bdAmount);
 
                                 dialog.dismiss();
                             }
