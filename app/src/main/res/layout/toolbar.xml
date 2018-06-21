@@ -1,20 +1,10 @@
-<android.support.v7.widget.Toolbar
+<androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/global_toolbar"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
     android:elevation="4dp"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:theme="@style/AdminiBotTheme"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-    <TextView
-        android:id="@+id/text_title_toolbar"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="#FFFFFF"/>
-
-</android.support.v7.widget.Toolbar>
+    android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+    app:navigationIcon="?attr/homeAsUpIndicator"/>
