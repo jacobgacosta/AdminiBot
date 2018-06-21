@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="72dp"
-              android:gravity="center_vertical"
-              android:orientation="horizontal"
-              android:paddingLeft="@dimen/activity_horizontal_margin">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:id="@+id/linearLayout3"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="72dp"
+                                                   android:gravity="center_vertical"
+                                                   android:paddingLeft="16dp"
+                                                   android:paddingTop="16dp">
 
     <ImageView
         android:id="@+id/image_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription=""
-        android:src="@drawable/ic_cash"
-        android:tint="#00BCD4"/>
+        android:tint="@color/primary_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_cash"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <TextView
+        android:id="@+id/text_option_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:text="TextView"
+        android:textColor="@color/list_item_title_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/image_option"
+        app:layout_constraintTop_toTopOf="@+id/image_option"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/activity_horizontal_margin">
+    <TextView
+        android:id="@+id/text_option_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:text="TextView"
+        android:textColor="@color/list_item_subtitle_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/image_option"
+        app:layout_constraintTop_toBottomOf="@+id/text_option_title"/>
 
-            <TextView
-                android:id="@+id/text_option_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="32dp"
-                android:text="Simple método de pago"
-                android:textColor="#212121"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/text_option_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="32dp"
-                android:text="Registra uno o varios metodos de pago."
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
