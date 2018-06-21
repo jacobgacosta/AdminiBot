@@ -1,20 +1,24 @@
 package io.dojogeek.adminibot.views;
 
-import androidx.test.espresso.intent.Intents;
-import androidx.test.filters.SmallTest;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
+import android.app.Instrumentation;
+import android.content.Intent;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 import io.dojogeek.adminibot.R;
 
+import static android.app.Activity.RESULT_OK;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.Intents.intending;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -25,7 +29,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 public class WelcomeActivityTest {
 
     @Rule
-    public ActivityTestRule<WelcomeActivity> mActivityRule = new ActivityTestRule<>(WelcomeActivity.class);
+    public IntentsTestRule<WelcomeActivity> mActivityRule = new IntentsTestRule<>(WelcomeActivity.class);
 
     @Test
     public void testShowWelcome_showOptionList() {
@@ -41,12 +45,11 @@ public class WelcomeActivityTest {
 
     @Test
     public void testShowWelcome_incomeRegistrationIsLaunched() {
-        Intents.init();// start recording the fired intents
+        intending(hasComponent(PaymentMethodsActivity.class.getName())).respondWith(new Instrumentation.ActivityResult(RESULT_OK, new Intent()));
 
         onView(withText(R.string.title_option_1)).perform(click());
 
         intended(hasComponent(PaymentMethodsActivity.class.getName()));
-        Intents.release(); // clear the Intents state and stop recording intents
     }
 
 }
