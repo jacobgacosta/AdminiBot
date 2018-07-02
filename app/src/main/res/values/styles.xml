@@ -1,12 +1,13 @@
 <resources>
 
     <!-- Main theme -->
-    <style name="Theme.AdminiBot" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.AdminiBot" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/dark_primary_color</item>
         <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="colorControlNormal">@color/text_color</item>
     </style>
 
 </resources>
