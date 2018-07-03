@@ -54,7 +54,7 @@ public class WelcomeActivity extends BaseActivity implements AdapterView.OnItemC
     }
 
     private void initializeViews() {
-        mItemsContainer = (ListView) findViewById(R.id.list_options);
+        mItemsContainer = findViewById(R.id.list_options);
     }
 
     private void setListeners() {
