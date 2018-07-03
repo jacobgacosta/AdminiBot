@@ -2,6 +2,42 @@
     <string name="app_name">Adminibot</string>
     <string name="title_activity_register">REGISTRO</string>
 
+    <!-- banks -->
+    <string name="banks_hint">Seleccione un banco</string>
+    <string name="banks_bancomer">Bancomer</string>
+    <string name="banks_banamex">Banamex</string>
+    <string name="banks_banorte">Bancomer</string>
+    <string name="banks_santander">Santander</string>
+    <string name="banks_hsbc">HSBC</string>
+    <string name="banks_wallmart">Wallmart</string>
+    <string name="banks_scotiabank">Scotia bank</string>
+    <string name="banks_amex">American Express</string>
+    <string name="banks_bnk_azteca">Banco Azteca</string>
+    <string name="banks_banregio">Banregio</string>
+    <string name="banks_bancoopel">Bancoopel</string>
+    <string name="banks_famsa">Banco ahorro famsa</string>
+
+    <!-- error messages -->
+    <string name="error_empty_value">El campo es requerido</string>
+    <string name="error_wrong_format_email">El formato del email es incorrecto</string>
+    <string name="error_wrong_length_email">El tamaño del email es incorrecto</string>
+    <string name="error_wrong_lenght_name">El nombre es demasiado largo</string>
+    <string name="error_wrong_lenght_last_name">El apellido es demasiado largo</string>
+    <string name="error_wrong_lenght_password">El password es demasiado largo</string>
+    <string name="error_wrong_format_name">El nombre debe contener solo letras</string>
+    <string name="error_wrong_format_last_name">El apellido debe contener solo letras</string>
+    <string name="error_wrong_lenght_concept">El concepto es demasiado largo</string>
+    <string name="error_wrong_account">El número de cuenta es incorrecto</string>
+    <string name="error_wrong_lenght_check_number">El número de cheque es numérico con un máximo de 18 digitos</string>
+    <string name="error_wrong_lenght_issuance_code">La longitud del código de emisión es incorrecta</string>
+    <string name="error_wrong_incorrect_amount">El monto debe estar compuesto de 10 enteros y 2 decimales como máximo</string>
+    <string name="error_wrong_lenght_field">El campo es demasiado largo</string>
+    <string name="error_wrong_only_numbers">El campo debe ser numerico</string>
+    <string name="error_wrong_length_card_number">Se debe especificar 3 digitos de identificación para la tarjeta</string>
+    <string name="error_wrong_brand_card">Debe seleccionar la marca de la tarjeta</string>
+    <string name="error_wrong_bank">Debe seleccionar un banco</string>
+    <string name="title_activity_home_activity">Adminibot!</string>
+
     <!-- * Welcome -->
     <string name="title_welcome">Selecciona una opción</string>
     <string name="title_option_1">Ingreso</string>
