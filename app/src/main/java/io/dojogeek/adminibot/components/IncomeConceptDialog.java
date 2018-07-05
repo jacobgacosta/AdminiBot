@@ -24,7 +24,7 @@ public class IncomeConceptDialog extends DialogFragment {
 
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_income_concept, null);
 
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity(), R.style.AdminiBotAlertDialog)
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setPositiveButton(R.string.msg_accept, null)
                 .setNegativeButton(R.string.msg_cancel, null)
@@ -35,12 +35,12 @@ public class IncomeConceptDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialogInterface) {
 
-                final EditText concept = (EditText) view.findViewById(R.id.edit_concept_of_income);
+                final EditText concept = view.findViewById(R.id.edit_concept_of_income);
 
                 ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
                         .showSoftInput(concept, InputMethodManager.SHOW_IMPLICIT);
 
-                final TextInputLayout inputLayoutConcept = (TextInputLayout) view
+                final TextInputLayout inputLayoutConcept = view
                         .findViewById(R.id.text_input_layout_concept);
 
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE)
