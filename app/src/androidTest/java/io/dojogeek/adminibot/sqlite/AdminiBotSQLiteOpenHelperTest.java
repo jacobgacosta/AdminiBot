@@ -3,7 +3,7 @@ package io.dojogeek.adminibot.sqlite;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import androidx.test.runner.AndroidJUnit4;
+import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 
-import static androidx.test.InstrumentationRegistry.getTargetContext;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -70,7 +70,7 @@ public class AdminiBotSQLiteOpenHelperTest {
     @Test
     public void testTablesCreation_correctCreations() {
 
-        String [] tables = {ExpensesContract.Expense.TABLE_NAME,
+        String[] tables = {ExpensesContract.Expense.TABLE_NAME,
                 ExpensesOthersPaymentMethodsContract.ExpenseOtherPaymentMethod.TABLE_NAME,
                 ExpensesTypesContract.ExpenseType.TABLE_NAME, IncomesContract.Incomes.TABLE_NAME,
                 PaymentMethodsContract.PaymentMethod.TABLE_NAME,
