@@ -100,4 +100,6 @@
 
     <!-- * empty title -->
     <string name="title_empty">Editar movimientos</string>
+    <string name="title_activity_cash_income">Ingreso en efectivo</string>
+    <string name="title_activity_food_coupon">Ingreso en vales de despensa</string>
 </resources>
