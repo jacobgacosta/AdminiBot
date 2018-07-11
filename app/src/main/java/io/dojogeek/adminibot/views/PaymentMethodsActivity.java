@@ -3,7 +3,6 @@ package io.dojogeek.adminibot.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -24,8 +23,6 @@ import dagger.AdminiBot;
 import dagger.AdminiBotModule;
 import io.dojogeek.adminibot.R;
 import io.dojogeek.adminibot.adapters.PaymentMethodAdapter;
-import io.dojogeek.adminibot.components.CashDialogFragment;
-import io.dojogeek.adminibot.components.FoodCouponDialogFragment;
 import io.dojogeek.adminibot.components.IncomeConceptDialog;
 import io.dojogeek.adminibot.dtos.DebitCardDto;
 import io.dojogeek.adminibot.dtos.IncomeDto;
@@ -33,7 +30,6 @@ import io.dojogeek.adminibot.enums.TypePaymentMethodEnum;
 import io.dojogeek.adminibot.presenters.PaymentMethodsPresenter;
 
 public class PaymentMethodsActivity extends BaseActivity implements PaymentMethods,
-        CashDialogFragment.Acceptable, FoodCouponDialogFragment.Acceptable,
         IncomeConceptDialog.Acceptable, AdapterView.OnItemClickListener, View.OnClickListener {
 
     public static final String TAG = "PaymentMethodsActivity";
@@ -67,47 +63,23 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
     }
 
     @Override
-    public void acceptCashAmount(BigDecimal amount) {
-        mTotalCash = mTotalCash.add(amount);
-
-        this.refreshTotalIncome(mTotalAmount);
-    }
-
-    @Override
-    public void acceptFoodCouponAmount(BigDecimal amount) {
-        mTotalFoodCoupons = mTotalFoodCoupons.add(amount);
-
-        this.refreshTotalIncome(mTotalFoodCoupons);
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         switch ((TypePaymentMethodEnum) view.getTag()) {
             case CASH:
-                new CashDialogFragment().show(getSupportFragmentManager(), "cashDialog");
+                startActivity(new Intent(this, CashIncomeActivity.class));
                 break;
             case FOOD_COUPONS:
-                new FoodCouponDialogFragment().show(getSupportFragmentManager(), "foodCoupon");
+                startActivity(new Intent(this, FoodCouponIncomeActivity.class));
                 break;
             case DEBIT_CARD:
-                Intent intent = new Intent(this, DebitCardActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(new Intent(this, DebitCardActivity.class));
                 break;
         }
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_save_payment_methods:
-                if (mTotalAmount.compareTo(BigDecimal.ZERO) == 0) {
-                    this.alertForNonExistentIncome();
 
-                } else {
-                    this.confirmSavingIncome();
-                }
-                break;
-        }
     }
 
     @Override
@@ -145,13 +117,28 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
         mDebitCard = data.getParcelableExtra("debit_card");
 
-        BigDecimal amount = new BigDecimal(mDebitCard.getAmount());
+        if (mDebitCard != null) {
+            BigDecimal debitCardAmount = new BigDecimal(mDebitCard.getAmount());
 
-        mTotalDebitCards = mTotalDebitCards.add(amount);
+            mTotalDebitCards = mTotalDebitCards.add(debitCardAmount);
 
-        mDebitCardMovements.add(mDebitCard);
+            mDebitCardMovements.add(mDebitCard);
 
-        refreshTotalIncome(amount);
+            refreshTotalIncome(debitCardAmount);
+        }
+
+        BigDecimal totalFoodCoupons = (BigDecimal) data.getSerializableExtra("food_coupon");
+
+        if (totalFoodCoupons != null) {
+            refreshTotalIncome(totalFoodCoupons);
+        }
+
+        BigDecimal totalCash = (BigDecimal) data.getSerializableExtra("cash");
+
+        if (totalCash != null) {
+            refreshTotalIncome(totalCash);
+        }
+
     }
 
     @Override
@@ -203,17 +190,14 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
         View view = this.getLayoutInflater().inflate(R.layout.dialog_alert, null);
         ((TextView) view.findViewById(R.id.text_alert)).setText(R.string.msg_alert_empty_payment_methods);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AdminiBotAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
         builder.setPositiveButton(R.string.msg_accept, null);
         builder.show();
     }
 
     private void confirmSavingIncome() {
-        Resources res = getResources();
-
         View view = this.getLayoutInflater().inflate(R.layout.dialog_confirm_save_income, null);
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
