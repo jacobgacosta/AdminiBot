@@ -112,15 +112,29 @@ public class PaymentMethodsActivityTest {
     public void testRegistrationSomePaymentMethods() {
         this.fillIncomeConcept();
 
+        Intent cashIntent = new Intent();
+        cashIntent.putExtra("cash", new BigDecimal("87843.89"));
+        Instrumentation.ActivityResult cashIncomeResult = new Instrumentation.ActivityResult(RESULT_OK, cashIntent);
+        intending(hasComponent(CashIncomeActivity.class.getName())).respondWith(cashIncomeResult);
+
+        Intent foodCouponIntent = new Intent();
+        foodCouponIntent.putExtra("food_coupon", new BigDecimal("8744.90"));
+        Instrumentation.ActivityResult foodCouponResult = new Instrumentation.ActivityResult(RESULT_OK, foodCouponIntent);
+        intending(hasComponent(FoodCouponIncomeActivity.class.getName())).respondWith(foodCouponResult);
+
+        DebitCardDto debitCardDto = new DebitCardDto();
+        debitCardDto.setName("Santander Zero");
+        debitCardDto.setAmount("12930");
+        debitCardDto.setNumber("1234 5678 9109 1234");
+        Intent debitCardIntent = new Intent();
+        debitCardIntent.putExtra("debit_card", debitCardDto);
+        Instrumentation.ActivityResult debitCardResult = new Instrumentation.ActivityResult(RESULT_OK, debitCardIntent);
+        intending(hasComponent(DebitCardActivity.class.getName())).respondWith(debitCardResult);
+
         onView(withText(R.string.msg_cash)).perform(click());
-        onView(withId(R.id.edit_cash_amount)).perform(typeText("1000.90"));
-        onView(withText("Aceptar")).perform(click());
-
         onView(withText(R.string.msg_food_coupons)).perform(click());
-        onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("500.10"));
-        onView(withText("Aceptar")).perform(click());
-
-        onView(withId(R.id.text_total_amount)).check(matches(isDisplayed())).check(matches(withText("$1501.00")));
+        onView(withText(R.string.msg_debit_card)).perform(click());
+        onView(withId(R.id.text_total_amount)).check(matches(isDisplayed())).check(matches(withText("$109518.79")));
     }
 
     @Test
