@@ -79,7 +79,15 @@ public class PaymentMethodsActivity extends BaseActivity implements PaymentMetho
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.button_save_payment_methods:
+                if (mTotalAmount.compareTo(BigDecimal.ZERO) == 0) {
+                    this.alertForNonExistentIncome();
+                } else {
+                    this.confirmSavingIncome();
+                }
+                break;
+        }
     }
 
     @Override
