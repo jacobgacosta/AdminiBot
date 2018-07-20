@@ -95,8 +95,9 @@
     <string name="msg_error_empty_card_amount">El monto es requerido</string>
 
     <!-- * total income dialog -->
-    <string name="msg_commit_income">Nuevo ingreso:</string>
+    <string name="msg_commit_income">¿Registrar Nuevo ingreso?</string>
     <string name="msg_total_income">Total: %1$s</string>
+    <string name="msg_income_concept">Concepto: %1$s</string>
 
     <!-- * empty title -->
     <string name="title_empty">Editar movimientos</string>
