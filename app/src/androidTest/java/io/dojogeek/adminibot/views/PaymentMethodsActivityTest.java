@@ -141,7 +141,7 @@ public class PaymentMethodsActivityTest {
     public void testClickSaveButton_withNoPaymentMethodAdded() {
         this.fillIncomeConcept();
 
-        //onView(withId(R.id.button_save_payment_methods)).perform(click());
+        onView(withId(R.id.button_save_payment_methods)).perform(click());
         onView(withText(R.string.msg_alert_empty_payment_methods)).check(matches(isDisplayed()));
         onView(withText(R.string.msg_accept)).check(matches(isDisplayed()));
     }
@@ -159,15 +159,35 @@ public class PaymentMethodsActivityTest {
     public void testClickSaveButton_processIncomes() {
         this.fillIncomeConcept();
 
+        Intent foodCouponIntent = new Intent();
+        foodCouponIntent.putExtra("total_food_coupons", new BigDecimal("8434.89"));
+        Instrumentation.ActivityResult foodCouponResult = new Instrumentation.ActivityResult(RESULT_OK, foodCouponIntent);
+        intending(hasComponent(FoodCouponIncomeActivity.class.getName())).respondWith(foodCouponResult);
+
+        Intent cashIntent = new Intent();
+        cashIntent.putExtra("total_cash", new BigDecimal("8434.89"));
+        Instrumentation.ActivityResult cashResult = new Instrumentation.ActivityResult(RESULT_OK, cashIntent);
+        intending(hasComponent(CashIncomeActivity.class.getName())).respondWith(cashResult);
+
+        DebitCardDto debitCardDto = new DebitCardDto();
+        debitCardDto.setAmount("98943");
+        debitCardDto.setName("Santander");
+        debitCardDto.setNumber("1234567890123456");
+
+        Intent debitCardIntent = new Intent();
+        debitCardIntent.putExtra("debit_card", debitCardDto);
+        Instrumentation.ActivityResult debitCardResult = new Instrumentation.ActivityResult(RESULT_OK, debitCardIntent);
+        intending(hasComponent(DebitCardActivity.class.getName())).respondWith(debitCardResult);
+
+        onView(withText(R.string.msg_food_coupons)).perform(click());
         onView(withText(R.string.msg_cash)).perform(click());
-        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
-        onView(withText(R.string.msg_accept)).perform(click());
+        onView(withText(R.string.msg_debit_card)).perform(click());
 
-        //onView(withId(R.id.button_save_payment_methods)).perform(click());
+        onView(withId(R.id.button_save_payment_methods)).perform(click());
+        onView(withText("Concepto: This a test concept")).check(matches(isDisplayed()));
+        onView(withText("Total: $115812.78")).check(matches(isDisplayed()));
 
-        //onView(withId(R.id.confirm_income_concept)).check(matches(isDisplayed())).check(matches(withText("This a test concept")));
-        //onView(withId(R.id.confirm_income_amount)).check(matches(isDisplayed())).check(matches(withText("$17500.00")));
-        onView(withText(R.string.msg_accept)).perform(click());
+        onView(withText("Aceptar")).perform(click());
 
         doNothing().when(presenter).registerIncome(any(IncomeDto.class));
 
@@ -179,11 +199,11 @@ public class PaymentMethodsActivityTest {
         this.fillIncomeConcept();
 
         onView(withText(R.string.msg_food_coupons)).perform(click());
-        onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("17500.09"));
+        //onView(withId(R.id.edit_food_coupon_amount)).perform(typeText("17500.09"));
         onView(withText(R.string.msg_accept)).perform(click());
 
         onView(withText(R.string.msg_cash)).perform(click());
-        onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
+        //onView(withId(R.id.edit_cash_amount)).perform(typeText("17500"));
         onView(withText(R.string.msg_accept)).perform(click());
 
         DebitCardDto debitCardDto = new DebitCardDto();
